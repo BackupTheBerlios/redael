@@ -162,7 +162,7 @@ package main;
 ##########################################################
 
 page 'index.html', sub {
-  element 'title', 'Complete, Integrated Personality Development';
+  element 'title', 'Complete, Integrated Self Awareness';
   endTag 'head';
 
   body();
