@@ -304,8 +304,7 @@ with a more pragmatic approach.';
 
 menupage $topmenu, 'Download', sub {
   columns sub {
-    element 'h1', 'Downloading';
-    element 'h2', 'Redael';
+    element 'h1', 'Get the Software';
   },
   sub { hskip 2 },
   sub {
@@ -313,6 +312,44 @@ menupage $topmenu, 'Download', sub {
     img 'art/floating.jpg', 'GNU Software', border=>0, hspace=>4;
     endTag 'a';
   };
+
+  element 'h2', 'Requirements';
+
+  startTag 'ul';
+
+  element 'li', 'XFree86 4.1.0';
+
+  element 'li', 'A video card supporting the XVideo extension is highly recommended.';
+
+  startTag 'li';
+  text 'Playing movies requires at least mid-range hardware.
+Here are some anecdotal data points:';
+  
+  startTag 'table', border=>1;
+  startTag 'tr';
+  element 'th', 'Model';
+  element 'th', 'CPU% for MPEG1 / VCD';
+  element 'th', 'CPU% for MPEG2 / DVD';
+  endTag 'tr';
+
+  startTag 'tr';
+  element 'td', 'Dual P3 @ 500Mhz via XVideo';
+  element 'td', '20%';
+  element 'td', '60%';
+  endTag 'tr';
+
+  startTag 'tr';
+  element 'td', 'K6-III @ 500Mhz';
+  element 'td', 'near 100% and choppy';
+  element 'td', 'too slow';
+  endTag 'tr';
+  endTag 'table';
+
+  endTag 'li';
+
+  endTag 'ul';
+
+  element 'h2', 'Compiling';
 
   element 'p', 'Presently, redael is only distributed as source code.
 Binaries will be available as soon as it is a practical possibility.
@@ -351,6 +388,59 @@ with --enable-glib2.';
   endTag 'a';
   text ' Add salt to taste.';
   endTag 'p';
+
+  element 'h2', 'Films';
+
+  startTag 'table', border=>1;
+  startTag 'tr';
+  element 'th', 'Title';
+  element 'th', 'Blurb';
+  element 'th', 'Rating';
+  element 'th', 'Status';
+  element 'th', 'Format';
+  element 'th', 'Annotation';
+  endTag 'tr';
+
+  startTag 'tr';
+  element 'td', 'Kaze no Tani no Naushika';
+  element 'td', 'Animated Adventure Epic';
+  element 'td', 'All Ages';
+  element 'td', '0%';
+  element 'td', 'VCD';
+  element 'td', 'soon';
+  endTag 'tr';
+
+  startTag 'tr';
+  element 'td', 'Star Wars: A New Hope';
+  element 'td', 'Space Opera';
+  element 'td', 'All Ages';
+  element 'td', '0%';
+  element 'td', 'VCD';
+  element 'td', 'soon';
+  endTag 'tr';
+
+  startTag 'tr';
+  element 'td', 'Good Will Hunting';
+  element 'td', 'Drama';
+  element 'td', '17+ (language, adult themes)';
+  element 'td', '10%';
+  element 'td', 'DVD';
+  element 'td', 'soon';
+  endTag 'tr';
+
+  endTag 'table';
+
+  startTag 'p';
+  element 'i', 'You must use the same format as is given in the
+table above because synchronization is accomplished with byte-offsets
+instead of time-offsets.  This will be fixed as soon as possible.';
+  endTag 'p';
+
+  element 'p', 'Films which will not be analyzed: most comedy, action,
+and horror genres unless especially insightful.';
+
+  element 'p', "Films under consideration for future analysis: Any Given Sunday, Devil's Advocate, or serious Hindi drama.  Do not submit your favorite
+film titles yet.";
 };
 
 menupage $topmenu, 'Documentation', sub {
