@@ -134,7 +134,7 @@ Jesus the Christ and Mother Mary.';
   },
   sub { hskip 4 },
   sub {
-    thumb 'art/christmas_puja.jpg', 'Christmas Puja';
+    thumb 'art/christmas_puja.jpg', 'Christmas Puja (Day 3)';
   },
   sub { hskip 2 },
   sub {
@@ -143,12 +143,13 @@ Jesus the Christ and Mother Mary.';
 
   br;
   columns sub {
-    thumb 'art/skit.jpg', 'Skit';
+    thumb 'art/skit.jpg', 'Grihalaakshmi (Day 4)';
   },
   sub { hskip 4 },
   sub {
-    element 'p', 'On Dec 26, we enjoyed a skit based on a traditional folk song
-of Maharashtra. A Kawalis performance followed.';
+    element 'p', 'On Dec 26, we enjoyed a skit based on traditional
+folk song of Maharashtra (Chalat Musafir Mohaliya Re Pinjadewali Munia).
+  A Kawalis performance followed.';
   },
   sub { hskip 4 },
   sub {
@@ -159,10 +160,11 @@ of Maharashtra. A Kawalis performance followed.';
   columns sub {
     element 'p', 'The matches were announced around 19:00 on Dec 27.
 We had about 36 hours to take a decision.';
+    element 'p', 'The dance in this photo is called Bharat Nataym.';
   },
   sub { hskip 4 },
   sub {
-    thumb 'art/dance.jpg', 'Dance';
+    thumb 'art/dance.jpg', 'Shri Shiva (Day 5)';
   };
 
   columns sub {
@@ -172,7 +174,7 @@ our qualifications.';
   },
   sub { hskip 4 },
   sub {
-    thumb 'art/making_friends.jpg', 'Making Friends';
+    thumb 'art/making_friends.jpg', 'With Tinu';
   },
   sub { hskip 4 },
   sub {
@@ -205,7 +207,7 @@ after only one hour we decided to proceed with the marriage.';
   },
   sub { hskip 4 },
   sub {
-    thumb 'art/kawali2.jpg', 'Kawalis';
+    thumb 'art/kawali2.jpg', 'Shri Krishna (Day 6)';
   };
 
   br;
@@ -228,7 +230,7 @@ dancing, and tumeric.';
 
   br;
   columns sub {
-    thumb 'art/marriage_puja.jpg', 'Marriage Day';
+    thumb 'art/marriage_puja.jpg', 'Ardha Narinateshwar (Day 7)';
   },
   sub { hskip 4 },
   sub {
@@ -271,9 +273,15 @@ compose couplets for Shri Mataji.';
 
   columns sub {
     thumb 'art/dhulia.jpg', 'In Dhulia';
+    br;
+    thumb 'art/kamdi3.jpg', 'In Nagpur';
   },
   sub { hskip 4 },
   sub {
+    element 'p', 'On Jan 6, we gave a small wedding reception
+to all the Sahaj yogis in Dhulia. We received a shower of their
+best wishes.';
+
     startTag 'p';
     text "During January, we visited Nagpur where most of Heera's
 family is living.  A ";

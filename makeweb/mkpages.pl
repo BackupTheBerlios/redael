@@ -705,8 +705,8 @@ deb http://redael.berlios.de/releases/debian ./
 menupage $topmenu, 'Unix', sub {
   element 'h1', 'Generic Unix Installation';
 
-  element 'p', 'If your operating system is not listed then you will
-need to compile redael from source code.';
+  element 'p', 'If your operating system is not listed then you
+can compile redael from source code.';
 
   startTag 'p';
   columns sub {
@@ -716,7 +716,7 @@ need to compile redael from source code.';
   },
   sub { hskip 6 },
   sub {
-    text 'Install 1.3.11 or later versions of glib, atk, pango, and gtk+.';
+    text 'Install 1.3.13 or later versions of glib, atk, pango, and gtk+.';
   };
   endTag 'p';
 
@@ -728,19 +728,16 @@ need to compile redael from source code.';
   },
   sub { hskip 6 },
   sub {
-    text 'Install 0.3.0 or later version of gstreamer.  You will also
-need some libraries: libmpeg2, liba52, and libHermes.  Make sure gstreamer
-is built with --enable-glib2.';
+    text 'Install 0.3.1 or later version of gstreamer.  You will also
+need some libraries: libmpeg2, liba52, and libHermes.';
   };
   endTag 'p';
 
   startTag 'p';
   startTag 'a', href=>'http://developer.berlios.de/project/filelist.php?group_id=167';
-  text 'Download the latest snapshot of redael.';
+  text 'Download the latest snapshot of redael source code.';
   endTag 'a';
   endTag 'p';
-
-  element 'p', 'Compile and run.';
 };
 
 menupage $topmenu, 'Windows', sub {
@@ -873,17 +870,18 @@ list.';
   emptyTag 'hr';
   endTag 'p';
 
-  element 'h2', 'Screenshots';
+  element 'h2', 'A Transcript';
 
+  startTag 'center';
   startTag 'p';
   img 'art/transcript.png', 'Transcript View';
   endTag 'p';
+  endTag 'center';
   
   element 'p', 'The left side contains the film transcript.  Each highlighted
 segment indicates the span of a single situation.  The right side
 contain a list of situations.  When you move the cursor, the left
-and right sides stay in-sync.  You can double-click in the situation
-list to open a detail screen (below).';
+and right sides stay in-sync.';
 
   vskip;
 };
@@ -895,11 +893,11 @@ menupage $topmenu, 'Situation', sub {
 'This screen shows the structural parameters of the situation.  Here
 questions are presented, mostly in a multiple-choice format.';
 
+  startTag 'center';
   startTag 'p';
   img 'art/ip.png', 'Abstract Situation', border=>1;
   endTag 'p';
-
-  element 'p', 'The questions are simple:';
+  endTag 'center';
 
   startTag 'ol';
 
@@ -914,24 +912,47 @@ the initiator.';
   endLi;
 
   startLi;
-  text "Choose the situation.  To pick the correct situation, the
-intention of the two participants must be taken into account.
-If there is an initiator then estimate intentions relative to
-the initiator's point of view.
-For each person, estimate his or her attention.  By this pair
-of intentions you can pick the appropriate situation.";
+  text "Choose the situation.";
   endLi;
 
   startLi;
-  text 'For phase, tension, and intensity, see the example
-dialogues in the Help menu.';
+  text 'Choose the phase, tension, and intensity.';
+  endLi;
+
+  startLi;
+  text 'The span of a situation is the longest period of time
+during which the parameters of the situation remain constant.';
+  endLi;
+
+  startLi;
+  text 'Choose the duration.';
   endLi;
 
   endTag 'ol';
 
-  element 'p', 'To summarize, the idea is to construct a sentence by
-the options given which best describes what is happening in the film
-during the span of the situation.';
+  element 'p', 'At first glance, the questions may seem simple,
+but they attempt to summarize all possible experiences.
+The idea is to construct a
+sentence by the options given which best describes what is
+happening in the film.  Three detailed screens provide
+guidance for describing situations uniquely and consistently.
+These screens are available from the Help menu.';
+
+  startTag 'center';
+  startTag 'p';
+  columns sub {
+    img 'art/situation_help1.png', 'Situation';
+  },
+  sub { hskip 4 },
+  sub {
+    img 'art/situation_help2.png', 'Phase & Initiative';
+  };
+  endTag 'p';
+  startTag 'p';
+  img 'art/situation_help3.png', 'Intensity & Tension';
+  endTag 'p';
+
+  endTag 'center';
 };
 
 
@@ -941,9 +962,11 @@ menupage $topmenu, 'Film', sub {
   element 'p', 'The filmview offers effortless seeking to any
 point in a film. (Films not included. :-)';
 
+  startTag 'center';
   startTag 'p';
   img 'art/filmview.jpg', 'Film View', border=>0;
   endTag 'p';
+  endTag 'center';
 
   element 'p', 'Actually it takes a lot of effort to make this effortless:';
 
@@ -1137,9 +1160,11 @@ menupage $topmenu, 'Exam', sub {
   element 'p', 'Once an exemplar film annotation is prepared
 and verified then students can be tested against it.';
 
+  startTag 'center';
   startTag 'p';
   img 'art/exam_setup.png', 'Exam Setup', border=>0;
   endTag 'p';
+  endTag 'center';
 
   columns sub {
   element 'p', 'Exam Status: The progress of an exam is shown.  The
@@ -1563,7 +1588,7 @@ The pressures of daily life keep the attention bouncing
 around the various other configurations.  It is necessary to
 
 study all the configurations of attention so that we can *aim*
-our attention at self-realization (f) no matter how it is
+our attention at self-realization (f) no matter how attention is
 momentarily configured.";
 
   element 'p', 'At least the emotions can be kept as the object of
@@ -1572,21 +1597,14 @@ chance to settle into emotional detachment (a) and spontaneously
 resolve into self-identity (f).  
 Besides actual emotional detechment (a), there are two other
 attention configurations which consider emotion as an
-object: (c) and (e).';
+object: (c) and (e).  This shows the importance of studying
+emotional intelligence (c).';
 
   },
   sub { hskip 4 },
   sub {
     img 'art/trident-sr.png', "Emotion as Object";
   };
-
-  element 'p', 'Study of emotional intelligence (c) is also
-useful as a defense against empathy (b).  Without emotional
-intelligence, empathy can seem like a vast and exciting
-field to explore.  It is easy to become lost, but actually
-emotional intelligence informs us that empathy is smaller
-than it might seem.  [write more]';
-
 };
 
 menupage $topmenu, 'Redael', sub {
@@ -1594,16 +1612,22 @@ menupage $topmenu, 'Redael', sub {
 
   element 'h2', 'Workflow';
 
+  element 'p', 'See below for an explanation of each numbered point.';
+
+  startTag 'center';
   startTag 'p';
   img 'art/workflow.png', 'Workflow', border=>0;
   endTag 'p';
+  endTag 'center';
 
   startTag 'ol';
 
   startTag 'li';
   startTag 'p';
-  text 'People can easily empathize with the actors and actresses, and *feel* a
-precise replica of the emotions depicted onscreen.';
+  text 'People can easily empathize with the actors and actresses,
+and *feel* a precise replica of the emotions depicted onscreen.
+A few people have an under-developed sense of empathy.  Such
+people are called "autistic".';
   endTag 'p';
   endTag 'li';
 
@@ -1611,16 +1635,17 @@ precise replica of the emotions depicted onscreen.';
   startTag 'p';
   text 'Emotional Intelligence is the factor which allows one to
 envision a
-situation from a 3rd person perspective.  The Situation Editor
-assists in recording the structural parameters of the situation.  The
-Add Joint screens assist in recording any relationships between situations.';
+situation from a 3rd person perspective.  The Situation screen
+records the structural parameters of the situation.  The
+Joint screens records any relationships between situations.';
   endTag 'p';
   endTag 'li';
 
   startTag 'li';
   startTag 'p';
   text 'The Cross Reference screen automates pattern
-matching from abstract situations to abstract emotions.';
+matching from abstract situations to abstract emotions.  This
+mechanical process tries to mimic the empathy sense.';
   endTag 'p';
   endTag 'li';
 
@@ -1635,7 +1660,7 @@ situation "before ';
   text ' accepts [+] followed by :react: during stifled
 [+] exposes ';
 element 'b', '[-]';
-  text '".  Since emotions are occasionally repeated, the pattern classifications
+  text '".  Since emotions are often repeated, pattern classifications
 can be established with some certainty.  As few as two or three repetitions
 are generally sufficient.';
   endTag 'p';
@@ -1655,15 +1680,14 @@ needs re-evaluation.';
 
   startTag 'p';
   text 'Steps (4) and (5) work against each other in opposite directions.
-After checking and re-checking, we can gain confidence that
+After checking and re-checking, we can gain confidence that the
 abstract representation is a fairly accurate distillation of the film.';
   endTag 'p';
 
   startTag 'p';
-  text "For an examination session, the automated facilities relating to
-abstract emotions are disabled.  Part of the reconciliation, step (4),
-is changed into a manual process.  A student's capacity for (2) emotional
-intelligence is tested intensively.";
+  text "During an examination session, the automated facilities relating to
+abstract emotions are disabled (step 3).  
+A student's capacity for (2) emotional intelligence is tested intensively.";
   endTag 'p';
 
   element 'h2', 'The Model';
@@ -1671,11 +1695,16 @@ intelligence is tested intensively.";
   element 'p', 'The utility of a given model of 3rd person situations
 is whether it provides a one-to-one mapping between abstract situations
 and abstract emotions.  If the mapping is one-to-one then the model
-can be taken as equal to the actual empathy mechanism.';
+can be taken as equal to the actual empathy sense.  Moreover, a
+one-to-one mapping exposes the inverse-of-empathy mechanism
+(emotional intelligence) which can then be seen, understood, and
+tested against.';
 
   startTag 'p';
   text 'The model used in redael was developed by asking the question:
-"What is the best model for the process of competition?"';
+"What is the best model to model the process of competition?"  While the
+inspiration behind this question is hard to explain, it is easy
+to check the utility of the model using our proposed measure.';
 
   endTag 'p';
 };
