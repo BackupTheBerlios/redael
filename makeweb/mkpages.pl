@@ -911,16 +911,19 @@ menupage $topmenu, 'Mailing Lists', sub {
   my $list = sub {
     my ($name, $desc) = @_;
 
+    startTag 'li';
     startTag 'p';
     element 'b', $name;
     text ' - ';
     element 'a', 'Subscribe', 'href', "https://lists.berlios.de/mailman/listinfo/$name";
     text ' / ';
     element 'a', 'Archives', 'href', "https://lists.berlios.de/pipermail/$name";
-    br;
-    text $desc;
     endTag 'p';
+    element 'p', $desc;
+    endTag 'li';
   };
+
+  startTag 'ul';
 
   $list->('redael-announce',
 	  'Announcements about releases or other important events.
@@ -929,6 +932,8 @@ Low-volume; at most one message per day.');
   $list->('redael-devel',
 	  'Technical discussions about software development and philosophy.
 Can be high volume on occation.');
+
+  endTag 'ul';
 };
 
 menupage $topmenu, 'Philosophy', sub {
