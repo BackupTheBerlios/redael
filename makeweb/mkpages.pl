@@ -321,7 +321,7 @@ the following steps:';
 
   startTag 'p';
   columns sub {
-    text 'Install 1.3.10 or later versions of glib, atk, pango, and gtk+.';
+    text 'Install 1.3.11 or later versions of glib, atk, pango, and gtk+.';
   },
   sub { hskip 2 },
   sub {
@@ -985,7 +985,7 @@ as those affiliated with ';
 is licensed under the ';
   element 'a', 'GPL', href=> 'http://www.gnu.org/copyleft/gpl.html';
 
-  text ' -- so you can start your own testing franchise, royalty free.';
+  text ' -- so you can start your own EQ testing franchise, royalty free.';
   endTag 'p';
 };
 
