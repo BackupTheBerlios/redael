@@ -384,11 +384,12 @@ menupage $topmenu, 'Mailing Lists', sub {
   };
 
   $list->('redael-announce',
-	  'Announcements of new versions.  Low-volume; at most one message
- per day.');
+	  'Announcements about releases or other important events.
+Low-volume; at most one message per day.');
 
   $list->('redael-devel',
-	  'Technical discussions about software development and philosophy.');
+	  'Technical discussions about software development and philosophy.
+Can be high volumn on occation.');
 };
 
 menupage $topmenu, 'Philosophy', sub {
