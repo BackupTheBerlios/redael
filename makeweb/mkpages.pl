@@ -354,58 +354,6 @@ menupage $topmenu, 'Documentation', sub {
 processor and movie player.  There are also some user interface
 elements for making annotations and advanced features for scoring.';
 
-  startTag 'p';
-  img 'art/transcript.png', 'Transcript View', border=>1;
-  endTag 'p';
-  
-  element 'p', 'The left side contains the film transcript.  Each highlighted
-segment indicates the span of a single situation.  The right side
-contain a list of situations.  When you move the cursor, the left
-and right side stay in-sync.  You can double-click in the situation
-list to open a detail screen (below).';
-
-  startTag 'p';
-  img 'art/ip.png', 'Abstract Situation', border=>1;
-  endTag 'p';
-
-  element 'p',
-'Situation Editor: This screen shows the structural parameters of the
-situation.  A situation always consists of two participants (real or
-anthropomorphic).
-Perhaps the best way to learn what these descriptions mean is to examine
-one of the exemplar film annotations.  Most of the terms are not
-defined beyond the customary dictionary.';
-
-  startTag 'p';
-  img 'art/filmview.jpg', 'Film View', border=>0;
-  endTag 'p';
-
-  element 'p', 'The filmview screen offers effortless seeking to any
-point in a film. (Films not included. :-)';
-
-  startTag 'p';
-  columns sub {
-    img 'art/addjoint1.png', 'Add Joint (1)', border=>0;
-  },
-  sub { hskip 2 },
-  sub {
-    img 'art/addjoint2.png', 'Add Joint (2)', border=>0;
-  };
-  endTag 'p';
-
-  element 'p', 'Add Joint: These two screens are used to create connections
-between two situations.  Connections (a.k.a. joints) are a
-bookkeeping aide to help keep everything in proper perspective.';
-
-  startTag 'p';
-  img 'art/crossref.png', 'Cross Reference', border=>0;
-  endTag 'p';
-
-  element 'p', 'Cross Reference:
-Once you have annotated the film in the 3rd person then you can
-create empathy patterns to translate back into the 1st person
-perspective.  This completes the empathy - emotional intelligence cycle.';
-
   element 'h2', 'Workflow Summary';
 
   startTag 'p';
@@ -478,6 +426,62 @@ abstract emotions are disabled.  Part of the reconciliation, step (4),
 is changed into a manual process.  A student's capacity for (2) emotional
 intelligence is tested intensively.";
   endTag 'p';
+
+  startTag 'p';
+  emptyTag 'hr';
+  endTag 'p';
+
+  startTag 'p';
+  img 'art/transcript.png', 'Transcript View', border=>1;
+  endTag 'p';
+  
+  element 'p', 'The left side contains the film transcript.  Each highlighted
+segment indicates the span of a single situation.  The right side
+contain a list of situations.  When you move the cursor, the left
+and right side stay in-sync.  You can double-click in the situation
+list to open a detail screen (below).';
+
+  startTag 'p';
+  img 'art/ip.png', 'Abstract Situation', border=>1;
+  endTag 'p';
+
+  element 'p',
+'Situation Editor: This screen shows the structural parameters of the
+situation.  A situation always consists of two participants (real or
+anthropomorphic).
+Perhaps the best way to learn what these descriptions mean is to examine
+one of the exemplar film annotations.  Most of the terms are not
+defined beyond the customary dictionary.';
+
+  startTag 'p';
+  img 'art/filmview.jpg', 'Film View', border=>0;
+  endTag 'p';
+
+  element 'p', 'The filmview screen offers effortless seeking to any
+point in a film. (Films not included. :-)';
+
+  startTag 'p';
+  columns sub {
+    img 'art/addjoint1.png', 'Add Joint (1)', border=>0;
+  },
+  sub { hskip 2 },
+  sub {
+    img 'art/addjoint2.png', 'Add Joint (2)', border=>0;
+  };
+  endTag 'p';
+
+  element 'p', 'Add Joint: These two screens are used to create connections
+between two situations.  Connections (a.k.a. joints) are a
+bookkeeping aide to help keep everything in proper perspective.';
+
+  startTag 'p';
+  img 'art/crossref.png', 'Cross Reference', border=>0;
+  endTag 'p';
+
+  element 'p', 'Cross Reference:
+Once you have annotated the film in the 3rd person then you can
+create empathy patterns to translate back into the 1st person
+perspective.  This completes the empathy - emotional intelligence cycle.';
 
   vskip;
 
