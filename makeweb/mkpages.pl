@@ -294,9 +294,6 @@ our $topmenu = MenuTree
 	 ['Philosophy'        => 'philo.html'],
 	]);
 
-require 'marriage.pl';
-require 'realization.pl';
-
 page 'fairuse.html', sub {
   element 'title', 'Fair Use Statement';
   endTag 'head';
@@ -686,12 +683,6 @@ small research study are ';
   text '!';
   endTag 'p';
 
-  startTag 'p';
-  text '[20 Jan 2002] i got ';
-  element 'a', 'married', href => 'm.html';
-  text '!';
-  endTag 'p';
-
 };
 
 menupage $topmenu, 'History', sub {
@@ -831,7 +822,6 @@ snapshot is ';
   element 'th', 'Blurb';
   element 'th', 'Rating';
   element 'th', 'Status';
-  element 'th', 'Format';
   element 'th', 'Annotation';
   endTag 'tr';
 
@@ -843,7 +833,6 @@ snapshot is ';
   element 'td', 'Epic Animated Adventure';
   element 'td', 'All Ages';
   element 'td', '5%';
-  element 'td', 'VCD';
   startTag 'td';
   element 'a', '22k', href => 'annotation/naushika35';
   endTag 'td';
@@ -857,7 +846,6 @@ snapshot is ';
   element 'td', 'Drama';
   element 'td', '17+ (language, adult themes)';
   element 'td', '0%';
-  element 'td', 'DVD';
   element 'td', 'soon';
   endTag 'tr';
 
@@ -869,7 +857,6 @@ snapshot is ';
   element 'td', 'Space Opera';
   element 'td', 'All Ages';
   element 'td', '0%';
-  element 'td', 'VCD';
   element 'td', 'soon';
   endTag 'tr';
 
@@ -927,8 +914,13 @@ titles until the first annotations are completed.";
   element 'p', 'Does anyone know where Hindi film scripts are
 available?';
 
-  element 'p', 'i heartily recommend The Matrix (1999), however, this
-film would be difficult to analyze.';
+  startTag 'p';
+  text 'i heartily recommend ';
+  element 'a', 'The Matrix (1999)', href => 'thematrix.html';
+  text ', however, this film is not really a good film to analyze
+with Aleader.  The beauty of this film is very less due to its
+abstract emotional content.';
+  endTag 'p';
 };
 
 if (0) {

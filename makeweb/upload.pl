@@ -79,13 +79,9 @@ sub sync_dir {
 
 sync_dir('.',
 	 qw(index.html news.html history.html
-	    download.html dl-debian.html dl-unix.html dl-windows.html
-	    doc.html doc-intro.html
-	    doc-situation.html doc-film.html doc-joints.html doc-xref.html
-	    doc-exam.html doc-disagree.html lists.html
-	    scores.html philo.html philo-redael.html
-	    jobs.html imrt.html fairuse.html
-	    m.html eyes.html realize.html kamdi.html));
+	    download.html lists.html thematrix.html
+	    scores.html philo.html
+	    jobs.html imrt.html fairuse.html));
 
 sync_dir('art', map { s,^.+/,,; $_ }
 	 glob('art/*.png'),
