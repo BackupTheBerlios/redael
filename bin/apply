@@ -2,7 +2,7 @@
 
 use strict;
 
-our @opt = ('-p0');
+our @opt;
 our @change;
 
 for my $o (@ARGV) {
@@ -21,17 +21,26 @@ sub run {
   die "exec $cmd: $!"
     if $exit == -1;
 
-  die "system $cmd failed: $exit"
-     if $exit;
+  die "$cmd failed: $exit"
+     if $exit & 0xff;
+
+  my $status = $exit >> 8;
+
+  die "$cmd failed: status $status"
+    if $status > 1;
 }
 
 for my $c (@change) {
   if (-d $c) {
     opendir my $dh, $c or die "opendir $c: $!";
-    for my $file (readdir $dh) {
+    for my $file (sort readdir $dh) {
+
+      if ($file eq 'README') {
+	run "cat $c/$file";
+	next;
+      }
 
       next if ($file =~ /^\./ or
-	       $file eq 'README' or
 	       ! -f "$c/$file");
 
       if ($file =~ /\.sh$/) {

@@ -205,11 +205,12 @@ page 'index.html', sub {
 
 our $topmenu = MenuTree
   ->new([
-	 'News'          => 'news.html',
-	 'Download'      => 'download.html',
-	 'Documentation' => 'doc.html',
-	 'Mailing Lists' => 'lists.html',
-	 'Philosophy'    => 'philo.html'
+	 'News'              => 'news.html',
+	 'Download'          => 'download.html',
+	 'Documentation'     => 'doc.html',
+	 'Mailing Lists'     => 'lists.html',
+	 'Philosophy'        => 'philo.html',
+	 'Job Opportunities' => 'jobs.html',
 	]);
 
 sub menupage {
@@ -643,6 +644,38 @@ configurations:';
     endTag 'p';
   };
   endTag 'center';
+};
+
+menupage $topmenu, 'Job Opportunities', sub {
+  element 'h1', 'Possible Research Grants';
+
+  startTag 'p';
+  text 'This project should be of interest to lots of research grants,
+and there is plenty of work to do.
+The philosophical approach used in redael has only been tested on
+a hand-full of people.  Larger scale scientific studies are needed
+to better estimate its effectiveness.';
+  endTag 'p';
+
+  startTag 'p';
+  text "If you have run a psychology experiment in college then
+you are qualified to apply for a grant.  Programming skills are
+not necessary.  For example, consider NIH grant ";
+  startTag 'a', href => 'http://grants.nih.gov/grants/guide/pa-files/PA-00-105.html';
+  text 'PA-00-105';
+  endTag 'a';
+  text '.  A more adventurous opportunity might be to try to get the attention
+of the ';
+  startTag 'a', href => 'http://www.templeton.org/';
+  text 'John Templeton Foundation';
+  endTag 'a';
+  text ", but that's a long-shot.";
+  endTag 'p';
+
+  startTag 'p';
+  text 'In any case, if you are interested in writing a grant proposal
+then please contact the mailing list.';
+  endTag 'p';
 };
 
 __END__
