@@ -20,7 +20,7 @@ page 'm.html', sub {
 		  ganesh.jpg brahmadeva.jpg
 		  mother_arrives.jpg christmas_puja.jpg christmas_puja2.jpg 
 		  skit.jpg kawali1.jpg dance.jpg
-		  making_friends.jpg kawali2.jpg 
+		  making_friends.jpg kawali2.jpg mehendi.jpg
 		  huldi1.jpg huldi2.jpg
 		  huldi_joshua.jpg 
 		  marriage_puja.jpg marriage_havan.jpg marriage_havan2.jpg 
@@ -222,6 +222,18 @@ after only one hour we decided to proceed with the marriage.';
   sub { hskip 4 },
   sub {
     thumb 'art/kawali2.jpg', 'Shri Krishna (Day 6)';
+  };
+
+  br;
+  columns sub {
+    thumb 'art/mehendi.jpg', 'Mehendi';
+  },
+  sub { hskip 4 },
+  sub {
+    element 'p', 'Both of us had our hands decorated with mehendi.
+Actually mehendi is traditionally only for women (not men), but many of
+the grooms wanted to try it.  i had tried it only once before
+so i found it fascinating.'
   };
 
   br;

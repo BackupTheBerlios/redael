@@ -652,7 +652,7 @@ instructions for your operating system.';
   element 'td', '5%';
   element 'td', 'VCD';
   startTag 'td';
-  element 'a', '22k', href => 'annotation/naushika12';
+  element 'a', '22k', href => 'annotation/naushika35';
   endTag 'td';
   endTag 'tr';
 
@@ -748,6 +748,9 @@ Any Given Sunday (1999), Devil's Advocate (1997), Ghost (1990),
 American Werewolf in Paris (1997), or serious Hindi
 drama.  Do not submit your favorite film titles until the first
 annotations are completed.";
+
+  element 'p', 'Does anyone know where Hindi film scripts are
+available?'
 };
 
 menupage $topmenu, 'Debian', sub {
@@ -762,15 +765,13 @@ as part of the main debian distribution).';
   startTag 'blockquote';
   startTag 'pre';
   text 'deb http://gstreamer.net/releases/debian ./
-deb-src http://gstreamer.net/releases/debian ./
-
 deb http://redael.berlios.de/releases/debian ./
 ';
   endTag 'pre';
   endTag 'blockquote';
   endTag 'p';
 
-  element 'p', 'And then simply use apt-get:';
+  element 'p', 'Then simply use apt-get:';
 
   startTag 'p';
   startTag 'blockquote';
@@ -809,8 +810,10 @@ can compile redael from source code.';
   },
   sub { hskip 6 },
   sub {
-    text 'Install 0.3.1 or later version of gstreamer.  You will also
+    element 'p', 'Install 0.3.1 or later version of gstreamer.  You will also
 need some libraries: libmpeg2, liba52, and libHermes.';
+
+    element 'p', 'ALERT: gstreamer 0.3.2 is broken.';
   };
   endTag 'p';
 
@@ -909,107 +912,12 @@ menupage $topmenu, 'Introduction', sub {
   element 'p', 'What is the best test design for ranking emotional
 intelligence?';
 
-  element 'p', 'Please consider the following question / answer pair:';
-
-  startTag 'blockquote';
-  startTag 'table';
-  startTag 'tr';
-  startTag 'td', bgcolor => '#ffff99';
-
-  startTag 'form';
-  element 'p', 'You are in a meeting when a colleague takes
- credit for work that you have done. What do you do?';
-
-  startTag 'table', cellPadding => 1, cellSpacing => 1;
-
-  startTag 'tr';
-  startTag 'td';
-  emptyTag 'input', type => 'radio';
-  endTag 'td';
-  startTag 'td';
-  text 'Immediately and publicly confront the colleague over
- the ownership of your work.';
-  endTag 'td';
-  endTag 'tr';
-
-  startTag 'tr';
-  startTag 'td';
-  emptyTag 'input', type => 'radio';
-  endTag 'td';
-  startTag 'td';
-  text 'After the meeting, take the colleague aside and tell her
- that you would appreciate in the future that she credits you when
- speaking about your work.';
-  endTag 'td';
-  endTag 'tr';
-
-  startTag 'tr';
-  startTag 'td';
-  emptyTag 'input', type => 'radio';
-  endTag 'td';
-  startTag 'td';
-  text "Nothing, it's not a good idea to embarrass colleagues in public.";
-  endTag 'td';
-  endTag 'tr';
-
-  startTag 'tr';
-  startTag 'td';
-  emptyTag 'input', type => 'radio';
-  endTag 'td';
-  startTag 'td';
-  text ' After the colleague speaks, publicly thank her for
- referencing your work and give the group more specific detail
- about what you were trying to accomplish.';
-  endTag 'td';
-  endTag 'tr';
-  endTag 'table';
-  endTag 'form';
-
-  emptyTag 'hr';
-
-  element 'p', 'The most emotionally intelligent answer is D. By
-  demonstrating an awareness of work-place dynamics, and an ability to
-  control your emotional responses, publicly recognizing your own
-  accomplishments in a non-threatening manner, will disarm your
-  colleague as well as puts you in a better light with your manager
-  and peers. Public confrontations can be ineffective, are likely to
-  cause your colleague to become defensive, and may look like poor
-  sportsmanship on your part. Although less threatening, private
-  confrontations are also less effective in that they will not help
-  your personal reputation.';
-
-  startTag 'blockquote';
-  text '[A] 0 Points - Immediately and publicly confront the colleague over the ownership of your work.';
-  br;
-  text '[B] 5 Points - After the meeting, take the colleague aside and tell her that you would appreciate in the future that she credits you when speaking about your work.';
-  br;
-  text "[C] 0 Points - Nothing, it's not a good idea to embarrass colleagues in public.";
-  br;
-  text '[D] 10 Points - After the colleague speaks, publicly thank her for referencing your work and give the group more specific detail about what you were trying to accomplish.';
-  endTag 'blockquote';
-
-  endTag 'td';
-  endTag 'tr';
-  endTag 'table';
-  endTag 'blockquote';
-
-  element 'p', q(This type of discussion is what most people seem to
-expect upon hearing the idea "emotional intelligence test."
-However, notice how the example above takes the situation
-as given.  In other words, the test focuses on the student's
-reaction to a *given* situation.);
-
-  element 'p', 'Certainly choosing the correct reaction *is*
+  element 'p', "Most tests focus on the student's
+reaction to a *given* situation.
+Certainly choosing the correct reaction *is*
 important.  However, deciding on a reaction depends on assessing
-the situation accurately.  
-To continue the example above, did your
-colleague really take credit for your 100% of your work?  Or
-did she take a small part of your idea and add her own unique spin to it?
-Or is she presenting her own idea except that she is using your
-particular style and terminology?
-How many times has your reaction been
-out-of-place because you misunderstood a situation?
-Attention to subtle details make all the difference.';
+the situation accurately.
+Attention to subtle details make all the difference.";
 
   startTag 'p';
   text 'Even if the term "emotional intelligence" encompasses
@@ -1022,10 +930,6 @@ urgent part.  Therefore, the redael test concentrates only on
 situation asseessment and leaves the question of choosing
 the perfect reaction up to your spontaneous creativity.';
   endTag 'p';
-
-  element 'p', 'If, even after mastering situation assessment, you
-still want to study the variety of possible reactions then you
-can always come back to tests built similar to the above example.';
 };
 
 menupage $topmenu, 'Getting Started', sub {
@@ -1193,7 +1097,11 @@ during which the parameters of the situation remain constant.';
   endLi;
 
   startLi;
-  text 'Choose the duration.';
+  text 'Choose the duration.  Although duration is not considered
+for scoring, duration indicates whether the situation will be the
+target of a joint (see the Joint section).  An ambiguous
+duration is only useful for exemplars to indicate an *optional*
+situation.';
   endLi;
 
   endTag 'ol';
@@ -1230,6 +1138,10 @@ menupage $topmenu, 'Joints', sub {
   element 'p', 'These two screens are used to create connections
 between two situations.  Connections (a.k.a. joints) describe
 a temporal relationship between two situations.';
+
+  element 'p', 'Canidate situations are generally indicated by
+having an open duration.  The Duration Query screen (not shown)
+offers a convenient summary of duration status.';
 
   startTag 'p';
   columns sub {
@@ -1318,6 +1230,10 @@ might be entirely different.';
 written in a simple if-then language.  These rules are loaded at
 redael startup.  If you don't like the default rules then you can
 customize them.";
+
+  element 'p', 'In any case, the scoring algorithm only distinguishes
+witness or non-witness type joints as the joint type can usually be
+inferred from surrounding context.';
 };
 
 menupage $topmenu, 'X-Reference', sub {
@@ -1609,10 +1525,10 @@ about the object.";
 
   element 'p', 'Within the realm of compassionate individuality,
 there are various ways attention can be configured.  What
-are all the permutations?  Fortunately, it is easy to generate
-a question to invoke a given configuration.  Once posed
-as a question, we can consider whether
-the configuration makes sense and draw any further conclusions.';
+are all the permutations?  The connection with grammer makes
+it is easy to generate examples to invoke a given configuration.
+Once posed as an example, we can consider the utility of a configuration
+and draw any further conclusions.';
 
   startTag 'p';
   columns sub { attention 0,1 },
@@ -1697,8 +1613,7 @@ much more so than any physical or mental amusement.';
   endTag 'p';
 
   startTag 'p';
-  columns sub {
-    text 'Jumping directly between the ';
+  text 'Jumping directly between the ';
     nth(2);
     text ' and ';
     nth(3);
@@ -1714,14 +1629,11 @@ much more so than any physical or mental amusement.';
     nth(1);
     text ' and ';
     nth(3);
-    text ' perspectives.';
-  },
-  sub { hskip 2 },
-  sub { text 'impossible'; attention 3,2 };
-  endTag 'p';
+    text ' perspectives. ';
 
-  element 'p', 'The following table and diagram summarize all sensical
+  text 'The following table and diagram summarize all sensical
 configurations:';
+  endTag 'p';
 
   startTag 'center';
   columns sub {
@@ -1748,7 +1660,7 @@ configurations:';
 
     startTag 'p';
     columns sub { text '(d) ' },
-    sub { text 'how do i feel about ..?'; attention 1,2 },
+    sub { text 'follow everyone else'; attention 1,2 },
     sub { hskip 6 },
     sub { text '(e) ' },
     sub { text 'ideal role-model'; attention 2,1 };
@@ -1898,6 +1810,7 @@ abstract emotions are disabled (step 3).
 A student's capacity for (2) emotional intelligence is tested intensively.";
   endTag 'p';
 
+if (0){
   element 'h2', 'The Model';
 
   element 'p', 'By showing a film, it is easy to present actual situations
@@ -1913,23 +1826,42 @@ one-to-one mapping exposes the inverse-of-empathy mechanism
 (emotional intelligence) which can then be seen, understood, and
 tested against.';
 
-  columns sub {
-    element 'p', 'So what is the *best* model to use for recording
+  element 'p', 'So what is the *best* model to use for recording
 the structural parameters of a situation?  There are probably an infinite
 number of ways to organize all the situations involving individuals.
-However, by thinking
-about this question like a mathematical equation, a solution is revealed.
-The trick is to model "competition" instead of "3rd person situation" (step 1).
-As the model is constructed, the "competitions" cancel out (step 2),
-and we approach an exact model of reality (step 3).';
+Even so, by thinking about this question like a mathematical
+equation, a solution is revealed.';
 
-    element 'p', 'This explanation may seem far-fetched,
+  startTag 'center';
+  img 'art/model.png', 'Model Mathematics';
+  endTag 'center';
+
+  startTag 'ol';
+  startLi;
+  text 'Write our question like a mathematical equation.';
+  endLi;
+  startLi;  
+  text 'Be specific about our terms.  Situation can be the object
+of attention (as with empathy) or the subject of attention (as with
+emotional intelligence).';
+  endLi;
+  startLi;
+  text 'For the case of the situation as a subject, we can
+substitute the word "competition".';
+  endLi;
+  startLi;
+  text 'Divide both sides of the equation by "competition".';
+  endLi;
+  startLi;
+  text 'Our sentence is re-written as: "The best model of competition
+is the actual objective situation."';
+  endLi;
+  endTag 'ol';
+
+  element 'p', 'This explanation may seem far-fetched,
 but it is easy to check the practical utility of the resulting model
 using the metric proposed above (whether the model is one-to-one with
 respect to emotions).';
-  }, sub { hskip 2 },
-  sub {
-    img 'art/model.png', 'Model Mathematics';
   };
 
   element 'h2', 'Ghost Wheel?';
