@@ -4,7 +4,12 @@ use 5.6.1;
 use strict;
 use Fatal qw(open);
 
-BEGIN { require "./minixml.pl"; }
+BEGIN {
+  require "./minixml.pl";
+}
+
+our $Scores;
+require './scores';
 
 sub run {
   my ($cmd) = @_;
@@ -213,6 +218,7 @@ our $topmenu = MenuTree
 	 'Download'          => 'download.html',
 	 'Documentation'     => 'doc.html',
 	 'Mailing Lists'     => 'lists.html',
+	 'High Scores'       => 'scores.html',
 	 'Philosophy'        => 'philo.html',
 	 'Job Opportunities' => 'jobs.html',
 	]);
@@ -941,8 +947,17 @@ menupage $topmenu, 'Mailing Lists', sub {
     text ' / ';
     element 'a', 'Archives', 'href', "https://lists.berlios.de/pipermail/$name";
     endTag 'p';
-    element 'p', $desc;
-    element 'p', $vol;
+
+    startTag 'p';
+    text $desc;
+
+    text ' ';
+
+    startTag 'i';
+    text $vol;
+    endTag 'i';
+    endTag 'p';
+
     endTag 'li';
   };
 
@@ -950,13 +965,56 @@ menupage $topmenu, 'Mailing Lists', sub {
 
   $list->('redael-announce',
 	  'Announcements about releases or other important events.',
-'[Low-volume; at most one message per day.]');
+'At most one message per day.');
 
   $list->('redael-devel',
 	  'Technical discussions about software development and philosophy.',
-'[Can be high volume on occation.]');
+'Can be high volume on occation.');
 
   endTag 'ul';
+};
+
+menupage $topmenu, 'High Scores', sub {
+  element 'h1', 'Scores';
+
+  element 'p', 'This page contains a compilation of EQ test results.
+Send email with
+your results to get listed here.  Obviously you can forge any results,
+however, honesty can keep this page somewhat useful.  Certified results
+obtained through professional testing methods will be placed on a different
+web page.';
+
+  startTag 'center';
+
+  startTag 'table', border=>1, cellpadding=>4;
+
+  startTag 'tr';
+  element 'th', 'Date';
+  element 'th', 'Name';
+  element 'th', 'Location';
+  element 'th', 'Film';
+  element 'th', 'Match';
+  element 'th', 'EQ';
+  endTag 'tr';
+  
+  for my $s (@$Scores) {
+    startTag 'tr';
+    for my $f (@$s) {
+      element 'td', $f;
+    }
+    endTag 'tr';
+  }
+  endTag 'table';
+
+  startTag 'blockquote';
+  startTag 'i';
+  text 'For a reliable EQ score, the match should be
+greater than the EQ.  In other words, the elapse time of a
+test should be at least one hour.';
+  endTag 'i';
+  endTag 'blockquote';
+
+  endTag 'center';
 };
 
 menupage $topmenu, 'Philosophy', sub {
