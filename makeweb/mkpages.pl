@@ -176,6 +176,13 @@ page 'index.html', sub {
   startTag 'tr';
   
   startTag 'td', 'align', 'center', valign=>'bottom';
+  img 'art/mensa.png', 'Mensa Logo', border => 0;
+  br;
+  text 'IQ: ';
+  element 'a', 'Mental Intelligence', 'href', 'http://www.mensa.org';
+  endTag 'td';
+  
+  startTag 'td', 'align', 'center', valign=>'bottom';
   img 'art/about_sy_chart.png', 'Chakra System', border=>0;
   br;
   text 'SQ: ';
@@ -187,13 +194,6 @@ page 'index.html', sub {
   br;
   text 'EQ: ';
   element 'a', 'Emotional Intelligence', 'href', 'news.html';
-  endTag 'td';
-  
-  startTag 'td', 'align', 'center', valign=>'bottom';
-  img 'art/mensa.png', 'Mensa Logo', border => 0;
-  br;
-  text 'IQ: ';
-  element 'a', 'Mental Intelligence', 'href', 'http://www.mensa.org';
   endTag 'td';
   
   endTag 'tr';
