@@ -284,7 +284,7 @@ used in for-profit film presentation is not required for our purposes.';
 
   startTag 'li';
   element 'p',
-'10% justification: To properly annotation duration, a whole film is
+'First 10% justification: To properly annotation duration, a whole film is
 required.  Our compromise is to use only the first 10%.  Within 10%, joints &
 duration can be demonstrated in a limited way which we hope and expect
 will be sufficient.';
@@ -311,9 +311,12 @@ protected under the fair use provision.';
 
   startTag 'li';
   element 'p',
-'Offering 10% of a quality degraded film is similar to the practices
-used in film promotion.  Hopefully it is clear to studios that it is
-not our desire to diminish the asset value of films.';
+'Offering 10% of a quality degraded film is similar to the practice
+routinely used in film promotion (previews).
+Hopefully it is plausible to studios that making available our proposed
+film sub-set will not diminish the asset value of a given film.
+Of course the actual effect on asset value is hard to measure objectively
+with any precision.';
   endTag 'li';
 
   endTag 'ul';
@@ -391,13 +394,26 @@ films to test how consistantly you can be a witness.';
   
   startTag 'p';
   text 'Redael is a software package that combines a video
-player (MPEG1/2), annotation tools, and a scoring system into an
+player (MPEG1/MPEG2), annotation tools, and a scoring system into an
 easy to use GUI.  This software is licensed under the ';
   element 'a', 'GPL', 'href', 'http://www.gnu.org/philosophy/philosophy.html';
   text ' and is available from the download page.';
   endTag 'p';
   
   element 'h1', "News";
+
+  startTag 'p';
+  text '[5 Dec 2001] Assuming the cooperation of upstream
+libraries, a binary release of redael will be made
+within a few months (1Q02).  As part of the release,
+i would very much like to make
+some exemplar annotations available. However, this will depend upon
+the vagaries of international copywrite law.  Can anyone comment
+on a preliminary ';
+  element 'a', 'fair use statement',
+    href => 'fairuse.html';
+  text '?';
+  endTag 'p';
 
   element 'p', '[3 Oct 2001] The basic features of the software have
 been working since two days ago.  A few patches are pending with
@@ -501,7 +517,7 @@ with --enable-glib2.';
   startTag 'a', href=>'http://developer.berlios.de/project/filelist.php?group_id=167';
   text 'Download the latest snapshot of redael.';
   endTag 'a';
-  text ' Add salt to taste.';
+  text ' Compile and run.';
   endTag 'p';
 
   element 'h2', 'Films';
@@ -518,7 +534,7 @@ with --enable-glib2.';
 
   startTag 'tr';
   startTag 'td';
-  element 'a', 'Kaze no Tani no Naushika',
+  element 'a', 'Kaze no Tani no Naushika (1984)',
     href => 'http://www.nausicaa.net/miyazaki/nausicaa/';
   endTag 'td';
   element 'td', 'Epic Animated Adventure';
@@ -530,7 +546,7 @@ with --enable-glib2.';
 
   startTag 'tr';
   startTag 'td';
-  element 'a', 'Star Wars: A New Hope',
+  element 'a', 'Star Wars: A New Hope (1977)',
     href => 'http://www.starwars.com/episode-iv/';
   endTag 'td';
   element 'td', 'Space Opera';
@@ -542,7 +558,7 @@ with --enable-glib2.';
 
   startTag 'tr';
   startTag 'td';
-  element 'a', 'Good Will Hunting',
+  element 'a', 'Good Will Hunting (1997)',
     href => 'http://www.un-official.com/GWH/GWMain.html';
   endTag 'td';
   element 'td', 'Drama';
@@ -560,11 +576,11 @@ table above because synchronization is accomplished with byte-offsets
 instead of time-offsets.  This will be fixed as soon as possible.';
   endTag 'p';
 
-  element 'p', 'Films which will not be analyzed: most comedy, action,
+  element 'p', 'Films which will not be analyzed here: most comedy, action,
 and horror genres (unless especially insightful).';
 
   element 'p', "Films under consideration for future analysis: Any Given
-Sunday, Devil's Advocate, American Werewolf in Paris, or serious Hindi
+Sunday, Devil's Advocate, Ghost, American Werewolf in Paris, or serious Hindi
 drama.  Do not submit your favorite film titles until the first
 annotations are completed.";
 };
@@ -582,7 +598,8 @@ elements for making annotations and advanced features for scoring.';
 
   startTag 'li';
   element 'p', 'A student can be tested against an exemplar film annotation.
-As little as one hour is required for a rough EQ estimate.';
+Once the user interface is mastered, as little as one hour is required
+for a rough EQ estimate.';
   endTag 'li';
 
   startTag 'li';
