@@ -89,6 +89,16 @@ sub nth {
   else { die $n; }
 }
 
+sub nth_ex {
+  my ($n) = @_;
+
+  if ($n == 0)    { text 'I am' }
+  elsif ($n == 1) { text 'emotion' }
+  elsif ($n == 2) { text 'personality' }
+  elsif ($n == 3) { text 'situation' }
+  else { die $n; }
+}
+
 ##########################################################
 package MenuTree;
 
@@ -317,7 +327,7 @@ concepts expressing fundamental beliefs.';
   element 'h1', 'The Need For a Model';
 
   element 'p', "We can't see ourselves apart from ourselves.
-To understand life, it is necessary to develop a model --
+To understand life, it is necessary to develop a *model* --
 a description or analogy to help visualize something that
 cannot be directly observed.  A model is a miniature representation,
 and a *good* model confers real insight into reality and joy.";
@@ -344,25 +354,39 @@ about the object.';
 
   startTag 'p';
   columns sub {
-    text 'Far back in history, one animal looked at another
+    startTag 'p';
+    text 'Far back in history, an animal looked at another
 with compassion.  He or she realized that there
 were a multiplicity of individuals, for the *first* time.
 Before compassion, each animal was ruthless, perfectly self-centered,
-and alone.  Even ';
-  }, sub {
-    emptyTag 'img', src=>'art/nocompassion.png', alt => 'No Compassion';
-  };
-  endTag 'p';
+and alone.';
+    endTag 'p';
 
-  startTag 'p';
-  text 'Compassion crystalizes the four perspectives:';
+    element 'p', 'Actually compassion awakens gradually for each individual.
+If it does not develop in a balanced way then
+horrible atrocities can result.  The business of slavery
+and the Nazi movement (in Germany) can be attributed to a
+terrible dearth of compassion.';
+  }, sub {
+    emptyTag 'img', src=>'art/nocompassion.jpg', alt => 'No Compassion';
+  };
   endTag 'p';
 
   startTag 'center';
   columns sub {
-    emptyTag 'img', src => 'art/fourpp.png', alt => 'Four Perspectives',
-      width=>159, height=>93;
+    startTag 'i';
+    text 'Balanced compassion';
+    br;
+    text 'crystalizes the';
+    br;
+    text 'four perspectives:';
+    endTag 'i';
   },
+  sub { hspace 10 },
+  sub {
+    emptyTag 'img', src => 'art/fourpp.jpg', alt => 'Four Perspectives';
+  },
+  sub { hspace 4 },
   sub {
     startTag 'table', border=>0, cellspacing=>0, cellpadding=>0;
     row sub { nth(3); text ' person perspective (situation)' };
