@@ -61,7 +61,6 @@ sync_dir('art', map { s,^.+/,,; $_ }
 	 glob('art/*.jpg'));
 
 open my $fh, ">checksum" or die "open: $!";
-while (my ($k,$v) = each %Sum) {
-  print $fh "$v $k\n";
+for (sort keys %Sum) {
+  print $fh "$Sum{$_} $_\n";
 }
-
