@@ -859,7 +859,7 @@ intelligence?';
   startTag 'td', bgcolor => '#ffff99';
 
   startTag 'form';
-  element 'p', '2. You are in a meeting when a colleague takes
+  element 'p', 'You are in a meeting when a colleague takes
  credit for work that you have done. What do you do?';
 
   startTag 'table', cellPadding => 1, cellSpacing => 1;
@@ -1834,10 +1834,10 @@ A student's capacity for (2) emotional intelligence is tested intensively.";
 
   element 'h2', 'The Model';
 
-  element 'p', 'By showing film, it is easy to present situations
+  element 'p', 'By showing a film, it is easy to present actual situations
 which are complex enough to activate the empathy mechanism.
-However, it is not at all obvious how to record structural
-parameters of a situation.';
+However, it is not at all obvious how to record the structural
+parameters of an abstract situation.';
 
   element 'p', 'The utility of a given model of 3rd person situations
 is whether it provides a one-to-one mapping between abstract situations
@@ -1849,19 +1849,21 @@ tested against.';
 
   columns sub {
     element 'p', 'So what is the *best* model to use for recording
-structural parameters of a situation?   By thinking about this
-question like a mathematical equation, the solution is revealed.
-The trick is to model "competition" instead of "situation" (step 1).
+the structural parameters of a situation?  There are probably an infinite
+number of ways to organize all the situations involving individuals.
+However, by thinking
+about this question like a mathematical equation, a solution is revealed.
+The trick is to model "competition" instead of "3rd person situation" (step 1).
 As the model is constructed, the "competitions" cancel out (step 2),
-and we approach a perfect model of reality (step 3).';
+and we approach an exact model of reality (step 3).';
 
     element 'p', 'This explanation may seem far-fetched,
-but it is easy to check the practical utility of this model using the
-metric proposed above (whether the model is one-to-one with
+but it is easy to check the practical utility of the resulting model
+using the metric proposed above (whether the model is one-to-one with
 respect to emotions).';
   }, sub { hskip 2 },
   sub {
-    img 'art/model.png', 'The Model';
+    img 'art/model.png', 'Model Mathematics';
   };
 
   element 'h2', 'Ghost Wheel?';
