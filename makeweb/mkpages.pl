@@ -1346,7 +1346,8 @@ configurations:';
     startTag 'p';
     columns sub { text '(b) ' },
     sub { text 'empathy'; attention 1,3 },
-    sub { hskip 3 },
+    sub { hskip 6 },
+    sub { text '(c) ' },
     sub {
       startTag 'font', color=>'#006600';
       text 'emotional intelligence';
@@ -1355,17 +1356,18 @@ configurations:';
     endTag 'p';
 
     startTag 'p';
-    columns sub { text '(c) ' },
-    sub { text 'prerequisite'; attention 1,2 },
-    sub { hskip 3 },
-    sub { text 'transformative pressure'; attention 2,1 };
+    columns sub { text '(d) ' },
+    sub { text 'prerequisite (read)'; attention 1,2 },
+    sub { hskip 6 },
+    sub { text '(e) ' },
+    sub { text 'command (write)'; attention 2,1 };
     endTag 'p';
 
     startTag 'p';
-    columns sub { text '(d) ' },
+    columns sub { text '(f) ' },
     sub { text 'self-realization'; attention 0,0 },
     sub { hskip 6 },
-    sub { text '(e) ' },
+    sub { text '(g) ' },
     sub { text 'divine expression'; attention 1,0 };
     endTag 'p';
   };
