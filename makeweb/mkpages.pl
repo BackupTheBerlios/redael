@@ -570,11 +570,11 @@ with --enable-glib2.';
 
   endTag 'table';
 
-  startTag 'p';
+  startTag 'blockquote';
   element 'i', 'You must use the same format as is given in the
 table above because synchronization is accomplished with byte-offsets
 instead of time-offsets.  This will be fixed as soon as possible.';
-  endTag 'p';
+  endTag 'blockquote';
 
   element 'p', 'Films which will not be analyzed here: most comedy, horror,
 and action movies (unless especially insightful).  Why not?  Because these
