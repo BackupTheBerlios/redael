@@ -223,6 +223,8 @@ our $topmenu = MenuTree
 	 'Philosophy'        => 'philo.html',
 	]);
 
+require 'marriage.pl';
+
 page 'fairuse.html', sub {
   element 'title', 'Fair Use Statement';
   endTag 'head';
@@ -407,6 +409,14 @@ easy to use GUI.  This software is licensed under the ';
   endTag 'p';
   
   element 'h1', "News";
+
+  if (0) {
+  startTag 'p';
+  text '[9 Jan 2002] i got ';
+  element 'a', 'married', href => 'm.html';
+  text '!';
+  endTag 'p';
+}
 
   startTag 'p';
   text '[5 Dec 2001] Assuming the cooperation of upstream
@@ -1265,13 +1275,21 @@ intelligence is tested intensively.";
 
   startTag 'p';
   columns sub { attention 1,2 },
-  sub { hskip 1 },
-  sub { attention 2,1 },
   sub { hskip 2 },
   sub {
-    element 'i', 'These configurations, which involve personality,
-are difficult to understand and not particularly important.  They will be
-explored elsewhere.'
+    text '"How do i feel about [something]?" ; where [something] is some
+imaginary situation.  Extra-ordinary personal preference and fashions
+are expressions of this configuration of attention.';
+  };
+  endTag 'p';
+
+  startTag 'p';
+  columns sub { attention 2,1 },
+  sub { hskip 2 },
+  sub {
+     text '"i do not care how i feel about [something]."
+ ; where [something] is some imaginary situation. This
+is to take a professional attitude.';
   };
   endTag 'p';
 
@@ -1357,10 +1375,10 @@ configurations:';
 
     startTag 'p';
     columns sub { text '(d) ' },
-    sub { text 'prerequisite (read)'; attention 1,2 },
+    sub { text 'how do i feel about ..?'; attention 1,2 },
     sub { hskip 6 },
     sub { text '(e) ' },
-    sub { text 'command (write)'; attention 2,1 };
+    sub { text 'command'; attention 2,1 };
     endTag 'p';
 
     startTag 'p';
@@ -1372,6 +1390,43 @@ configurations:';
     endTag 'p';
   };
   endTag 'center';
+
+  element 'h2', 'Toward Self-Identity';
+
+  startTag 'p';
+  columns sub {
+    element 'p', 'The problem with seeking self-realization (f)
+is that the actual
+self (the original subject or "I am") cannot appear as an object,
+by definition.  "I am" is the *subject*.  So to realize the self, we have
+to use divine intelligence.';
+
+    element 'p', 'The most direct approach is to concentrate all the
+attention as emotional detachment (a) while soothing the emotions
+down.  As the strength of emotions fade, the actual self is experienced
+when the attention vector resolves to a point.
+However, this approach is not generally practical.
+The pressures of daily life keep the attention bouncing
+around the various other configurations.';
+  },
+  sub { hskip 4 },
+  sub {
+    img 'art/trident-sr.png', "Emotion as Object";
+  };
+
+  element 'p', 'At least the emotions can be kept as the object of
+attention.  If emotion is the object then the attention has a
+chance to settle into emotional detachment (a) and eventually
+resolve into self-identity (f).  Consideration of emotion as
+a object is important for this reason, as a means of
+gaining self-realization and preserving self-identity.';
+
+  element 'p', 'Besides emotional detechment (a), there are two other
+attention configurations which consider emotion as an object.
+Our interest here is with one of those configurations, emotional
+intelligence (c).';
+
+  endTag 'p';
 };
 
 menupage $topmenu, 'Business Opportunities', sub {
