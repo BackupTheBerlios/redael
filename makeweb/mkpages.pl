@@ -209,8 +209,8 @@ our $topmenu = MenuTree
 	 'Download'          => 'download.html',
 	 'Documentation'     => 'doc.html',
 	 'Mailing Lists'     => 'lists.html',
-	 'Philosophy'        => 'philo.html',
 	 'Job Opportunities' => 'jobs.html',
+	 'Philosophy'        => 'philo.html',
 	]);
 
 sub menupage {
@@ -652,7 +652,7 @@ menupage $topmenu, 'Job Opportunities', sub {
   startTag 'p';
   text 'This project should be of interest to lots of research grants,
 and there is plenty of work to do.
-The philosophical approach used in redael has only been tested on
+The methodology used in redael has only been tested on
 a hand-full of people.  Larger scale scientific studies are needed
 to better estimate its effectiveness.';
   endTag 'p';
