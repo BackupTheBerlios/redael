@@ -1,46 +1,4 @@
-sub thumb {
-  my ($src, $caption) = @_;
-  my $sm = $src;
-  if ($sm !~ s/\.jpg$/-sm.jpg/) {
-    warn "what is $src ?"; next 
-  }
-
-  startTag 'center';
-  startTag 'a', href => $src;
-  emptyTag 'img', src=>$sm, alt=>$caption;
-  endTag 'a';
-  br;
-  text "$caption";
-  endTag 'center';
-}
-
 page 'm.html', sub {
-  for my $pic (qw(mappl-h.jpg mappl-j.jpg
-		  nirmal_nagari.jpg
-		  ganesh.jpg brahmadeva.jpg
-		  mother_arrives.jpg christmas_puja.jpg christmas_puja2.jpg 
-		  skit.jpg kawali1.jpg dance.jpg
-		  making_friends.jpg kawali2.jpg mehendi.jpg
-		  huldi1.jpg huldi2.jpg
-		  huldi_joshua.jpg 
-		  marriage_puja.jpg marriage_havan.jpg marriage_havan2.jpg 
-		  marriage_dinner.jpg
-		  dhulia.jpg m_registration.jpg
-		  heera-model.jpg kamdi1.jpg kamdi2.jpg kamdi3.jpg)) {
-    if (!-e "art/$pic") {
-      warn "$pic doesn't exist";
-      next;
-    }
-    my $sm = $pic;
-    if ($sm =~ s/\.jpg$/-sm.jpg/) {
-      if (modtime("art/$pic") > modtime("art/$sm")) {
-	run "cp art/$pic art/$sm";
-	run "mogrify -geometry 160x160 art/$sm";
-      }
-    }
-    else { warn "what is $pic ?" }
-  }
-
   element 'title', 'Marriage';
   endTag 'head';
 

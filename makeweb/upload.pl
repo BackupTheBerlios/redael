@@ -82,9 +82,9 @@ sync_dir('.',
 	    download.html dl-debian.html dl-unix.html dl-windows.html
 	    doc.html doc-intro.html
 	    doc-situation.html doc-film.html doc-joints.html doc-xref.html
-	    doc-exam.html lists.html
+	    doc-exam.html doc-disagree.html lists.html
 	    scores.html philo.html philo-redael.html
-	    jobs.html fairuse.html
+	    jobs.html imrt.html fairuse.html
 	    m.html eyes.html realize.html kamdi.html));
 
 sync_dir('art', map { s,^.+/,,; $_ }

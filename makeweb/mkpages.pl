@@ -76,6 +76,32 @@ sub img {
   emptyTag 'img', src=>$src, alt=>$alt, @rest;
 }
 
+sub thumb {
+  my ($src, $caption) = @_;
+
+  if (!-e "$src") {
+    warn "$src doesn't exist";
+    return;
+  }
+  
+  my $sm = $src;
+  if ($sm =~ s/\.jpg$/-sm.jpg/) {
+    if (modtime("$src") > modtime("$sm")) {
+      run "cp $src $sm";
+      run "mogrify -geometry 160x160 $sm";
+    }
+  }
+  else { warn "what is $src ?" }
+
+  startTag 'center';
+  startTag 'a', href => $src;
+  emptyTag 'img', src=>$sm, alt=>$caption;
+  endTag 'a';
+  br;
+  text "$caption";
+  endTag 'center';
+}
+
 sub startLi {
   startTag 'li';
   startTag 'p';
@@ -123,7 +149,7 @@ sub nth {
 sub nth_ex {
   my ($n) = @_;
 
-  if ($n == 0)    { text 'I am' }
+  if ($n == 0)    { text 'pure spirit' }
   elsif ($n == 1) { text 'emotion' }
   elsif ($n == 2) { text 'personality' }
   elsif ($n == 3) { text 'situation' }
@@ -248,10 +274,15 @@ our $topmenu = MenuTree
 	   ['Joints'          => 'doc-joints.html'],
 	   ['X-Reference'     => 'doc-xref.html'],
 	   ['Exam'            => 'doc-exam.html'],
+	   ['Disagreement Resolution' => 'doc-disagree.html'],
 	  ]],
 	 ['Mailing Lists'     => 'lists.html'],
 	 ['High Scores'       => 'scores.html'],
-	 ['Research & Professional' => 'jobs.html'],
+	 ['Research & Professional' => 'jobs.html',
+	  [
+	   ['IMRT'            => 'imrt.html'],
+	  ]
+	 ],
 	 ['Philosophy'        => 'philo.html',
 	 [
 	  ['Redael'           => 'philo-redael.html'],
@@ -374,6 +405,10 @@ sub menupage {
   my ($menu, $curitem, $x) = @_;
 
   my $file = $menu->file($curitem);
+  if (!$file) {
+    warn "menupage($curitem): not found (ignoring)";
+    return;
+  }
   my $print = $file;
   $print =~ s/\.html$/-pr.html/;
 
@@ -530,6 +565,25 @@ This software is licensed under the ';
   element 'h1', "News";
 
   startTag 'p';
+  text '[26 Apr 2002] Courtesy of the Institute of Management,
+Research & Technology here in Nashik, the results of our first
+small research study are ';
+  element 'a', 'available', href => 'imrt.html';
+  text '!';
+  endTag 'p';
+
+  startTag 'p';
+  text '[20 Jan 2002] i got ';
+  element 'a', 'married', href => 'm.html';
+  text '!';
+  endTag 'p';
+
+};
+
+menupage $topmenu, 'History', sub {
+  element 'h1', "Old News";
+  
+  startTag 'p';
   columns sub {
     text '[12 Feb 2002] We plan to start giving regular tests at a local
 college here in Maharashtra.  Since the main language is Marathi,
@@ -546,12 +600,6 @@ snapshot of our progress.';
 for Debian i386.';
 
   startTag 'p';
-  text '[20 Jan 2002] i got ';
-  element 'a', 'married', href => 'm.html';
-  text '!';
-  endTag 'p';
-
-  startTag 'p';
   text '[5 Dec 2001] Assuming the cooperation of upstream
 libraries, a binary release of redael will be made
 within a few months (1Q02).  As part of the release,
@@ -564,11 +612,6 @@ on a preliminary ';
   text '?';
   endTag 'p';
 
-};
-
-menupage $topmenu, 'History', sub {
-  element 'h1', "Old News";
-  
   element 'p', '[3 Oct 2001] The basic features of the software have
 been working since two days ago.  A few patches are pending with
 upstream libraries, but everything should be resolved for
@@ -767,7 +810,7 @@ to serve as a basis for redael annotations.';
   endTag 'center';
 
   element 'p', "Films under consideration for future analysis:
-Any Given Sunday (1999), Devil's Advocate (1997), Ghost (1990),
+Devil's Advocate (1997), Ghost (1990),
 or serious Hindi drama.  Do not submit your favorite film
 titles until the first annotations are completed.";
 
@@ -857,58 +900,12 @@ version 0.3.2 or later yet.  You must use version 0.3.1.';
 };
 
 menupage $topmenu, 'Windows', sub {
-  element 'h1', 'Please do not port software to Windows';
+  element 'h1', 'Microsoft Windows';
 
-  element 'p', 'At least, do not port my software to Windows.';
-
-  element 'p', 'While the GNU General Public License expressly
-  prohibits me from denying you the freedom to port software protected
-  by it to Windows, I feel that you do great damage to the world if
-  you do. Let me explain.';
-
-  element 'p', "Windows is a proprietary environment. They don't give
-  you the source code, and they do anything in their power to limit
-  your freedom. They even try to limit what you can do with the
-  software you rightfully bought from them. So, supporting them in any
-  way is bad for the world, because it encourages others to try to
-  limit others' freedoms (it worked great for Microsoft, so it must be
-  a good idea, right?).";
-
-  element 'p', "I don't want any of my work to give anyone a reason to
-  support companies like Microsoft who try to limit people's freedoms.";
-
-  startTag 'p';
-  text "That's why I develop my software on a completely free
-  platform. So I know it works on a completely free platform. Many
-  people using Windows don't care about their freedom. They do care
-  about quality software and for that reason try to replace all the
-  user space software from Microsoft with better free
-  alternatives. This is the sole reason for the existance of ";
-  element 'a', 'cygwin', href => 'http://sources.redhat.com/cygwin/';
-  text '.';
-  endTag 'p';
-
-  element 'p', "However, giving people a way to work around bugs in
-  Windows makes them stay longer with Windows. That's why I consider
-  porting software to Windows sabotage. It does not help people under
-  Windows, in the contrary. It makes them stay longer with
-  Windows. And while they stay, they will put pressure on others to
-  also use Windows. It only helps Microsoft.";
-
-  element 'p', "While this text singles out Microsoft, other companies
-  are equally evil. For example, porting redael to Solaris
-  would help Sun, noone else. Don't do it.";
-
-  element 'p', 'In the same line of argumentation, I will not modify
-  any of my software so it works better with proprietary development
-  platforms like Visual C++, even if I sacrifice great amounts of
-  performance by not exploiting their features. And I ask you to do
-  the same.';
-
-  startTag 'p';
-  element 'a', '(This discussion was copied from www.fefe.de.)',
-    href => 'http://www.fefe.de';
-  endTag 'p';
+  element 'p', "i don't know much about programming on Windows
+and i don't have time to learn.
+If you have the expertise, 
+you are welcome to port Redael to Windows and submit patches.";
 };
 
 menupage $topmenu, 'Documentation', sub {
@@ -994,7 +991,7 @@ first attempt.  Follow a gradual introduction:";
   startTag 'li';
   element 'p', 'Take an exam with original spans and also ignore any joints.
 Always set duration to Closed.  Use the diff tool to
-examine your mistakes.';
+examine your mistakes. (Depth 1)';
   endTag 'li';
   
   startTag 'li';
@@ -1002,14 +999,14 @@ examine your mistakes.';
 and always set the duration to Open.
 Add closing joints until all the situations are closed.
 You can use the duration query screen to check whether anything remains open.
-Use the diff tool to examine your mistakes.';
+Use the diff tool to examine your mistakes. (Depth 2)';
   endTag 'li';
   
   startTag 'li';
   element 'p', 'Take an exam without any original annotation.
 Now it is your responsibility to deterime the span of each situation.
 Set the duration and add joints as you see fit.
-Use the diff tool to examine your mistakes.';
+Use the diff tool to examine your mistakes. (Depth 3)';
   endTag 'li';
   
   endTag 'ol';
@@ -1163,48 +1160,19 @@ These screens are available from the Help menu.';
   startTag 'center';
   startTag 'p';
   columns sub {
-    img 'art/situation_help1.png', 'Situation';
+    thumb 'art/situation_help1.jpg', 'Situation';
   },
   sub { hskip 4 },
   sub {
-    img 'art/situation_help2.png', 'Phase & Initiative';
+    thumb 'art/situation_help2.jpg', 'Phase & Initiative';
+  },
+  sub { hskip 4 },
+  sub {
+    thumb 'art/situation_help3.jpg', 'Intensity & Tension';
   };
   endTag 'p';
-  startTag 'p';
-  img 'art/situation_help3.png', 'Intensity & Tension';
-  endTag 'p';
-
   endTag 'center';
 
-  element 'p', 'Here are a few more guidelines to disambiguate
-complex scenes.  Understand that abstract situations are a
-*simplification* of the actual film.  It is sufficient to
-model only the most important aspects of a situation.';
-
-  startTag 'ol';
-  startLi;
-  text 'The film may include an actor who is doing narration
-from a 3rd person perspective.  This narration is less important
-that any immediate action.';
-  endLi;
-
-  startLi;
-  text 'If there seem to be multiple active situations (for
-example both [+] admires [0] and [0] accepts [+]) then the
-situation with a shorter span is more important.';
-  endLi;
-
-  startLi;
-  text "You are welcome to study the whole film, however,
-you must respect the status of hidden information before it
-is subsequently revealed.  For example, if someone's
-identity is not yet revealed then treat that person as
-Someone until the film progresses to the point where
-the person's identity is actually revealed in the film.
-A 5-10 second look-ahead is admissible in some cases.
-Use your good judgment.";
-  endLi;
-  endTag 'ol';
 };
 
 
@@ -1361,16 +1329,175 @@ and verified then students can be tested against it.';
   endTag 'p';
   endTag 'center';
 
+  element 'p', 'Exam Status: The heart of redael is the score
+calculation.  The definition of EQ is:
+"# of correctly categorized situations" per hour.
+Here is an example of an exam in progress.';
+
   columns sub {
-  element 'p', 'Exam Status: The progress of an exam is shown.  The
-EQ score can be calculated in real-time.  This particular screen
-shows an elapse time of 49 seconds.  The accuracy of the EQ score will
-increase as the exam progresses.';
+    element 'p', '"Changed" is the number of situations
+which the student has *potentially*
+categorized correctly.  "Ideal EQ" is the EQ which the student
+could have gotten if he had actually categorized the situations perfectly.
+"EQ" is the actual EQ.  "Speed" is a recommendation based on
+whether the student is making a good trade-off between speed and accuracy.
+If the accuracy is too low (lots of errors) then redael will suggest
+"Go Slower".  If the accuracy is too high (no errors) then redael will
+suggest "Go Faster".';
   },
   sub { hskip 4 },
   sub {
-  img 'art/exam_status.png', 'Exam Status', border=>0;
+    img 'art/exam_status.png', 'Exam Status', border=>0;
   };
+
+  columns sub {
+    element 'p', 'In this case, the student needs to spend
+more time working on accuracy since the actual EQ is about 10%
+of the Ideal EQ (84.9 * 10% = 8.4 > 8.26).';
+  }, 
+  sub { hskip 4 },
+  sub {
+    img 'art/exam_status2.png', 'Exam Status';
+  };
+
+  startTag 'p';
+  columns sub {
+    element 'p', 'Ideal EQ is a function of "Elapse Time" and "Changed".
+The table (right side) offers some examples of this function.
+Notice that both 5 situations in 5 minutes and
+25 situations in 25 minutes give an Ideal EQ of 60.  This
+makes sense because one situation per minute is 60 situations per hour.';
+    element 'p', 'It is hard to score above 60 without practicing the test in advance.';
+  },
+  sub {
+  startTag 'table';
+  startTag 'tr';
+  element 'th', '';
+  for (my $ch = 5; $ch <= 55; $ch += 10) {
+    element 'th', $ch;
+  }
+  element 'th', 'Changed';
+  endTag 'tr';
+  for (my $tm = 5; $tm <= 45; $tm += 5) {
+    startTag 'tr';
+    element 'th', "$tm:00";
+    for (my $ch = 5; $ch <= 55; $ch += 10) {
+      my $ieq = $ch * 60 / $tm;
+      if ($ieq > 60) {
+        startTag 'td';
+        element 'font', sprintf("%d", $ieq), color => 'gray';
+        endTag 'td';
+      } else {
+        element 'td', sprintf("%d", $ieq);
+      }
+    }
+    endTag 'tr';
+  }
+  startTag 'tr';
+  element 'th', 'Elapsed';
+  endTag 'tr';
+  endTag 'table';
+  };
+  endTag 'p';
+
+  columns sub {
+    element 'p', 'Here is another example.  The EQ is almost the
+same as the Ideal EQ, so redael recommends "Go Faster".  By
+going faster, the student will do two things: raise the Ideal EQ
+and make slightly more mistakes.  Overall, the EQ score should
+improve by balancing speed and accuracy.';
+  },
+  sub { hskip 4 },
+  sub {
+    img 'art/exam_status3.png', 'Exam Status';
+  };
+
+  element 'p', 'Spending more time taking a test increases
+the accuracy.  On the other hand, spending longer than one hour
+becomes exhausting and the score is likely to decay somewhat.
+Empirically, we found that 15, 30, and 45 minutes are probably
+the most enjoyable test durations.';
+
+};
+
+menupage $topmenu, 'Disagreement Resolution', sub {
+  element 'h1', 'Disagreement Resolution';
+
+  element 'p', '*Expect* disagreements to happen.  The questions
+posed by Redael may seem easy but sometimes it is hard to figure
+out the best way to answer.  The first thing to check is:
+what is happening in the film?';
+
+  startTag 'blockquote';
+  element 'p', "Just discuss the situation in more detail and see
+if you can reach an agreement on the general meaning of the
+film.  Repeatedly view the scene 5, 10 or 100 times.
+If you can't agree on the meaning then the film is just too ambiguous.";
+
+  element 'p', 'Add some notes to the transcript to hint at an agreed
+upon meaning.  Until the film is clear, it is not possible to
+classify a given situation.';
+  endTag 'blockquote';
+
+  element 'p', 'Here are a few more guidelines to disambiguate
+complex scenes.  Understand that abstract situations are a
+*simplification* of the actual film.  It is sufficient to
+model only the most important aspects of a situation.';
+
+  startTag 'ul';
+  startLi;
+  text 'The film may include an actor who is doing narration
+from a 3rd person perspective.  This narration is less important
+that any immediate action.';
+  endLi;
+
+  startLi;
+  text 'If there seem to be multiple active situations (for
+example both [+] admires [0] and [0] accepts [+]) then the
+situation with a shorter span is more important.';
+  endLi;
+
+  startLi;
+  text "You are welcome to study the whole film, however,
+you must respect the status of hidden information before it
+is subsequently revealed.  For example, if someone's
+identity is not yet revealed then treat that person as
+Someone until the film progresses to the point where
+the person's identity is actually revealed in the film.
+A 5-10 second look-ahead is admissible in some cases.
+Use your good judgment.";
+  endLi;
+  endTag 'ul';
+
+  element 'h2', 'Hard Disagreements';
+
+  element 'p', 'If there is still a disagreement then it is
+necessary to resort to a democratic protocol.  The general
+principle for resolving disputes is "the majority wins".  However, your
+vote will not be counted until you demonstrate thoroughly level-headed
+consistency.';
+
+  element 'blockquote', 'The utility of a model of 3rd person situations
+is whether it provides a one-to-one mapping between abstract situations
+and abstract emotions.
+
+A one-to-one mapping provides an inverse-of-empathy mapping
+(emotional intelligence) which can then be seen, understood,
+and tested against.';
+
+  element 'p',  'Use the Cross Reference screen to check
+the consistency of the annotations.  For a given annotation,
+all the matching situations should evoke a similar emotion.
+Check this theory by re-playing matching situations from the film.
+Each group of matching situations should evoke a distinct
+cluster of similar emotions.  Try it.
+This is how to gain confidence in the categorization system.';
+
+  element 'p','If you are advocating a different categorization
+system then you need to show that your system offers at least
+as much consistancy.  May the most consistent system prevail.
+Good luck!';
+
 };
 
 menupage $topmenu, 'Mailing Lists', sub {
@@ -1453,16 +1580,8 @@ web page.';
   endTag 'table';
 
   startTag 'blockquote';
-  element 'p', 'Notes: N indicates the first, second, or third attempt.
-P indicates a practice test.';
-
-  startTag 'p';
-  startTag 'i';
-  text 'For a reliable EQ score, the match should be
-greater than the EQ.  In other words, the elapse time of a
-test should be at least one hour.';
-  endTag 'i';
-  endTag 'p';
+  element 'p', 'Notes: 1 and 2 indicates that the test was of depth
+1 or 2 (instead of 3).  P indicates a practice test.';
 
   endTag 'blockquote';
 
@@ -1569,7 +1688,7 @@ As compassion dawns, the four perspectives come into focus:';
     row sub { nth(3); text ' person perspective (situation)' };
     row sub { nth(2); text ' person perspective (personality)' };
     row sub { nth(1); text ' person perspective (emotion)' };
-    row sub { nth(0); text ' person perspective ("I am")' };
+    row sub { nth(0); text ' person perspective (pure spirit)' };
     endTag 'table';
   };
   endTag 'center';
@@ -1687,7 +1806,7 @@ really understand philosophy unless and until you take your second birth.";
     sub { hskip 2 },
       sub {
 	text 'While practicing true meditation, i focus my attention on
-the Whole (a.k.a. "I am").  After meditation, part of my attention remains
+the Whole (a.k.a. the pure spirit).  After meditation, part of my attention remains
 connected with the Whole, thereby enlightening the experience of individuality.
 This divine expression makes individuality most beautiful and enjoyable,
 much more so than any physical or mental amusement.';
@@ -1771,8 +1890,8 @@ of self-realization (f).';
     element 'p', '
 The problem with seeking self-realization (f)
 is that the actual
-self (the original subject or "I am") cannot appear as an object,
-by definition.  "I am" is the *subject*.  So to realize the self, we have
+self (the original subject or the pure spirit) cannot appear as an object,
+by definition.  The spirit is the *subject*.  So to realize the self, we have
 to use divine intelligence.';
 
   },
@@ -2006,6 +2125,7 @@ not necessary.  For example, consider NIH grant ";
   text '.  On the other hand, a grant is not even necessary
 for a small study.  You just need one computer, a small
 group of students, and time commitment.';
+  text '  For example, see the study we did at '; element 'a', 'IMRT', href=>'imrt.html'; text '.';
   endTag 'p';
 
   element 'h2', 'Certified EQ Testing';
@@ -2023,6 +2143,165 @@ is licensed under the ';
   element 'a', 'GPL', href=> 'http://www.gnu.org/copyleft/gpl.html';
   text ' -- so you can start your own EQ testing franchise, royalty free.';
   endTag 'p';
+};
+
+our $ScoresIMRT;
+require './scores.imrt';
+
+menupage $topmenu, 'IMRT', sub {
+  element 'h1', 'Research Study #1';
+
+  startTag 'p';
+  startTag 'big';
+  startTag 'center';
+  text "Nashik District Maratha Vidya Prasarak Samaj's"; br;
+  text 'Institute of Management, Research & Technology'; br;
+  text 'M.V.P. Campus, Shivajinagar, Gangapur Road, Nashik-422002';
+  endTag 'center';
+  endTag 'big';
+  endTag 'p';
+
+  element 'p', 'IMRT is recognized as a research institute by the
+university of Pune for Ph.D. in Management, Commerce, and Social
+Sciences.';
+
+  element 'p', 'We would like to express gratitude
+to Dr. B. B. Rayate Sir, director of IMRT for granting us permission to
+conduct our testing.
+We would also like to thank Mr. Faruk K. Shaikh Sir, Master of Social Work,
+for his support.';
+
+  element 'p', 'When: 10 April -> 19 April 2002';
+
+  element 'p', 'Who: 2nd year Master of Social Work students';
+
+  element 'p', 'Film: Nausicaa (Japanese with an English transcript)';
+
+  element 'p', "Method: The students were given at least 30 minutes
+to prepare for the test:  We played the relevant section of the film.
+We demonstrated how to take the test.  We gave them time to become
+comfortable with operating the computer.  We gave them a short practice
+test.  During the test, we asked each student to give answers for
+10 situations.";
+
+  startTag 'table';
+  startTag 'tr';
+  element 'th', 'Date';
+  startTag 'th'; hskip 1; endTag 'th';
+  element 'th', 'Name';
+  element 'th', 'Prefers';
+  element 'th', "Language Problem?";
+  element 'th', 'Enough Time?';
+  element 'th', 'Time';
+  startTag 'th'; hskip 1; endTag 'th';
+  element 'th', 'EQ';
+  element 'th', 'Rank';
+  endTag 'tr';
+
+  my %Lang = (
+    'e' => 'English',
+    'm' => 'Marathi',
+    'h' => 'Hindi',
+    'o' => 'Other',
+  );
+  my %YesNo = (
+    0 => 'No',
+    1 => 'Yes',
+  );
+
+  @$ScoresIMRT = sort { $b->[7] <=> $a->[7] } @$ScoresIMRT;
+
+  for (my $x=0; $x < @$ScoresIMRT; $x++) {
+    my $r = $ScoresIMRT->[$x];
+    startTag 'tr';
+    element 'td', "$r->[0]/04";
+    element 'td', '';
+    element 'td', $r->[1];
+    my @l = split / */, $r->[2];
+    my $lang = join ', ', map { $Lang{ $_ } } @l;
+    element 'td', $lang;
+    element 'td', $YesNo{ $r->[3] };
+    element 'td', $YesNo{ $r->[4] };
+    element 'td', $r->[5];
+    element 'td', '';
+    element 'td', $r->[7], align => 'right';
+    element 'td', 1+$x, align => 'right';
+    endTag 'tr';
+  }
+  endTag 'table';
+
+  element 'p', 'The maximum EQ one can achieve is 60.';
+
+  element 'p', 'We gave a "Post-Test Evaluation".  Here are
+some examples of the response we received:';
+
+  columns sub {
+    thumb 'art/posttest1.jpg', 'Bhagade Arun Ramdas';
+  },
+  sub {
+    thumb 'art/posttest4.jpg', '(backside)';
+  },
+  sub { hskip 4 },
+  sub {
+    text 'Through this test we get a knowledge:
+how to concentrate more and how to get more intelligence.
+Simultaneously through this test, we acquire more knowledge.
+We come to know the importance of time.  Concentration is
+very important.  What i most like about the test is that
+i myself was operating everything.  Through this i understood
+the importance of time, intelligence, mind, attention, brain,
+emotions and how to bring all these things together -- how
+to concentrate and get more good results out of it.  i want
+to know about this test in detail.';
+  };
+  br;
+  columns sub {
+    thumb 'art/posttest2.jpg', 'Prakash Genoo Bhagade';
+  },
+  sub {
+    thumb 'art/posttest3.jpg', '(backside)';
+  },
+  sub { hskip 4 },
+  sub {
+    text 'Emotional intelligence is not an academic course
+but it has more concentration towards intelligence.  That is
+why this is a very useful test.  This test is really meant
+to increase the emotional intelligence.  Through this test
+we come to know how much emotional intelligence we have and
+through this test we become more concentrated.  Nothing
+boring in this test.  i want to know more about this test.
+i am sure that if i give this test again then it will help
+to increase my emotional intelligence.  i like this test
+very much.  There is nothing to dislike about this test but
+i want more information regarding situations.';
+  };
+
+  element 'p', 'We did find one error in the answer key.
+Most of the students disagreed with my understanding of
+situation #15.  Since the answer key should express the
+majority opinion, the answer key was updated, clarified,
+and the scores were recalculated.';
+
+  element 'h2', 'Conclusions';
+
+  startTag 'ul';
+  startLi;
+  element 'p', 'Almost all the students reported that they had enough
+time to understand the test.  This shows that the test is easy to
+administer.';
+  endLi;
+
+  startLi;
+  element 'p', 'Half the students reported no problem understanding the language.';
+  endLi;
+
+  startLi;
+  element 'p', 'We found that students really enjoyed answering the test.
+This was the most gratifying aspect of the research.
+The students expressed faith that the test would help them become sharp
+in taking decisions and improve at situation assessment.';
+  endLi;
+  endTag 'ul';
 };
 
 for my $file (keys %Chapter) {
@@ -2049,6 +2328,6 @@ for my $file (keys %Chapter) {
     },
     sub { hskip 2 };
   };
-}
+};
 
 __END__
