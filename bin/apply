@@ -1,0 +1,48 @@
+#!/usr/bin/perl -w
+
+use strict;
+
+our @opt = ('-p0');
+our @change;
+
+for my $o (@ARGV) {
+  if ($o =~ /^-/) {
+    push @opt, $o;
+  } else {
+    push @change, $o;
+  }
+}
+
+sub run {
+  my $cmd = join ' ', @_;
+
+  my $exit = system($cmd);
+
+  die "exec $cmd: $!"
+    if $exit == -1;
+
+  die "system $cmd failed: $exit"
+     if $exit;
+}
+
+for my $c (@change) {
+  if (-d $c) {
+    opendir my $dh, $c or die "opendir $c: $!";
+    for my $file (readdir $dh) {
+
+      next if ($file =~ /^\./ or
+	       $file eq 'README' or
+	       ! -f "$c/$file");
+
+      if ($file =~ /\.sh$/) {
+	my $cmd = "sh $c/$file";
+	print "$cmd\n";
+	run $cmd;
+      } else {
+	run 'patch', @opt, "<$c/$file";
+      }
+    }
+  } else {
+    run 'patch', @opt, "<$c";
+  }
+}
