@@ -17,6 +17,7 @@ sub thumb {
 page 'm.html', sub {
   for my $pic (qw(mappl-h.jpg mappl-j.jpg
 		  nirmal_nagari.jpg
+		  ganesh.jpg brahmadeva.jpg
 		  mother_arrives.jpg christmas_puja.jpg christmas_puja2.jpg 
 		  skit.jpg kawali1.jpg dance.jpg
 		  making_friends.jpg kawali2.jpg 
@@ -124,6 +125,20 @@ international Sahaja Yoga seminar at Ganapatipule, Maharashtra.';
 
   br;
   columns sub {
+    thumb 'art/ganesh.jpg', 'Shri Ganesha (Day 1)';
+  },
+  sub { hskip 4 },
+  sub {
+    element 'p', "Every day the stage is decorated with the creativity
+of the hosting countries. This year we enjoyed paintings of
+Mother's eyes in the form of various deites.";
+  },
+  sub { hskip 4 },
+  sub {
+    thumb 'art/brahmadeva.jpg', 'Brahmadeva (Day 2)';
+  };
+
+  columns sub {
     thumb 'art/mother_arrives.jpg', 'Mother Arrives';
   },
   sub { hskip 4 },
@@ -141,7 +156,6 @@ Jesus the Christ and Mother Mary.';
     thumb 'art/christmas_puja2.jpg', 'Close-Up';
   };
 
-  br;
   columns sub {
     thumb 'art/skit.jpg', 'Grihalaakshmi (Day 4)';
   },
@@ -150,14 +164,14 @@ Jesus the Christ and Mother Mary.';
     element 'p', 'On Dec 26, we enjoyed a skit based on traditional
 folk song of Maharashtra (Chalat Musafir Mohaliya Re Pinjadewali Munia).
   A Kawalis performance followed.';
-  },
-  sub { hskip 4 },
-  sub {
-    thumb 'art/kawali1.jpg', 'Kawalis';
   };
 
   br;
   columns sub {
+    thumb 'art/kawali1.jpg', 'Kawalis';
+  },
+  sub { hskip 4 },
+  sub {
     element 'p', 'The matches were announced around 19:00 on Dec 27.
 We had about 36 hours to take a decision.';
     element 'p', 'The dance in this photo is called Bharat Nataym.';
@@ -285,6 +299,12 @@ compose couplets for Shri Mataji.';
   },
   sub { hskip 4 },
   sub {
+    startTag 'p';
+    text 'In retrospect, we felt that the ';
+    element 'a', 'eye decoration', href => 'eyes.html';
+    text ' was really fantastic.';
+    endTag 'p';
+
     element 'p', 'On Jan 6, we gave a small wedding reception
 to all the Sahaj yogis in Dhulia. We received a shower of their
 best wishes.';
@@ -320,6 +340,91 @@ bureaucracy.  We got official documentation after only a few days.";
   element 'a', 'joshua@why-compete.org',
     href => 'mailto:joshua@why-compete.org';
   text '.  Thank you very much.';
+  endTag 'p';
+
+  element 'p', 'Last modified @DATE@.';
+};
+
+page 'eyes.html', sub {
+  element 'title', 'Eye Candy';
+  endTag 'head';
+
+  body 50;
+
+  element 'h1', 'Ganapatipule Seminar 2001';
+  element 'h2', 'Eye Decoration';
+
+  element 'p', 'Pyar bhare do nirmal nain. (a poem by Babamama)';
+
+  startTag 'p';
+  columns sub {
+    thumb 'art/ganesh.jpg', 'Shri Ganesha';
+  },
+  sub { hskip 4 },
+  sub {
+    element 'p', 'Innocence, eternal childhood, wisdom';
+  };
+  endTag 'p';
+
+  startTag 'p';
+  columns
+  sub {
+    thumb 'art/brahmadeva.jpg', 'Shri Brahmadeva';
+  },
+  sub { hskip 4 },
+  sub {
+    element 'p', 'Creativity, abstract thought, aesthetics';
+  };
+  endTag 'p';
+
+  startTag 'p';
+  columns sub {
+    thumb 'art/christmas_puja.jpg', 'Shri Jesus / Mother Mary';
+  },
+  sub { hskip 4 },
+  sub {
+    element 'p', 'Forgiveness, resurrection';
+  };
+  endTag 'p';
+
+  startTag 'p';
+  columns sub {
+    thumb 'art/skit.jpg', 'Shri Grihalaakshmi';
+  },
+  sub { hskip 4 },
+  sub {
+    element 'p', 'Household wealth, welfare, well-being';
+  };
+  endTag 'p';
+
+  startTag 'p';
+  columns sub {
+    thumb 'art/dance.jpg', 'Shri Shiva';
+  },
+  sub { hskip 4 },
+  sub {
+    element 'p', 'Existence, motherly love, silent joy';
+  };
+  endTag 'p';
+
+  startTag 'p';
+  columns sub {
+    thumb 'art/kawali2.jpg', 'Shri Krishna';
+  },
+  sub { hskip 4 },
+  sub {
+    element 'p', 'Divine diplomacy, playful witness';
+  };
+  endTag 'p';
+
+  startTag 'p';
+  columns sub {
+    thumb 'art/marriage_puja.jpg', 'Ardha Narinateshwar';
+  },
+  sub { hskip 4 },
+  sub {
+    element 'p', 'Through marriage Shiva and Shakti becomes one.';
+  };
   endTag 'p';
 
   element 'p', 'Last modified @DATE@.';

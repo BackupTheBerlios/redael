@@ -69,7 +69,8 @@ sync_dir('.',
 	    doc-situation.html doc-film.html doc-joints.html doc-xref.html
 	    doc-exam.html lists.html
 	    scores.html philo.html philo-redael.html
-	    jobs.html fairuse.html m.html realize.html kamdi.html));
+	    jobs.html fairuse.html
+	    m.html eyes.html realize.html kamdi.html));
 
 sync_dir('art', map { s,^.+/,,; $_ }
 	 glob('art/*.png'),
