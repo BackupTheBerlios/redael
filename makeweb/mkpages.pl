@@ -365,11 +365,15 @@ elements for making annotations and advanced features for scoring.';
   startTag 'ol';
 
   startTag 'li';
-  element 'p', 'A researcher can develop an exemplar film annotation.';
+  element 'p', 'A student can be tested against an exemplar film annotation.
+As little as one hour is required for a rough EQ estimate.';
   endTag 'li';
 
   startTag 'li';
-  element 'p', 'A student can be tested against an exemplar film annotation.';
+  element 'p', 'A researcher can develop an exemplar film annotation.
+This demands a considerable amount of time.  Annotations should be
+consistent across three or more films.  Expect a whole film to consume
+at least a man-month of effort.';
   endTag 'li';
 
   endTag 'ol';
@@ -720,6 +724,19 @@ and a *good* model confers tangible insight into reality and joy.";
 
   element 'p', 'The rest of this page offers a philosophical
 justification of the model used by redael.';
+
+  element 'h2', 'Categories of Feeling';
+
+  element 'p', 'The words emotion, spirit, and feeling are used to mean a
+variety of different things in different contexts.  The defintions used
+here are as follows.';
+
+  startTag 'p';
+  text "`Emotion' is a feeling which arrises in the context of two separate people.
+`Spirit' is a feeling which does not admit the idea of separation.  `Feeling'
+includes both emotion and spirit.  Compassion is a special feeling which bridges
+spirit to emotion.";
+  endTag 'p';
 
   element 'h2', 'Compassion';
 

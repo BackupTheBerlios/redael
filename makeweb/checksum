@@ -1,10 +1,10 @@
-5ddedb22d5a58d11f6c5498261f13997 ./doc.html
+a6ebe04805359dc8663822410b2d5790 ./doc.html
 644637aa8f708cf7ec9dc568cf1916f9 ./download.html
 93fce13a0b989500b8ebc8a6c0f668e9 ./index.html
 73e7ccfff76902e4ac8f9072862df22f ./jobs.html
 6240a3a22e89625bacddfc9cb6f6ab36 ./lists.html
 710b314da92010b5969288358a7e2d79 ./news.html
-cf306fe5e31690d05f321665b84dc60e ./philo.html
+9634274013ab6f8d7b9d0db41ebc0848 ./philo.html
 bc9497d98a980d6ee7e81e407bfd5288 art/about_sy_chart.png
 44a4dc047c36a026271ce7f4b4bb948d art/addjoint1.png
 e212c3ece64952bd11ffe295afe491fb art/addjoint2.png
@@ -25,6 +25,3 @@ aebcd9b0e019ee9bac50d12cdbb82497 art/richard.jpg
 7eb51ec246149def854ab21bc175be26 art/transcript.png
 09d6fa101a4e23baf1955d5c661a8360 art/trident.png
 6a25981cd18657195be2738c4c4e4a17 art/workflow.png
-df3f5a00d93276b5220a5945783159de bulky/ip.xcf
-ddcf555e75c180c9dfedf53327e685a8 bulky/transcript.xcf
-a6373d829371a09598646d698f0e5067 bulky/trident.xcf
