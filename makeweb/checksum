@@ -1,10 +1,13 @@
-908af8de5a43384f003723cc7f02824b ./doc.html
+648aa5d36420e0d8ea88c55dd12dee20 ./doc.html
 9cda19812e24103be53b07bef0195e70 ./download.html
 86709368cd605668d8c2e0e361a0ce19 ./index.html
 3de1dcd23d5ff6257f74965500943815 ./jobs.html
 51d56330d9992bb1a97ebc76aa606b03 ./lists.html
 55b9579e61e15236f5c881dc9e0c8902 ./news.html
 95692a6acf2ef34993b440bf37fb9bf1 ./philo.html
+44a4dc047c36a026271ce7f4b4bb948d art/addjoint1.png
+e212c3ece64952bd11ffe295afe491fb art/addjoint2.png
+bf9d419a3900a317a6ffe36ce189bace art/crossref.png
 2324acd03597b050424204c3c4adf44e art/filmview.jpg
 bd54f5fb7c771132b1a6fc0717f0a763 art/fourpp.jpg
 72969f08d5f185a915efd2516a36c596 art/gnomelogo.png

@@ -380,8 +380,30 @@ one of the exemplar film annotations.';
   endTag 'p';
 
   element 'p', 'The filmview screen offers effortless seeking to any
-point in a film.  Preset scaling is offered from 25% to 200%.  (Films
-not included. :-)';
+point in a film. (Films not included. :-)';
+
+  startTag 'p';
+  columns sub {
+    img 'art/addjoint1.png', 'Add Joint (1)', border=>0;
+  },
+  sub { hskip 2 },
+  sub {
+    img 'art/addjoint2.png', 'Add Joint (2)', border=>0;
+  };
+  endTag 'p';
+
+  element 'p', 'These two screens are used to create connections
+between two situations.  Connections (a.k.a. joints) are a
+bookkeeping aide to help keep everything in proper perspective.';
+
+  startTag 'p';
+  img 'art/crossref.png', 'Cross Reference', border=>0;
+  endTag 'p';
+
+  element 'p', 'The cross reference screen is like a reconciliation.
+Once you have annotated the film in the 3rd person, then you can
+create empathy patterns to translate back into the 1st person
+perspective.  This completes the empathy - emotional intelligence cycle.';
 
   vskip;
 
