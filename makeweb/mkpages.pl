@@ -371,7 +371,11 @@ with any precision.';
 sub menupage {
   my ($menu, $curitem, $x) = @_;
 
-  page $menu->file($curitem), sub {
+  my $file = $menu->file($curitem);
+  my $print = $file;
+  $print =~ s/\.html$/-pr.html/;
+
+  page $file, sub {
     element 'title', $curitem;
     endTag 'head';
     body;
@@ -418,7 +422,11 @@ sub menupage {
       endTag 'p';
     }
 
-    vskip 4;
+    vskip 3;
+    
+    element 'a', '[Print]', href => $print;
+
+    vskip 1;
     startTag 'p';
     text 'Hosted by:';
     br;
@@ -453,6 +461,23 @@ sub menupage {
     },
     sub { hskip 2 };
   };
+
+  page $print, sub {
+    element 'title', $curitem;
+    endTag 'head';
+    body 10;
+    $x->();
+    vskip 1;
+    
+    columns sub { hskip 2 },
+    sub {
+      emptyTag 'hr';
+      element 'p', 'Copyright (C) 2001, 2002 Joshua Nathaniel Pritikin.  Verbatim copying and distribution of this entire article is permitted in any medium, provided this notice is preserved.';
+      element 'p', 'Last modified @DATE@.';
+      emptyTag 'hr';
+    },
+    sub { hskip 2 };
+};
 };
 
 menupage $topmenu, 'News', sub {

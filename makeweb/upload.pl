@@ -48,6 +48,10 @@ sub sync_dir {
       print "$key unchanged\n"
     } else {
       push @todo, $f;
+      my $print = $f;
+      $print =~ s/\.html$/-pr.html/;
+      push @todo, $print
+	if -e $print;
     }
     $Sum{ $key } = $sum;
   }
