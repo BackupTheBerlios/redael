@@ -33,12 +33,12 @@ sub page {
   rename "tmp$$", $file or die "rename: $!";
 }
 
-sub hspace {
+sub hskip {
   my $reps = $_[0] || 1;
   print '&nbsp;' while --$reps >= 0;
 }
 
-sub vspace {
+sub vskip {
   my $reps = $_[0] || 1;
   print '<p>&nbsp;</p>' while --$reps >= 0
 }
@@ -112,12 +112,12 @@ sub attention {
   startTag 'tr';
   startTag 'th';
   text 'subject:';
-  hspace;
+  hskip;
   nth $s;
   endTag 'th';
   startTag 'th';
   text 'object:';
-  hspace;
+  hskip;
   nth $o;
   endTag 'th';
   endTag 'tr';
@@ -168,9 +168,9 @@ page 'index.html', sub {
   body();
 
   startTag 'center';
-  vspace 2;
+  vskip 2;
   element 'h1', 'Complete, Integrated Personality Development';
-  vspace 2;
+  vskip 2;
   
   startTag 'table', 'border', 0, 'cellpadding', 25;
   startTag 'tr';
@@ -200,7 +200,7 @@ page 'index.html', sub {
   endTag 'table';
   
   endTag 'center';
-  vspace;
+  vskip;
 };
 
 our $topmenu = MenuTree
@@ -237,7 +237,7 @@ sub menupage {
       endTag 'p';
     }
 
-    vspace 4;
+    vskip 4;
     startTag 'p';
     text 'Hosted by:';
     br;
@@ -250,7 +250,7 @@ sub menupage {
     endTag 'td';
     
     startTag 'td', 'valign', 'top', 'bgcolor', '#ffcccc';
-    hspace;
+    hskip;
     endTag 'td';
 
     startTag 'td', 'valign', 'top';
@@ -261,7 +261,7 @@ sub menupage {
     
     endTag 'tr';
     endTag 'table';
-    vspace 4;
+    vskip 4;
   };
 };
 
@@ -286,7 +286,15 @@ with a more pragmatic approach.';
 };
 
 menupage $topmenu, 'Download', sub {
-  element 'h1', 'Downloading';
+  columns sub {
+    startTag 'a', href => 'http://www.gnu.org/philosophy/philosophy.html';
+    img 'art/richard.jpg', 'Richard Stallman', border=>0, hspace=>4;
+    endTag 'a';
+  },
+  sub { hskip 2 },
+  sub {
+    element 'h1', 'Downloading';
+  };
 
   element 'p', 'Presently, redael is only distributed as source code,
 and worse, it is difficult to compile.  Binaries will be available
@@ -302,7 +310,7 @@ going to need help.';
 this patch for 64-bit parameters.  Follow the directions in HACKING
 to build from CVS sources.';   # XXX
   },
-  sub { hspace 2 },
+  sub { hskip 2 },
   sub {
     startTag 'a', 'href', 'http://gtk.org/download/';
     img 'art/gnomelogo.png', 'Gnome', 'border', 0;
@@ -316,7 +324,7 @@ to build from CVS sources.';   # XXX
 large file support.  You need to install the libraries: mpeg2dec, a52dec,
 and Hermes.  Build gstreamer with --enable-glib2.';
   },
-  sub { hspace 2 },
+  sub { hskip 2 },
   sub {
     startTag 'a', 'href', 'http://www.gstreamer.net/';
     img 'art/gstlogo.png', 'Gstreamer', 'border', 0;
@@ -353,7 +361,7 @@ the situation.  A situation always consists of two participants.
 The best way to learn what these descriptions mean is to examine
 one of the exemplar film annotations.';
 
-  vspace;
+  vskip;
 
   element 'p', '[Add lots of screen captures with explanation.]';
 };
@@ -441,11 +449,11 @@ four perspectives come into focus:';
     text 'four perspectives:';
     endTag 'i';
   },
-  sub { hspace 10 },
+  sub { hskip 10 },
   sub {
     emptyTag 'img', src => 'art/fourpp.jpg', alt => 'Four Perspectives';
   },
-  sub { hspace 4 },
+  sub { hskip 4 },
   sub {
     startTag 'table', border=>0, cellspacing=>0, cellpadding=>0;
     row sub { nth(3); text ' person perspective (situation)' };
@@ -456,11 +464,12 @@ four perspectives come into focus:';
   };
   endTag 'center';
 
-  element 'p', 'That compassion is "the answer" is nothing new.  What
-is new, is that balanced compassion is defined as awareness of
-the four perspectives.  So instead of talking about compassion in
-vague terms, we can do something scientific: study the relationships
-between perspectives.';
+  element 'p', 'That compassion is "the answer" is nothing new.
+However, we can do better than talking about it in the typical
+vague terms. Since balanced compassion is defined as awareness
+of the four perspectives, we can study the relationships
+between perspectives. These relationship may reveal a scientific
+way to foster compassion.';
 
   element 'h2', 'Subject / Object';
 
@@ -488,7 +497,7 @@ the configuration makes sense and draw any further conclusions.';
 
   startTag 'p';
   columns sub { attention 0,1 },
-    sub { hspace 2 },
+    sub { hskip 2 },
       sub {
 	text 'For example: "i am angry, but i am detached from
 my anger.  i am not allowing the anger to affect my behavior.
@@ -498,7 +507,7 @@ The anger is an object of my attention."';
 
   startTag 'p';
   columns sub { attention 1,3 },
-    sub { hspace 2 },
+    sub { hskip 2 },
       sub {
 	text 'Perhaps the most obvious example of empathy is
 what happens while watching a film.  A film is nothing but ';
@@ -512,7 +521,7 @@ is the object and emotion is the subject, hence "empathy."';
 
   startTag 'p';
   columns sub { attention 3,1 },
-    sub { hspace 2 },
+    sub { hskip 2 },
       sub {
 	startTag 'font', color=>'#006600';
 	text '"Based on how i feel, what is the structural situation?"
@@ -523,9 +532,9 @@ This style of question is repeatedly posed in redael annotations.';
 
   startTag 'p';
   columns sub { attention 1,2 },
-  sub { hspace 1 },
+  sub { hskip 1 },
   sub { attention 2,1 },
-  sub { hspace 2 },
+  sub { hskip 2 },
   sub {
     element 'i', 'These configurations, which involve personality,
 are difficult to understand and not particularly important.  They will be
@@ -535,19 +544,19 @@ explored elsewhere.'
 
   startTag 'p';
   columns sub { attention 0,0 },
-    sub { hspace 2 },
+    sub { hskip 2 },
       sub {
-	text "If you haven't experienced self-realization then
+	text "If you have *not* experienced self-realization then
 please visit a local ";
 	element 'a', 'Sahaja Yoga', href=>'http://sahajayoga.org';
 	text " center and feel the divine cool breeze.  You can't
-understand philosophy unless and until you take your second birth.";
+really understand philosophy unless and until you take your second birth.";
       };
   endTag 'p';
 
   startTag 'p';
   columns sub { attention 1,0 },
-    sub { hspace 2 },
+    sub { hskip 2 },
       sub {
 	text 'While practicing true meditation, i focus my attention on
 the Whole (a.k.a. "I am").  After meditation, part of my attention remains
@@ -583,7 +592,7 @@ Attention vectors are only possible between the ';
     nth(3);
     text ' perspectives.';
   },
-  sub { hspace 2 },
+  sub { hskip 2 },
   sub { text 'impossible'; attention 3,2 };
   endTag 'p';
 
@@ -594,7 +603,7 @@ configurations:';
   columns sub {
     emptyTag 'img', src=>'art/trident.png', alt=>'Attention Trident';
   },
-  sub { hspace 10 },
+  sub { hskip 10 },
   sub {
     startTag 'p';
     columns sub { text '(a) ' },
@@ -604,7 +613,7 @@ configurations:';
     startTag 'p';
     columns sub { text '(b) ' },
     sub { text 'empathy'; attention 1,3 },
-    sub { hspace 3 },
+    sub { hskip 3 },
     sub {
       startTag 'font', color=>'#006600';
       text 'emotional intelligence';
@@ -615,14 +624,14 @@ configurations:';
     startTag 'p';
     columns sub { text '(c) ' },
     sub { text 'prerequisite'; attention 1,2 },
-    sub { hspace 3 },
+    sub { hskip 3 },
     sub { text 'transformative pressure'; attention 2,1 };
     endTag 'p';
 
     startTag 'p';
     columns sub { text '(d) ' },
     sub { text 'self-realization'; attention 0,0 },
-    sub { hspace 6 },
+    sub { hskip 6 },
     sub { text '(e) ' },
     sub { text 'divine expression'; attention 1,0 };
     endTag 'p';
