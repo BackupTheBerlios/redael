@@ -170,7 +170,7 @@ page 'index.html', sub {
   startTag 'td', 'align', 'center';
   emptyTag 'img', 'src', 'art/shri.jpg', 'alt', 'Shri Chaktra', 'border', 0;
   br;
-  text 'SQ:';
+  text 'SQ: ';
   element 'a', 'Spiritual Intelligence', 'href', 'http://sahajayoga.org';
   endTag 'td';
   
@@ -178,14 +178,14 @@ page 'index.html', sub {
   emptyTag 'img', 'src', 'art/trident.png',
     'alt', 'Attention Trident', 'border', 0;
   br;
-  text 'EQ:';
+  text 'EQ: ';
   element 'a', 'Emotional Intelligence', 'href', 'news.html';
   endTag 'td';
   
   startTag 'td', 'align', 'center';
   emptyTag 'img', 'src', 'art/mensa.png', 'alt', 'Mensa Logo', 'border', 0;
   br;
-  text 'IQ:';
+  text 'IQ: ';
   element 'a', 'Mental Intelligence', 'href', 'http://www.mensa.org';
   endTag 'td';
   
@@ -575,10 +575,3 @@ configurations:';
 };
 
 __END__
-
-  startTag 'p';
-  text 'By definition, each of the n';
-  element 'sup', 'th';
-  text ' person perspectives are a possible origin of the subject.
-A few configurations don't make sense.';
-  endTag 'p';
