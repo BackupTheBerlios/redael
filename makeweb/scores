@@ -1,10 +1,11 @@
 # -*- perl -*-
 
-my @yogita = ('Yogita Patil', 'Nashik');
+my @yogita = ('Yogita Patil', 'F', 1, 'Nashik');
 my $naushika = 'Naushika-1984';
 
 $Scores =
 [
- # date, name, location, film, match, EQ
+ # date, name, gender, SY, location, film, match, EQ
  [20011216, @yogita, $naushika, 7.16, 6.3],
+ [20011217, 'Sumit Pradhan', 'M', 1, 'Nashik', $naushika, 12.88, 9.7],
 ];

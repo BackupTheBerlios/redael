@@ -999,9 +999,13 @@ web page.';
   
   for my $s (@$Scores) {
     startTag 'tr';
-    for my $f (@$s) {
-      element 'td', $f;
-    }
+    element 'td', $s->[0];
+    element 'td', $s->[1];
+    # gender, SY : hidden
+    element 'td', $s->[4];
+    element 'td', $s->[5];
+    element 'td', $s->[6];
+    element 'td', $s->[7];
     endTag 'tr';
   }
   endTag 'table';
