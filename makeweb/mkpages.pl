@@ -558,9 +558,9 @@ terrible imbalance in compassion.';
   text 'Before compassion, the main focus is on the ';
   nth(1);
   text ' person perspective.  There is no partition between personality
-and emotion, only vibratory feeling.  There are no situations,
-only *my* situation (singular).  As compassion dawns, the
-four perspectives come into focus:';
+and emotion.  There are no situations, only *my* situation (singular).
+Charming, huh?
+As compassion dawns, the four perspectives come into focus:';
   endTag 'p';
 
   }, sub {
