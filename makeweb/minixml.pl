@@ -1,3 +1,5 @@
+use Carp;
+
 {################################
 ## based on XML::Writer by David Megginson <david@megginson.com>
 ##

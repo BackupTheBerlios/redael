@@ -251,7 +251,7 @@ our $topmenu = MenuTree
 	  [
 	   ['History'          => 'history.html'],
 	  ]],
-	 ['Download'          => 'download.html',
+	 ['Download'           => 'download.html',
 	  [
 	   [Debian             => 'dl-debian.html'],
 	   [Unix               => 'dl-unix.html'],
@@ -278,7 +278,7 @@ our $topmenu = MenuTree
 	 ],
 	 ['Philosophy'        => 'philo.html',
 	 [
-	  ['Redael'           => 'philo-redael.html'],
+	  ['Aleader'           => 'philo-redael.html'],
 	 ]],
 	]);
 
@@ -293,7 +293,7 @@ page 'fairuse.html', sub {
 
   element 'h2', 'Fair Use Statement';
 
-  element 'p', 'Despite the fact that Redael is an international project,
+  element 'p', 'Despite the fact that Aleader is an international project,
 this discussion will
 entertain American copyright law because America is presently taking a
 leadership role in legislating and enforcing restictions on fair use.';
@@ -320,7 +320,7 @@ case is a fair use the factors to be considered shall include -';
 is of a commercial nature or is for nonprofit educational purposes;';
   endTag 'font';
   
-  element 'p', 'Redael uses films for non-profit educational purposes, specifically
+  element 'p', 'Aleader uses films for non-profit educational purposes, specifically
 for the purposes of teaching, scholarship, and research.  The films
 are used verbatim (not transformed) and retain proper attribution.';
 
@@ -538,7 +538,7 @@ menupage $topmenu, 'News', sub {
 
   element 'h1', 'Introduction';
 
-  element 'p', "Personality tests generally focus on the student's
+  element 'p', "Personality development generally focuses on the student's
 reaction to a given situation.
 Certainly choosing the correct reaction *is* important.
 However, deciding on a reaction depends on assessing
@@ -550,7 +550,7 @@ then how can you expect to act effectively?";
 AQ (assessment quotient).
 Our test presents film segments and tests how consistantly you
 can be a witness.
-Redael is the software used to administer the test.
+Aleader is the software used to administer the test.
 It combines a video player, annotation tools,
 and a scoring system into an easy to use GUI.';
 
@@ -558,11 +558,19 @@ and a scoring system into an easy to use GUI.';
   text 'This project is strictly non-profit.
 The software is licensed under the ';
   element 'a', 'GPL', 'href', 'http://www.gnu.org/philosophy/philosophy.html';
-  text ' and is freely available from the download page.
-Even so, we expect that Redael will also be useful in commercial ventures.';
+  text ' and is freely available from the ';
+  element 'a', 'download page', href => 'download.html';
+  text '.';
   endTag 'p';
   
   element 'h1', "News";
+
+  startTag 'p';
+  text '[08 Jul 2002] What are all the different emotions and
+how can we organize them?  Now you can browse a hyper-linked ';
+  element 'a', 'empathy map', href => 'empathy/index.html';
+  text '.';
+  endTag 'p';
 
   startTag 'p';
   text '[26 Apr 2002] Courtesy of the Institute of Management,
@@ -583,6 +591,11 @@ small research study are ';
 menupage $topmenu, 'History', sub {
   element 'h1', "Old News";
   
+  element 'p', '[11 Jun 2002] After trying to discuss emotional
+intelligence for about a year, i am confident that
+this terminology is not suitable.
+Henceforce, "emotional intelligence" is changed to "situation assessment".';
+
   startTag 'p';
   columns sub {
     text '[12 Feb 2002] We plan to start giving regular tests at a local
@@ -762,9 +775,11 @@ instructions for your operating system.';
   endTag 'table';
 
   startTag 'blockquote';
+  startTag 'font', color => 'red';
   element 'i', 'You must use the same format as is given in the
 table above because synchronization is accomplished with byte-offsets
 instead of time-offsets.  This will be fixed as soon as possible.';
+  endTag 'font';
   endTag 'blockquote';
 
   element 'p', 'Films which will not be analyzed here: most comedy, horror,
@@ -805,7 +820,7 @@ following chart:';
   startTag 'i';
   text 'Even if a film is excellent and entertaining,
 these genres probably do not offer enough emotional complexity
-to serve as a basis for Redael annotations.';
+to serve as a basis for Aleader annotations.';
   endTag 'i';
   endTag 'blockquote';
 
@@ -850,7 +865,7 @@ deb http://redael.berlios.de/releases/debian ./
   startTag 'blockquote';
   startTag 'pre';
   text '# apt-get update
-# apt-get install redael
+# apt-get install aleader
 ';
   endTag 'pre';
   endTag 'blockquote';
@@ -863,7 +878,7 @@ menupage $topmenu, 'Unix', sub {
   element 'h1', 'Generic Unix Installation';
 
   element 'p', 'If your operating system is not listed then you
-can compile Redael from source code.';
+can compile Aleader from source code.';
 
   startTag 'p';
   columns sub {
@@ -889,14 +904,16 @@ can compile Redael from source code.';
 you will also need some libraries:
 libbz2, libmpeg2 0.2.0, liba52 0.7.2, hermes, and mad.';
 
-    element 'p', 'ALERT: Redael has not been ported to gstreamer 
-version 0.3.2 or later yet.  You must use version 0.3.1.';
+    startTag 'font', color =>'red';
+    element 'p', 'ALERT: Aleader has not been ported to gstreamer 
+version 0.3.2 or later yet.  You must use exactly version 0.3.1.';
+    endTag 'font';
   };
   endTag 'p';
 
   startTag 'p';
   startTag 'a', href=>'http://developer.berlios.de/project/filelist.php?group_id=167';
-  text 'Download the latest snapshot of Redael source code.';
+  text 'Download the latest snapshot of Aleader source code.';
   endTag 'a';
   endTag 'p';
 };
@@ -907,7 +924,7 @@ menupage $topmenu, 'Windows', sub {
   element 'p', "i don't know much about programming on Windows
 and i don't have time to learn.
 If you have the expertise, 
-you are welcome to port Redael to Windows and submit patches.";
+you are welcome to port Aleader to Windows and submit patches.";
 };
 
 menupage $topmenu, 'Documentation', sub {
@@ -917,7 +934,7 @@ menupage $topmenu, 'Documentation', sub {
 processor and movie player.  There are also some interface
 elements for making annotations and advanced features for scoring.';
 
-  element 'p', 'Redael operates in basically two modes:';
+  element 'p', 'Aleader operates in basically two modes:';
 
   startTag 'ol';
 
@@ -960,7 +977,7 @@ a transcriber for the Author of All.';
 menupage $topmenu, 'Getting Started', sub {
   element 'h1', 'Getting Started';
 
-  element 'p', 'The most important feature of Redael is that you
+  element 'p', 'The most important feature of Aleader is that you
 do not have to understand *why* it works to benefit.  All you have to do is
 gain practical experience using it.  Moreover, you are welcome to
 use standard test-taking techniques to improve your score.';
@@ -1052,7 +1069,7 @@ pick a different film.";
 
   startTag 'li';
   startTag 'p';
-  text 'Load your transcript and film together in Redael.';
+  text 'Load your transcript and film together in Aleader.';
   endTag 'p';
   endTag 'li';
 
@@ -1067,7 +1084,7 @@ transcript.  Select Insert::Sync from the menu.';
 
   startTag 'li';
   startTag 'p';
-  text 'Re-position your cursor at the end of the dialog.  Select Insert::Sync.  Repeat until you have done the whole film. Redael will do
+  text 'Re-position your cursor at the end of the dialog.  Select Insert::Sync.  Repeat until you have done the whole film. Aleader will do
 linear interpolation between the explicit time sync marks so
 you only have to add a time sync at the important places.';
   endTag 'p';
@@ -1180,7 +1197,7 @@ offers a convenient summary of duration status.';
   endTag 'p';
 
   element 'p', "Each joint has particular characteristics.  (This is
-really hard to understand until you actually use Redael so don't worry
+really hard to understand until you actually use Aleader so don't worry
 if it doesn't make much sense.)";
 
   startTag 'p';
@@ -1254,7 +1271,7 @@ might be entirely different.';
 
   element 'p', "Joint characteristics are enforced by a set of rules
 written in a simple if-then language.  These rules are loaded at
-Redael startup.  If you don't like the default rules then you can
+Aleader startup.  If you don't like the default rules then you can
 customize them.";
 
   element 'p', 'In any case, the scoring algorithm only distinguishes
@@ -1275,28 +1292,16 @@ perspective.  This completes the empathy <---> situation assessment cycle.';
 
   element 'p', "About 110 patterns have been gathered based on
 a comparison of annotations from three films, however, this work was
-done before i wrote Redael.  With Redael's help, we should be able
+done before i wrote Aleader.  With Aleader's help, we should be able
 to develop a larger and more consistent collection of patterns.
 (Your help is needed. :-)";
 
-  element 'p', 'Here are some example patterns:';
+  startTag 'p';
+  text 'You might enjoy browsing the hyper-linked ';
+  element 'a', 'empathy map', href => 'empathy/index.html';
+  text '.';
+  endTag 'p';
 
-  startTag 'pre';
-  text q(if
- initiator = right
- situation = steals
- phase = during
- tension = stifled
-then "angry with himself / herself"
-
-if
- initiator = left
- situation = admires
- phase = during
- tension = focused
-then "awe / offer service"
-);
-  endTag 'pre';
 };
 
 menupage $topmenu, 'Exam', sub {
@@ -1311,7 +1316,7 @@ and verified then students can be tested against it.';
   endTag 'p';
   endTag 'center';
 
-  element 'p', 'Exam Status: The heart of Redael is the score
+  element 'p', 'Exam Status: The heart of Aleader is the score
 calculation.  The definition of AQ is:
 "# of correctly categorized situations per hour."
 Here is an example of an exam in progress.';
@@ -1323,8 +1328,8 @@ categorized correctly.  "Ideal AQ" is the AQ which the student
 could have gotten if he had actually categorized the situations perfectly.
 "AQ" is the actual AQ.  "Speed" is a recommendation based on
 whether the student is making a good trade-off between speed and accuracy.
-If the accuracy is too low (lots of errors) then Redael will suggest
-"Go Slower".  If the accuracy is too high (no errors) then Redael will
+If the accuracy is too low (lots of errors) then Aleader will suggest
+"Go Slower".  If the accuracy is too high (no errors) then Aleader will
 suggest "Go Faster".';
   },
   sub { hskip 4 },
@@ -1384,7 +1389,7 @@ makes sense because one situation per minute is 60 situations per hour.';
 
   columns sub {
     element 'p', 'Here is another example.  The AQ is almost the
-same as the Ideal AQ, so Redael recommends "Go Faster".  By
+same as the Ideal AQ, so Aleader recommends "Go Faster".  By
 going faster, the student will do two things: raise the Ideal AQ
 and make slightly more mistakes.  Overall, the AQ score should
 improve by balancing speed and accuracy.';
@@ -1406,7 +1411,7 @@ menupage $topmenu, 'Disagreement Resolution', sub {
   element 'h1', 'Disagreement Resolution';
 
   element 'p', '*Expect* disagreements to happen.  The questions
-posed by Redael may seem easy but sometimes it is hard to figure
+posed by Aleader may seem easy but sometimes it is hard to figure
 out the best way to answer.  The first thing to check is:
 what is happening in the film?';
 
@@ -1533,6 +1538,11 @@ however, honesty can keep this page somewhat useful.  Certified results
 obtained through professional testing methods will be placed on a different
 web page.';
 
+  startTag 'font', color => 'red';
+  element 'p', 'The scores are reset due to minor changes in the
+weighting and score reporting.';
+  endTag 'font';
+
 if (0) {
   startTag 'center';
 
@@ -1586,13 +1596,12 @@ menupage $topmenu, 'Philosophy', sub {
 concepts expressing fundamental beliefs.';
   endTag 'blockquote';
 
-  element 'h1', 'Meta Yoga';
+  element 'h1', 'Yoga';
 
   element 'p', 'Yoga is an ancient sanskrit word which
-means approximately "union with the divine."  Our interest
-here is with *meta* yoga -- the foundation of yoga --
-in other words,
-to present a secular model of reality on which yoga is seen to take place.
+means approximately "union with the divine."  
+Here we present a secular model of reality on
+which yoga is seen to take place.
 Any such model is a miniature representation, and a *good* model
 confers tangible insight into reality and joy.';
 
@@ -1610,7 +1619,7 @@ here are as follows:';
 
   startTag 'ul';
   startTag 'li';
-  text "`Emotion' is a feeling which arrises in the context of two separate people.";
+  text "`Emotion' is a feeling which arises in the context of two separate people.";
   endTag 'li';
   startTag 'li';
   text "`Spirit' is a feeling which does not admit the idea of separation.";
@@ -1624,9 +1633,26 @@ spirit, and compassion.";
   endTag 'li';
   endTag 'ul';
 
-  element 'p', "(`Thoughts' are defined as emotions about the future.
-Even so, distinguishing between thought and emotion is not necessary
-for this discussion. Here `emotion' is meant inclusive of thought.)";
+  element 'p', 'Here are some additional notes:';
+
+  startTag 'ul';
+
+  startLi;
+  text "We can give a definition for `thought',
+however, distinguishing between thought and emotion is not necessary
+for this discussion. Here `emotion' is meant inclusive of thought.";
+  endLi;
+
+  startLi;
+  text "Emotion doesn't require two living breathing people.
+Only the *context* of two people is important.
+For example,
+if you have compassion for a stone then emotion can
+arise between you and the stone (maybe you are a sculptor).
+Anthropomorphic emotions are still emotions.";
+  endLi;
+
+  endTag 'ul';
 
   element 'h2', 'Compassion';
 
@@ -1717,8 +1743,8 @@ and draw any further conclusions.';
     sub { hskip 2 },
       sub {
 	text 'For example: "i am angry, but i am detached from
-my anger.  i am not allowing the anger to affect my behavior.
-The anger is an object of my attention."';
+my anger.  The anger is an object of my attention.  i forgive,
+i forgive.  Now i do not feel angry."';
       };
   endTag 'p';
 
@@ -1742,7 +1768,7 @@ is the object and emotion is the subject, hence "empathy."';
       sub {
 	startTag 'font', color=> EICOLOR;
 	text '"Based on how i feel, what is the structural situation?"
-This style of question is repeatedly posed in Redael annotations.';
+This style of question is repeatedly posed in Aleader annotations.';
 	endTag 'font';
       };
   endTag 'p';
@@ -1959,8 +1985,8 @@ the object of attention.';
   };
 };
 
-menupage $topmenu, 'Redael', sub {
-  element 'h1', 'Redael';
+menupage $topmenu, 'Aleader', sub {
+  element 'h1', 'Aleader';
 
   element 'h2', 'Workflow';
 
@@ -1986,7 +2012,8 @@ people are called "autistic".)';
   startTag 'li';
   startTag 'p';
   text 'AQ (assessment quoient) is the factor which allows one to
-envision the 3rd person situation.  The Situation screen
+envision the 3rd person situation by sensitivity to emotion.
+The Situation screen
 records the structural parameters of the situation.  The
 Joint screens record any relationships between situations.';
   endTag 'p';
@@ -2100,14 +2127,66 @@ respect to emotions).';
 love, the divine cool breeze.  "Wheel" hints at the idea of a machine.
 So "ghost-wheel" refers to the timeless machine which is animated
 by the power of divine love.  This machine is *timeless* because only
-one prerequisite is needed for its operation: compassionate individuals.';
+one prerequisite is needed to trigger its operation:
+ compassionate individuals.';
 
-  element 'p', 'The other name i used for this project is "why-compete".
+  startTag 'table', border => 0, cellspacing => 0, cellpadding => 0;
+  startTag 'tr';
+  startTag 'td', width=>'50%', valign => 'top';
+    element 'p', 'The other name i used for this project is "why-compete".
 This name is based on the inspiration i received when i was trying to
 figure out how to design the situation model.';
 
-  element 'p', 'Redael is the word "leader" with the letters reversed.
+    element 'p', 'Redael is the word "leader" with the letters reversed.
 Pronounce it as you wish.';
+
+    element 'p', 'Aleader has at least two meanings:';
+    startTag 'ul';
+    startLi;
+    text 'It is a short form of "assessment leader".';
+    endLi;
+    startLi;
+    text 'It suggests a contrast between "a leader" and "the leader".
+Only one of us is the leader, but we can all be a leader.
+In other words, i believe that leadership qualities are not dependent on
+the number of followers.';
+    endLi;
+    endTag 'ul';
+  endTag 'td';
+  startTag 'td';
+  hskip 4;
+  endTag 'td';
+  startTag 'td', width => '50%', valign => 'top';
+    startTag 'p';
+    text 'The river carves out the valley by flowing beneath it.';
+    br;
+    text 'Thereby the river is the master of the valley.';
+    br;br;
+    text 'In order to master people';
+    br;
+    text 'One must speak as their servant;';
+    br; 
+    text 'In order to lead people';
+    br;
+    text 'One must follow them.';
+    br;br;
+    text 'So when the gentle rise above the people,';
+    br;
+    text 'They do not feel oppressed;';
+    br;
+    text 'And when the gentle stand before the people,';
+    br;
+    text 'They do not feel hindered.';
+    br;br;
+    text 'So support for the gentle does not fail,';
+    br;
+    text 'They do not contend, and none contend against them.';
+    endTag 'p';
+    element 'a', 'Tao Te Ching #66',
+      href => 'http://home.san.rr.com/merel/gnl.html';
+  endTag 'td';
+  endTag 'tr';
+  endTag 'table';
 };
 
 menupage $topmenu, 'Research & Professional', sub {
@@ -2118,7 +2197,7 @@ menupage $topmenu, 'Research & Professional', sub {
   startTag 'p';
   text 'This project should be of interest to lots of research grants,
 and there is plenty of work to do.
-The methodology used in Redael has only been tested on
+The methodology used in Aleader has only been tested on
 a hand-full of people.  Larger scale scientific studies are needed
 to better reveal its effectiveness. ';
   text 'There are basically two things which need to be
@@ -2140,7 +2219,7 @@ performance?';
   br;
   text '(Personality development has shown significant
 correlation with career performance.  Therefore, AQ should
-also show significant correlation because it is a prerequisite
+also show significant correlation because AQ is a prerequisite
 for developing the personality.)';
   endLi;
   endTag 'ul';
@@ -2182,13 +2261,23 @@ menupage $topmenu, 'IMRT', sub {
   element 'h1', 'Research Study #1';
 
   startTag 'p';
-  startTag 'big';
   startTag 'center';
-  text "Nashik District Maratha Vidya Prasarak Samaj's"; br;
-  text 'Institute of Management, Research & Technology'; br;
-  text 'M.V.P. Campus, Shivajinagar, Gangapur Road, Nashik-422002';
+  columns sub {
+    startTag 'big';
+    startTag 'center';
+    text "Nashik District Maratha Vidya Prasarak Samaj's"; br;
+    text 'Institute of Management, Research & Technology'; br;
+    text 'M.V.P. Campus, Shivajinagar, Gangapur Road, Nashik-422002';
+    endTag 'center';
+    endTag 'big';
+  },
+  sub { hskip 8 },
+  sub {
+    startTag 'center';
+    thumb 'art/imrt0.jpg', 'IMRT Entrance';
+    endTag 'center';
+  };
   endTag 'center';
-  endTag 'big';
   endTag 'p';
 
   element 'p', 'IMRT is recognized as a research institute by the
@@ -2262,10 +2351,15 @@ test.  During the test, we asked each student to give answers for
 
   element 'p', 'The maximum AQ one can achieve is 60.';
 
-  element 'p', 'We gave a "Post-Test Evaluation".  Here are
-some examples of the response we received.  [Note: The
+  startTag 'p';
+  text 'We gave a "Post-Test Evaluation".  Here are
+some examples of the response we received.  ';
+  startTag 'font', color=>'red';
+  text '[Note: The
 statistic was called "emotional intelligence" instead of
 "situation assessment" when these evaluations were written.]';
+  endTag 'font';
+  endTag 'p';
 
   columns sub {
     thumb 'art/posttest1.jpg', 'Bhagade Arun Ramdas';
@@ -2334,6 +2428,17 @@ The students expressed faith that the test would help them become sharp
 in taking decisions and improve at situation assessment.';
   endLi;
   endTag 'ul';
+
+  startTag 'center';
+  columns sub {
+    img 'art/imrt1.jpg', 'Day 1';
+  },
+  sub { hskip 4 },
+  sub {
+    img 'art/imrt2.jpg', 'Day 2';
+  };
+  endTag 'center';
+
 };
 
 for my $file (keys %Chapter) {
