@@ -391,8 +391,8 @@ and alone.';
 A good mother ususally sooths the development into a balanced path.
 If for some reason compassion goes out of balance then
 horrible atrocities can result.  The business of slavery
-and the Nazi movement (in Germany) can be attributed to a
-terrible dearth of compassion.';
+and the Nazi killings in Germany can be attributed to a
+terrible imbalance in compassion.';
   }, sub {
     emptyTag 'img', src=>'art/nocompassion.jpg', alt => 'No Compassion';
   };
