@@ -406,8 +406,8 @@ easy to use GUI.  This software is licensed under the ';
   text '[5 Dec 2001] Assuming the cooperation of upstream
 libraries, a binary release of redael will be made
 within a few months (1Q02).  As part of the release,
-i would very much like to make
-some exemplar annotations available. However, this will depend upon
+i would very much like to make available
+some exemplar annotations. However, this will depend upon
 the vagaries of international copywrite law.  Can anyone comment
 on a preliminary ';
   element 'a', 'fair use statement',
@@ -546,11 +546,10 @@ with --enable-glib2.';
 
   startTag 'tr';
   startTag 'td';
-  element 'a', 'Star Wars: A New Hope (1977)',
-    href => 'http://www.starwars.com/episode-iv/';
+  text 'Hum Dil De Chuke Sanam (1999)';
   endTag 'td';
-  element 'td', 'Space Opera';
-  element 'td', 'All Ages';
+  element 'td', 'Hindi Drama';
+  element 'td', '13+ (adult themes)';
   element 'td', '0%';
   element 'td', 'VCD';
   element 'td', 'soon';
@@ -565,6 +564,18 @@ with --enable-glib2.';
   element 'td', '17+ (language, adult themes)';
   element 'td', '10%';
   element 'td', 'DVD';
+  element 'td', 'soon';
+  endTag 'tr';
+
+  startTag 'tr';
+  startTag 'td';
+  element 'a', 'Star Wars: A New Hope (1977)',
+    href => 'http://www.starwars.com/episode-iv/';
+  endTag 'td';
+  element 'td', 'Space Opera';
+  element 'td', 'All Ages';
+  element 'td', '0%';
+  element 'td', 'VCD';
   element 'td', 'soon';
   endTag 'tr';
 
@@ -657,79 +668,46 @@ at least a man-month of effort.';
   emptyTag 'hr';
   endTag 'p';
 
-  element 'h2', 'Workflow Summary';
+  element 'h2', 'Getting Started';
 
-  startTag 'p';
-  img 'art/workflow.png', 'Workflow', border=>0;
-  endTag 'p';
+  element 'p', 'The most important feature of redael is that you
+do not have to understand *why* it works.  All you have to do is
+gain practical experience using it.  Moreover, you are welcome to
+use standard test-taking techniques to improve your score .';
+
+  element 'p', "The test medium is multiple-choice except for spans,
+duration and joints.  Don't try to figure out spans or joints on your
+first try.  Follow a gradual introduction:";
 
   startTag 'ol';
-
   startTag 'li';
-  startTag 'p';
-  text 'People can easily empathize with the actors and actresses, and *feel* a
-precise replica of the emotions depicted onscreen.';
-  endTag 'p';
+  element 'p', 'Take an exam with original spans and also ignore any joints.
+Always set duration to Closed.  After you finish, use the diff tool to
+examine your mistakes.';
   endTag 'li';
-
+  
   startTag 'li';
-  startTag 'p';
-  text 'Emotional Intelligence is the factor which allows one to
-envision a
-situation from a 3rd person perspective.  The Situation Editor
-assists in recording the structural parameters of the situation.  The
-Add Joint screens assist in recording any relationships between situations.';
-  endTag 'p';
+  element 'p', 'Take an exam with the original spans
+and always set the duration to Open.
+Add closing joints until all the situations are closed.
+You can use the duration query screen to check whether anything remains open.
+After you finish, use the diff tool to examine your mistakes.';
   endTag 'li';
-
+  
   startTag 'li';
-  startTag 'p';
-  text 'The Cross Reference screen automates pattern
-matching from abstract situations to abstract emotions.';
-  endTag 'p';
+  element 'p', 'Take an exam without any original annotation.
+Now it is your responsibility to deterine the span of each situation.
+Set the duration and add joints as you see fit.
+After you finish, use the diff tool to examine your mistakes.';
   endTag 'li';
-
-  startTag 'li';
-  startTag 'p';
-  text 'The principal
-reason to want abstract emotions is for verifying correctness.  For
-example, it is much easier to imagine the abstract emotion "try
-to cover up mistake" (or "shame") than to imagine the corresponding abstract
-situation "before ';
-  element 'b', '[0]';
-  text ' accepts [+] followed by :react: during stifled
-[+] exposes ';
-element 'b', '[-]';
-  text '".  Since emotions are occasionally repeated, the pattern classifications
-can be established with some certainty.  As few as two or three repetitions
-are generally sufficient.';
-  endTag 'p';
-  endTag 'li';
-
-  startTag 'li';
-  startTag 'p';
-  text 'The pattern matching also makes it easier to verify that
-each abstract situation corresponds to its associated actual situation
-in the film.  If the abstract emotions seem correct except for one
-case then the structure of the exceptional situation probably
-needs re-evaluation.';
-  endTag 'p';
-  endTag 'li';
-
+  
   endTag 'ol';
 
-  startTag 'p';
-  text 'Steps (4) and (5) work against each other in opposite directions.
-After checking and re-checking, we can gain confidence that
-abstract representation is a fairly accurate distillation of the film.';
-  endTag 'p';
-
-  startTag 'p';
-  text "For an examination session, the automated facilities relating to
-abstract emotions are disabled.  Part of the reconciliation, step (4),
-is changed into a manual process.  A student's capacity for (2) emotional
-intelligence is tested intensively.";
-  endTag 'p';
+  element 'p', 'The diff tool can measure the difference between
+your answers and the exemplar.  Generally, any differences will
+be your mistake.  However, this is not non-negotiable.  You may find
+errors in the exemplar.  Please report any errors to the mailing
+list.';
 
   startTag 'p';
   emptyTag 'hr';
@@ -970,11 +948,11 @@ menupage $topmenu, 'Mailing Lists', sub {
 
   $list->('redael-announce',
 	  'Announcements about releases or other important events.',
-'Low-volume; at most one message per day.');
+'[Low-volume; at most one message per day.]');
 
   $list->('redael-devel',
 	  'Technical discussions about software development and philosophy.',
-'Can be high volume on occation.');
+'[Can be high volume on occation.]');
 
   endTag 'ul';
 };
@@ -1140,6 +1118,87 @@ This style of question is repeatedly posed in redael annotations.';
 	endTag 'font';
       };
   endTag 'p';
+
+  startTag 'blockquote';
+  emptyTag 'hr';
+
+  element 'h3', 'Redael Workflow';
+
+  startTag 'p';
+  img 'art/workflow.png', 'Workflow', border=>0;
+  endTag 'p';
+
+  startTag 'ol';
+
+  startTag 'li';
+  startTag 'p';
+  text 'People can easily empathize with the actors and actresses, and *feel* a
+precise replica of the emotions depicted onscreen.';
+  endTag 'p';
+  endTag 'li';
+
+  startTag 'li';
+  startTag 'p';
+  text 'Emotional Intelligence is the factor which allows one to
+envision a
+situation from a 3rd person perspective.  The Situation Editor
+assists in recording the structural parameters of the situation.  The
+Add Joint screens assist in recording any relationships between situations.';
+  endTag 'p';
+  endTag 'li';
+
+  startTag 'li';
+  startTag 'p';
+  text 'The Cross Reference screen automates pattern
+matching from abstract situations to abstract emotions.';
+  endTag 'p';
+  endTag 'li';
+
+  startTag 'li';
+  startTag 'p';
+  text 'The principal
+reason to want abstract emotions is for verifying correctness.  For
+example, it is much easier to imagine the abstract emotion "try
+to cover up mistake" (or "shame") than to imagine the corresponding abstract
+situation "before ';
+  element 'b', '[0]';
+  text ' accepts [+] followed by :react: during stifled
+[+] exposes ';
+element 'b', '[-]';
+  text '".  Since emotions are occasionally repeated, the pattern classifications
+can be established with some certainty.  As few as two or three repetitions
+are generally sufficient.';
+  endTag 'p';
+  endTag 'li';
+
+  startTag 'li';
+  startTag 'p';
+  text 'The pattern matching also makes it easier to verify that
+each abstract situation corresponds to its associated actual situation
+in the film.  If the abstract emotions seem correct except for one
+case then the structure of the exceptional situation probably
+needs re-evaluation.';
+  endTag 'p';
+  endTag 'li';
+
+  endTag 'ol';
+
+  startTag 'p';
+  text 'Steps (4) and (5) work against each other in opposite directions.
+After checking and re-checking, we can gain confidence that
+abstract representation is a fairly accurate distillation of the film.';
+  endTag 'p';
+
+  startTag 'p';
+  text "For an examination session, the automated facilities relating to
+abstract emotions are disabled.  Part of the reconciliation, step (4),
+is changed into a manual process.  A student's capacity for (2) emotional
+intelligence is tested intensively.";
+  endTag 'p';
+
+  emptyTag 'hr';
+  endTag 'blockquote';
+
 
   startTag 'p';
   columns sub { attention 1,2 },
