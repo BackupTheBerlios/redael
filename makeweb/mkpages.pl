@@ -1495,7 +1495,6 @@ variety of different things in different contexts.  The defintions used
 here are as follows:';
 
   },
-  sub { hskip 4 },
   sub {
     img 'art/feelings.png', 'Feelings';
   };
@@ -1537,7 +1536,9 @@ Charming, huh?
 As compassion dawns, the four perspectives come into focus:';
   endTag 'p';
 
-  }, sub {
+  },
+  sub { hskip 4 },
+  sub {
     emptyTag 'img', src=>'art/nocompassion.jpg', alt => 'No Compassion';
   };
 
@@ -1582,7 +1583,8 @@ foster compassion with scientific certainty.';
 The subject is the origin of attention.  Attention is focused on an object,
 the object is enveloped with awareness, and the subject is informed
 about the object.";
-  }, sub {
+  },
+  sub {
     emptyTag 'img', src => 'art/informs.png', alt => 'Informs',
       width => 206, height => 64;
   };
@@ -1681,17 +1683,11 @@ much more so than any physical or mental amusement.';
 
   startTag 'p';
   columns sub {
-    text 'The permutations between ';
+    text 'Jumping directly between the ';
     nth(2);
     text ' and ';
     nth(3);
-    text " perspectives don't make sense.  Our information (or
-flexibility) is necessarily partial because the four perspectives
-are known only by compassion.  For example, ";
-    text '"How is your personality affected by observing the situation?"
--- this question could only be answered by an omniscient individual.
-We are merely compassionate individuals.
-Attention vectors are only possible between the ';
+    text " perspectives doesn't make sense.  Attention flows between the ";
     nth(0);
     text ' and ';
     nth(1);
