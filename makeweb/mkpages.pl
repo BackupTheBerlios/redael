@@ -16,6 +16,12 @@ sub run {
   system($cmd) == 0 or die "system $cmd failed: $?";
 }
 
+sub modtime {
+  my ($f) = @_;
+  my @s = stat $f;
+  $s[9] || 0;
+}
+
 sub page {
   my ($file, $x) = @_;
   
@@ -423,6 +429,7 @@ sub menupage {
     sub {
       emptyTag 'hr';
       element 'p', 'Copyright (C) 2001, 2002 Joshua Nathaniel Pritikin.  Verbatim copying and distribution of this entire article is permitted in any medium, provided this notice is preserved.';
+      element 'p', 'Last modified @DATE@.';
       emptyTag 'hr';
     },
     sub { hskip 2 };
@@ -446,13 +453,11 @@ easy to use GUI.  This software is licensed under the ';
   
   element 'h1', "News";
 
-  if (0) {
   startTag 'p';
-  text '[9 Jan 2002] i got ';
+  text '[20 Jan 2002] i got ';
   element 'a', 'married', href => 'm.html';
   text '!';
   endTag 'p';
-}
 
   startTag 'p';
   text '[5 Dec 2001] Assuming the cooperation of upstream
@@ -1531,10 +1536,26 @@ intelligence is tested intensively.";
   element 'h2', 'The Model';
 
   startTag 'p';
-  text 'Which model is most appropriate to encode abstract situations?';
+  element 'i', 'What is the best model to encode abstract situations?';
   endTag 'p';
 
-  element 'p', '[write something here]';
+  element 'p', 'One way to identify a good model is that
+it will have a one-to-one mapping between
+abstract situations and abstract emotions.  However, this
+condition does not provide much guidance about how to
+represent an abstract situation.';
+
+  startTag 'p';
+  text 'The trick is to analyze the question.  "What is the ';
+  element 'b', 'best';
+  text ' model to encode abstract situations?"  This word "best"
+implies some sort of competition between canidate models.
+Actually if we think of these canidate models anthopomoriphically
+and take them two at a time then the competition factor becomes
+an inductive solution:  The best model of competition is the
+best model.  [write more ..]';
+
+  endTag 'p';
 };
 
 menupage $topmenu, 'Business Opportunities', sub {

@@ -22,6 +22,12 @@ if (open my $fh, "<checksum") {
   close $fh;
 }
 
+our $Date;
+{
+  my @tm = localtime;
+  $Date = sprintf "%02d/%02d/%04d", $tm[3], $tm[4]+1, $tm[5]+1900;
+}
+
 sub sync_dir {
   my ($dir, @f) = @_;
 
@@ -47,6 +53,10 @@ sub sync_dir {
   }
 
   if (@todo) {
+    for my $f (@todo) {
+      next if $f !~ m/\.html$/;
+      run "perl -pi.orig -e 's,\\\@DATE\\\@,$Date,' $dir/$f";
+    }
     run('scp', (map { "$dir/$_" } @todo), $user.'@shell.berlios.de:'.
 	'/home/groups/redael/htdocs/'.$dir.'/');
   }

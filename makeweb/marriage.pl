@@ -1,4 +1,43 @@
+sub thumb {
+  my ($src, $caption) = @_;
+  my $sm = $src;
+  if ($sm !~ s/\.jpg$/-sm.jpg/) {
+    warn "what is $src ?"; next 
+  }
+
+  startTag 'center';
+  emptyTag 'img', src=>$sm, alt=>$caption;
+  br;
+  text "$caption ";
+  element 'a', '(enlarge)', href => $src;
+  endTag 'center';
+}
+
 page 'm.html', sub {
+  for my $pic (qw(mappl-h.jpg mappl-j.jpg
+		  nirmal_nagari.jpg
+		  mother_arrives.jpg christmas_puja.jpg 
+		  kawali1.jpg kawali2.jpg 
+		  huldi1.jpg huldi2.jpg
+		  huldi_joshua.jpg 
+		  marriage_puja.jpg marriage_havan.jpg 
+		  marriage_dinner.jpg
+		  m_registration.jpg
+		  heera-model.jpg kamdi1.jpg kamdi2.jpg kamdi3.jpg)) {
+    if (!-e "art/$pic") {
+      warn "$pic doesn't exist";
+      next;
+    }
+    my $sm = $pic;
+    if ($sm =~ s/\.jpg$/-sm.jpg/) {
+      if (modtime("art/$pic") > modtime("art/$sm")) {
+	run "cp art/$pic art/$sm";
+	run "mogrify -geometry 160x160 art/$sm";
+      }
+    }
+    else { warn "what is $pic ?" }
+  }
+
   element 'title', 'Marriage';
   endTag 'head';
 
@@ -6,8 +45,10 @@ page 'm.html', sub {
 
   element 'h1', 'Our Marriage';
 
-  element 'p', 'Between Sep and Dec, approximately 300 people submitted
-marriage applications.';
+  element 'p', 'For about twenty years, Sahaja Yoga has been
+offering the opportunity for divine marriage.
+In 2001 between Sep and Dec, approximately 300 hopefuls
+submitted marriage applications.';
 
   startTag 'p';
   columns sub {
@@ -22,17 +63,16 @@ arranged marriage.";
   },
   sub { hskip 4 },
   sub {
-    startTag 'center';
-    img 'art/mappl-j1.jpg', 'Joshua';
-    br;
-    text 'Joshua ';
-    element 'a', '(enlarge)', href => 'art/mappl-j2.jpg';
-    endTag 'center';
+    thumb 'art/mappl-j.jpg', 'Joshua';
   };
   endTag 'p';
 
   startTag 'p';
-  columns sub {
+  columns  sub {
+    thumb 'art/mappl-h.jpg', 'Heera';
+  },
+  sub { hskip 4 },
+  sub {
     element 'p', "The traditional Indian marriage procedure takes too
 much time (more than six months) and is too expensive.  Also the bride
 must endure too much abuse.";
@@ -40,16 +80,6 @@ must endure too much abuse.";
 two years back.
 The marriage has been successful and her parents felt that Sahaja Yoga
 attracted high quality people.  They gladly approved the application.";
-
-  },
-  sub { hskip 4 },
-  sub {
-    startTag 'center';
-    img 'art/mappl-h1.jpg', 'Heera';
-    br;
-    text 'Heera ';
-    element 'a', '(enlarge)', href => 'art/mappl-h2.jpg';
-    endTag 'center';
   };
   endTag 'p';
   
@@ -73,36 +103,128 @@ could not be matched.';
 
   br;
   columns sub {
-    element 'p', 'On Dec 24, the 300 marriage applicants and
-about 9000 yogis from around the world arrived at the
-international Sahaja Yoga seminar at Ganapatipule, Maharashtra.';
-
-    element 'p', 'The matches were announced around 19:00 on Dec 27.';
-
-  element 'p', 'We had about 36 hours to take a decision.  However,
-we were both delighted with the match and decided after about
-one hour.';
-
+    img 'art/ganapatipule.jpg', 'Ganapatipule';
   },
   sub { hskip 4 },
   sub {
-    img 'art/ganapatipule.jpg', 'Ganapatipule';
+    element 'p', 'On Dec 24, the 300 marriage applicants and
+about 9000 yogis from around the world arrived at the
+international Sahaja Yoga seminar at Ganapatipule, Maharashtra.';
+  },
+  sub { hskip 4 },
+  sub {
+    thumb 'art/nirmal_nagari.jpg', 'Nirmal Nagari';
   };
 
-  element 'p', 'The marriages took place on the evening of Dec 29.
-Here are some photos from the marrage ceremony:';
+  br;
+  columns sub {
+    thumb 'art/mother_arrives.jpg', 'Mother Arrives';
+  },
+  sub { hskip 4 },
+  sub {
+    element 'p', 'Ganapatipule seminar started with the performance
+of Christmas Puja -- we worshipped the mother in the form of
+Jesus the Christ.';
+  },
+  sub { hskip 4 },
+  sub {
+    thumb 'art/christmas_puja.jpg', 'Christmas Puja';
+  };
 
-  startTag 'p';
-  img 'art/mpuja2.jpg', 'During Puja';
-  endTag 'p';
-
-  startTag 'p';
-  img 'art/mpuja1.jpg', 'During Puja';
-  endTag 'p';
+  br;
+  columns sub {
+    thumb 'art/kawali1.jpg', 'Kawalis';
+  },
+  sub { hskip 4 },
+  sub {
+    element 'p', 'We enjoyed music performances and Kawalis on Dec 26.';
+    element 'p', 'The matches were announced around 19:00 on Dec 27.
+We had about 36 hours to take a decision.';
+  };
 
   columns sub {
-    element 'p', 'After the ceremony, each bride and bride-groom were
-asked to spontaneously compose couplets for Shri Mataji.';
+    element 'p', 'Most divine marriages are successful, but a few end
+up in disaster.  We carefully exchanged more information about
+our qualifications.';
+  },
+  sub { hskip 4 },
+  sub {
+    element 'p', "Heera:";
+
+    startTag 'ul';
+    element 'li', 'B.Sc. (Home Science)';
+    element 'li', 'Black Belt in Tae Kwon Do (a few years ago)';
+    element 'li', "National Cadet Core - 'C' Certificate Pass";
+    endTag 'ul';
+  },
+  sub { hskip 4 },
+  sub {
+    element 'p', "Joshua:";
+    
+    startTag 'ul';
+    element 'li', 'Software Engineer';
+    startTag 'li';
+    element 'a', 'Research in Emotional Intelligence',
+      href => 'http://ghost-wheel.net';
+    endTag 'li';
+    endTag 'ul';
+  };
+
+  columns sub {
+    element 'p', 'We felt that it was such a good match that
+after only one hour we decided to proceed with the marriage.';
+    element 'p', 'While waiting for the actual marriages,
+ we enjoyed two more evenings filled with dance and music performances.';
+  },
+  sub { hskip 4 },
+  sub {
+    thumb 'art/kawali2.jpg', 'Kawalis';
+  };
+
+  br;
+  columns sub {
+    thumb 'art/huldi1.jpg', 'Haldi';
+  },
+  sub { hskip 2 },
+  sub {
+    thumb 'art/huldi2.jpg', 'Haldi';
+  },
+  sub { hskip 4 },
+  sub {
+    element 'p', 'The haldi program involved lots of loud music,
+dancing, and tumeric.';
+  },
+  sub { hskip 4 },
+  sub {
+    thumb 'art/huldi_joshua.jpg', 'Joshua';
+  };
+
+  br;
+  columns sub {
+    thumb 'art/marriage_puja.jpg', 'Marriage Day';
+  },
+  sub { hskip 4 },
+  sub {
+    element 'p', 'The marriages took place on the evening of Dec 29.
+The beautiful background artwork shows two eyes, one male and one female.';
+
+    element 'p', "The ceremony requires the help of some of the
+bride's relatives.  Of course it is best if the real relations
+are present, but none of our relations were at the seminar.
+We recruited substitute relations to perform the requisite rites.";
+  },
+  sub { hskip 4 },
+  sub {
+    thumb 'art/marriage_havan.jpg', 'Marriage Havan';
+  };
+
+  columns sub {
+    element 'p', 'After the marriage havan, we were served dinner and
+Shri Mataji ate some food with us.
+Then each bride and bride-groom were asked to spontaneously
+compose couplets for Shri Mataji.';
+
+    thumb 'art/marriage_dinner.jpg', 'Marriage Dinner';
 
     element 'p', "(`Heera' means `diamond' in Marathi.)";
   },
@@ -116,8 +238,54 @@ asked to spontaneously compose couplets for Shri Mataji.';
     endTag 'p';
   };
 
+  columns sub {
+    element 'p', "One of Heera's uncles knows how to handle government
+bureaucracy.  We got official documentation after only a few days.";
+
+  },
+  sub { hskip 4 },
+  sub {
+    thumb 'art/m_registration.jpg', 'Registration';
+  };
+
   startTag 'p';
-  element 'i', 'Please let me know any further questions i can answer here.
-i will add more photos as they become available.';
+  element 'b', 'Both of us invite and welcome you to Sahaja Yoga.';
   endTag 'p';
+  
+#  element 'p', 'Kamdi Family Reception';
+
+  element 'p', 'Last modified @DATE@.';
 };
+
+__END__
+  startTag 'p';
+  emptyTag 'hr';
+  endTag 'p';
+
+ element 'h2', 'Kamdi Family Reception';
+
+  columns sub {
+    element 'p', 'On Jan 13, the Kamdi family gave us a marriage
+ reception in Nagpur.';
+  },
+  sub { hskip 4 },
+  sub {
+    thumb 'art/kamdi1.jpg', 'Reception';
+  },
+  sub { hskip 2 },
+  sub {
+    thumb 'art/kamdi2.jpg', 'Reception';
+  };
+
+  columns sub {
+    thumb 'art/kamdi3.jpg', 'Chatting';
+  },
+  sub { hskip 2 },
+  sub {
+    thumb 'art/heera-model.jpg', 'Old Photo';
+  },
+  sub { hskip 4 },
+  sub {
+    element 'p', "Here is one of Heera's old photos.";
+  };
+
