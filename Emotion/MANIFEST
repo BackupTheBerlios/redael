@@ -1,0 +1,10 @@
+COPYING
+MANIFEST
+MANIFEST.SKIP
+Makefile.PL
+README
+TODO
+lib/Emotion.pm
+lib/Emotion.pod
+pl/empathize
+t/01.t

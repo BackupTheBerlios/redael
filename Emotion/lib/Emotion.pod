@@ -1,0 +1,482 @@
+=head1 NAME
+
+Emotion - discrete emotion annotation processing
+
+=head1 SYNOPSIS
+
+  empathize <transcript>
+  empathize --index <transcript> [<transcript> ...]
+
+=head1 DESCRIPTION
+
+The most difficult part of this module is learning how to annotate
+free-form text with information about what competition is taking
+place.  If you haven't studied http://ghost-wheel.net then go do that
+now.
+
+The first part of this document describes the XML representation of
+3rd person annotations and the validation rules.  The second part
+describes the perl API.
+
+=head1 XML TUTORIAL
+
+=head2 The Basics
+
+The minimum situation consists of the type of competition and two
+opponents.
+
+  abbreviation  type of competition (situation)
+  ------------  -------------------------------
+  destroys      [-] destroys [-]
+  steals        [-] steals from [+]
+  uneasy        [-] is made uneasy by [0]
+  exposes       [+] exposes [-]
+  impasse       [+] and [+] are at an impasse
+  admires       [+] admires [0]
+  observes      [0] observes [-]
+  accepts       [0] accepts [+]
+  ready         [0] and [0] are at readiness
+
+Each opponent is labelled either C<left> or C<right>, indicating on
+which side of the situation he or she participates.  For example:
+
+  <observes left="student" right="teacher">
+    A student watches the teacher make a presentation.
+  </observes>
+
+  <observes right="student" left="teacher">
+    The teacher watches a student make a presentation.
+  </observes>
+
+Of course a teacher is probably more accustomed to lecturing in front
+of a class than a student.  This information can be captured with the
+C<intensity> attribute:
+
+  <observes left="student" right="teacher" intensity="gentle">
+    A student watches the teacher make a presentation.
+  </observes>
+
+  <observes right="student" left="teacher" intensity="forceful">
+    The teacher watches a student make a presentation.
+  </observes>
+
+Now it is clear that the teacher's presentation involves some gentle
+excitement, but a student presentation is an exciting test of
+self-control.  Since no spin is involved, the emotion is roughly the
+same regardless of whether we empathize with the presenter or the
+audience.  To contrast, situations involving spin require some
+additional structure.  For example:
+
+  <steals left="thief" right="child">
+    The thief steals the teddy bear from the child.
+  </steals>
+
+Here it is not clear which emotion is intended.  Opponents experience
+the situation very differently.  Perhaps the thief is drunk with
+accomplishment, but the child is probably quite angry.  To avoid this
+ambiguity, situations involving spin follow a transactional structure:
+
+  initiator:   (1) before ---+---> (3) after
+                             |
+                             v
+  victim:             (2) tension
+
+Here is a hypothetical trace of a C<steals> situation decomposed into
+the three transaction phases:
+
+  <steals left="thief" right="child" before="focused">
+    The thief eyes the teddy bear maliciously and wrenches it
+    from the child's passionate grip.
+  </steals>
+
+  <steals left="thief" right="child" tension="focused">
+    The child becomes furious and starts crying.
+  </steals>
+
+  <steals left="thief" right="child" after="focused">
+    The thief triumphantly stows the teddy bear in his backpack.
+  </steals>
+
+Perhaps this sequence of events is ghastly, but here the goal is
+merely to model emotions accurately.  In this example, the three
+phases unambiguously correspond to "anxiety," "anger," and "drunk with
+accomplishment."
+
+The attributes C<before>, C<tension>, and C<after> describe the
+emotional tension.  Tension modifies a general emotion to fit the
+precise situation.  For example:
+
+  <steals left="thief" right="child" before="relaxed">
+    The thief grabs the teddy bear with abandon.
+  </steals>
+
+  <steals left="thief" right="child" before="stifled">
+    The thief studies whether the teddy bear can be stolen.
+  </steals>
+
+A tension modifier is either C<focused>, C<relaxed>, or C<stifled>.
+Emotion correspondance charts can assist in fitting the most accurate
+modifier to the situation.  Of course a thief is not always
+successful:
+
+  <steals left="thief" right="child" before="stifled">
+    The thief studies whether the teddy bear can be stolen.
+  </steals>
+
+  <impasse left="child" right="thief" tension="focused">
+    The child grips the teddy bear even more tightly.
+  </impasse>
+
+The four situations involving spin (C<steals>, C<exposes>, C<admires>,
+and C<accepts>) mostly follow the three phase transaction structure.
+However, flexibility offered by C<accepts> shows the need to
+explicitly indicate an initiator.  For example:
+
+  <accepts left="chef" right="child" before="focused">
+    I am hungry.  Is dinner ready?
+  </accepts>
+
+  <accepts left="chef" right="child" before="focused">
+    You are hungry!
+  </accepts>
+
+Looking just at the annotation, a reader cannot determine whether the
+child is making a demand, or the chef is voicing the child's
+expression of hunger.  An C<initiator> attribute eliminates the
+ambiguity:
+
+  <accepts left="chef" right="child" before="focused" initiator="right">
+    I am hungry.  Is dinner ready?
+  </accepts>
+
+  <accepts left="chef" right="child" before="focused" initiator="left">
+    You are hungry!
+  </accepts>
+
+Now the situations can be distinguish.  While the annotation is
+precise, it is also quite a lot of typing.  To reduce the burden on
+the analyst, the parser is capable of guessing reasonable defaults by
+consideration of who is talking.  For example:
+
+  <accepts left="chef" initiator="child" before="focused">
+    I am hungry.  Is dinner ready?
+  </accepts>
+
+Or alternately:
+
+  <talk who="child">
+    <accepts left="chef" before="focused">
+      I am hungry.  Is dinner ready?
+    </accepts>
+  </talk>
+
+We covered most of the simple variations.  Here is a summary:
+
+  situation  variations
+  ---------- ---------------------------------
+  steals     before|tension|after, initiator
+  exposes    before|tension|after, initiator
+  admires    before|tension|after, initiator
+  accepts    before|tension|after, initiator
+  impasse    tension
+  observes   intensity, [initiator]
+  uneasy     intensity, [initiator]
+  ready      intensity
+  destroys   -
+
+The square brackets denote optional attributes.  More will be said
+about this later.
+
+=head2 Reaction
+
+Question & answer (Q&A) format is a common way to structure
+discussion.  This section looks at the Q&A structure in comparison
+with the competition model.  It will be shown that there are some
+conflicts in the corresponce, however, the complementary features can
+be embraced.
+
+Questions usually end with a question mark.  Even so, from the point
+of view of competition, questions are essentially demands.  For
+example:
+
+  <accepts left="child" initiator="parent" before="focused">
+    Does your teddy bear have brown fur?
+  </accepts>
+
+In answer, the child's choices include:
+
+  <accepts initiator="child" right="parent" before="focused">
+    Yes!
+  </accepts>
+
+Or:
+
+  <impasse initiator="child" right="parent" tension="relaxed">
+    Which teddy bear?
+  </accepts>
+
+Notice that similar replies could be expected from the non-question
+demand, "I want the teddy bear."  For example, C<accepts> ("OK, here
+it is.") or C<impasse> ("Which teddy bear?").  While the question mark
+inflects the demand somehow, its presence or absence does not seem
+particularly significant in the context of competition.
+
+The answer side of Q&A will now be considered.  Answers are generally
+offered in reaction to questions.  However, it is easy to demonstrate
+ambiguity.  For example:
+
+  <accepts left="child" initiator="parent" before="focused">
+    Does your teddy bear have brown fur?
+  </accepts>
+
+  <impasse initiator="child" right="parent" tension="relaxed">
+    Which teddy bear?
+  </accepts>
+
+Is the child's reply a question or an answer?  Perhaps both, but
+clearly the Q&A terminology is imprecise.  Despite these problems,
+some kind of contextual relationship definitely exists.  To encode the
+Q&A relationship precisely, a clear standard is needed to recognize
+it.
+
+The standard suggested here is that the participants must match but
+the initiator must flip-flop.  These rules were discovered by
+surveying many Q&A style exchanges and the rules seem to work well in
+practice.  C<re> (meaning "in reaction to") and C<id> attributes serve
+the purpose.  For example:
+
+  <accepts id="q1" right="child" initiator="adult" before="focused">
+    Does your teddy bear have brown fur?
+  </accepts>
+
+  <accepts re="q1" left="parent" initiator="child" before="focused">
+    Yes!
+  </accepts>
+
+=head2 Quality
+
+So far, the chosen markup may seem somewhat arbitrary.  For example,
+why indicate merely C<accepts>?
+
+  <accepts id="q1" right="child" initiator="adult" before="focused">
+    Does your teddy bear have brown fur?
+  </accepts>
+
+Why not more detail, such as:
+
+  <accepts id="q1" right="child" initiator="adult" before="focused">
+    Does your
+      <admires initiator="child" right="teddy bear" tension="relaxed">
+        teddy bear
+      </admires>
+    have brown fur?
+  </accepts>
+
+In fact, either annotation could be accurate.  Part of the problem is
+that both the story and annotation are being written by the same
+person.  This is a conflict of interest because i can adjust the story
+to improve my annotations, and visa-versa.  Recall that the goal here
+is to develop the best quality annotations *without* changing the
+story.
+
+Another problem is that written text is not rich enough as a medium to
+thoroughly convey life's emotional textual.  To contrast, film (or the
+actual life experience itself) is quite sufficiently expressive.  So
+assuming we are watching a film, what consistitutes best quality
+markup?  For example:
+
+  <steals initiator="Yupi" right="Lon" before="focused">
+    Yupi gives Lon a beautiful and fragrant flower.
+  </steals>
+
+Most likely this markup is wrong.  A proposed criteria for judging the
+quality of markup follows:
+
+=over 4
+
+=item * Is it detailed enough to isolate single emotions?
+
+Looking at a scene as a sequences of moments, every moment can be
+consider an *independent* competition event.  The question is: into
+how many intervals must we divide the timeline such that each interval
+is exactly one emotion?
+
+=item * Does it span the entire duration of the emotion?
+
+Some clarity is lost if a single emotion is sub-divided excessively.
+A single annotation should span as much time as is practical.  The
+duration criteria is also consided in the next section, "Resolution."
+
+=back
+
+=head2 Resolution
+
+The parser tries to keep track of situations which remain unresolved
+(or pending).  For example:
+
+  <accepts id="o1" initiator="clerk" left="Joey" before="focused">
+    What toppings do you want on your pizza?
+  </accepts>
+
+  <impasse id="o2" re="o1" left="Joey" right="cleck" tension="stifled">
+    Joey puts the phone on hold.
+  </impasse>
+
+In general, stories don't stop abruptly leaving unresolved
+cliffhangers.  Here is a clue that can be used to debug annotations.
+After processing a transcript, C<empathize> outputs all the situations
+which do not find closure.  In the above example, the situation is
+pending until Joey picks up the phone or the clerk gives up in disgust
+or whatever.
+
+Similarly, a warning is triggered when the same situation is resolved
+more than once.  For example:
+
+  <accepts id="o3" initiator="clerk" left="Joey" before="focused">
+    How many pizzas do you want?
+  </accepts>
+
+  <accepts re="o3" initiator="Joey" before="focused">
+    i want exactly three pizzas.
+  </accepts>
+
+  <accepts re="o3" initiator="Joey" before="focused">
+    i want exactly two pizzas.
+  </accepts>
+
+Notice the situation C<o3> is listed in the C<re> attribute twice.
+This is unnecessarily ambiguous.  There are a variety of ways to
+better model the scenario.
+
+=head2 Revoke / Amend
+
+Sometimes i say something which i wish i never said.  The C<revoke>
+attribute reflects this scenario.
+
+  <accepts id="q1" initiator="Spike" left="Jeff" before="focused">
+    What time is it?
+  </accepts>
+
+  <impasse id="a1" re="q1" tension="focused" right="Spike" initiator="Jeff">
+    No idea!
+  </observes>
+
+  <uneasy id="q2" amend="q1" initiator="Spike" left="Jeff" intensity="gentle">
+    Spike gives Jeff a threatening look.
+  </uneasy>
+
+  <accepts id="a2" revoke="a1" re="q1" before="focused" left="Spike"
+           initiator="Jeff">
+    Eleven hundred hours!  Sir!
+  </accepts>
+
+C<q1> is resolved by C<a1> until C<q1> becomes pending again when
+C<a1> is revoked by C<a2>.  Now that C<q1> is again pending, the C<re>
+attribute can be used in C<a2> to substitute a revised reaction.
+
+To contrast, Spike's demand for the time in C<q1> is not revoked by
+his subsequent threatening look in C<q2>.  Here, what needs to be
+reflected is Spike's change in tone, but not change in fact.  The
+C<amend> attribute serves this purpose.
+
+=head2 Echo
+
+The C<echo> attribute represents the repeated emphasis of the same
+situation.
+
+  <impasse id="m1" left="child" right="mother" tension="focused"
+           absent="right">
+    Where is my mother?
+  </impasse>
+
+  <impasse echo="m1" id="m2" left="child" right="mother" tension="stifled">
+    i miss my mom!  :-(
+  </impasse>
+
+Once echo'd, C<m1> is no longer pending.  Only C<m2> remains pending.
+
+=head2 Absent
+
+Another way to manage resolution is to declare the victim absent.
+Here is an example:
+
+  <talk who="teacher">
+    <accepts left="students" before="focused" absent="left">
+      The students listen to the teacher's tedious monologue.
+    </accepts>
+  </talk>
+
+In fact, the teacher may never know whether the situation was
+truly C<accepts>, C<observes>, or even merely:
+
+  <ready intensity="gentle" left="students" right="teacher">
+    The students are intermittently aware that the
+    teacher continues to talk.
+  </ready>
+
+Notice that the C<absent> attribute is unnecessary in this case.  A
+few situations do not trigger any need for resolution, and C<ready> is
+one of them.
+
+=head2 Wildcards
+
+  <accepts left="*" initiator="Crawford" before="focused">
+    Does anyone know the time?
+  </accepts>
+
+Talk about anthropomorphic rivals. XXX
+
+=head2 Context
+
+Here is a prior example updated with new markup:
+
+  <steals id="p1" initiator="thief" right="child" before="focused">
+    The thief eyes the teddy bear maliciously and wrenches it
+    from the child's passionate grip.
+  </steals>
+
+  <steals re="p1" left="thief" initiator="child" tension="focused">
+    The child becomes furious and starts crying.
+  </steals>
+
+  <steals context="p1" initiator="thief" right="child" after="focused">
+    The thief triumphantly stows the teddy bear in his backpack.
+  </steals>
+
+This last situation describing the thief gloating over his
+accomplishment is not really an C<answer> to "p1", but there is
+certainly some kind of direct contextual connection.  The C<context>
+attribute is available for such cases.  C<context> is a catch-all.  It
+is appropriate for any kind of generic relationship for which a more
+specific classification is not available.
+
+=head1 EMOTION LIBRARY API
+
+=over 4
+
+=item * Emotion::set_transcript($xml_file)
+
+=item * my $dialog_id = Emotion::set_speaker($who)
+
+=item * my @pending = Emotion::unresolved()
+
+=back
+
+=head2 Emotion::Atom Methods
+
+=over 4
+
+=item * my $situation = Emotion::Atom->new($expat, $attr)
+
+=item * my $emotion = $atom->emotion;
+
+=back
+
+=head1 SEE ALSO
+
+http://ghost-wheel.net
+
+=cut
+
+C<absent> is not avaiable to the initiator, and is not permitted for
+C<ready>, C<observes>, C<uneasy>, C<impasse>, or C<destroys>.
