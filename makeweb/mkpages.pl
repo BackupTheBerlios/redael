@@ -2,9 +2,13 @@
 
 use strict;
 use Fatal qw(open);
+BEGIN { require "./minixml.pl" }
 
-BEGIN {
-  require "./minixml.pl";
+if (-d 'root' and !-e 'cache') {
+  rename 'root', 'cache' or warn "rename root cache: $!";
+}
+if (!-e 'root') {
+  mkdir 'root' or die "mkdir root: $!";
 }
 
 our $Scores;
@@ -50,7 +54,7 @@ sub page {
   $NoteNumber = 1;
   @Notes = ();
 
-  open my $fh, ">tmp$$";
+  open my $fh, "> root/$file";
   select $fh;
 
   doctype 'HTML', '-//W3C//DTD HTML 4.01//EN',
@@ -64,9 +68,6 @@ sub page {
   endTag 'html';
   print "\n";
   close $fh;
-  
-  #run "tidy -config tidy.conf -utf8 -xml tmp$$";
-  rename "tmp$$", $file or die "rename: $!";
 }
 
 sub hskip {
@@ -98,22 +99,54 @@ sub br { emptyTag 'br' }
 
 sub img {
   my ($src, $alt, @rest) = @_;
+  
+  my $cache = "cache/$src";
+  my $path = "root/$src";
+  my $oldart = "art/$src";
+
+  if (!-e $path) {
+    if (-e $cache) {
+      rename $cache, $path or die "rename $cache $path: $!";
+    } elsif (-e $oldart) {
+      rename $oldart, $path or die "rename $oldart $path: $!";
+    } else {
+      warn "$path doesn't exist";
+      return;
+    }
+  }
+
   emptyTag 'img', src=>$src, alt=>$alt, @rest;
 }
 
 sub thumb {
   my ($src, $caption) = @_;
 
-  if (!-e "$src") {
-    warn "$src doesn't exist";
-    return;
+  my $cache = "cache/$src";
+  my $path = "root/$src";
+  my $oldart = "art/$src";
+
+  if (!-e $path) {
+    if (-e $cache) {
+      rename $cache, $path or die "rename $cache $path: $!";
+    } elsif (-e $oldart) {
+      rename $oldart, $path or die "rename $oldart $path: $!";
+    } else {
+      warn "$path doesn't exist";
+      return;
+    }
   }
   
   my $sm = $src;
   if ($sm =~ s/\.jpg$/-sm.jpg/) {
-    if (modtime("$src") > modtime("$sm")) {
-      run "cp $src $sm";
-      run "mogrify -geometry 160x160 $sm";
+    my $smcache = "cache/$sm";
+    my $smroot = "root/$sm";
+    if (modtime($smcache) >= modtime($path)) {
+      rename $smcache, $smroot or die "rename $smcache $smroot: $!";
+    } elsif (modtime($smroot) >= modtime($path)) {
+      # ok
+    } else {
+      run "cp $path $smroot";
+      run "mogrify -geometry 160x160 $smroot";
     }
   }
   else { warn "what is $src ?" }
@@ -259,13 +292,13 @@ page 'index.html', sub {
   startTag 'tr';
   
   startTag 'td', 'align', 'center', valign=>'bottom';
-  img 'art/about_sy_chart.png', 'Chakra System', border=>0;
+  img 'about_sy_chart.png', 'Chakra System', border=>0;
   br;
   element 'a', 'En Masse Self-Realization', 'href', 'http://sahajayoga.org';
   endTag 'td';
   
   startTag 'td', 'align', 'center', valign=>'bottom';
-  img 'art/trident.png', 'Attention Trident', border => 0;
+  img 'trident.png', 'Attention Trident', border => 0;
   br;
   element 'a', 'Situation Assessment', 'href', 'news.html';
   endTag 'td';
@@ -471,7 +504,7 @@ sub menupage {
     vskip 2;
     
     element 'a', '[Print]', href => $print;
-    if ($is_chapter) {
+    if (0 and $is_chapter) {
       my $ch = $file;
       $ch =~ s/\.html$/-ch.html/;
       text ' ';
@@ -507,8 +540,7 @@ sub menupage {
     columns sub { hskip 2 },
     sub {
       emptyTag 'hr';
-      element 'p', 'Copyright (C) 2001, 2002 Joshua Nathaniel Pritikin.  Verbatim copying and distribution of this entire article is permitted in any medium, provided this notice is preserved.';
-      element 'p', 'Last modified @DATE@.';
+      element 'p', 'Copyright (C) 2001, 2002, 2003 Joshua Nathaniel Pritikin.  Verbatim copying and distribution of this entire article is permitted in any medium, provided this notice is preserved.';
       emptyTag 'hr';
     },
     sub { hskip 2 };
@@ -524,8 +556,7 @@ sub menupage {
     columns sub { hskip 2 },
     sub {
       emptyTag 'hr';
-      element 'p', 'Copyright (C) 2001, 2002 Joshua Nathaniel Pritikin.  Verbatim copying and distribution of this entire article is permitted in any medium, provided this notice is preserved.';
-      element 'p', 'Last modified @DATE@.';
+      element 'p', 'Copyright (C) 2001, 2002, 2003 Joshua Nathaniel Pritikin.  Verbatim copying and distribution of this entire article is permitted in any medium, provided this notice is preserved.';
       emptyTag 'hr';
     },
     sub { hskip 2 };
@@ -669,13 +700,6 @@ The software is licensed under the ';
   element 'h1', "News";
 
   startTag 'p';
-  text '[08 Jul 2002] What are all the different emotions and
-how can we organize them?  Now you can browse a hyper-linked ';
-  element 'a', 'empathy map', href => 'empathy/index.html';
-  text '.';
-  endTag 'p';
-
-  startTag 'p';
   text '[26 Apr 2002] Courtesy of the Institute of Management,
 Research & Technology here in Nashik, the results of our first
 small research study are ';
@@ -702,7 +726,7 @@ snapshot of our progress.';
   },
   sub { hskip 4 },
   sub {
-    img 'art/marathi_demo1.png', 'Situations in Marathi';
+    img 'marathi_demo1.png', 'Situations in Marathi';
   };
   endTag 'p';
 
@@ -750,58 +774,11 @@ menupage $topmenu, 'Download', sub {
   sub { hskip 2 },
   sub {
     startTag 'a', href => 'http://www.gnu.org/philosophy/philosophy.html';
-    img 'art/floating.jpg', 'GNU Software', border=>0, hspace=>4;
+    img 'floating.jpg', 'GNU Software', border=>0, hspace=>4;
     endTag 'a';
   };
 
   element 'h2', 'Requirements';
-
-  startTag 'ul';
-
-  startTag 'li';
-  element 'p', 'A video card supporting the XVideo extension is highly recommended.';
-  endTag 'li';
-
-  startTag 'li';
-  element 'p', 'You need a fairly recent computer to play movies.
-Any Intel P4 is more than adaquate.  Here are some anecdotal data points:';
-  
-  startTag 'table', border=>1, cellpadding=>3;
-  startTag 'tr';
-  element 'th', 'Configuration';
-  element 'th', 'CPU% for VCD';
-  element 'th', 'CPU% for DVD';
-  endTag 'tr';
-
-  startTag 'tr';
-  element 'td', 'AMD K6-III @ 400Mhz';
-  element 'td', '100% and choppy';
-  element 'td', 'too slow';
-  endTag 'tr';
-
-  startTag 'tr';
-  element 'td', 'AMD K6-III @ 400Mhz via XVideo';
-  element 'td', '95%';
-  element 'td', 'too slow';
-  endTag 'tr';
-
-  startTag 'tr';
-  element 'td', 'Intel P-3 @ 764Mhz via XVideo';
-  element 'td', '15%';
-  element 'td', '?';
-  endTag 'tr';
-
-  startTag 'tr';
-  element 'td', 'Dual Intel P-3 @ 500Mhz via XVideo';
-  element 'td', '20%';
-  element 'td', '60%';
-  endTag 'tr';
-
-  endTag 'table';
-
-  endTag 'li';
-
-  endTag 'ul';
 
   startTag 'font', color => 'red';
   startTag 'p';
@@ -814,7 +791,24 @@ snapshot is ';
   endTag 'p';
   endTag 'font';
 
+  startTag 'p';
+  text 'If your computer is fast enough to playback VCD format films
+then you computer is fast enough to use Aleader.  Aleader is as
+portable as ';
+  element 'a', 'Gtk+', href => 'http://gtk.org';
+  text ' and ';
+  element 'a', 'Gstreamer', href => 'http://gstreamer.net';
+  text '.  If these two libraries are ported to your chipset
+and operating system then, chances are, Aleader will also work.';
+  endTag 'p';
+
+  element 'p', 'In addition to the Aleader software, you will need
+some films with an exemplar to get started.';
+
   element 'h2', 'Films';
+
+  element 'p', 'i selected some of my favorite films for initial
+analysis.  As more films are analyzed, the exemplars will appear here.';
 
   startTag 'table', border=>1;
   startTag 'tr';
@@ -834,7 +828,8 @@ snapshot is ';
   element 'td', 'All Ages';
   element 'td', '5%';
   startTag 'td';
-  element 'a', '22k', href => 'annotation/naushika35';
+  #element 'a', '22k', href => 'annotation/naushika35';
+  text 'soon';
   endTag 'td';
   endTag 'tr';
 
@@ -906,19 +901,15 @@ to serve as a basis for Aleader annotations.';
 
   endTag 'center';
 
-  element 'p', "Films under consideration for future analysis:
-Devil's Advocate (1997), Ghost (1990),
-or serious Hindi drama.  Do not submit your favorite film
-titles until the first annotations are completed.";
-
-  element 'p', 'Does anyone know where Hindi film scripts are
-available?';
+# Ghost (1990)
+# Devil's Advocate (1997)
 
   startTag 'p';
   text 'i heartily recommend ';
+  run "cp thematrix.html root/thematrix.html";
   element 'a', 'The Matrix (1999)', href => 'thematrix.html';
   text ', however, this film is not really a good film to analyze
-with Aleader.  The beauty of this film is very less due to its
+with Aleader.  The beauty of this film is less due to its
 abstract emotional content.';
   endTag 'p';
 };
@@ -969,7 +960,7 @@ can compile Aleader from source code.';
   startTag 'p';
   columns sub {
     startTag 'a', 'href', 'http://gtk.org/download/';
-    img 'art/gnomelogo.png', 'Gnome', 'border', 0;
+    img 'gnomelogo.png', 'Gnome', 'border', 0;
     endTag 'a';
   },
   sub { hskip 6 },
@@ -981,7 +972,7 @@ can compile Aleader from source code.';
   startTag 'p';
   columns sub {
     startTag 'a', 'href', 'http://www.gstreamer.net/';
-    img 'art/gstlogo.png', 'Gstreamer', 'border', 0;
+    img 'gstlogo.png', 'Gstreamer', 'border', 0;
     endTag 'a';
   },
   sub { hskip 6 },
@@ -1132,7 +1123,7 @@ here are as follows:';
 
   },
   sub {
-    img 'art/feelings.png', 'Feelings';
+    img 'feelings.png', 'Feelings';
   };
 
   startTag 'ul';
@@ -1188,7 +1179,7 @@ As compassion dawns, the four perspectives come into focus:';
   },
   sub { hskip 4 },
   sub {
-    emptyTag 'img', src=>'art/nocompassion.jpg', alt => 'No Compassion';
+    emptyTag 'img', src=>'nocompassion.jpg', alt => 'No Compassion';
   };
 
   startTag 'center';
@@ -1203,7 +1194,7 @@ As compassion dawns, the four perspectives come into focus:';
   },
   sub { hskip 10 },
   sub {
-    emptyTag 'img', src => 'art/fourpp.jpg', alt => 'Four Perspectives';
+    emptyTag 'img', src => 'fourpp.jpg', alt => 'Four Perspectives';
   },
   sub { hskip 4 },
   sub {
@@ -1234,7 +1225,7 @@ the object is enveloped with awareness, and the subject is informed
 about the object.";
   },
   sub {
-    emptyTag 'img', src => 'art/informs.png', alt => 'Informs',
+    emptyTag 'img', src => 'informs.png', alt => 'Informs',
       width => 206, height => 64;
   };
   endTag 'p';
@@ -1371,7 +1362,7 @@ configurations:';
 
   startTag 'center';
   columns sub {
-    emptyTag 'img', src=>'art/trident.png', alt=>'Attention Trident';
+    emptyTag 'img', src=>'trident.png', alt=>'Attention Trident';
   },
   sub { hskip 10 },
   sub {
@@ -1507,7 +1498,7 @@ object of attention.';
     endLi;
 
     startTag 'center';
-    img 'art/trident-sr.png', "Emotion as Object";
+    img 'trident-sr.png', "Emotion as Object";
     endTag 'center';
 
     startLi;
@@ -1605,7 +1596,7 @@ menupage $topmenu, 'IMRT', sub {
   sub { hskip 8 },
   sub {
     startTag 'center';
-    thumb 'art/imrt0.jpg', 'IMRT Entrance';
+    thumb 'imrt0.jpg', 'IMRT Entrance';
     endTag 'center';
   };
   endTag 'center';
@@ -1693,10 +1684,10 @@ statistic was called "emotional intelligence" instead of
   endTag 'p';
 
   columns sub {
-    thumb 'art/posttest1.jpg', 'Bhagade Arun Ramdas';
+    thumb 'posttest1.jpg', 'Bhagade Arun Ramdas';
   },
   sub {
-    thumb 'art/posttest4.jpg', '(backside)';
+    thumb 'posttest4.jpg', '(backside)';
   },
   sub { hskip 4 },
   sub {
@@ -1713,10 +1704,10 @@ to know about this test in detail.';
   };
   br;
   columns sub {
-    thumb 'art/posttest2.jpg', 'Prakash Genoo Bhagade';
+    thumb 'posttest2.jpg', 'Prakash Genoo Bhagade';
   },
   sub {
-    thumb 'art/posttest3.jpg', '(backside)';
+    thumb 'posttest3.jpg', '(backside)';
   },
   sub { hskip 4 },
   sub {
@@ -1762,15 +1753,17 @@ in taking decisions and improve at situation assessment.';
 
   startTag 'center';
   columns sub {
-    img 'art/imrt1.jpg', 'Day 1';
+    img 'imrt1.jpg', 'Day 1';
   },
   sub { hskip 4 },
   sub {
-    img 'art/imrt2.jpg', 'Day 2';
+    img 'imrt2.jpg', 'Day 2';
   };
   endTag 'center';
 
 };
+
+exit; # skip chapter generation
 
 for my $file (keys %Chapter) {
   my $ch = $file;
@@ -1790,8 +1783,7 @@ for my $file (keys %Chapter) {
     columns sub { hskip 2 },
     sub {
       emptyTag 'hr';
-      element 'p', 'Copyright (C) 2001, 2002 Joshua Nathaniel Pritikin.  Verbatim copying and distribution of this entire article is permitted in any medium, provided this notice is preserved.';
-      element 'p', 'Last modified @DATE@.';
+      element 'p', 'Copyright (C) 2001, 2002, 2003 Joshua Nathaniel Pritikin.  Verbatim copying and distribution of this entire article is permitted in any medium, provided this notice is preserved.';
       emptyTag 'hr';
     },
     sub { hskip 2 };

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+rsync -rlxz --delete -v --progress -e ssh \
+  ./root/ \
+  vishnu@shell.berlios.de:/home/groups/redael/htdocs/
