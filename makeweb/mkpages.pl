@@ -670,8 +670,6 @@ shows an elapse time of 49 seconds.  The accuracy of the EQ score will
 increase as the exam progresses.';
 
   vskip;
-
-  element 'p', '[Note to self: Add lots of screen captures with explanation.]';
 };
 
 menupage $topmenu, 'Mailing Lists', sub {
@@ -729,18 +727,25 @@ justification of the model used by redael.';
 
   element 'p', 'The words emotion, spirit, and feeling are used to mean a
 variety of different things in different contexts.  The defintions used
-here are as follows.';
+here are as follows:';
 
-  startTag 'p';
-  text "`Emotion' is a feeling which arrises in the context of two separate people.
-`Spirit' is a feeling which does not admit the idea of separation.  `Feeling'
-includes both emotion and spirit.  Compassion is a special feeling which bridges
-spirit to emotion.";
-  endTag 'p';
+  startTag 'ul';
+  startTag 'li';
+  text "`Emotion' is a feeling which arrises in the context of two separate people.";
+  endTag 'li';
+  startTag 'li';
+  text "`Spirit' is a feeling which does not admit the idea of separation.";
+  endTag 'li';
+  startTag 'li';
+  text "`Feeling' includes both emotion and spirit.";
+  endTag 'li';
+  startTag 'li';
+  text "`Compassion' is a special feeling which bridges spirit to emotion.";
+  endTag 'li';
+  endTag 'ul';
 
   element 'h2', 'Compassion';
 
-  startTag 'p';
   columns sub {
 
   startTag 'p';
@@ -763,7 +768,6 @@ As compassion dawns, the four perspectives come into focus:';
   }, sub {
     emptyTag 'img', src=>'art/nocompassion.jpg', alt => 'No Compassion';
   };
-  endTag 'p';
 
   startTag 'center';
   columns sub {
