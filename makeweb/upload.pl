@@ -48,8 +48,14 @@ sub sync_dir {
       print "$key unchanged\n"
     } else {
       push @todo, $f;
+
       my $print = $f;
       $print =~ s/\.html$/-pr.html/;
+      push @todo, $print
+	if -e $print;
+
+      $print = $f;
+      $print =~ s/\.html$/-ch.html/;
       push @todo, $print
 	if -e $print;
     }
@@ -59,7 +65,7 @@ sub sync_dir {
   if (@todo) {
     for my $f (@todo) {
       next if $f !~ m/\.html$/;
-      run "perl -pi.orig -e 's,\\\@DATE\\\@,$Date,' $dir/$f";
+      run "perl -pi -e 's,\\\@DATE\\\@,$Date,' $dir/$f";
     }
     run('scp', (map { "$dir/$_" } @todo), $user.'@shell.berlios.de:'.
 	'/home/groups/redael/htdocs/'.$dir.'/');

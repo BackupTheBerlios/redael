@@ -40,7 +40,7 @@ sub page {
   print "\n";
   close $fh;
   
-  run "tidy -config tidy.conf -utf8 -xml tmp$$";
+  #run "tidy -config tidy.conf -utf8 -xml tmp$$";
   rename "tmp$$", $file or die "rename: $!";
 }
 
@@ -368,12 +368,16 @@ with any precision.';
   vskip 2;
 };
 
+my %Chapter;
+
 sub menupage {
   my ($menu, $curitem, $x) = @_;
 
   my $file = $menu->file($curitem);
   my $print = $file;
   $print =~ s/\.html$/-pr.html/;
+
+  my $is_chapter;
 
   page $file, sub {
     element 'title', $curitem;
@@ -401,7 +405,12 @@ sub menupage {
 	element 'a', $item->[0], 'href', $item->[1];
       }
 
+      $is_chapter = 1
+	if (@$item == 3 and $item->[0] eq $curitem);
+
       if (@$item == 3 and ($item->[0] eq $curitem or $in_sub)) {
+	push @{ $Chapter{ $menu->file($item->[0]) } }, $x;
+	
 	startTag 'table';
 	for my $s (@{$item->[2]}) {
 	  startTag 'tr';
@@ -422,9 +431,15 @@ sub menupage {
       endTag 'p';
     }
 
-    vskip 3;
+    vskip 2;
     
     element 'a', '[Print]', href => $print;
+    if ($is_chapter) {
+      my $ch = $file;
+      $ch =~ s/\.html$/-ch.html/;
+      text ' ';
+      element 'a', '[Chapter]', href => $ch;
+    }
 
     vskip 1;
     startTag 'p';
@@ -477,7 +492,7 @@ sub menupage {
       emptyTag 'hr';
     },
     sub { hskip 2 };
-};
+  };
 };
 
 menupage $topmenu, 'News', sub {
@@ -1976,19 +1991,30 @@ is licensed under the ';
 
   text ' -- so you can start your own EQ testing franchise, royalty free.';
   endTag 'p';
-
-  # element 'h2', 'How can Redael be a serious competitor to established
-  # EQ testing techniques when it is at an embryonic stage of development?';
-
-  # see http://www.bytext.org/FAQ.htm (5)
 };
 
+for my $file (keys %Chapter) {
+  my $ch = $file;
+  $ch =~ s/\.html$/-ch.html/;
+
+  page $ch, sub {
+    element 'title', $file;
+    endTag 'head';
+    body 10;
+
+    for my $x (@{$Chapter{$file}}) {
+     $x->();
+    }
+    
+    columns sub { hskip 2 },
+    sub {
+      emptyTag 'hr';
+      element 'p', 'Copyright (C) 2001, 2002 Joshua Nathaniel Pritikin.  Verbatim copying and distribution of this entire article is permitted in any medium, provided this notice is preserved.';
+      element 'p', 'Last modified @DATE@.';
+      emptyTag 'hr';
+    },
+    sub { hskip 2 };
+  };
+}
+
 __END__
-5. How can Bytext be a serious competitor to Unicode when it is at an embryonic stage of development?
-
-Because most of the benefits of Bytext can be proven theoretically. Compare this question to the question: At what point did object oriented programming become a serious competitor to procedural programming? To those concerned with the theoretical aspects of computer programming and those forward thinking enough to predict the needs of computer languages, it was a serious competitor the moment it was conceived, before there was even an implementation ready to exploit it. To less forward thinking individuals, it was only a serious competitor once there were enough people that could be quoted as saying that it is a serious competitor. Reactionaries always need to have things forced down their throat before they become palatable.
-
-Likewise, to those concerned with the theoretical aspects of processing text, Bytext as a technical idea and a format should most definitely be regarded as a serious competitor to the technical ideas that Unicode is based on and the formats that Unicode provides.
-
-Also note the answer to question 1, Bytext provides a different way of thinking about characters and makes use of what would be private characters in a UCS context, but does not fundamentally compete with the groups tasked with building a consensus of what characters are appropriate for plain text.
-
