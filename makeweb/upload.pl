@@ -60,6 +60,9 @@ sync_dir('art', map { s,^.+/,,; $_ }
 	 glob('art/*.png'),
 	 glob('art/*.jpg'));
 
+sync_dir('annotation', map { s,^.+/,,; $_ }
+	 glob('annotation/*'));
+
 sync_dir('bulky', map { s,^.+/,,; $_ }
 	 glob('bulky/*'));
 

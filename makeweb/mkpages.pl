@@ -507,9 +507,9 @@ the following steps:';
   },
   sub { hskip 6 },
   sub {
-    text 'Get the current CVS for gstreamer.  You need to install
-some libraries: libmpeg2, liba52, and libHermes.  Build gstreamer
-with --enable-glib2.';
+    text 'Install 0.3.0 or later version of gstreamer.  You will also
+need some libraries: libmpeg2, liba52, and libHermes.  Make sure gstreamer
+is built with --enable-glib2.';
   };
   endTag 'p';
 
@@ -539,9 +539,11 @@ with --enable-glib2.';
   endTag 'td';
   element 'td', 'Epic Animated Adventure';
   element 'td', 'All Ages';
-  element 'td', '0%';
+  element 'td', '5%';
   element 'td', 'VCD';
-  element 'td', 'soon';
+  startTag 'td';
+  element 'a', '22k', href => 'annotation/naushika';
+  endTag 'td';
   endTag 'tr';
 
   startTag 'tr';
