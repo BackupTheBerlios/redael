@@ -472,8 +472,8 @@ abstract representation is a fairly accurate distillation of the film.';
 
   startTag 'p';
   text "For an examination session, the automated facilities relating to
-abstract emotions are disabled.  This changes the reconciliation steps
-(4) and (5) into a manual process.  Student's capacity for (2) emotional
+abstract emotions are disabled.  Part of the reconciliation, step (4),
+is changed into a manual process.  A student's capacity for (2) emotional
 intelligence is tested intensively.";
   endTag 'p';
 
