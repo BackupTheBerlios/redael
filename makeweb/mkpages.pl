@@ -282,7 +282,15 @@ easy to use GUI.  This software is licensed under the ';
   endTag 'p';
   
   element 'h1', "News";
-  element 'p', '18 Sep 2001: The re-designed web site goes online
+
+  element 'p', '[3 Oct 2001] The basic features of the software have
+been working since two days ago.  A few patches are pending with
+upstream libraries, but everything should be resolved for
+out-of-the-box, no-fuss compilation on the order of weeks.  (In
+other words, my personal software development nightmare is
+almost over. :-)';
+
+  element 'p', '[18 Sep 2001] A re-designed web site goes online
 with a more pragmatic approach.';
 };
 
@@ -672,8 +680,7 @@ not necessary.  For example, consider NIH grant ";
   startTag 'a', href => 'http://grants.nih.gov/grants/guide/pa-files/PA-00-105.html';
   text 'PA-00-105';
   endTag 'a';
-  text '.  A more adventurous opportunity might be to try to get the attention
-of the ';
+  text '.  A more tantalizing opportunity is the ';
   startTag 'a', href => 'http://www.templeton.org/';
   text 'John Templeton Foundation';
   endTag 'a';
