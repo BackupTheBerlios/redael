@@ -428,7 +428,7 @@ terrible imbalance in compassion.';
   nth(1);
   text ' person perspective.  There is no personality or
 emotion, only a vibratory feeling.  There are no situations,
-only *the* situation (singular).';
+only *my* situation (singular).';
   endTag 'p';
 
   element 'h2', 'Attention Configurations';
@@ -476,7 +476,7 @@ This style of question is repeatedly posed in redael annotations.';
   sub { attention 2,1 },
   sub { hspace 2 },
   sub {
-    text 'These configurations involving personality are difficult
+    text 'These configurations, which involve personality, are difficult
 to understand and not particularly important.  They will be
 explored elsewhere.'
   };
@@ -498,9 +498,9 @@ understand philosophy unless and until you take your second birth.";
   columns sub { attention 1,0 },
     sub { hspace 2 },
       sub {
-	text 'While practicing true meditation you focus your attention on
+	text 'While practicing true meditation, you focus your attention on
 the Whole (a.k.a. "I am").  After meditation, part of your attention remains
-connected to the Whole thereby enlightening the experience of individuality.
+connected with the Whole, thereby enlightening the experience of individuality.
 This divine expression makes individuality most beautiful and enjoyable,
 much more so than any physical or mental amusement.';
       };
