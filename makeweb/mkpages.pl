@@ -489,27 +489,27 @@ the following steps:';
 
   startTag 'p';
   columns sub {
-    text 'Install 1.3.11 or later versions of glib, atk, pango, and gtk+.';
-  },
-  sub { hskip 2 },
-  sub {
     startTag 'a', 'href', 'http://gtk.org/download/';
     img 'art/gnomelogo.png', 'Gnome', 'border', 0;
     endTag 'a';
+  },
+  sub { hskip 6 },
+  sub {
+    text 'Install 1.3.11 or later versions of glib, atk, pango, and gtk+.';
   };
   endTag 'p';
 
   startTag 'p';
   columns sub {
-    text 'Get the current CVS for gstreamer.  You need to install
-some libraries: libmpeg2, liba52, and libHermes.  Build gstreamer
-with --enable-glib2.';
-  },
-  sub { hskip 2 },
-  sub {
     startTag 'a', 'href', 'http://www.gstreamer.net/';
     img 'art/gstlogo.png', 'Gstreamer', 'border', 0;
     endTag 'a';
+  },
+  sub { hskip 6 },
+  sub {
+    text 'Get the current CVS for gstreamer.  You need to install
+some libraries: libmpeg2, liba52, and libHermes.  Build gstreamer
+with --enable-glib2.';
   };
   endTag 'p';
 
@@ -587,29 +587,42 @@ following chart:';
   startTag 'tr';
   element 'th', 'Film Genre';
   element 'th', 'Situation';
+  element 'th', 'Example';
   endTag 'tr';
 
   startTag 'tr';
-  element 'td', 'comedy';
+  element 'td', 'Comedy';
   element 'td', '[0] observes [-]';
+  element 'td', 'The Great Dictator (1940)';
   endTag 'tr';
 
   startTag 'tr';
-  element 'td', 'horror';
+  element 'td', 'Horror (serious)';
   element 'td', '[-] is made uneasy by [0]';
+  element 'td', 'Alien (1979)';
   endTag 'tr';
 
   startTag 'tr';
-  element 'td', 'action';
+  element 'td', 'Action';
   element 'td', '[+] exposes [-]';
+  element 'td', "Jackie Chan's Police Story (1985)";
   endTag 'tr';
 
   endTag 'table';
 
+  startTag 'blockquote';
+  startTag 'i';
+  text 'Even if a film is excellent and entertaining,
+these genres probably do not offer enough emotional complexity
+to serve as a basis for redael annotations.';
+  endTag 'i';
+  endTag 'blockquote';
+
   endTag 'center';
 
-  element 'p', "Films under consideration for future analysis: Any Given
-Sunday, Devil's Advocate, Ghost, American Werewolf in Paris, or serious Hindi
+  element 'p', "Films under consideration for future analysis:
+Any Given Sunday (1999), Devil's Advocate (1997), Ghost (1990),
+American Werewolf in Paris (1997), or serious Hindi
 drama.  Do not submit your favorite film titles until the first
 annotations are completed.";
 };
@@ -938,7 +951,7 @@ menupage $topmenu, 'Mailing Lists', sub {
   element 'h1', 'Mailing Lists';
 
   my $list = sub {
-    my ($name, $desc) = @_;
+    my ($name, $desc, $vol) = @_;
 
     startTag 'li';
     startTag 'p';
@@ -949,18 +962,19 @@ menupage $topmenu, 'Mailing Lists', sub {
     element 'a', 'Archives', 'href', "https://lists.berlios.de/pipermail/$name";
     endTag 'p';
     element 'p', $desc;
+    element 'p', $vol;
     endTag 'li';
   };
 
   startTag 'ul';
 
   $list->('redael-announce',
-	  'Announcements about releases or other important events.
-Low-volume; at most one message per day.');
+	  'Announcements about releases or other important events.',
+'Low-volume; at most one message per day.');
 
   $list->('redael-devel',
-	  'Technical discussions about software development and philosophy.
-Can be high volume on occation.');
+	  'Technical discussions about software development and philosophy.',
+'Can be high volume on occation.');
 
   endTag 'ul';
 };
