@@ -496,16 +496,31 @@ sub menupage {
 };
 
 menupage $topmenu, 'News', sub {
+  startTag 'center';
+  emptyTag 'hr';
+  startTag 'i';
+  element 'p', 'How well do you understand the meaning of your emotions?';
+  element 'p', 'How accurately can you assess difficult situations?';
+  element 'p', 'How gracefully do you manage people?';
+  endTag 'i';
+  emptyTag 'hr';
+  endTag 'center';
+
   element 'h1', 'Introduction';
   element 'p', 'Our concern is with measuring and increasing
-EQ score (emotional quotient or emotional intelligence).  This project is
-strictly non-profit and for education.  Our approach is to study
-films to test how consistantly you can be a witness.';
+EQ score (emotional quotient or emotional intelligence).
+EQ is important because it is closely correlated with building
+successful businesses and efficient organizations.
+Even so, this project is strictly non-profit.  We aim to deliver a
+complete software platform at minimal cost (currently zero dollars),
+which is suitable for driving both commercial and non-commercial ventures.';
   
   startTag 'p';
-  text 'Redael is a software package that combines a video
-player (MPEG1/MPEG2), annotation tools, and a scoring system into an
-easy to use GUI.  This software is licensed under the ';
+  text 'Our approach is to study films to test how consistantly you
+can be a witness.  Redael is the software package used to administer the test.
+It combines a video player (MPEG1/MPEG2), annotation tools,
+and a scoring system into an easy to use GUI.
+This software is licensed under the ';
   element 'a', 'GPL', 'href', 'http://www.gnu.org/philosophy/philosophy.html';
   text ' and is available from the download page.';
   endTag 'p';
@@ -749,7 +764,10 @@ or serious Hindi drama.  Do not submit your favorite film
 titles until the first annotations are completed.";
 
   element 'p', 'Does anyone know where Hindi film scripts are
-available?'
+available?';
+
+  element 'p', 'i heartily recommend The Matrix (1999), however, this
+film would be difficult to analyze.';
 };
 
 menupage $topmenu, 'Debian', sub {
