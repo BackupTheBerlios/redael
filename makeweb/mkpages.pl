@@ -44,14 +44,18 @@ sub vskip {
 }
 
 sub body {
+  my ($pad) = @_;
+
+  $pad ||= 0;
+
   startTag ('body',
 	    'bgcolor', "#FFFFFF",
 	    'topmargin', 0,
 	    'bottommargin', 0,
 	    'leftmargin', 0,
 	    'rightmargin', 0,
-	    'marginheight', 0,
-	    'marginwidth', 0);
+	    'marginheight', $pad,
+	    'marginwidth', $pad);
 }
 
 sub br { emptyTag 'br' }
@@ -213,6 +217,110 @@ our $topmenu = MenuTree
 	 'Job Opportunities' => 'jobs.html',
 	]);
 
+page 'fairuse.html', sub {
+  element 'title', 'Fair Use Statement';
+  endTag 'head';
+
+  body(20);
+
+  element 'h2', 'Fair Use Statement';
+
+  element 'p', 'Despite the fact that Redael is an international project,
+this discussion will
+entertain American copyright law because America is presently taking a
+leadership role in legislating and enforcing restictions on fair use.';
+
+  emptyTag 'hr';
+
+  startTag 'p';
+  text 'The references which i used to research this discussion include ';
+  element 'a', 'http://fairuse.stanford.edu',
+    href=>'http://fairuse.stanford.edu';
+  text ' and ';
+  element 'a', 'http://www.benedict.com',
+    href=>'http://www.benedict.com';
+  text '.';
+  endTag 'p';
+
+  emptyTag 'hr';
+
+  startTag 'font', color=>'red';
+  element 'p', 'Fair Use Provision of the U.S. Copyright Act: Ch 1 Sec 107';
+  element 'p', '[...]  In determining whether the use made of a work in any particular
+case is a fair use the factors to be considered shall include -';
+  element 'p', '(1) the purpose and character of the use, including whether such use
+is of a commercial nature or is for nonprofit educational purposes;';
+  endTag 'font';
+  
+  element 'p', 'Redael uses films for non-profit educational purposes, specifically
+for the purposes of teaching, scholarship, and research.  The films
+are used verbatim (not transformed) and retain proper attribution.';
+
+  
+  startTag 'font', color=>'red';
+  element 'p', '(2) the nature of the copyrighted work;';
+  endTag 'font';
+
+  element 'p', 'Our fair use statement does not contest the worthiness of film for
+protection under copyright law.';
+
+  startTag 'font', color=>'red';
+  element 'p', '(3) the amount and substantiality of the portion used in relation to
+the copyrighted work as a whole; and';
+  endTag 'font';
+
+  element 'p', 'The decision to make a portion of a copyrighted film available under
+the fair use provision was not undertaken lightly.  We decided to
+distribute the minimum workable sub-sample: only the first 10% of the
+film at sub-standard quality.';
+
+  startTag 'ul';
+  startTag 'li';
+  element 'p',
+'Quality justification: Video and audio must be of sufficient quality to
+activate the empathy mechanism, to generate emotions.  The customary quality
+used in for-profit film presentation is not required for our purposes.';
+  endTag 'li';
+
+  startTag 'li';
+  element 'p',
+'10% justification: To properly annotation duration, a whole film is
+required.  Our compromise is to use only the first 10%.  Within 10%, joints &
+duration can be demonstrated in a limited way which we hope and expect
+will be sufficient.';
+  endTag 'li';
+
+  endTag 'ul';
+  
+  startTag 'font', color=>'red';
+  element 'p',
+'(4) the effect of the use upon the potential market for or value of
+the copyrighted work. The fact that a work is unpublished shall not
+itself bar a finding of fair use if such finding is made upon
+consideration of all the above factors.';
+  endTag 'font';
+  
+  startTag 'ul';
+  startTag 'li';
+  element 'p',
+ 'Part of the motivation for this fair use statement is to encourage
+people to take copyright seriously.  Please buy an
+authorized duplicate if you wish to view a film for any purpose not
+protected under the fair use provision.';
+  endTag 'li';
+
+  startTag 'li';
+  element 'p',
+'Offering 10% of a quality degraded film is similar to the practices
+used in film promotion.  Hopefully it is clear to studios that it is
+not our desire to diminish the asset value of films.';
+  endTag 'li';
+
+  endTag 'ul';
+
+  vskip 2;
+};
+
 sub menupage {
   my ($menu, $curitem, $x) = @_;
 
@@ -318,10 +426,6 @@ menupage $topmenu, 'Download', sub {
   startTag 'ul';
 
   startTag 'li';
-  element 'p', 'XFree86 4.1.0';
-  endTag 'li';
-
-  startTag 'li';
   element 'p', 'A video card supporting the XVideo extension is highly recommended.';
   endTag 'li';
 
@@ -329,24 +433,31 @@ menupage $topmenu, 'Download', sub {
   element 'p', 'Playing movies requires at least mid-range hardware.
 Here are some anecdotal data points:';
   
-  startTag 'table', border=>1;
+  startTag 'table', border=>1, cellpadding=>3;
   startTag 'tr';
-  element 'th', 'Model';
-  element 'th', 'CPU% for MPEG1 / VCD';
-  element 'th', 'CPU% for MPEG2 / DVD';
+  element 'th', 'Configuration';
+  element 'th', 'CPU% for VCD';
+  element 'th', 'CPU% for DVD';
   endTag 'tr';
 
   startTag 'tr';
-  element 'td', 'Dual P3 @ 500Mhz via XVideo';
+  element 'td', 'AMD K6-III @ 400Mhz';
+  element 'td', '100% and choppy';
+  element 'td', 'too slow';
+  endTag 'tr';
+
+  startTag 'tr';
+  element 'td', 'AMD K6-III @ 400Mhz via XVideo';
+  element 'td', '95%';
+  element 'td', 'too slow';
+  endTag 'tr';
+
+  startTag 'tr';
+  element 'td', 'Dual Intel P-3 @ 500Mhz via XVideo';
   element 'td', '20%';
   element 'td', '60%';
   endTag 'tr';
 
-  startTag 'tr';
-  element 'td', 'K6-III @ 500Mhz';
-  element 'td', 'near 100% and choppy';
-  element 'td', 'too slow';
-  endTag 'tr';
   endTag 'table';
 
   endTag 'li';
@@ -406,7 +517,10 @@ with --enable-glib2.';
   endTag 'tr';
 
   startTag 'tr';
-  element 'td', 'Kaze no Tani no Naushika';
+  startTag 'td';
+  element 'a', 'Kaze no Tani no Naushika',
+    href => 'http://www.nausicaa.net/miyazaki/nausicaa/';
+  endTag 'td';
   element 'td', 'Epic Animated Adventure';
   element 'td', 'All Ages';
   element 'td', '0%';
@@ -415,7 +529,10 @@ with --enable-glib2.';
   endTag 'tr';
 
   startTag 'tr';
-  element 'td', 'Star Wars: A New Hope';
+  startTag 'td';
+  element 'a', 'Star Wars: A New Hope',
+    href => 'http://www.starwars.com/episode-iv/';
+  endTag 'td';
   element 'td', 'Space Opera';
   element 'td', 'All Ages';
   element 'td', '0%';
@@ -424,7 +541,10 @@ with --enable-glib2.';
   endTag 'tr';
 
   startTag 'tr';
-  element 'td', 'Good Will Hunting';
+  startTag 'td';
+  element 'a', 'Good Will Hunting',
+    href => 'http://www.un-official.com/GWH/GWMain.html';
+  endTag 'td';
   element 'td', 'Drama';
   element 'td', '17+ (language, adult themes)';
   element 'td', '10%';
