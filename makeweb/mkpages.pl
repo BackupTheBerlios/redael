@@ -557,8 +557,8 @@ terrible imbalance in compassion.';
   startTag 'p';
   text 'Before compassion, the main focus is on the ';
   nth(1);
-  text ' person perspective.  There is no personality or
-emotion, only vibratory feeling.  There are no situations,
+  text ' person perspective.  There is no partition between personality
+and emotion, only vibratory feeling.  There are no situations,
 only *my* situation (singular).  As compassion dawns, the
 four perspectives come into focus:';
   endTag 'p';
@@ -593,12 +593,12 @@ four perspectives come into focus:';
   };
   endTag 'center';
 
-  element 'p', 'That compassion is "the answer" is nothing new.
+  element 'p', 'That fostering compassion is "the answer" is nothing new.
 However, we can do better than talking about it in the typical
 vague terms. Since balanced compassion is defined as awareness
 of the four perspectives, we can study the relationships
-between perspectives. These relationships may reveal a scientific
-way to foster compassion.';
+between perspectives. These relationships may reveal a way to
+foster compassion with scientific certainty.';
 
   element 'h2', 'Subject / Object';
 
