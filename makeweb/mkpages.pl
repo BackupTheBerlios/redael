@@ -263,6 +263,14 @@ sub menupage {
     endTag 'tr';
     endTag 'table';
     vskip 4;
+
+    emptyTag 'hr';
+    startTag 'center';
+    element 'p', 'Copyright (C) 2001 Joshua Nathaniel Pritikin';
+
+    element 'p', 'Verbatim copying and distribution of this entire article is permitted in any medium, provided this notice is preserved.';
+    endTag 'center';
+    emptyTag 'hr';
   };
 };
 
