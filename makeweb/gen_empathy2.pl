@@ -231,6 +231,16 @@ Windows and MacOS users can download a player from ";
 your video player most likely already supports DIVX.";
   endTag 'p';
 
+  startTag 'p';
+  text 'One more comment before we get started: ';
+  br;
+  element 'i', "Please drop any preconceived notions you hold about what is
+an emotion and what isn't.  From this point on, _any_ evocative phrase
+can serve as an emotion.";
+  text " Your job is only to question whether or not an evocative phrase is
+reflected in the film examples.";
+  endTag 'p';
+
   emptyTag 'hr';
 
   my $len = 1;
