@@ -297,6 +297,7 @@ with a more pragmatic approach.';
 menupage $topmenu, 'Download', sub {
   columns sub {
     element 'h1', 'Downloading';
+    element 'h2', 'Redael';
   },
   sub { hskip 2 },
   sub {
@@ -479,6 +480,22 @@ bookkeeping aide to help keep everything in proper perspective.';
 Once you have annotated the film in the 3rd person then you can
 create empathy patterns to translate back into the 1st person
 perspective.  This completes the empathy - emotional intelligence cycle.';
+
+  startTag 'p';
+  img 'art/exam_setup.png', 'Exam Setup', border=>0;
+  endTag 'p';
+
+  element 'p', 'Exam Setup: Once an exemplar film annotation is prepared
+and verified then students can be tested against it.';
+
+  startTag 'p';
+  img 'art/exam_status.png', 'Exam Status', border=>0;
+  endTag 'p';
+
+  element 'p', 'Exam Status: The progress of an exam is shown.  The
+EQ score can be calculated in real-time.  This particular screen
+shows an elapse time of 49 seconds.  The accuracy of the EQ score will
+increase as the exam progresses.';
 
   vskip;
 
