@@ -365,15 +365,16 @@ and right side stay in-sync.  You can double-click in the situation
 list to open a detail screen (below).';
 
   startTag 'p';
-  img 'art/ip.png', 'IP Editor', border=>1;
+  img 'art/ip.png', 'Abstract Situation', border=>1;
   endTag 'p';
 
-  element 'p', 'Situation Editor: This screen shows the structural
-parameters of
-the situation.  A situation always consists of two participants (real
-or anthropomorphic).
+  element 'p',
+'Situation Editor: This screen shows the structural parameters of the
+situation.  A situation always consists of two participants (real or
+anthropomorphic).
 Perhaps the best way to learn what these descriptions mean is to examine
-one of the exemplar film annotations.';
+one of the exemplar film annotations.  Most of the terms are not
+defined beyond the customary dictionary.';
 
   startTag 'p';
   img 'art/filmview.jpg', 'Film View', border=>0;
@@ -518,6 +519,9 @@ menupage $topmenu, 'Philosophy', sub {
   text 'Pursuit of the truth.  An analysis of the grounds of and
 concepts expressing fundamental beliefs.';
   endTag 'p';
+
+  element 'p', 'Philosophy is the first word we should define because
+an analysis of the meaning of words is so essential to our definition.';
 
   element 'h1', 'The Need For a Model';
 
