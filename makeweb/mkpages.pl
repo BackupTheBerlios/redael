@@ -422,7 +422,7 @@ precise replica of the emotions depicted onscreen.';
 
   startTag 'li';
   startTag 'p';
-  text 'Emotion Intelligence is the factor which allow one to
+  text 'Emotional Intelligence is the factor which allows one to
 envision a
 situation from a 3rd person perspective.  The Situation Editor
 assists in recording the structural parameters of the situation.  The
@@ -442,13 +442,13 @@ matching from abstract situations to abstract emotions.';
   text 'The principal
 reason to want abstract emotions is for verifying correctness.  For
 example, it is much easier to imagine the abstract emotion "try
-to cover up mistake" than to imagine the corresponding abstract
+to cover up mistake" (or "shame") than to imagine the corresponding abstract
 situation "before ';
   element 'b', '[0]';
   text ' accepts [+] followed by :react: during stifled
 [+] exposes ';
 element 'b', '[-]';
-  text '".  Since emotions are occationally repeated, the pattern classifications
+  text '".  Since emotions are occasionally repeated, the pattern classifications
 can be established with some certainty.  As few as two or three repetitions
 are generally sufficient.';
   endTag 'p';
@@ -458,7 +458,7 @@ are generally sufficient.';
   startTag 'p';
   text 'The pattern matching also makes it easier to verify that
 each abstract situation corresponds to its associated concrete situation
-in the film.  If the abstract emotion is seems wrong then
+in the film.  If the abstract emotion seems wrong then
 the situation was probably evaluated with unjustifiable bias.';
   endTag 'p';
   endTag 'li';
@@ -472,7 +472,7 @@ abstract representation is a fairly accurate distillation of the film.';
 
   startTag 'p';
   text "For an examination session, the automated facilities relating to
-abstract emotions are disable.  This changes the reconciliation steps
+abstract emotions are disabled.  This changes the reconciliation steps
 (4) and (5) into a manual process.  Student's capacity for (2) emotional
 intelligence is tested intensively.";
   endTag 'p';
