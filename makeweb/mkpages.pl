@@ -679,13 +679,13 @@ at least a man-month of effort.';
   element 'h2', 'Getting Started';
 
   element 'p', 'The most important feature of redael is that you
-do not have to understand *why* it works.  All you have to do is
+do not have to understand *why* it works to benefit.  All you have to do is
 gain practical experience using it.  Moreover, you are welcome to
 use standard test-taking techniques to improve your score .';
 
   element 'p', "The test medium is multiple-choice except for spans,
 duration and joints.  Don't try to figure out spans or joints on your
-first try.  Follow a gradual introduction:";
+first attempt.  Follow a gradual introduction:";
 
   startTag 'ol';
   startTag 'li';
@@ -713,8 +713,8 @@ After you finish, use the diff tool to examine your mistakes.';
 
   element 'p', 'The diff tool can measure the difference between
 your answers and the exemplar.  Generally, any differences will
-be your mistake.  However, this is not non-negotiable.  You may find
-errors in the exemplar.  Please report any errors to the mailing
+be your mistake.  However, this is not always true.  You may find
+errors in the exemplar.  Please report possible errors to the mailing
 list.';
 
   startTag 'p';
@@ -786,14 +786,13 @@ pick a different film.";
   text 'Actors or actresses generally take turns talking.  Place your
 cursor at the beginning of a segment of talking.  Sync the film up to
 the same place so the film matches your cursor position in the
-transcript.  Select Insert::Time Sync from the menu.';
+transcript.  Select Insert::Sync from the menu.';
   endTag 'p';
   endTag 'li';
 
   startTag 'li';
   startTag 'p';
-  text 'Re-position your cursor at the end of the dialog.  Select Insert::Time
-Sync.  Repeat until you have done the whole film. Redael will do
+  text 'Re-position your cursor at the end of the dialog.  Select Insert::Sync.  Repeat until you have done the whole film. Redael will do
 linear interpolation between the explicit time sync marks so
 you only have to add a time sync at the important places.';
   endTag 'p';
@@ -906,7 +905,7 @@ customize them.";
   element 'p', 'Cross Reference:
 Once you have annotated the film in the 3rd person then you can
 create empathy patterns to translate back into the 1st person
-perspective.  This completes the empathy - emotional intelligence cycle.';
+perspective.  This completes the empathy <---> emotional intelligence cycle.';
 
   element 'p', "About 110 patterns have been gathered based on
 a comparison of annotations from three films, however, this work was
@@ -951,7 +950,7 @@ menupage $topmenu, 'Mailing Lists', sub {
     startTag 'p';
     text $desc;
 
-    text ' ';
+    br;
 
     startTag 'i';
     text $vol;
