@@ -65,7 +65,7 @@ sub sync_dir {
 sync_dir('.',
 	 qw(index.html news.html
 	    download.html dl-debian.html dl-unix.html dl-windows.html
-	    doc.html
+	    doc.html doc-intro.html
 	    doc-situation.html doc-film.html doc-joints.html doc-xref.html
 	    doc-exam.html lists.html
 	    scores.html philo.html philo-redael.html

@@ -238,13 +238,13 @@ our $topmenu = MenuTree
 	 ],
 	 ['Documentation'     => 'doc.html',
 	  [
-	   ['Introduction'    => 'doc-starting.html'],
+	   ['Introduction'    => 'doc-intro.html'],
+	   ['Getting Started' => 'doc-starting.html'],
 	   ['Film'            => 'doc-film.html'],
 	   ['Situation'       => 'doc-situation.html'],
 	   ['Joints'          => 'doc-joints.html'],
 	   ['X-Reference'     => 'doc-xref.html'],
 	   ['Exam'            => 'doc-exam.html'],
-	   ['Hay Group Comparison'  => 'doc-haygroup.html'],
 	  ]],
 	 ['Mailing Lists'     => 'lists.html'],
 	 ['High Scores'       => 'scores.html'],
@@ -843,75 +843,15 @@ at least a man-month of effort.';
   endTag 'li';
 
   endTag 'ol';
-
-  startTag 'p';
-  emptyTag 'hr';
-  endTag 'p';
-
-  element 'h2', 'A Transcript';
-
-  startTag 'center';
-  startTag 'p';
-  img 'art/transcript.png', 'Transcript View';
-  endTag 'p';
-  endTag 'center';
-  
-  element 'p', 'The left side contains the film transcript.  Each highlighted
-segment indicates the span of a single situation.  The right side
-contain a list of situations.  When you move the cursor, the left
-and right sides stay in-sync.';
-
-  vskip;
 };
 
-menupage $topmenu, 'Hay Group Comparison', sub {
-  element 'h1', 'Hay Group Comparison';
+menupage $topmenu, 'Introduction', sub {
+  element 'h1', 'Introduction';
 
-  startTag 'p';
-  text 'It may to helpful to compare and contrast our approach
- with that of ';
-  element 'a', 'Hay Group', href => 'http://ei.haygroup.com';
-  text ", which is operating under the guidance of Daniel Goleman and
- Richard Boyatzis.  Here are highlights from their biographies:";
-  endTag 'p';
+  element 'p', 'What is the best test design for ranking emotional
+intelligence?';
 
-  startTag 'ul';
-  startLi;
-  text "Daniel Goleman consults internationally and lectures frequently
- to business audiences, professional groups and on college campuses.
-Dr. Goleman's 1995 book, ";
-  element 'i', 'Emotional Intelligence';
-  text ' (Bantam Books),
-was on The New York Times bestseller list for a year-and-a-half, with more
-than 5,000,000 copies in print worldwide. It has been a best seller
-throughout Europe, Asia and Latin America, and was translated into
-nearly 30 languages.';
-  endLi;
-
-  startLi;
-  text 'Richard E. Boyatzis is Professor of Organizational Behavior,
- Chair of the Department of Organizational Behavior in the Weatherhead
- School of Management at Case Western Reserve University, Cleveland.
-He is the author of numerous articles on human motivation, self-directed
- behavior change, leadership, value trends, managerial competencies,
- power, alcohol and aggression, and a research book entitled, ';
-  element 'i', 'The Competent Manager: A Model for Effective Performance';
-  text '.';
-  endLi;
-  endTag 'ul';
-
-  startTag 'p';
-  text 'The Hay Group claims that, "we are the experts on how
-to identify and work with personal motives to increase job
-performance."';
-  endTag 'p';
-
-  startTag 'p';
-  text "Let's consider a typical question / answer pair from
-the ";
-  element 'a', 'sample quiz', href=>'http://ei.haygroup.com/resources/content_ieitest.html';
-  text ' on the Hay Group web site:';
-  endTag 'p';
+  element 'p', 'Please consider the following question / answer pair:';
 
   startTag 'blockquote';
   startTag 'table';
@@ -995,34 +935,40 @@ the ";
   endTag 'table';
   endTag 'blockquote';
 
-  element 'p', q(This type of question is what most people seem to
-expect when hearing the term "emotional intelligence test."
+  element 'p', q(This type of discussion is what most people seem to
+expect upon hearing the idea "emotional intelligence test."
 However, notice how the example above takes the situation
 as given.  In other words, the test focuses on the student's
-reaction to a *given* situation.  Perhaps the test designers
-were forced into this format by choosing prose as their test medium.);
+reaction to a *given* situation.);
 
   element 'p', 'Certainly choosing the correct reaction *is*
-important.  However, deciding on a reaction depends on accurate
-situation assessment.  How many times has your reaction been
+important.  However, deciding on a reaction depends on assessing
+the situation accurately.  How many times has your reaction been
 out-of-place because you misunderstood the situation?
 To continue the example above, did your
 colleague really take credit for your 100% of your work?  Or
-did she take half of your idea and add her own unique spin to it?
+did she take a small part of your idea and add her own unique spin to it?
 Or is she presenting her own idea except that she is using your
-particular style and terminology?';
+particular style and terminology?  Attention to subtle details
+make all the difference.';
 
-  element 'p', 'Even if the term "emotional intelligence" encompasses
-both situation assessment and choosing a reaction, assessment is the more
-important part.  Furthermore, i find reactions a natural
-outcome once the situation assessed accurately.
+  startTag 'p';
+  text 'Even if the term "emotional intelligence" encompasses
+both ';
+  element 'i', 'situation assessment';
+  text ' and ';
+  element 'i', 'choosing a reaction';
+  text ', assessment is the more
+important part.  Furthermore, i find reactions to be a natural
+outcome once the situation is established.
 Therefore, the redael test concentrates on situation asseessment
 and leaves the question of choosing a
 reaction up to your spontaneous creativity.';
+  endTag 'p';
 };
 
-menupage $topmenu, 'Introduction', sub {
-  element 'h1', 'Introduction';
+menupage $topmenu, 'Getting Started', sub {
+  element 'h1', 'Getting Started';
 
   element 'p', 'The most important feature of redael is that you
 do not have to understand *why* it works to benefit.  All you have to do is
@@ -1065,10 +1011,25 @@ list.';
 };
 
 menupage $topmenu, 'Film', sub {
-  element 'h1', 'Film';
+  element 'h1', 'Film Transcript';
 
-  element 'p', 'The filmview offers effortless seeking to any
-point in a film.';
+  startTag 'center';
+  startTag 'p';
+  img 'art/transcript.png', 'Transcript View';
+  endTag 'p';
+  endTag 'center';
+  
+  element 'p', 'The left side contains the film transcript.  Each highlighted
+segment indicates the span of a single situation.  The right side
+contain a list of situations.  When you move the cursor, the left
+and right sides stay in-sync.  By selecting text or by pressing the
+"Play" button, you can effortless play back any piece of the film.';
+
+  startTag 'p';
+  emptyTag 'hr';
+  endTag 'p';
+
+  element 'h2', 'Film View';
 
   startTag 'center';
   startTag 'p';
@@ -1077,8 +1038,8 @@ point in a film.';
   endTag 'center';
 
   element 'p', 'Actually it takes a lot of effort to make this effortless.
-Only folks who are preparing new film annotations need to understand these
-steps in detail.';
+Fortunately, only folks who are preparing a new film annotation need
+to understand these steps in detail.';
 
   startTag 'ol';
   startTag 'li';
@@ -1873,26 +1834,35 @@ A student's capacity for (2) emotional intelligence is tested intensively.";
 
   element 'h2', 'The Model';
 
-  columns sub {
-    startTag 'p';
-    text 'The model used in redael was developed by asking the question:
-"What is the best model to model the process of competition?"
-(See equation at right.)
-While the inspiration behind this question is hard to explain, it is easy
-to check the *utility* of the model.';
-    endTag 'p';
-  }, sub { hskip 2 },
-  sub {
-    img 'art/model.png', 'The Model';
-  };
+  element 'p', 'By showing film, it is easy to present situations
+which are complex enough to activate the empathy mechanism.
+However, it is not at all obvious how to record structural
+parameters of a situation.';
 
-    element 'p', 'The utility of a given model of 3rd person situations
+  element 'p', 'The utility of a given model of 3rd person situations
 is whether it provides a one-to-one mapping between abstract situations
 and abstract emotions.  If the mapping is one-to-one then the model
 can be taken as equal to the actual empathy sense.  Moreover, a
 one-to-one mapping exposes the inverse-of-empathy mechanism
 (emotional intelligence) which can then be seen, understood, and
 tested against.';
+
+  columns sub {
+    element 'p', 'So what is the *best* model to use for recording
+structural parameters of a situation?   By thinking about this
+question like a mathematical equation, the solution is revealed.
+The trick is to model "competition" instead of "situation" (step 1).
+As the model is constructed, the "competitions" cancel out (step 2),
+and we approach a perfect model of reality (step 3).';
+
+    element 'p', 'This explanation may seem far-fetched,
+but it is easy to check the practical utility of this model using the
+metric proposed above (whether the model is one-to-one with
+respect to emotions).';
+  }, sub { hskip 2 },
+  sub {
+    img 'art/model.png', 'The Model';
+  };
 
   element 'h2', 'Ghost Wheel?';
 
