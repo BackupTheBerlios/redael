@@ -573,7 +573,9 @@ sub situations_to_html {
     text '.. ';
     format_text $text[0];
     endTag 'font';
+    startTag 'b';
     format_text $text[1];
+    endTag 'b';
     startTag 'font', color => '#808080';
     format_text $text[2];
     text ' ..';
