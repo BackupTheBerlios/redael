@@ -251,7 +251,7 @@ our $topmenu = MenuTree
 	  ]],
 	 ['Mailing Lists'     => 'lists.html'],
 	 ['High Scores'       => 'scores.html'],
-	 ['Business Opportunities' => 'jobs.html'],
+	 ['Research & Professional' => 'jobs.html'],
 	 ['Philosophy'        => 'philo.html',
 	 [
 	  ['Redael'           => 'philo-redael.html'],
@@ -756,8 +756,14 @@ available?'
 menupage $topmenu, 'Debian', sub {
   element 'h1', 'Debian Installation';
 
-  element 'p', 'A i386 binary package is available (but not yet
-as part of the main debian distribution).';
+  element 'p', 'GStreamer debs beyond 0.3.1 are not supported
+yet.  Since the release of Glib/Gtk+ 2.0 and corresponding debs,
+it is not practical downgrade and use the i386 deb here.';
+
+  element 'p', 'You can install debs for glib/gtk+ but then
+follow the Unix installation instead of the instructions below:';
+
+  startTag 'font', color=>'gray';
 
   element 'p', 'Add the following lines to /etc/apt/sources.list:';
 
@@ -782,6 +788,8 @@ deb http://redael.berlios.de/releases/debian ./
   endTag 'pre';
   endTag 'blockquote';
   endTag 'p';
+
+  endTag 'font';
 };
 
 menupage $topmenu, 'Unix', sub {
@@ -810,10 +818,12 @@ can compile redael from source code.';
   },
   sub { hskip 6 },
   sub {
-    element 'p', 'Install 0.3.1 or later version of gstreamer.  You will also
-need some libraries: libmpeg2, liba52, and libHermes.';
+    element 'p', 'Install gstreamer 0.3.1.  To build the plugins,
+you will also need some libraries:
+libmpeg2 0.2.0, liba52 0.7.2, and libHermes.';
 
-    element 'p', 'ALERT: gstreamer 0.3.2 is broken.';
+    element 'p', 'ALERT: Redael has not been ported to gstreamer 
+version 0.3.2 or later yet.  You must use version 0.3.1.';
   };
   endTag 'p';
 
@@ -917,7 +927,8 @@ reaction to a *given* situation.
 Certainly choosing the correct reaction *is*
 important.  However, deciding on a reaction depends on assessing
 the situation accurately.
-Attention to subtle details make all the difference.";
+If your perfect reaction is in reaction to the wrong situation
+then how can you expect to communicate effectively?";
 
   startTag 'p';
   text 'Even if the term "emotional intelligence" encompasses
@@ -930,6 +941,19 @@ urgent part.  Therefore, the redael test concentrates only on
 situation asseessment and leaves the question of choosing
 the perfect reaction up to your spontaneous creativity.';
   endTag 'p';
+
+  element 'h2', 'Acknowledgment';
+
+  element 'p', 'In scientific literature, it customary to provide
+a bibliography of related research.  While i hestitate to break
+with scientific norms in the slightest, i can hardly make a short
+list of people whose contribution i should acknowledge.
+i have drawn inspiration from too many sources.';
+
+  element 'p', 'i have given my life for this research,
+put everything into it, every moment,
+person, and experience.  Perhaps i am the author, but only as
+a transcriber for the Author of All.';
 };
 
 menupage $topmenu, 'Getting Started', sub {
@@ -1588,6 +1612,12 @@ role-model feel in a given situation?';
   };
   endTag 'p';
 
+  element 'p', "The word 'character' generally indicates the
+relationship between emotion and personality:  A person with
+sound character behaves in accord with ideal principles.  A
+person with poor character will often follow whims or
+trends.";
+
   startTag 'p';
   columns sub { attention 0,0 },
     sub { hskip 2 },
@@ -1880,7 +1910,7 @@ figure out how to design the situation model.';
 Pronounce it as you wish.';
 };
 
-menupage $topmenu, 'Business Opportunities', sub {
+menupage $topmenu, 'Research & Professional', sub {
   element 'h1', 'The Next Step';
 
   element 'h2', 'Research';
@@ -1900,11 +1930,9 @@ not necessary.  For example, consider NIH grant ";
   startTag 'a', href => 'http://grants.nih.gov/grants/guide/pa-files/PA-00-105.html';
   text 'PA-00-105';
   endTag 'a';
-  text '.  A more tantalizing opportunity is the ';
-  startTag 'a', href => 'http://www.templeton.org/';
-  text 'John Templeton Foundation';
-  endTag 'a';
-  text ", but that's a long-shot.";
+  text '.  On the other hand, a grant is not even necessary
+for a small study.  You just need one computer, a small
+group of students, and lots of time.';
   endTag 'p';
 
   element 'h2', 'Certified EQ Testing';
@@ -1920,7 +1948,6 @@ as those affiliated with ';
   text '.  Anyone is welcome to do this -- the code
 is licensed under the ';
   element 'a', 'GPL', href=> 'http://www.gnu.org/copyleft/gpl.html';
-
   text ' -- so you can start your own EQ testing franchise, royalty free.';
   endTag 'p';
 };

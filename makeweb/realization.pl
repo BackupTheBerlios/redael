@@ -46,10 +46,26 @@ Repeat until the aspirant enters into meditation.];
 it doesn't matter.  Give vibration for about 15 seconds.
   Ask, "Do you feel any difference
 between your hands?  Do you feel any warm or cool breeze on your left
-or right hand?"  Invariably, the aspirant will report feeling vibration
-on the hand you are working on, or report heaviness or tingling in the opposite
-hand, or at least some difference.];
+or right hand?"];
   endLi;
+
+  startTag 'ul';
+  startLi;
+  text 'If the aspirant feels vibration
+on the hand you are working on, or report heaviness or tingling in the opposite
+hand then you are done.';
+  endLi;
+
+  startLi; 
+  text 'If the aspirant feels no different then there is a problem
+with sensitivity.  "Rub both hands together vigorously."  Show
+how to do this yourself and explain, "The easiest place to sustain
+awareness of vibration is on the surface of your hands.  When
+you rub your hands together, you re-sensitize yourself to vibration."
+Try working on the hands again and see if the aspirant can
+feel any vibration -- it will be easy now.';
+  endLi;
+  endTag 'ul';
 
   startLi;
   text q["Very good!  This is the kundalini power working to sooth
