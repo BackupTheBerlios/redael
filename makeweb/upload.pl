@@ -53,7 +53,8 @@ sub sync_dir {
 }
 
 sync_dir('.',
-	 qw(index.html));
+	 qw(index.html news.html download.html doc.html lists.html
+	    philo.html));
 
 sync_dir('art', map { s,^.+/,,; $_ }
 	 glob('art/*.png'),

@@ -21,11 +21,7 @@
      sub element {
 	 my ($tag, $data, @attr) = @_;
 	 startTag($tag, @attr);
-	 if ($data eq ' ') {
-	   print '&nbsp;';
-	 } else {
-	   text($data);
-	 }
+	 text($data);
 	 endTag();
      }
 
