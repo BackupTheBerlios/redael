@@ -1612,8 +1612,8 @@ chance to settle into emotional detachment (a) and spontaneously
 resolve into self-identity (f).  
 Besides actual emotional detechment (a), there are two other
 attention configurations which consider emotion as an
-object: (c) and (e).  This shows the importance of studying
-emotional intelligence (c).';
+object: (c) and (e).  While ideal role-model (e) is outside of our
+scope, emotional intelligence (c) is one of the special configurations.';
 
   },
   sub { hskip 4 },
@@ -1707,20 +1707,26 @@ A student's capacity for (2) emotional intelligence is tested intensively.";
 
   element 'h2', 'The Model';
 
-  element 'p', 'The utility of a given model of 3rd person situations
+  columns sub {
+    startTag 'p';
+    text 'The model used in redael was developed by asking the question:
+"What is the best model to model the process of competition?"
+(See equation at right.)
+While the inspiration behind this question is hard to explain, it is easy
+to check the *utility* of the model.';
+    endTag 'p';
+  }, sub { hskip 2 },
+  sub {
+    img 'art/model.png', 'The Model';
+  };
+
+    element 'p', 'The utility of a given model of 3rd person situations
 is whether it provides a one-to-one mapping between abstract situations
 and abstract emotions.  If the mapping is one-to-one then the model
 can be taken as equal to the actual empathy sense.  Moreover, a
 one-to-one mapping exposes the inverse-of-empathy mechanism
 (emotional intelligence) which can then be seen, understood, and
 tested against.';
-
-  startTag 'p';
-  text 'The model used in redael was developed by asking the question:
-"What is the best model to model the process of competition?"  While the
-inspiration behind this question is hard to explain, it is easy
-to check the utility of the model using our proposed measure.';
-  endTag 'p';
 
   element 'h2', 'Ghost Wheel?';
 
