@@ -462,7 +462,7 @@ is the subject and the film is the object.';
   columns sub { attention 3,1 },
     sub { hspace 2 },
       sub {
-	text '"Based on how you feel, what is the structural situation?"
+	text '"Based on how i feel, what is the structural situation?"
 This style of question is repeatedly posed in redael annotations.';
       };
   endTag 'p';
