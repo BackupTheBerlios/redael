@@ -6,23 +6,25 @@ sub thumb {
   }
 
   startTag 'center';
+  startTag 'a', href => $src;
   emptyTag 'img', src=>$sm, alt=>$caption;
+  endTag 'a';
   br;
-  text "$caption ";
-  element 'a', '(enlarge)', href => $src;
+  text "$caption";
   endTag 'center';
 }
 
 page 'm.html', sub {
   for my $pic (qw(mappl-h.jpg mappl-j.jpg
 		  nirmal_nagari.jpg
-		  mother_arrives.jpg christmas_puja.jpg 
-		  kawali1.jpg making_friends.jpg kawali2.jpg 
+		  mother_arrives.jpg christmas_puja.jpg christmas_puja2.jpg 
+		  skit.jpg kawali1.jpg dance.jpg
+		  making_friends.jpg kawali2.jpg 
 		  huldi1.jpg huldi2.jpg
 		  huldi_joshua.jpg 
-		  marriage_puja.jpg marriage_havan.jpg 
+		  marriage_puja.jpg marriage_havan.jpg marriage_havan2.jpg 
 		  marriage_dinner.jpg
-		  m_registration.jpg
+		  dhulia.jpg m_registration.jpg
 		  heera-model.jpg kamdi1.jpg kamdi2.jpg kamdi3.jpg)) {
     if (!-e "art/$pic") {
       warn "$pic doesn't exist";
@@ -133,17 +135,34 @@ Jesus the Christ and Mother Mary.';
   sub { hskip 4 },
   sub {
     thumb 'art/christmas_puja.jpg', 'Christmas Puja';
+  },
+  sub { hskip 2 },
+  sub {
+    thumb 'art/christmas_puja2.jpg', 'Close-Up';
   };
 
   br;
   columns sub {
-    thumb 'art/kawali1.jpg', 'Kawalis';
+    thumb 'art/skit.jpg', 'Skit';
   },
   sub { hskip 4 },
   sub {
-    element 'p', 'We enjoyed music performances and Kawalis on Dec 26.';
+    element 'p', 'On Dec 26, we enjoyed a skit based on a traditional folk song
+of Maharashtra. A Kawalis performance followed.';
+  },
+  sub { hskip 4 },
+  sub {
+    thumb 'art/kawali1.jpg', 'Kawalis';
+  };
+
+  br;
+  columns sub {
     element 'p', 'The matches were announced around 19:00 on Dec 27.
 We had about 36 hours to take a decision.';
+  },
+  sub { hskip 4 },
+  sub {
+    thumb 'art/dance.jpg', 'Dance';
   };
 
   columns sub {
@@ -224,6 +243,10 @@ We recruited substitute relations to perform the requisite rites.";
   sub { hskip 4 },
   sub {
     thumb 'art/marriage_havan.jpg', 'Marriage Havan';
+  },
+  sub { hskip 2 },
+  sub {
+    thumb 'art/marriage_havan2.jpg', 'Circling';
   };
 
   columns sub {
@@ -247,6 +270,10 @@ compose couplets for Shri Mataji.';
   };
 
   columns sub {
+    thumb 'art/dhulia.jpg', 'In Dhulia';
+  },
+  sub { hskip 4 },
+  sub {
     startTag 'p';
     text "During January, we visited Nagpur where most of Heera's
 family is living.  A ";

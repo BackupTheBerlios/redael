@@ -913,10 +913,6 @@ A situation always consists of two participants (real or anthropomorphic).';
 the initiator.';
   endLi;
 
-  startTag 'p';
-  img 'art/wheel.png', 'The Ghost Wheel';
-  endTag 'p';
-
   startLi;
   text "Choose the situation.  To pick the correct situation, the
 intention of the two participants must be taken into account.
@@ -932,6 +928,10 @@ dialogues in the Help menu.';
   endLi;
 
   endTag 'ol';
+
+  element 'p', 'To summarize, the idea is to construct a sentence by
+the options given which best describes what is happening in the film
+during the span of the situation.';
 };
 
 
@@ -1215,6 +1215,7 @@ web page.';
   element 'th', 'Film';
   element 'th', 'Match';
   element 'th', 'EQ';
+  element 'th', 'Note';
   endTag 'tr';
   
   for my $s (@$Scores) {
@@ -1226,16 +1227,23 @@ web page.';
     element 'td', $s->[5];
     element 'td', $s->[6];
     element 'td', $s->[7];
+    element 'td', $s->[8] || '';
     endTag 'tr';
   }
   endTag 'table';
 
   startTag 'blockquote';
+  element 'p', 'Notes: N indicates the first, second, or third attempt.
+P indicates a practice test.';
+
+  startTag 'p';
   startTag 'i';
   text 'For a reliable EQ score, the match should be
 greater than the EQ.  In other words, the elapse time of a
 test should be at least one hour.';
   endTag 'i';
+  endTag 'p';
+
   endTag 'blockquote';
 
   endTag 'center';
@@ -1525,10 +1533,14 @@ configurations:';
 
   element 'h2', 'Toward Self-Identity';
 
-  element 'p', 'How is emotional intelligence (c) related to
-self-realization (f)?';
-
   columns sub {
+  element 'p', 'Our goal is divine expression (g) -- to manifest heaven
+on earth.  However, the only way to invite divine expression is via
+self-realization (f).  Only after self-realization does divine
+expression flow, and only for a short time.  We need a way to
+easily and consistently place our attention in the configuration
+of self-realization (f).';
+
     element 'p', '
 The problem with seeking self-realization (f)
 is that the actual
@@ -1536,29 +1548,45 @@ self (the original subject or "I am") cannot appear as an object,
 by definition.  "I am" is the *subject*.  So to realize the self, we have
 to use divine intelligence.';
 
-    element 'p', 'The most direct approach is to concentrate all the
+  },
+  sub { hskip 4 },
+  sub {
+    img 'art/trident.png', 'Attention Trident';
+  };
+
+  columns sub {
+    element 'p', "The most direct approach is to concentrate all the
 attention as emotional detachment (a) while soothing the emotions
-down.  As the strength of emotions fade, the actual self is experienced
-when the attention vector resolves to a point (f).
+down.  As the significance of emotions fade, the attention vector resolves to a point (f) and the actual self is experienced.
 However, this approach is not generally practical.
 The pressures of daily life keep the attention bouncing
-around the various other configurations.';
+around the various other configurations.  It is necessary to
+
+study all the configurations of attention so that we can *aim*
+our attention at self-realization (f) no matter how it is
+momentarily configured.";
+
+  element 'p', 'At least the emotions can be kept as the object of
+attention.  If emotion is the object then the attention has a
+chance to settle into emotional detachment (a) and spontaneously
+resolve into self-identity (f).  
+Besides actual emotional detechment (a), there are two other
+attention configurations which consider emotion as an
+object: (c) and (e).';
+
   },
   sub { hskip 4 },
   sub {
     img 'art/trident-sr.png', "Emotion as Object";
   };
 
-  element 'p', 'At least the emotions can be kept as the object of
-attention.  If emotion is the object then the attention has a
-chance to settle into emotional detachment (a) and spontaneously
-resolve into self-identity (f).  Consideration of emotion as
-a object is important for this reason, as a means of
-taking self-realization and preserving self-identity.
-Besides emotional detechment (a), there are two other
-attention configurations which consider emotion as an object.
-Our interest here is with one of those configurations: emotional
-intelligence (c).';
+  element 'p', 'Study of emotional intelligence (c) is also
+useful as a defense against empathy (b).  Without emotional
+intelligence, empathy can seem like a vast and exciting
+field to explore.  It is easy to become lost, but actually
+emotional intelligence informs us that empathy is smaller
+than it might seem.  [write more]';
+
 };
 
 menupage $topmenu, 'Redael', sub {
@@ -1640,21 +1668,14 @@ intelligence is tested intensively.";
 
   element 'h2', 'The Model';
 
-  startTag 'p';
-  element 'i', 'What is the best model to encode abstract situations?';
-  endTag 'p';
-
-  element 'p', 'One way to identify a good model is that
-it will have a one-to-one mapping between
-abstract situations and abstract emotions.  However, this
-condition does not provide much guidance about how to
-represent an abstract situation.';
+  element 'p', 'The utility of a given model of 3rd person situations
+is whether it provides a one-to-one mapping between abstract situations
+and abstract emotions.  If the mapping is one-to-one then the model
+can be taken as equal to the actual empathy mechanism.';
 
   startTag 'p';
-  text 'The trick is to analyze the question.  "What is the ';
-  element 'b', 'best';
-  text ' model to encode abstract situations?"  This word "best"
-implies some sort of competition between canidate models.  [write more...]';
+  text 'The model used in redael was developed by asking the question:
+"What is the best model for the process of competition?"';
 
   endTag 'p';
 };
