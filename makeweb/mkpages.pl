@@ -248,8 +248,6 @@ sub attention {
   endTag 'table';
 }
 
-sub EICOLOR { '#006600' }
-
 ##########################################################
 package MenuTree;
 
@@ -324,7 +322,6 @@ our $topmenu = MenuTree
 	   ['IMRT'            => 'imrt.html'],
 	  ]
 	 ],
-	 ['Philosophy'        => 'philo.html'],
 	]);
 
 page 'fairuse.html', sub {
@@ -780,6 +777,17 @@ menupage $topmenu, 'Download', sub {
 
   element 'h2', 'Requirements';
 
+  startTag 'p';
+  text 'If your computer is fast enough to playback VCD format films
+then you computer is fast enough to use Aleader.  Aleader is as
+portable as ';
+  element 'a', 'Gtk+', href => 'http://gtk.org';
+  text ' and ';
+  element 'a', 'Gstreamer', href => 'http://gstreamer.net';
+  text '.  If these two libraries are ported to your chipset
+and operating system then, chances are, Aleader will also work.';
+  endTag 'p';
+
   startTag 'font', color => 'red';
   startTag 'p';
   text 'Old versions of the software are available but they
@@ -791,15 +799,25 @@ snapshot is ';
   endTag 'p';
   endTag 'font';
 
+  if (!-e 'root/manual') {
+    mkdir 'root/manual' or die "mkdir root/manual: $!";
+  }
+
+  if (modtime("root/manual/aleader.pdf.bz2") <
+      modtime("/home/joshua/aleader/doc/aleader.pdf")) {
+    run "cp /home/joshua/aleader/doc/aleader.pdf root/manual";
+    run "bzip2 -f root/manual/aleader.pdf";
+  }
+
+  run "cp /home/joshua/aleader/doc/aleader.html root/manual";
+  run "cp /home/joshua/aleader/doc/*.png root/manual";
+  run "cp /home/joshua/aleader/doc/*.jpg root/manual";
+
   startTag 'p';
-  text 'If your computer is fast enough to playback VCD format films
-then you computer is fast enough to use Aleader.  Aleader is as
-portable as ';
-  element 'a', 'Gtk+', href => 'http://gtk.org';
-  text ' and ';
-  element 'a', 'Gstreamer', href => 'http://gstreamer.net';
-  text '.  If these two libraries are ported to your chipset
-and operating system then, chances are, Aleader will also work.';
+  text 'Documentation is here: ';
+  element 'a', 'HTML', href => 'manual/aleader.html';
+  text ' | ';
+  element 'a', 'PDF', href => 'manual/aleader.pdf.bz2';
   endTag 'p';
 
   element 'p', 'In addition to the Aleader software, you will need
@@ -813,7 +831,6 @@ analysis.  As more films are analyzed, the exemplars will appear here.';
   startTag 'table', border=>1;
   startTag 'tr';
   element 'th', 'Title';
-  element 'th', 'Blurb';
   element 'th', 'Rating';
   element 'th', 'Status';
   element 'th', 'Annotation';
@@ -824,7 +841,6 @@ analysis.  As more films are analyzed, the exemplars will appear here.';
   element 'a', 'Kaze no Tani no Naushika (1984)',
     href => 'http://www.nausicaa.net/miyazaki/nausicaa/';
   endTag 'td';
-  element 'td', 'Epic Animated Adventure';
   element 'td', 'All Ages';
   element 'td', '5%';
   startTag 'td';
@@ -838,7 +854,6 @@ analysis.  As more films are analyzed, the exemplars will appear here.';
   element 'a', 'Good Will Hunting (1997)',
     href => 'http://www.un-official.com/GWH/GWMain.html';
   endTag 'td';
-  element 'td', 'Drama';
   element 'td', '17+ (language, adult themes)';
   element 'td', '0%';
   element 'td', 'soon';
@@ -849,11 +864,12 @@ analysis.  As more films are analyzed, the exemplars will appear here.';
   element 'a', 'Star Wars: A New Hope (1977)',
     href => 'http://www.starwars.com/episode-iv/';
   endTag 'td';
-  element 'td', 'Space Opera';
   element 'td', 'All Ages';
   element 'td', '0%';
   element 'td', 'soon';
   endTag 'tr';
+
+  # add Pixar films here
 
   endTag 'table';
 
@@ -895,7 +911,7 @@ following chart:';
   startTag 'i';
   text 'Even if a film is excellent and entertaining,
 these genres probably do not offer enough emotional complexity
-to serve as a basis for Aleader annotations.';
+to serve as a basis for Aleader analysis.';
   endTag 'i';
   endTag 'blockquote';
 
@@ -903,6 +919,7 @@ to serve as a basis for Aleader annotations.';
 
 # Ghost (1990)
 # Devil's Advocate (1997)
+# Tukaram
 
   startTag 'p';
   text 'i heartily recommend ';
@@ -1089,429 +1106,6 @@ if (0) {
 
   endTag 'center';
 }
-};
-
-menupage $topmenu, 'Philosophy', sub {
-  element 'h1', 'What is Philosophy?';
-
-  startTag 'p';
-  element 'i', 'Perhaps there are many definitions, but here we mean: ';
-  endTag 'p';
-
-  startTag 'blockquote';
-  text 'Pursuit of the truth.';
-  br;
-  text 'An analysis of the grounds of and
-concepts expressing fundamental beliefs.';
-  endTag 'blockquote';
-
-  element 'h1', 'Yoga';
-
-  element 'p', 'Yoga is an ancient sanskrit word which
-means approximately "union with the divine."  
-Here we present a secular model of reality on
-which yoga is seen to take place.
-Any such model is a miniature representation, and a *good* model
-confers tangible insight into reality and joy.';
-
-  element 'h2', 'Categories of Feeling';
-
-  columns sub {
-  element 'p', 'The words emotion, spirit, and feeling are used to mean a
-variety of different things in different contexts.  The defintions used
-here are as follows:';
-
-  },
-  sub {
-    img 'feelings.png', 'Feelings';
-  };
-
-  startTag 'ul';
-  startTag 'li';
-  text "`Emotion' is a feeling which arises in the context of two separate people.";
-  note "We can give a definition for `thought',
-however, distinguishing between thought and emotion is not necessary
-for this discussion. Here `emotion' is meant inclusive of thought --
-some non-physical sensation arising in the context of two separate people.";
-  endTag 'li';
-  startTag 'li';
-  text "`Spirit' is a feeling which does not admit the idea of separation.";
-  endTag 'li';
-  startTag 'li';
-  text "`Compassion' is a special feeling which bridges spirit to emotion.";
-  note "Emotion doesn't require two living breathing people.
-Only the *context* of two people is important.
-For example,
-if you have compassion for a stone then emotion can
-arise between you and the stone (maybe you are a sculptor).
-Anthropomorphic emotions are still emotions.";
-  endTag 'li';
-  startTag 'li';
-  text "`Feeling' is the most general word, including emotion,
-spirit, and compassion.";
-  endTag 'li';
-  endTag 'ul';
-
-  show_notes();
-
-  element 'h2', 'Compassion';
-
-  columns sub {
-
-  startTag 'p';
-  text 'Compassion awakens gradually in each individual.
-A good mother ususally sooths the development into a balanced path.
-If for some reason compassion goes out of balance then
-horrible atrocities can result.  The business of slavery
-and the Nazi killings in Germany can be attributed to a
-terrible imbalance in compassion.';
-  endTag 'p';
-  startTag 'p';
-  text 'Before compassion awakens, an individual can be described
-as follows:  His main focus is on the ';
-  nth(1);
-  text ' person perspective.  There is no partition between personality
-and emotion.  There are no situations, only *my* situation (singular).
-Charming, huh?
-As compassion dawns, the four perspectives come into focus:';
-  endTag 'p';
-
-  },
-  sub { hskip 4 },
-  sub {
-    emptyTag 'img', src=>'nocompassion.jpg', alt => 'No Compassion';
-  };
-
-  startTag 'center';
-  columns sub {
-    startTag 'i';
-    text 'Balanced compassion';
-    br;
-    text 'crystalizes the';
-    br;
-    text 'four perspectives:';
-    endTag 'i';
-  },
-  sub { hskip 10 },
-  sub {
-    emptyTag 'img', src => 'fourpp.jpg', alt => 'Four Perspectives';
-  },
-  sub { hskip 4 },
-  sub {
-    startTag 'table', border=>0, cellspacing=>0, cellpadding=>0;
-    row sub { nth(3); text ' person perspective (situation)' };
-    row sub { nth(2); text ' person perspective (personality)' };
-    row sub { nth(1); text ' person perspective (emotion)' };
-    row sub { nth(0); text ' person perspective (pure spirit)' };
-    endTag 'table';
-  };
-  endTag 'center';
-
-  element 'p', 'That fostering compassion is "the answer" is nothing new.
-However, we can do better than talking about it in the typical
-vague terms. Since balanced compassion is defined as awareness
-of the four perspectives, we can study the relationships
-between perspectives. These relationships may reveal a way to
-foster compassion with scientific certainty.';
-
-  element 'h2', 'Subject / Object';
-
-  startTag 'p';
-  columns sub {
-    text "`Subject' and `object' describe end-points of an attention vector.
-(These words are not meant in a strict grammatical sense.)
-The subject is the origin of attention.  Attention is focused on an object,
-the object is enveloped with awareness, and the subject is informed
-about the object.";
-  },
-  sub {
-    emptyTag 'img', src => 'informs.png', alt => 'Informs',
-      width => 206, height => 64;
-  };
-  endTag 'p';
-
-  element 'h2', 'Attention Configurations';
-
-  element 'p', 'Within the realm of compassionate individuality,
-there are various ways attention can be configured.  What
-are all the permutations?  The connection with grammer makes
-it is easy to generate examples to invoke a given configuration.
-Once posed as an example, we can consider the utility of a configuration
-and draw any further conclusions.';
-
-  startTag 'p';
-  columns sub { attention 0,1 },
-    sub { hskip 2 },
-      sub {
-	element 'tt', 'detachment'; br;
-        text 'For example: "i am angry, but i am detached from
-my anger.  The anger is an object of my attention.  i forgive,
-i forgive.  Now i do not feel angry."';
-      };
-  endTag 'p';
-
-  startTag 'p';
-  columns sub { attention 1,3 },
-    sub { hskip 2 },
-      sub {
-        element 'tt', 'empathy';  br;
-	text 'Perhaps the most obvious example of empathy is
-what happens while watching a film.  A film is nothing but ';
-	nth 3;
-	text ' person perspective: images and sound.  However,
-people can easily empathize with the actors and *feel* a
-precise replica of the emotions depicted onscreen.  The film
-is the object and emotion is the subject, hence "empathy."';
-        note 'A few people fail to developed a sense of empathy
-as children.  Such people are called "autistic".';
-      };
-  endTag 'p';
-
-  startTag 'p';
-  columns sub { attention 3,1 },
-    sub { hskip 2 },
-      sub {
-	startTag 'font', color=> EICOLOR;
-        element 'tt', 'situation assessment'; br;
-	text '"Based on how i feel, what is the structural situation?"
-This style of question is repeatedly posed in Aleader annotations.';
-	endTag 'font';
-      };
-  endTag 'p';
-
-
-  startTag 'p';
-  columns sub { attention 1,2 },
-  sub { hskip 2 },
-  sub {
-    element 'tt', 'follow everyone else'; br;
-    text '"What are other people doing?"  Extra-ordinary personal
-preference and fashions are expressions of this configuration of
-attention.  For example, "Everyone is going to the pub therefore
-i will also go to the pub."';
-  };
-  endTag 'p';
-
-  startTag 'p';
-  columns sub { attention 2,1 },
-  sub { hskip 2 },
-  sub {
-     element 'tt', 'ideal role-model'; br;
-     text 'How would an ideal personality behave?
-For example, "How would my mother behave in my place?"  Parents
-or great teachers of morality can serve as a role-model.';
-  };
-  endTag 'p';
-
-  element 'p', "The word 'character' generally indicates the
-relationship between emotion and personality: 
-A person with poor character will often follow whims or trends.
-A person with sound character behaves in accord with ideal principles.";
-
-  startTag 'p';
-  columns sub { attention 0,0 },
-    sub { hskip 2 },
-      sub {
-        element 'tt', 'self-realization'; br;
-	text "If you have *not* experienced self-realization then
-please visit a local ";
-	element 'a', 'Sahaja Yoga', href=>'http://sahajayoga.org';
-	text " center and feel the divine cool breeze.
-Self-realization will turn this theoretical discussion
-into your living reality.";
-      };
-  endTag 'p';
-
-  startTag 'p';
-  columns sub { attention 1,0 },
-    sub { hskip 2 },
-      sub {
-        element 'tt', 'divine expression'; br;
-	text 'After meditation, part of my attention remains
-connected with the spirit, thereby enlightening the experience
-of individuality.
-Divine expression makes individuality most beautiful and enjoyable,
-much more so than any physical or mental amusement.';
-      };
-  endTag 'p';
-
-  startTag 'p';
-    text "Attention flows between the ";
-    nth(0);
-    text ' and ';
-    nth(1);
-    text '; ';
-    nth(1);
-    text ' and ';
-    nth(2);
-    text '; and ';
-    nth(1);
-    text ' and ';
-    nth(3);
-    text ' perspectives. ';
-
-    text 'Jumping directly between the ';
-    nth(2);
-    text ' and ';
-    nth(3);
-    text " perspectives doesn't make sense.  ";
-
-  text 'The following table and diagram summarize all sensical
-configurations:';
-  endTag 'p';
-
-  startTag 'center';
-  columns sub {
-    emptyTag 'img', src=>'trident.png', alt=>'Attention Trident';
-  },
-  sub { hskip 10 },
-  sub {
-    startTag 'p';
-    columns sub { text '(a) ' },
-    sub { text 'detachment'; attention 0,1 };
-    endTag 'p';
-
-    startTag 'p';
-    columns sub { text '(b) ' },
-    sub { text 'empathy'; attention 1,3 },
-    sub { hskip 6 },
-    sub { text '(c) ' },
-    sub {
-      startTag 'font', color=> EICOLOR;
-      text 'situation assessment';
-      endTag 'font';
-      attention 3,1 };
-    endTag 'p';
-
-    startTag 'p';
-    columns sub { text '(d) ' },
-    sub { text 'follow everyone else'; attention 1,2 },
-    sub { hskip 6 },
-    sub { text '(e) ' },
-    sub { text 'ideal role-model'; attention 2,1 };
-    endTag 'p';
-
-    startTag 'p';
-    columns sub { text '(f) ' },
-    sub { text 'self-realization'; attention 0,0 },
-    sub { hskip 6 },
-    sub { text '(g) ' },
-    sub { text 'divine expression'; attention 1,0 };
-    endTag 'p';
-  };
-  endTag 'center';
-
-  show_notes();
-
-  element 'h2', 'Toward Self-Identity';
-
-  columns sub {
-  element 'p', 'Our goal is divine expression (g).
-The challenge is to get the attention focused on pure spirit.
-Self-realization (f) is the only configuration to accomplish this
-(pure spirit as an object).
-Even so, the attention quickly flows outward into other configurations
-and the divine quality (g) of attention is soon dilute.';
-
-    startTag 'p';
-    text 'To restart the divine flow, we need a way to consistently
-place our attention in the configuration of self-realization (f).
-However, neither self-realization (f) or divine expression (g) are
-easily accessible because their object is pure spirit.
-How to focus the attention on pure spirit?
-The attention is lost in seemingly infinite variations of experience.
-Detachment (a) is essential to elminate the confusion.
-This configuration (a) is unique: the pure spirit is present
-(as the subject) and the object tangible.
-None of the other accessible configurations';
-    note 'Configurations (a), (b), (c), (d), and (e) are easily accessible
-because their object is something tangible.';
-    text ' even involve the pure spirit.';
-    endTag 'p';
-
-    element 'p', 'Detachment (a) is a most subtle topic.
-H. H. Shri Mataji describes it well:
-"The spirit is like the steady axis of a wheel. If
-our attention reaches the immovable firm axis at the very centre of the
-wheel of our existence (which is constantly moving), we become
-enlightened by the spirit, the source of inner peace, and reach a state
-of complete calm and self-knowledge."
-In geometric terms, the attention ceases to be a vector (looking
-from here to there) and resolves to the point of complete calm.';
-
-    columns sub {
-      element 'p', '
-If detachment (a) supports self-realization (f) then
-what kind of experiences support detachment (a)?
-The pressures of daily life keep attention bouncing
-around the various configurations.
-At least the emotions can be kept as the object of
-attention.  If emotion is the object then the attention is
-already halfway configured as detachment (a).';
-
-      startTag 'p';
-    text 'While having some importance,
-empathy (b) and following everyone else (d) need not
-be full-time pursuits.  The two remaining attention configurations
-take emotion as the object: (c) and (e).
-Studying an ideal role-model (e)
-is one of the special configurations, however, here we are
-concerned exclusively with ';
-    element 'font', 'situation assessment (c)', color=>EICOLOR;
-    text '.';
-      endTag 'p';
-    },
-    sub { hskip 2 },
-    sub {
-      text '(a) detachment';
-      attention 0,1,'o'; br;
-      element 'font', '(c) situation assessment', color=>EICOLOR;
-      attention 3,1,'o'; br;
-      text '(e) ideal role-model';
-      attention 2,1,'o';
-    };
-    show_notes();
-  },
-  sub {
-    startTag 'center';
-    element 'h3', 'Summary';
-    endTag 'center';
-
-    startTag 'ul';
-    startLi;
-    text 'Self-realization (f) converts to divine expression (g), but
-divine expression is soon diluted by subsequent experiences.';
-    endLi;
-
-    startLi;
-    text 'Only detachment (a) can lead to self-realization (f).';
-    endLi;
-
-    startLi;
-    text 'Detachment (a) demands a subtle understanding
-of thought and emotion.';
-    endLi;
-
-    startLi;
-    text 'Detachment (a) is supported when emotion is the
-object of attention.';
-    endLi;
-
-    startTag 'center';
-    img 'trident-sr.png', "Emotion as Object";
-    endTag 'center';
-
-    startLi;
-
-    text 'The configurations ';
-    element 'font', 'situation assessment (c)', color=>EICOLOR;
-    text ' and ideal role-model (e) both take emotion as
-the object of attention.';
-
-    endLi;
-
-    endTag 'ul';
-  };
 };
 
 menupage $topmenu, 'Research & Professional', sub {
