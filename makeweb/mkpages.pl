@@ -316,7 +316,8 @@ menupage $topmenu, 'Download', sub {
 
   element 'p', 'Presently, redael is only distributed as source code.
 Binaries will be available as soon as it is a practical possibility.
-If you are still undaunted then you may attempt the following steps:';
+If you are prepared to compile the source release then you may attempt
+the following steps:';
 
   startTag 'p';
   columns sub {
@@ -546,7 +547,7 @@ Low-volume; at most one message per day.');
 
   $list->('redael-devel',
 	  'Technical discussions about software development and philosophy.
-Can be high volumn on occation.');
+Can be high volume on occation.');
 };
 
 menupage $topmenu, 'Philosophy', sub {
@@ -802,7 +803,7 @@ configurations:';
 };
 
 menupage $topmenu, 'Job Opportunities', sub {
-  element 'h1', 'Possible Research Grants';
+  element 'h1', 'The Next Step';
 
   startTag 'p';
   text 'This project should be of interest to lots of research grants,
@@ -827,8 +828,18 @@ not necessary.  For example, consider NIH grant ";
   endTag 'p';
 
   startTag 'p';
-  text 'In any case, if you are interested in writing a grant proposal
-then please contact the mailing list.';
+  text 'Once some studies are completed then we can approach
+business and government human resources departments.
+There are already successful companies in this sector such
+as those affiliated with ';
+  startTag 'a', href => 'http://www.eiconsortium.org';
+  text 'EI Consortium';
+  endTag 'a';
+  text '.  Anyone is welcome to do this -- the code
+is ';
+  element 'a', 'GPL', href=> 'http://www.gnu.org/copyleft/gpl.html';
+
+  text ' -- so you can start your own testing franchise, royalty free.';
   endTag 'p';
 };
 
