@@ -238,11 +238,13 @@ our $topmenu = MenuTree
 	 ],
 	 ['Documentation'     => 'doc.html',
 	  [
+	   ['Introduction'    => 'doc-starting.html'],
 	   ['Film'            => 'doc-film.html'],
 	   ['Situation'       => 'doc-situation.html'],
 	   ['Joints'          => 'doc-joints.html'],
 	   ['X-Reference'     => 'doc-xref.html'],
 	   ['Exam'            => 'doc-exam.html'],
+	   ['Hay Group Comparison'  => 'doc-haygroup.html'],
 	  ]],
 	 ['Mailing Lists'     => 'lists.html'],
 	 ['High Scores'       => 'scores.html'],
@@ -393,15 +395,22 @@ sub menupage {
       }
 
       if (@$item == 3 and ($item->[0] eq $curitem or $in_sub)) {
+	startTag 'table';
 	for my $s (@{$item->[2]}) {
-	  br;
+	  startTag 'tr';
+	  startTag 'td';
 	  hskip 2;
+	  endTag 'td';
+	  startTag 'td';
 	  if ($s->[0] eq $curitem) {
 	    text $s->[0];
 	  } else {
 	    element 'a', $s->[0], 'href', $s->[1];
 	  }
+	  endTag 'td';
+	  endTag 'tr';
 	}
+	endTag 'table';
       }
       endTag 'p';
     }
@@ -839,7 +848,181 @@ at least a man-month of effort.';
   emptyTag 'hr';
   endTag 'p';
 
-  element 'h2', 'Getting Started';
+  element 'h2', 'A Transcript';
+
+  startTag 'center';
+  startTag 'p';
+  img 'art/transcript.png', 'Transcript View';
+  endTag 'p';
+  endTag 'center';
+  
+  element 'p', 'The left side contains the film transcript.  Each highlighted
+segment indicates the span of a single situation.  The right side
+contain a list of situations.  When you move the cursor, the left
+and right sides stay in-sync.';
+
+  vskip;
+};
+
+menupage $topmenu, 'Hay Group Comparison', sub {
+  element 'h1', 'Hay Group Comparison';
+
+  startTag 'p';
+  text 'It may to helpful to compare and contrast our approach
+ with that of ';
+  element 'a', 'Hay Group', href => 'http://ei.haygroup.com';
+  text ", which is operating under the guidance of Daniel Goleman and
+ Richard Boyatzis.  Here are highlights from their biographies:";
+  endTag 'p';
+
+  startTag 'ul';
+  startLi;
+  text "Daniel Goleman consults internationally and lectures frequently
+ to business audiences, professional groups and on college campuses.
+Dr. Goleman's 1995 book, ";
+  element 'i', 'Emotional Intelligence';
+  text ' (Bantam Books),
+was on The New York Times bestseller list for a year-and-a-half, with more
+than 5,000,000 copies in print worldwide. It has been a best seller
+throughout Europe, Asia and Latin America, and was translated into
+nearly 30 languages.';
+  endLi;
+
+  startLi;
+  text 'Richard E. Boyatzis is Professor of Organizational Behavior,
+ Chair of the Department of Organizational Behavior in the Weatherhead
+ School of Management at Case Western Reserve University, Cleveland.
+He is the author of numerous articles on human motivation, self-directed
+ behavior change, leadership, value trends, managerial competencies,
+ power, alcohol and aggression, and a research book entitled, ';
+  element 'i', 'The Competent Manager: A Model for Effective Performance';
+  text '.';
+  endLi;
+  endTag 'ul';
+
+  startTag 'p';
+  text 'The Hay Group claims that, "we are the experts on how
+to identify and work with personal motives to increase job
+performance."';
+  endTag 'p';
+
+  startTag 'p';
+  text "Let's consider a typical question / answer pair from
+the ";
+  element 'a', 'sample quiz', href=>'http://ei.haygroup.com/resources/content_ieitest.html';
+  text ' on the Hay Group web site:';
+  endTag 'p';
+
+  startTag 'blockquote';
+  startTag 'table';
+  startTag 'tr';
+  startTag 'td', bgcolor => '#ffff99';
+
+  startTag 'form';
+  element 'p', '2. You are in a meeting when a colleague takes
+ credit for work that you have done. What do you do?';
+
+  startTag 'table', cellPadding => 1, cellSpacing => 1;
+
+  startTag 'tr';
+  startTag 'td';
+  emptyTag 'input', type => 'radio';
+  endTag 'td';
+  startTag 'td';
+  text 'Immediately and publicly confront the colleague over
+ the ownership of your work.';
+  endTag 'td';
+  endTag 'tr';
+
+  startTag 'tr';
+  startTag 'td';
+  emptyTag 'input', type => 'radio';
+  endTag 'td';
+  startTag 'td';
+  text 'After the meeting, take the colleague aside and tell her
+ that you would appreciate in the future that she credits you when
+ speaking about your work.';
+  endTag 'td';
+  endTag 'tr';
+
+  startTag 'tr';
+  startTag 'td';
+  emptyTag 'input', type => 'radio';
+  endTag 'td';
+  startTag 'td';
+  text "Nothing, it's not a good idea to embarrass colleagues in public.";
+  endTag 'td';
+  endTag 'tr';
+
+  startTag 'tr';
+  startTag 'td';
+  emptyTag 'input', type => 'radio';
+  endTag 'td';
+  startTag 'td';
+  text ' After the colleague speaks, publicly thank her for
+ referencing your work and give the group more specific detail
+ about what you were trying to accomplish.';
+  endTag 'td';
+  endTag 'tr';
+  endTag 'table';
+  endTag 'form';
+
+  emptyTag 'hr';
+
+  element 'p', 'The most emotionally intelligent answer is D. By
+  demonstrating an awareness of work-place dynamics, and an ability to
+  control your emotional responses, publicly recognizing your own
+  accomplishments in a non-threatening manner, will disarm your
+  colleague as well as puts you in a better light with your manager
+  and peers. Public confrontations can be ineffective, are likely to
+  cause your colleague to become defensive, and may look like poor
+  sportsmanship on your part. Although less threatening, private
+  confrontations are also less effective in that they will not help
+  your personal reputation.';
+
+  startTag 'blockquote';
+  text '[A] 0 Points - Immediately and publicly confront the colleague over the ownership of your work.';
+  br;
+  text '[B] 5 Points - After the meeting, take the colleague aside and tell her that you would appreciate in the future that she credits you when speaking about your work.';
+  br;
+  text "[C] 0 Points - Nothing, it's not a good idea to embarrass colleagues in public.";
+  br;
+  text '[D] 10 Points - After the colleague speaks, publicly thank her for referencing your work and give the group more specific detail about what you were trying to accomplish.';
+  endTag 'blockquote';
+
+  endTag 'td';
+  endTag 'tr';
+  endTag 'table';
+  endTag 'blockquote';
+
+  element 'p', q(This type of question is what most people seem to
+expect when hearing the term "emotional intelligence test."
+However, notice how the example above takes the situation
+as given.  In other words, the test focuses on the student's
+reaction to a *given* situation.  Perhaps the test designers
+were forced into this format by choosing prose as their test medium.);
+
+  element 'p', 'Certainly choosing the correct reaction *is*
+important.  However, deciding on a reaction depends on accurate
+situation assessment.  How many times has your reaction been
+out-of-place because you misunderstood the situation?
+To continue the example above, did your
+colleague really take credit for your 100% of your work?  Or
+did she take half of your idea and add her own unique spin to it?
+Or is she presenting her own idea except that she is using your
+particular style and terminology?';
+
+  element 'p', 'Even if the term "emotional intelligence" encompasses
+both situation assessment and choosing a reaction, assessment is the more
+important part.  Furthermore, i find reactions a natural
+outcome once the situation assessed accurately.
+Therefore, the redael test concentrates on situation asseessment
+and leaves the question of choosing a
+reaction up to your spontaneous creativity.';
+};
+
+menupage $topmenu, 'Introduction', sub {
+  element 'h1', 'Introduction';
 
   element 'p', 'The most important feature of redael is that you
 do not have to understand *why* it works to benefit.  All you have to do is
@@ -879,25 +1062,73 @@ your answers and the exemplar.  Generally, any differences will
 be your mistake.  However, this is not always true.  You may find
 errors in the exemplar.  Please report possible errors to the mailing
 list.';
+};
 
-  startTag 'p';
-  emptyTag 'hr';
-  endTag 'p';
+menupage $topmenu, 'Film', sub {
+  element 'h1', 'Film';
 
-  element 'h2', 'A Transcript';
+  element 'p', 'The filmview offers effortless seeking to any
+point in a film.';
 
   startTag 'center';
   startTag 'p';
-  img 'art/transcript.png', 'Transcript View';
+  img 'art/filmview.jpg', 'Film View', border=>0;
   endTag 'p';
   endTag 'center';
-  
-  element 'p', 'The left side contains the film transcript.  Each highlighted
-segment indicates the span of a single situation.  The right side
-contain a list of situations.  When you move the cursor, the left
-and right sides stay in-sync.';
 
-  vskip;
+  element 'p', 'Actually it takes a lot of effort to make this effortless.
+Only folks who are preparing new film annotations need to understand these
+steps in detail.';
+
+  startTag 'ol';
+  startTag 'li';
+  startTag 'p';
+  text 'Copy a film onto your hard drive.  MPEG1 (vcd) or MPEG2 (dvd)
+is OK.  Actually, this step is optional.  You do not *need* to copy the
+film, but the following steps will involve lots of seeking which might
+stress your CD/DVD.';
+  endTag 'p';
+  endTag 'li';
+
+  startLi;
+  text 'Find or create a transcript of your film.  Creating a transcript
+from scratch is *really* tedious.  Be sure to search ';
+  element 'a', "Drew's Script-O-Rama", href=>'http://www.script-o-rama.com';
+  text " or any other similar sites for your title.  If you can't find
+a script then consider whether you should go back to step (1) and
+pick a different film.";
+  endLi;
+
+  startTag 'li';
+  startTag 'p';
+  text 'Load your transcript and film together in redael.';
+  endTag 'p';
+  endTag 'li';
+
+  startTag 'li';
+  startTag 'p';
+  text 'Actors or actresses generally take turns talking.  Place your
+cursor at the beginning of a segment of talking.  Sync the film up to
+the same place so the film matches your cursor position in the
+transcript.  Select Insert::Sync from the menu.';
+  endTag 'p';
+  endTag 'li';
+
+  startTag 'li';
+  startTag 'p';
+  text 'Re-position your cursor at the end of the dialog.  Select Insert::Sync.  Repeat until you have done the whole film. Redael will do
+linear interpolation between the explicit time sync marks so
+you only have to add a time sync at the important places.';
+  endTag 'p';
+  endTag 'li';
+
+  startTag 'li';
+  startTag 'p';
+  text 'Make backups.  This is something you should never be forced to
+do more than once!';
+  endTag 'p';
+  endTag 'li';
+  endTag 'ol';
 };
 
 menupage $topmenu, 'Situation', sub {
@@ -970,71 +1201,6 @@ These screens are available from the Help menu.';
   endTag 'center';
 };
 
-
-menupage $topmenu, 'Film', sub {
-  element 'h1', 'Film';
-
-  element 'p', 'The filmview offers effortless seeking to any
-point in a film. (Films not included. :-)';
-
-  startTag 'center';
-  startTag 'p';
-  img 'art/filmview.jpg', 'Film View', border=>0;
-  endTag 'p';
-  endTag 'center';
-
-  element 'p', 'Actually it takes a lot of effort to make this effortless:';
-
-  startTag 'ol';
-  startTag 'li';
-  startTag 'p';
-  text 'Copy a film onto your hard drive.  MPEG1 (vcd) or MPEG2 (dvd)
-is OK.  Actually, this step is optional.  You do not *need* to copy the
-film, but the following steps will involve lots of seeking which might
-stress your CD/DVD.';
-  endTag 'p';
-  endTag 'li';
-
-  startLi;
-  text 'Find or create a transcript of your film.  Creating a transcript
-from scratch is *really* tedious.  Be sure to search ';
-  element 'a', "Drew's Script-O-Rama", href=>'http://www.script-o-rama.com';
-  text " or any other similar sites for your title.  If you can't find
-a script then consider whether you should go back to step (1) and
-pick a different film.";
-  endLi;
-
-  startTag 'li';
-  startTag 'p';
-  text 'Load your transcript and film together in redael.';
-  endTag 'p';
-  endTag 'li';
-
-  startTag 'li';
-  startTag 'p';
-  text 'Actors or actresses generally take turns talking.  Place your
-cursor at the beginning of a segment of talking.  Sync the film up to
-the same place so the film matches your cursor position in the
-transcript.  Select Insert::Sync from the menu.';
-  endTag 'p';
-  endTag 'li';
-
-  startTag 'li';
-  startTag 'p';
-  text 'Re-position your cursor at the end of the dialog.  Select Insert::Sync.  Repeat until you have done the whole film. Redael will do
-linear interpolation between the explicit time sync marks so
-you only have to add a time sync at the important places.';
-  endTag 'p';
-  endTag 'li';
-
-  startTag 'li';
-  startTag 'p';
-  text 'Make backups.  This is something you should never be forced to
-do more than once!';
-  endTag 'p';
-  endTag 'li';
-  endTag 'ol';
-};
 
 menupage $topmenu, 'Joints', sub {
   element 'h1', 'Add Joint';
