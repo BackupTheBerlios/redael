@@ -2,13 +2,18 @@
 
 use strict;
 use Fatal qw(open);
-BEGIN { require "./minixml.pl" }
+BEGIN { do "./minixml.pl"; die if $@ }
+
+use constant HTML_ROOT => '/home/joshua/gw/makeweb/root';
 
 if (-d 'root' and !-e 'cache') {
   rename 'root', 'cache' or warn "rename root cache: $!";
 }
-if (!-e 'root') {
-  mkdir 'root' or die "mkdir root: $!";
+
+for my $dir (qw(root root/vault)) {
+  if (!-e $dir) {
+    mkdir $dir or die "mkdir $dir: $!";
+  }
 }
 
 our $Scores;
@@ -54,8 +59,8 @@ sub page {
   $NoteNumber = 1;
   @Notes = ();
 
-  open my $fh, "> root/$file";
-  select $fh;
+  open my $fh, ">$file";
+  my $oldfh = select $fh;
 
   doctype 'HTML', '-//W3C//DTD HTML 4.01//EN',
     'http://www.w3.org/TR/html4/strict.dtd';
@@ -68,6 +73,7 @@ sub page {
   endTag 'html';
   print "\n";
   close $fh;
+  select $oldfh;
 }
 
 sub hskip {
@@ -275,7 +281,7 @@ package main;
 
 ##########################################################
 
-page 'index.html', sub {
+page HTML_ROOT . '/index.html', sub {
   my $title = 'Complete Integrated Self Awareness';
   element 'title', $title;
   endTag 'head';
@@ -312,9 +318,10 @@ our $topmenu = MenuTree
   ->new([
 	 ['News'              => 'news.html',
 	  [
-	   ['History'          => 'history.html'],
+	   ['History'         => 'history.html'],
 	  ]],
-	 ['Download'           => 'download.html'],
+	 ['Empathy Index'     => 'empathy.html'],
+	 ['Download'          => 'download.html'],
 	 ['Mailing Lists'     => 'lists.html'],
 #	 ['High Scores'       => 'scores.html'],
 	 ['Research & Professional' => 'jobs.html',
@@ -327,7 +334,7 @@ our $topmenu = MenuTree
 my %Chapter;
 
 sub menupage {
-  my ($menu, $curitem, $x) = @_;
+  my ($menu, $curitem, $x, $noprint) = @_;
 
   my $file = $menu->file($curitem);
   if (!$file) {
@@ -339,7 +346,7 @@ sub menupage {
 
   my $is_chapter;
 
-  page $file, sub {
+  page HTML_ROOT . "/$file", sub {
     element 'title', $curitem;
     endTag 'head';
     body;
@@ -393,7 +400,9 @@ sub menupage {
 
     vskip 2;
     
-    element 'a', '[Print]', href => $print;
+    if (!$noprint) {
+      element 'a', '[Print]', href => $print;
+    }
     if (0 and $is_chapter) {
       my $ch = $file;
       $ch =~ s/\.html$/-ch.html/;
@@ -436,7 +445,7 @@ sub menupage {
     sub { hskip 2 };
   };
 
-  page $print, sub {
+  page HTML_ROOT . "/$print", sub {
     element 'title', $curitem;
     endTag 'head';
     body 10;
@@ -450,7 +459,8 @@ sub menupage {
       emptyTag 'hr';
     },
     sub { hskip 2 };
-  };
+  }
+    if !$noprint;
 };
 
 menupage $topmenu, 'News', sub {
@@ -467,23 +477,24 @@ menupage $topmenu, 'News', sub {
 
   element 'h1', 'Introduction';
 
-  element 'p', 'i am not against competition,
+  startTag 'p';
+  element 'i', 'i am not against competition,
 but i believe that this software project is unique.
 As far as i know, there is nothing else like it.
 For this reason, a little extra effort
 may be needed to understand what this software does and why
 it is important.';
+  endTag 'p';
 
-  element 'p', 'Our concern is with measuring and increasing
+  startTag 'p';
+  text 'Our concern is with measuring and increasing
 assessment quotient (AQ).
 Our test presents film segments and tests how consistantly you
 can be a witness.
 Aleader is the software used to administer the test.
 It combines a video player, annotation tools,
-and a scoring system into an easy to use GUI.';
-
-  startTag 'p';
-  text 'Aleader uses a non-mystical, statistical approach to measure
+and a scoring system into an easy to use GUI.
+ Aleader uses a statistical approach to measure
 situation assessment ability.
 This project is strictly non-profit.
 The software is licensed under the ';
@@ -497,6 +508,31 @@ The software is licensed under the ';
 
   element 'h1', "News";
 
+  startTag 'p';
+  text '[05 Jun 2003] The Illustrated Empathy Index is now online. ';
+  element 'a', 'Please take a look!', href => 'empathy.html';
+  endTag 'p';
+
+  startTag 'p';
+  text '[14 Apr 2003] The main user visible change in
+Aleader 0.9.2 is support for drag-n-drop.
+There are also lots of minor bug fixes.';
+  endTag 'p';
+  
+  startTag 'p';
+  text 'Instead of continuing to refine the Aleader software, the next
+priority is to build an emotion index on the web integrated
+with actual film clips.
+Everyone needs to be able to explore the empathy mapping using an
+average web browser without installing any special software.  ';
+  element 'i', 'This needs to be Seseme Street easy.';
+  endTag 'p';
+
+};
+
+menupage $topmenu, 'History', sub {
+  element 'h1', "Old News";
+  
   startTag 'p';
   text '[28 Feb 2003] Aleader 0.9.1 is out.
 The main change in this release is exam mode, which is greatly
@@ -514,6 +550,11 @@ binary packages from debian unstable.  Beta testing is needed.
 Please try it out.';
   endTag 'p';
 
+  element 'p', '[11 Jun 2002] After trying to discuss emotional
+intelligence for about a year, i am confident that
+this terminology is not suitable.
+Henceforce, "emotional intelligence" is changed to "situation assessment".';
+
   startTag 'p';
   text '[26 Apr 2002] Courtesy of the Institute of Management,
 Research & Technology here in Nashik, the results of our first
@@ -522,22 +563,19 @@ small research study are ';
   text '!';
   endTag 'p';
 
-};
-
-menupage $topmenu, 'History', sub {
-  element 'h1', "Old News";
-  
-  element 'p', '[11 Jun 2002] After trying to discuss emotional
-intelligence for about a year, i am confident that
-this terminology is not suitable.
-Henceforce, "emotional intelligence" is changed to "situation assessment".';
-
   startTag 'p';
   columns sub {
+    startTag 'p';
     text '[12 Feb 2002] We plan to start giving regular tests at a local
 college here in Maharashtra.  Since the mother tongue is Marathi,
 we are slowly translating the most important screens.  Here is an
 snapshot of our progress.';
+    endTag 'p';
+    startTag 'p';
+    element 'i', 'This plan was cancelled.  Aleader must work
+over the Internet.  If it can work over the Internet then it will
+work anywhere.';
+    endTag 'p';
   },
   sub { hskip 4 },
   sub {
@@ -590,13 +628,13 @@ sub grab_films {
   }
   for my $f (keys %Film) {
     my $fn = film_name($f);
-    run "cp $edir/$fn root/";
+    run "cp $edir/$fn root/vault/";
   }
 }
 
 sub film_link {
   my ($f) = @_;
-  element 'a', "v$Film{$f}", href => film_name($f);
+  element 'a', "v$Film{$f}", href => 'vault/' . film_name($f);
 }
 
 menupage $topmenu, 'Download', sub {
@@ -611,7 +649,7 @@ menupage $topmenu, 'Download', sub {
   };
 
   startTag 'p';
-  text 'If your computer is fast enough to playback VCD format films
+  text 'If your computer is fast enough to playback VCD films
 then you computer is fast enough to use Aleader.  Aleader is as
 portable as ';
   element 'a', 'Gtk+', href => 'http://gtk.org';
@@ -679,9 +717,9 @@ apt-get install aleader aleader-doc
   element 'h2', 'Documentation';
 
   startTag 'p';
-  element 'a', 'HTML', href => 'manual/index.html';
-  text ' | ';
   element 'a', 'PDF', href => 'manual/aleader.pdf';
+  text ' | ';
+  element 'a', 'HTML', href => 'manual/index.html';
   br;
   element 'small', '(PDF looks a _lot_ better than HTML)';
   endTag 'p';
@@ -818,7 +856,7 @@ fantasy to illuminate the structure of reality.';
   element 'h3', 'Combined Exemplar Statistics';
 
   element 'p', 'Here are the coverage statistics for
-the film exemplars finished so far.';
+the film exemplars finished so far:';
 
   startTag 'center';
   startTag 'table', border => 1;
@@ -831,7 +869,15 @@ the film exemplars finished so far.';
   element 'th', 'Complexity';
   endTag 'tr';
   startTag 'tr';
-  element 'td', '26 Feb 2002';
+  element 'td', '29 Mar 2003';
+  element 'td', '376';
+  element 'td', '79';
+  element 'td', '9';
+  element 'td', '74.7%';
+  element 'td', '4.035';
+  endTag 'tr';
+  startTag 'tr';
+  element 'td', '26 Feb 2003';
   element 'td', '437';
   element 'td', '98';
   element 'td', '39';
@@ -841,7 +887,38 @@ the film exemplars finished so far.';
   endTag 'table';
   endTag 'center';
 
-  element 'p', '58.2% coverage and 39 unknown is not very good.  i know.  We are working on it.';
+  startTag 'ul';
+  startLi;
+  text 'Situations - The total number of abstract situations.';
+  endLi;
+
+  startLi;
+  text 'Patterns - The number of (situation, emotion) entries
+in the empathy mapping.';
+  endLi;
+
+  startLi;
+  text 'Unknown - The number of abstract situations which have no
+matching sub-pattern in the empathy mapping.  Many of these are due
+to incomplete
+situations or broken joints.  Some of these are situations sequences
+which need to be classified and added to the empathy mapping.';
+  endLi;
+
+  startLi;
+  text 'Coverage - The percentage of entries which have actual examples
+in the films.  If no example can be found then the entry will be deleted.';
+  endLi;
+
+  startLi;
+  text 'Complexity - The weighted average complexity of the classified
+emotional content of the films.  Each entry in the empathy mapping
+is ranked by how specific is its abstract situation.';
+  endLi;
+  endTag 'ul';
+
+  element 'p', '57.8% coverage and 10 unknown is not very good.
+We know.  We are working on it.';
 };
 
 menupage $topmenu, 'Mailing Lists', sub {
@@ -995,13 +1072,9 @@ group of students, and a lot of time.';
 
   startTag 'p';
   text 'Once some studies are completed then we can approach
-business and government human resources departments.
-There are already successful companies in this sector such
-as those affiliated with ';
-  startTag 'a', href => 'http://www.eiconsortium.org';
-  text 'EI Consortium';
-  endTag 'a';
-  text '.  Anyone is welcome to do this -- the code
+professionals, the human resources department of business and government
+for screening management canidates.
+Anyone is welcome to do this -- the code
 is licensed under the ';
   element 'a', 'GPL', href=> 'http://www.gnu.org/copyleft/gpl.html';
   text ' -- so you can start your own AQ testing franchise, royalty free.';
@@ -1195,13 +1268,18 @@ in taking decisions and improve at situation assessment.';
 
 };
 
+do "./gen_empathy2.pl";
+die if $@;
+
+run "cp robots.txt root/";
+
 exit; # skip chapter generation
 
 for my $file (keys %Chapter) {
   my $ch = $file;
   $ch =~ s/\.html$/-ch.html/;
 
-  page $ch, sub {
+  page HTML_ROOT . "/$ch", sub {
     element 'title', $file;
     endTag 'head';
     body 10;
@@ -1224,8 +1302,3 @@ for my $file (keys %Chapter) {
 
 __END__
 
-This test is only concerned with situation assessment.  It leaves the
-question of choosing the perfect reaction up to your spontaneous
-creativity.
-
-Algorithmic definition of Happiness
