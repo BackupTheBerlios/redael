@@ -99,6 +99,31 @@ sub nth_ex {
   else { die $n; }
 }
 
+sub attention {
+  my ($s, $o) = @_;
+  
+  startTag 'table', border=>1, cellpadding=>3, cellspacing=>0;
+  startTag 'tr';
+  startTag 'th';
+  text 'subject: ';
+  nth $s;
+  endTag 'th';
+  startTag 'th';
+  text 'object: ';
+  nth $o;
+  endTag 'th';
+  endTag 'tr';
+  startTag 'tr';
+  startTag 'td';
+  nth_ex $s;
+  endTag 'td';
+  startTag 'td';
+  nth_ex $o;
+  endTag 'td';
+  endTag 'tr';
+  endTag 'table';
+}
+
 ##########################################################
 package MenuTree;
 
@@ -407,39 +432,78 @@ only *the* situation (singular).';
 
   element 'h2', 'Attention Configurations';
 
+  element 'p', 'Within the realm of compassionate individuality,
+there are various ways attention can be configured.  What
+are all the permutations?';
+
   startTag 'p';
-  text 'Note that each of the n';
-  element 'sup', 'th';
-  text ' person perspectives are a possible origin of the subject
-of attention.  Furthermore, the object of attention can ';
+  columns sub { attention 0,1 },
+    sub { hspace 2 },
+      sub {
+	text 'For example: "i am angry, but i am detached from
+my anger.  i am not allowing the anger to affect my behavior.
+The anger is an object of my attention."';
+      };
   endTag 'p';
 
+  startTag 'p';
+  columns sub { attention 1,3 },
+    sub { hspace 2 },
+      sub {
+	text 'Perhaps the most obvious example of empathy is
+what happens when watching a film.  A film is nothing but ';
+	nth 3;
+	text ' person perspective, images and sound.  However,
+people can easily empathize with the characters and feel a
+precise replica of the emotions depicted onscreen.  The emotion
+is the subject and the film is the object.';
+      };
+  endTag 'p';
+
+  element 'p', 'The following table summarizes all the sensical
+configurations:';
+
+  startTag 'center';
   columns sub {
-    startTag 'table', border=>1, cellpadding=>3, cellspacing=>0;
-    startTag 'tr';
-    startTag 'th';
-    text 'subject: ';
-    nth(0);
-    endTag 'th';
-    startTag 'th';
-    text 'object: ';
-    nth(1);
-    endTag 'th';
-    endTag 'tr';
-    startTag 'tr';
-    element 'td', 'I am';
-    element 'td', 'emotion';
-    endTag 'tr';
-    endTag 'table';
+    emptyTag 'img', src=>'art/trident.png', alt=>'Attention Trident';
   },
-  sub { hspace 2 },
+  sub { hspace 10 },
   sub {
-    text 'For example i am angry, but i am detached.';
+    startTag 'p';
+    columns sub { text '(a) ' },
+    sub { text 'detachment'; attention 0,1 };
+    endTag 'p';
+
+    startTag 'p';
+    columns sub { text '(b) ' },
+    sub { text 'empathy'; attention 1,3 },
+    sub { hspace 3 },
+    sub { text 'emotional intelligence'; attention 3,1 };
+    endTag 'p';
+
+    startTag 'p';
+    columns sub { text '(c) ' },
+    sub { text 'prerequisite'; attention 1,2 },
+    sub { hspace 3 },
+    sub { text 'transformative pressure'; attention 2,1 };
+    endTag 'p';
+
+    startTag 'p';
+    columns sub { text '(d) ' },
+    sub { text 'self-realization'; attention 0,0 },
+    sub { hspace 6 },
+    sub { text '(e) ' },
+    sub { text 'divine expression'; attention 1,0 };
+    endTag 'p';
   };
+  endTag 'center';
 };
 
 __END__
 
-
-
-
+  startTag 'p';
+  text 'By definition, each of the n';
+  element 'sup', 'th';
+  text ' person perspectives are a possible origin of the subject.
+A few configurations don't make sense.';
+  endTag 'p';
