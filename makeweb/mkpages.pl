@@ -291,23 +291,31 @@ then you may attempt the following steps:';
 going to need help.';
 
   startTag 'p';
-  startTag 'a', 'href', 'http://gtk.org/download/';
-  emptyTag 'img', 'src', 'art/gnomelogo.png', 'alt', 'Gnome', 'border', 0;
-  endTag 'a';
-  br;
-  text 'Get the current CVS for glib, atk, pango, and gtk+.  Apply
+  columns sub {
+    startTag 'a', 'href', 'http://gtk.org/download/';
+    emptyTag 'img', 'src', 'art/gnomelogo.png', 'alt', 'Gnome', 'border', 0;
+    endTag 'a';
+  },
+  sub { hspace 2 },
+  sub {
+    text 'Get the current CVS for glib, atk, pango, and gtk+.  Apply
 this patch for 64-bit parameters.  Follow the directions in HACKING
 to build from CVS sources.';   # XXX
+  };
   endTag 'p';
 
   startTag 'p';
-  startTag 'a', 'href', 'http://www.gstreamer.net/';
-  emptyTag 'img', 'src', 'art/gstlogo.png', 'alt', 'Gstreamer', 'border', 0;
-  endTag 'a';
-  br;
-  text 'Get the current CVS for gstreamer.  Apply this patch for
+  columns sub {
+    startTag 'a', 'href', 'http://www.gstreamer.net/';
+    emptyTag 'img', 'src', 'art/gstlogo.png', 'alt', 'Gstreamer', 'border', 0;
+    endTag 'a';
+  },
+  sub { hspace 2 },
+  sub {
+    text 'Get the current CVS for gstreamer.  Apply this patch for
 large file support.  You need to install the libraries: mpeg2dec, a52dec,
 and Hermes.  Build gstreamer with --enable-glib2.';
+  };
   endTag 'p';
 
   element 'p', 'Download the latest snapshot of redael.  Add salt to taste.';
