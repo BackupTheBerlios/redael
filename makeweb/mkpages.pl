@@ -162,14 +162,15 @@ package main;
 ##########################################################
 
 page 'index.html', sub {
-  element 'title', 'Complete, Integrated Self Awareness';
+  my $title = 'Complete Integrated Self Awareness';
+  element 'title', $title;
   endTag 'head';
 
   body();
 
   startTag 'center';
   vskip 1;
-  element 'h1', 'Complete, Integrated Personality Development';
+  element 'h1', $title;
 
   startTag 'table', 'border', 0, 'cellpadding', 25;
   startTag 'tr';
