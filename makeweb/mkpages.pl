@@ -214,7 +214,7 @@ sub menupage {
     endTag 'head';
     body;
 
-    startTag 'table', 'border', 0, cellspacing => 0, cellpadding => 4;
+    startTag 'table', 'border', 0, cellspacing => 0, cellpadding => 3;
     startTag 'tr';
 
     startTag 'td', 'valign', 'top', 'bgcolor', '#ccffcc';
@@ -243,6 +243,10 @@ sub menupage {
     
     endTag 'td';
     
+    startTag 'td', 'valign', 'top', 'bgcolor', '#ffcccc';
+    hspace;
+    endTag 'td';
+
     startTag 'td', 'valign', 'top';
     
     $x->();
