@@ -576,8 +576,37 @@ table above because synchronization is accomplished with byte-offsets
 instead of time-offsets.  This will be fixed as soon as possible.';
   endTag 'p';
 
-  element 'p', 'Films which will not be analyzed here: most comedy, action,
-and horror genres (unless especially insightful).';
+  element 'p', 'Films which will not be analyzed here: most comedy, horror,
+and action movies (unless especially insightful).  Why not?  Because these
+films generally offer a monotonous emotional structure.  Consider the
+following chart:';
+
+  startTag 'center';
+
+  startTag 'table', border => 1;
+  startTag 'tr';
+  element 'th', 'Film Genre';
+  element 'th', 'Situation';
+  endTag 'tr';
+
+  startTag 'tr';
+  element 'td', 'comedy';
+  element 'td', '[0] observes [-]';
+  endTag 'tr';
+
+  startTag 'tr';
+  element 'td', 'horror';
+  element 'td', '[-] is made uneasy by [0]';
+  endTag 'tr';
+
+  startTag 'tr';
+  element 'td', 'action';
+  element 'td', '[+] exposes [-]';
+  endTag 'tr';
+
+  endTag 'table';
+
+  endTag 'center';
 
   element 'p', "Films under consideration for future analysis: Any Given
 Sunday, Devil's Advocate, Ghost, American Werewolf in Paris, or serious Hindi
