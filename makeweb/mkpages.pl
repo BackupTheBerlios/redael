@@ -183,6 +183,8 @@ sub attention {
   endTag 'table';
 }
 
+sub EICOLOR { '#006600' }
+
 ##########################################################
 package MenuTree;
 
@@ -225,24 +227,15 @@ page 'index.html', sub {
   startTag 'tr';
   
   startTag 'td', 'align', 'center', valign=>'bottom';
-  img 'art/mensa.png', 'Mensa Logo', border => 0;
-  br;
-  text 'IQ: ';
-  element 'a', 'Mental Intelligence', 'href', 'http://www.mensa.org';
-  endTag 'td';
-  
-  startTag 'td', 'align', 'center', valign=>'bottom';
   img 'art/about_sy_chart.png', 'Chakra System', border=>0;
   br;
-  text 'SQ: ';
-  element 'a', 'Spiritual Intelligence', 'href', 'http://sahajayoga.org';
+  element 'a', 'En Masse Self-Realization', 'href', 'http://sahajayoga.org';
   endTag 'td';
   
   startTag 'td', 'align', 'center', valign=>'bottom';
   img 'art/trident.png', 'Attention Trident', border => 0;
   br;
-  text 'EQ: ';
-  element 'a', 'Emotional Intelligence', 'href', 'news.html';
+  element 'a', 'Situation Assessment', 'href', 'news.html';
   endTag 'td';
   
   endTag 'tr';
@@ -267,7 +260,7 @@ our $topmenu = MenuTree
 	 ],
 	 ['Documentation'     => 'doc.html',
 	  [
-	   ['Introduction'    => 'doc-intro.html'],
+	   ['Acknowledgment'  => 'doc-intro.html'],
 	   ['Getting Started' => 'doc-starting.html'],
 	   ['Film'            => 'doc-film.html'],
 	   ['Situation'       => 'doc-situation.html'],
@@ -544,22 +537,29 @@ menupage $topmenu, 'News', sub {
   endTag 'center';
 
   element 'h1', 'Introduction';
+
+  element 'p', "Personality tests generally focus on the student's
+reaction to a given situation.
+Certainly choosing the correct reaction *is* important.
+However, deciding on a reaction depends on assessing
+the situation accurately.
+If your perfect reaction is based on a misreading of the situation
+then how can you expect to act effectively?";
+
   element 'p', 'Our concern is with measuring and increasing
-EQ score (emotional quotient or emotional intelligence).
-EQ is important because it is closely correlated with building
-successful businesses and efficient organizations.
-Even so, this project is strictly non-profit.  We aim to deliver a
-complete software platform at minimal cost (currently zero dollars),
-which is suitable for driving both commercial and non-commercial ventures.';
-  
+AQ (assessment quotient).
+Our test presents film segments and tests how consistantly you
+can be a witness.
+Redael is the software used to administer the test.
+It combines a video player, annotation tools,
+and a scoring system into an easy to use GUI.';
+
   startTag 'p';
-  text 'Our approach is to study films to test how consistantly you
-can be a witness.  Redael is the software package used to administer the test.
-It combines a video player (MPEG1/MPEG2), annotation tools,
-and a scoring system into an easy to use GUI.
-This software is licensed under the ';
+  text 'This project is strictly non-profit.
+The software is licensed under the ';
   element 'a', 'GPL', 'href', 'http://www.gnu.org/philosophy/philosophy.html';
-  text ' and is available from the download page.';
+  text ' and is freely available from the download page.
+Even so, we expect that Redael will also be useful in commercial ventures.';
   endTag 'p';
   
   element 'h1', "News";
@@ -586,7 +586,7 @@ menupage $topmenu, 'History', sub {
   startTag 'p';
   columns sub {
     text '[12 Feb 2002] We plan to start giving regular tests at a local
-college here in Maharashtra.  Since the main language is Marathi,
+college here in Maharashtra.  Since the mother tongue is Marathi,
 we are slowly translating the most important screens.  Here is an
 snapshot of our progress.';
   },
@@ -601,7 +601,7 @@ for Debian i386.';
 
   startTag 'p';
   text '[5 Dec 2001] Assuming the cooperation of upstream
-libraries, a binary release of redael will be made
+libraries, a binary release of Redael will be made
 within a few months (1Q02).  As part of the release,
 i would very much like to make available
 some exemplar annotations. However, this will depend upon
@@ -746,6 +746,7 @@ instructions for your operating system.';
   element 'td', 'soon';
   endTag 'tr';
 
+  if (0) {
   startTag 'tr';
   startTag 'td';
   text 'Hum Dil De Chuke Sanam (1999)';
@@ -756,6 +757,7 @@ instructions for your operating system.';
   element 'td', 'VCD';
   element 'td', 'soon';
   endTag 'tr';
+  }
 
   endTag 'table';
 
@@ -803,7 +805,7 @@ following chart:';
   startTag 'i';
   text 'Even if a film is excellent and entertaining,
 these genres probably do not offer enough emotional complexity
-to serve as a basis for redael annotations.';
+to serve as a basis for Redael annotations.';
   endTag 'i';
   endTag 'blockquote';
 
@@ -861,7 +863,7 @@ menupage $topmenu, 'Unix', sub {
   element 'h1', 'Generic Unix Installation';
 
   element 'p', 'If your operating system is not listed then you
-can compile redael from source code.';
+can compile Redael from source code.';
 
   startTag 'p';
   columns sub {
@@ -894,7 +896,7 @@ version 0.3.2 or later yet.  You must use version 0.3.1.';
 
   startTag 'p';
   startTag 'a', href=>'http://developer.berlios.de/project/filelist.php?group_id=167';
-  text 'Download the latest snapshot of redael source code.';
+  text 'Download the latest snapshot of Redael source code.';
   endTag 'a';
   endTag 'p';
 };
@@ -922,7 +924,7 @@ elements for making annotations and advanced features for scoring.';
   startTag 'li';
   element 'p', 'A student can be tested against an exemplar film annotation.
 Once the user interface is mastered, as little as one hour is required
-for a rough EQ estimate.';
+for a rough AQ estimate.';
   endTag 'li';
 
   startTag 'li';
@@ -935,39 +937,19 @@ at least a man-month of effort.';
   endTag 'ol';
 };
 
-menupage $topmenu, 'Introduction', sub {
-  element 'h1', 'Introduction';
-
-  element 'p', 'What is the best test design for ranking emotional
-intelligence?';
-
-  element 'p', "Most tests focus on the student's
-reaction to a *given* situation.
-Certainly choosing the correct reaction *is*
-important.  However, deciding on a reaction depends on assessing
-the situation accurately.
-If your perfect reaction is based on a misreading of the situation
-then how can you expect to communicate effectively?";
+menupage $topmenu, 'Acknowledgment', sub {
+  element 'h1', 'Acknowledgment';
 
   startTag 'p';
-  text 'Even if the term "emotional intelligence" encompasses
-both ';
-  element 'i', 'situation assessment';
-  text ' and ';
-  element 'i', 'choosing a reaction';
-  text ', assessment is the more
-urgent part.  Therefore, the redael test concentrates only on
-situation assessment and leaves the question of choosing
-the perfect reaction up to your spontaneous creativity.';
-  endTag 'p';
-
-  element 'h2', 'Acknowledgment';
-
-  element 'p', 'In scientific literature, it customary to provide
+  text 'In scientific literature, it customary to provide
 a bibliography of related research.  However, i am forced to break
 with this convention because i can hardly make a short
 list of people whose contribution i should acknowledge.
-i have drawn inspiration from too many sources.';
+i have drawn inspiration from too many sources.  The best i can
+do is refer you to the ';
+  element 'a', 'philosophy page', href => 'philo.html';
+  text '.';
+  endTag 'p';
 
   element 'p', 'i have given my life for this research,
 put everything into it, every moment,
@@ -978,7 +960,7 @@ a transcriber for the Author of All.';
 menupage $topmenu, 'Getting Started', sub {
   element 'h1', 'Getting Started';
 
-  element 'p', 'The most important feature of redael is that you
+  element 'p', 'The most important feature of Redael is that you
 do not have to understand *why* it works to benefit.  All you have to do is
 gain practical experience using it.  Moreover, you are welcome to
 use standard test-taking techniques to improve your score.';
@@ -1070,7 +1052,7 @@ pick a different film.";
 
   startTag 'li';
   startTag 'p';
-  text 'Load your transcript and film together in redael.';
+  text 'Load your transcript and film together in Redael.';
   endTag 'p';
   endTag 'li';
 
@@ -1198,7 +1180,7 @@ offers a convenient summary of duration status.';
   endTag 'p';
 
   element 'p', "Each joint has particular characteristics.  (This is
-really hard to understand until you actually use redael so don't worry
+really hard to understand until you actually use Redael so don't worry
 if it doesn't make much sense.)";
 
   startTag 'p';
@@ -1272,7 +1254,7 @@ might be entirely different.';
 
   element 'p', "Joint characteristics are enforced by a set of rules
 written in a simple if-then language.  These rules are loaded at
-redael startup.  If you don't like the default rules then you can
+Redael startup.  If you don't like the default rules then you can
 customize them.";
 
   element 'p', 'In any case, the scoring algorithm only distinguishes
@@ -1285,7 +1267,7 @@ menupage $topmenu, 'X-Reference', sub {
 
   element 'p', 'Once you have annotated the film in the 3rd person then you can
 create empathy patterns to translate back into the 1st person
-perspective.  This completes the empathy <---> emotional intelligence cycle.';
+perspective.  This completes the empathy <---> situation assessment cycle.';
 
   startTag 'p';
   img 'art/crossref.png', 'Cross Reference', border=>0;
@@ -1293,7 +1275,7 @@ perspective.  This completes the empathy <---> emotional intelligence cycle.';
 
   element 'p', "About 110 patterns have been gathered based on
 a comparison of annotations from three films, however, this work was
-done before i wrote redael.  With redael's help, we should be able
+done before i wrote Redael.  With Redael's help, we should be able
 to develop a larger and more consistent collection of patterns.
 (Your help is needed. :-)";
 
@@ -1329,20 +1311,20 @@ and verified then students can be tested against it.';
   endTag 'p';
   endTag 'center';
 
-  element 'p', 'Exam Status: The heart of redael is the score
-calculation.  The definition of EQ is:
-"# of correctly categorized situations" per hour.
+  element 'p', 'Exam Status: The heart of Redael is the score
+calculation.  The definition of AQ is:
+"# of correctly categorized situations per hour."
 Here is an example of an exam in progress.';
 
   columns sub {
     element 'p', '"Changed" is the number of situations
 which the student has *potentially*
-categorized correctly.  "Ideal EQ" is the EQ which the student
+categorized correctly.  "Ideal AQ" is the AQ which the student
 could have gotten if he had actually categorized the situations perfectly.
-"EQ" is the actual EQ.  "Speed" is a recommendation based on
+"AQ" is the actual AQ.  "Speed" is a recommendation based on
 whether the student is making a good trade-off between speed and accuracy.
-If the accuracy is too low (lots of errors) then redael will suggest
-"Go Slower".  If the accuracy is too high (no errors) then redael will
+If the accuracy is too low (lots of errors) then Redael will suggest
+"Go Slower".  If the accuracy is too high (no errors) then Redael will
 suggest "Go Faster".';
   },
   sub { hskip 4 },
@@ -1352,8 +1334,8 @@ suggest "Go Faster".';
 
   columns sub {
     element 'p', 'In this case, the student needs to spend
-more time working on accuracy since the actual EQ is about 10%
-of the Ideal EQ (84.9 * 10% = 8.4 > 8.26).';
+more time working on accuracy since the actual AQ is about 10%
+of the Ideal AQ (84.9 * 10% = 8.4 > 8.26).';
   }, 
   sub { hskip 4 },
   sub {
@@ -1362,10 +1344,10 @@ of the Ideal EQ (84.9 * 10% = 8.4 > 8.26).';
 
   startTag 'p';
   columns sub {
-    element 'p', 'Ideal EQ is a function of "Elapse Time" and "Changed".
+    element 'p', 'Ideal AQ is a function of "Elapse Time" and "Changed".
 The table (right side) offers some examples of this function.
 Notice that both 5 situations in 5 minutes and
-25 situations in 25 minutes give an Ideal EQ of 60.  This
+25 situations in 25 minutes give an Ideal AQ of 60.  This
 makes sense because one situation per minute is 60 situations per hour.';
     element 'p', 'It is hard to score above 60 without practicing the test in advance.';
   },
@@ -1401,10 +1383,10 @@ makes sense because one situation per minute is 60 situations per hour.';
   endTag 'p';
 
   columns sub {
-    element 'p', 'Here is another example.  The EQ is almost the
-same as the Ideal EQ, so redael recommends "Go Faster".  By
-going faster, the student will do two things: raise the Ideal EQ
-and make slightly more mistakes.  Overall, the EQ score should
+    element 'p', 'Here is another example.  The AQ is almost the
+same as the Ideal AQ, so Redael recommends "Go Faster".  By
+going faster, the student will do two things: raise the Ideal AQ
+and make slightly more mistakes.  Overall, the AQ score should
 improve by balancing speed and accuracy.';
   },
   sub { hskip 4 },
@@ -1482,7 +1464,7 @@ is whether it provides a one-to-one mapping between abstract situations
 and abstract emotions.
 
 A one-to-one mapping provides an inverse-of-empathy mapping
-(emotional intelligence) which can then be seen, understood,
+(situation assessment) which can then be seen, understood,
 and tested against.';
 
   element 'p',  'Use the Cross Reference screen to check
@@ -1544,13 +1526,14 @@ menupage $topmenu, 'Mailing Lists', sub {
 menupage $topmenu, 'High Scores', sub {
   element 'h1', 'Scores';
 
-  element 'p', 'This page contains a compilation of EQ test results.
+  element 'p', 'This page contains a compilation of AQ test results.
 Send email with
 your results to get listed here.  Obviously you can forge any results,
 however, honesty can keep this page somewhat useful.  Certified results
 obtained through professional testing methods will be placed on a different
 web page.';
 
+if (0) {
   startTag 'center';
 
   startTag 'table', border=>1, cellpadding=>4;
@@ -1561,7 +1544,7 @@ web page.';
   element 'th', 'Location';
   element 'th', 'Film';
   element 'th', 'Match';
-  element 'th', 'EQ';
+  element 'th', 'AQ';
   element 'th', 'Note';
   endTag 'tr';
   
@@ -1586,6 +1569,7 @@ web page.';
   endTag 'blockquote';
 
   endTag 'center';
+}
 };
 
 menupage $topmenu, 'Philosophy', sub {
@@ -1602,16 +1586,15 @@ menupage $topmenu, 'Philosophy', sub {
 concepts expressing fundamental beliefs.';
   endTag 'blockquote';
 
-  element 'h1', 'The Need For a Model';
+  element 'h1', 'Meta Yoga';
 
-  element 'p', "We can't see ourselves apart from ourselves.
-To understand life, it is necessary to develop a *model* --
-a description or analogy -- to help visualize something that
-cannot be directly observed.  A model is a miniature representation,
-and a *good* model confers tangible insight into reality and joy.";
-
-  element 'p', 'The rest of this page offers a philosophical
-justification of the model used by redael.';
+  element 'p', 'Yoga is an ancient sanskrit word which
+means approximately "union with the divine."  Our interest
+here is with *meta* yoga -- the foundation of yoga --
+in other words,
+to present a secular model of reality on which yoga is seen to take place.
+Any such model is a miniature representation, and a *good* model
+confers tangible insight into reality and joy.';
 
   element 'h2', 'Categories of Feeling';
 
@@ -1640,6 +1623,10 @@ here are as follows:';
 spirit, and compassion.";
   endTag 'li';
   endTag 'ul';
+
+  element 'p', "(`Thoughts' are defined as emotions about the future.
+Even so, distinguishing between thought and emotion is not necessary
+for this discussion. Here `emotion' is meant inclusive of thought.)";
 
   element 'h2', 'Compassion';
 
@@ -1753,9 +1740,9 @@ is the object and emotion is the subject, hence "empathy."';
   columns sub { attention 3,1 },
     sub { hskip 2 },
       sub {
-	startTag 'font', color=>'#006600';
+	startTag 'font', color=> EICOLOR;
 	text '"Based on how i feel, what is the structural situation?"
-This style of question is repeatedly posed in redael annotations.';
+This style of question is repeatedly posed in Redael annotations.';
 	endTag 'font';
       };
   endTag 'p';
@@ -1767,8 +1754,8 @@ This style of question is repeatedly posed in redael annotations.';
   sub {
     text '"What are other people doing?"  Extra-ordinary personal
 preference and fashions are expressions of this configuration of
-attention.  "Everyone is going to the pub therefore i will also
-go to the pub."';
+attention.  For example, "Everyone is going to the pub therefore
+i will also go to the pub."';
   };
   endTag 'p';
 
@@ -1776,18 +1763,16 @@ go to the pub."';
   columns sub { attention 2,1 },
   sub { hskip 2 },
   sub {
-     text '"How would [XXX] feel to solve a given problem?"
-Replace [XXX] with any of: Ganesha, Krishna, Rama, Jesus the Christ, Buddha,
-Mahavira, Lao Zi, etc.  In other words, how would an ideal
-role-model feel in a given situation?';
+     text 'How would an ideal personality behave?
+For example, "How would my mother behave in my place?"  Parents
+or great teachers of morality can serve as a role-model.';
   };
   endTag 'p';
 
   element 'p', "The word 'character' generally indicates the
-relationship between emotion and personality:  A person with
-sound character behaves in accord with ideal principles.  A
-person with poor character will often follow whims or
-trends.";
+relationship between emotion and personality: 
+A person with poor character will often follow whims or trends.
+A person with sound character behaves in accord with ideal principles.";
 
   startTag 'p';
   columns sub { attention 0,0 },
@@ -1796,8 +1781,9 @@ trends.";
 	text "If you have *not* experienced self-realization then
 please visit a local ";
 	element 'a', 'Sahaja Yoga', href=>'http://sahajayoga.org';
-	text " center and feel the divine cool breeze.  You can't
-really understand philosophy unless and until you take your second birth.";
+	text " center and feel the divine cool breeze.
+Self-realization will turn this theoretical discussion
+into your living reality.";
       };
   endTag 'p';
 
@@ -1806,9 +1792,10 @@ really understand philosophy unless and until you take your second birth.";
     sub { hskip 2 },
       sub {
 	text 'While practicing true meditation, i focus my attention on
-the Whole (a.k.a. the pure spirit).  After meditation, part of my attention remains
-connected with the Whole, thereby enlightening the experience of individuality.
-This divine expression makes individuality most beautiful and enjoyable,
+the pure spirit.  After meditation, part of my attention remains
+connected with the spirit, thereby enlightening the experience
+of individuality.
+Divine expression makes individuality most beautiful and enjoyable,
 much more so than any physical or mental amusement.';
       };
   endTag 'p';
@@ -1853,8 +1840,8 @@ configurations:';
     sub { hskip 6 },
     sub { text '(c) ' },
     sub {
-      startTag 'font', color=>'#006600';
-      text 'emotional intelligence';
+      startTag 'font', color=> EICOLOR;
+      text 'situation assessment';
       endTag 'font';
       attention 3,1 };
     endTag 'p';
@@ -1880,52 +1867,95 @@ configurations:';
   element 'h2', 'Toward Self-Identity';
 
   columns sub {
-  element 'p', 'Our goal is divine expression (g) -- to manifest heaven
-on earth.  However, the only way to invite divine expression is via
-self-realization (f).  Only after self-realization does divine
-expression flow, and only for a short time.  We need a way to
-easily and consistently place our attention in the configuration
-of self-realization (f).';
+  element 'p', 'Our goal is divine expression (g).
+The challenge is to get the attention focused on pure spirit.
+Self-realization (f) is the only configuration to accomplish this
+(pure spirit as an object).
+Even so, the attention quickly flows outward into other configurations
+and the divine quality (g) of attention is soon dilute.';
 
     element 'p', '
-The problem with seeking self-realization (f)
-is that the actual
-self (the original subject or the pure spirit) cannot appear as an object,
-by definition.  The spirit is the *subject*.  So to realize the self, we have
-to use divine intelligence.';
+To restart the divine flow, we need a way to consistently
+place our attention in the configuration of self-realization (f).
+The problem with seeking self-realization (f) is that the attention
+is lost in seemingly infinite variations of experience.
+Detachment (a) is essential to elminate the confusion.
+This configuration (a) is unique because the pure spirit is present
+as the subject.  None of the other accessible configurations
+directly involve the pure spirit.';
 
+    element 'p', '
+By aligning the attention as soothing detachment (a) with respect to
+the complete octave of emotions, no significant object remains.
+The attention ceases to be a vector and resolves to
+the point of self-realization (f).
+"The spirit is like the steady axis of a wheel. If
+our attention reaches the immovable firm axis at the very centre of the
+wheel of our existence (which is constantly moving), we become
+enlightened by the spirit, the source of inner peace, and reach a state
+of complete calm and self-knowledge." (H. H. Shri Mataji)';
+
+    element 'p', '
+If detachment (a) supports self-realization (f) then
+what kind of experiences support detachment (a)?
+The pressures of daily life keep attention bouncing
+around the various configurations.
+At least the emotions can be kept as the object of
+attention.  If emotion is the object then the attention is
+already halfway configured as detachment (a).';
+
+    startTag 'p';
+    text 'While having some importance,
+empathy (b) and following everyone else (d) need not
+be full-time pursuits.  The two remaining attention configurations
+take emotion as the object: (c) and (e).
+Studying an ideal role-model (e)
+is one of the special configurations, however, here we are
+concerned exclusively with ';
+    element 'font', 'situation assessment (c)', color=>EICOLOR;
+    text '.';
+    endTag 'p';
   },
   sub { hskip 4 },
   sub {
-    img 'art/trident.png', 'Attention Trident';
-  };
+    startTag 'center';
+    element 'h3', 'Summary';
+    endTag 'center';
 
-  columns sub {
-    element 'p', "The most direct approach is to concentrate all the
-attention as emotional detachment (a) while soothing the emotions
-down.  As the significance of emotions fade, the attention vector resolves to a point (f) and the actual self is experienced.
-However, this approach is not generally practical.
-The pressures of daily life keep the attention bouncing
-around the various other configurations.  It is necessary to
+    startTag 'ul';
+    startLi;
+    text 'Self-realization (f) converts to divine expression (g), but
+divine expression is soon diluted by subsequent experiences.';
+    endLi;
 
-study all the configurations of attention so that we can *aim*
-our attention at self-realization (f) no matter how attention is
-momentarily configured.";
+    startLi;
+    text 'Only detachment (a) can lead to self-realization (f).';
+    endLi;
 
-  element 'p', 'At least the emotions can be kept as the object of
-attention.  If emotion is the object then the attention has a
-chance to settle into emotional detachment (a) and spontaneously
-resolve into self-identity (f).  
-Besides actual emotional detechment (a), there are two other
-attention configurations which consider emotion as an
-object: (c) and (e).  Studying an ideal role-model (e)
-is one of the special configurations, however, here we are concerned
-exclusively with emotional intelligence (c).';
+    startLi;
+    text 'Detachment (a) demands a precise understanding
+of emotions.';
+    endLi;
 
-  },
-  sub { hskip 4 },
-  sub {
+    startLi;
+    text 'Detachment (a) is supported when emotion is the
+object of attention.';
+    endLi;
+
+    startTag 'center';
     img 'art/trident-sr.png', "Emotion as Object";
+    endTag 'center';
+
+    startLi;
+
+    text 'The configurations ';
+    element 'font', 'situation assessment (c)', color=>EICOLOR;
+    text ' and ideal role-model (e) both take emotion as
+the object of attention.';
+
+    endLi;
+
+    endTag 'ul';
   };
 };
 
@@ -1955,9 +1985,8 @@ people are called "autistic".)';
 
   startTag 'li';
   startTag 'p';
-  text 'Emotional Intelligence is the factor which allows one to
-envision a
-situation from the 3rd person perspective.  The Situation screen
+  text 'AQ (assessment quoient) is the factor which allows one to
+envision the 3rd person situation.  The Situation screen
 records the structural parameters of the situation.  The
 Joint screens record any relationships between situations.';
   endTag 'p';
@@ -1983,8 +2012,7 @@ situation "before ';
 [+] exposes ';
 element 'b', '[-]';
   text '".  Since emotions are often repeated, pattern classifications
-can be established with some certainty.  As few as two or three repetitions
-are generally sufficient.';
+can be established with certainty.';
   endTag 'p';
   endTag 'li';
 
@@ -2009,7 +2037,7 @@ abstract representation is a fairly accurate distillation of the film.';
   startTag 'p';
   text "During an examination session, the automated facilities relating to
 abstract emotions are disabled (step 3).  
-A student's capacity for (2) emotional intelligence is tested intensively.";
+A student's AQ (assessment quotient) is tested intensively.";
   endTag 'p';
 
 if (0){
@@ -2025,7 +2053,7 @@ is whether it provides a one-to-one mapping between abstract situations
 and abstract emotions.  If the mapping is one-to-one then the model
 can be taken as equal to the actual empathy sense.  Moreover, a
 one-to-one mapping exposes the inverse-of-empathy mechanism
-(emotional intelligence) which can then be seen, understood, and
+(situation assessment) which can then be seen, understood, and
 tested against.';
 
   element 'p', 'So what is the *best* model to use for recording
@@ -2045,7 +2073,7 @@ equation, a solution is revealed.';
   startLi;  
   text 'Be specific about our terms.  Situation can be the object
 of attention (as with empathy) or the subject of attention (as with
-emotional intelligence).';
+situation assessment).';
   endLi;
   startLi;
   text 'For the case of the situation as a subject, we can
@@ -2090,7 +2118,7 @@ menupage $topmenu, 'Research & Professional', sub {
   startTag 'p';
   text 'This project should be of interest to lots of research grants,
 and there is plenty of work to do.
-The methodology used in redael has only been tested on
+The methodology used in Redael has only been tested on
 a hand-full of people.  Larger scale scientific studies are needed
 to better reveal its effectiveness. ';
   text 'There are basically two things which need to be
@@ -2101,17 +2129,19 @@ established statistically:';
   startTag 'ul';
   startLi;
   text 'How many hours of practice does it take to produce
-an accurate EQ score?';
+an accurate AQ score?';
   br;
   text '(i speculate that accuracy will emerge
 after the 2nd or 3rd attempt.)';
   endLi;
   startLi;
-  text 'Does well does our EQ score correlate with actual career
+  text 'Does well does our AQ score correlate with career
 performance?';
   br;
-  text '(Once scores are measured then i expect *excellent*
-correlation between the EQ score actual career performance.)';
+  text '(Personality development has shown significant
+correlation with career performance.  Therefore, AQ should
+also show significant correlation because it is a prerequisite
+for developing the personality.)';
   endLi;
   endTag 'ul';
 
@@ -2128,7 +2158,7 @@ group of students, and time commitment.';
   text '  For example, see the study we did at '; element 'a', 'IMRT', href=>'imrt.html'; text '.';
   endTag 'p';
 
-  element 'h2', 'Certified EQ Testing';
+  element 'h2', 'Certified AQ Testing';
 
   startTag 'p';
   text 'Once some studies are completed then we can approach
@@ -2141,7 +2171,7 @@ as those affiliated with ';
   text '.  Anyone is welcome to do this -- the code
 is licensed under the ';
   element 'a', 'GPL', href=> 'http://www.gnu.org/copyleft/gpl.html';
-  text ' -- so you can start your own EQ testing franchise, royalty free.';
+  text ' -- so you can start your own AQ testing franchise, royalty free.';
   endTag 'p';
 };
 
@@ -2194,7 +2224,7 @@ test.  During the test, we asked each student to give answers for
   element 'th', 'Enough Time?';
   element 'th', 'Time';
   startTag 'th'; hskip 1; endTag 'th';
-  element 'th', 'EQ';
+  element 'th', 'AQ';
   element 'th', 'Rank';
   endTag 'tr';
 
@@ -2230,10 +2260,12 @@ test.  During the test, we asked each student to give answers for
   }
   endTag 'table';
 
-  element 'p', 'The maximum EQ one can achieve is 60.';
+  element 'p', 'The maximum AQ one can achieve is 60.';
 
   element 'p', 'We gave a "Post-Test Evaluation".  Here are
-some examples of the response we received:';
+some examples of the response we received.  [Note: The
+statistic was called "emotional intelligence" instead of
+"situation assessment" when these evaluations were written.]';
 
   columns sub {
     thumb 'art/posttest1.jpg', 'Bhagade Arun Ramdas';
@@ -2276,8 +2308,8 @@ very much.  There is nothing to dislike about this test but
 i want more information regarding situations.';
   };
 
-  element 'p', 'We did find one error in the answer key.
-Most of the students disagreed with my understanding of
+  element 'p', 'We did find one problem in the answer key.
+Most of the students disagreed with my assessment of
 situation #15.  Since the answer key should express the
 majority opinion, the answer key was updated, clarified,
 and the scores were recalculated.';
@@ -2331,3 +2363,8 @@ for my $file (keys %Chapter) {
 };
 
 __END__
+
+This test is only concerned with situation assessment.  It leaves the
+question of choosing the perfect reaction up to your spontaneous
+creativity.
+
