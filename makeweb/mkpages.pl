@@ -1018,14 +1018,14 @@ both ';
   text ' and ';
   element 'i', 'choosing a reaction';
   text ', assessment is the more
-urgent part.  Therefore, the redael test concentrates on
-situation asseessment and leaves the question of choosing a
-reaction up to your spontaneous creativity.';
+urgent part.  Therefore, the redael test concentrates only on
+situation asseessment and leaves the question of choosing
+the perfect reaction up to your spontaneous creativity.';
   endTag 'p';
 
   element 'p', 'If, even after mastering situation assessment, you
 still want to study the variety of possible reactions then you
-can always come back to training systems similar to the above example.';
+can always come back to tests built similar to the above example.';
 };
 
 menupage $topmenu, 'Getting Started', sub {
@@ -2005,7 +2005,9 @@ for my $file (keys %Chapter) {
     for my $x (@{$Chapter{$file}}) {
      $x->();
     }
-    
+
+    vskip 1;
+
     columns sub { hskip 2 },
     sub {
       emptyTag 'hr';

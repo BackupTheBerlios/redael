@@ -31,10 +31,25 @@ our $Date;
 sub sync_dir {
   my ($dir, @f) = @_;
 
+  my @extra;
+  for my $f (@f) {
+    my $print = $f;
+    if ($print =~ s/\.html$/-pr.html/) {
+      push @extra, $print
+	if -e $print;
+    }
+    
+    $print = $f;
+    if ($print =~ s/\.html$/-ch.html/) {
+      push @extra, $print
+	if -e $print;
+    }
+  }
+
   my @todo;
   my $md5 = Digest::MD5->new;
   
-  for my $f (@f) {
+  for my $f (@f, @extra) {
     my $key = "$dir/$f";
     open my $fh, "<$key" or do {
       warn "open $key: $!";
@@ -48,16 +63,6 @@ sub sync_dir {
       print "$key unchanged\n"
     } else {
       push @todo, $f;
-
-      my $print = $f;
-      $print =~ s/\.html$/-pr.html/;
-      push @todo, $print
-	if -e $print;
-
-      $print = $f;
-      $print =~ s/\.html$/-ch.html/;
-      push @todo, $print
-	if -e $print;
     }
     $Sum{ $key } = $sum;
   }
