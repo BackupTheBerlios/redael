@@ -264,9 +264,13 @@ sub menupage {
     endTag 'table';
     vskip 4;
 
-    emptyTag 'hr';
-    element 'p', 'Copyright (C) 2001 Joshua Nathaniel Pritikin.  Verbatim copying and distribution of this entire article is permitted in any medium, provided this notice is preserved.';
-    emptyTag 'hr';
+    columns sub { hskip 2 },
+    sub {
+      emptyTag 'hr';
+      element 'p', 'Copyright (C) 2001 Joshua Nathaniel Pritikin.  Verbatim copying and distribution of this entire article is permitted in any medium, provided this notice is preserved.';
+      emptyTag 'hr';
+    },
+    sub { hskip 2 };
   };
 };
 
@@ -310,10 +314,9 @@ menupage $topmenu, 'Download', sub {
     endTag 'a';
   };
 
-  element 'p', 'Presently, redael is only distributed as source code,
-and worse, it is difficult to compile.  Binaries will be available
-as soon as it is a practical possibility.  If you are still undaunted
-then you may attempt the following steps:';
+  element 'p', 'Presently, redael is only distributed as source code.
+Binaries will be available as soon as it is a practical possibility.
+If you are still undaunted then you may attempt the following steps:';
 
   startTag 'p';
   columns sub {
@@ -352,9 +355,23 @@ with --enable-glib2.';
 menupage $topmenu, 'Documentation', sub {
   element 'h1', 'Documentation';
 
-  element 'p', 'The interface combines the elements from a word
-processor and movie player.  There are also some user interface
+  element 'p', 'The user interface combines the elements from a word
+processor and movie player.  There are also some interface
 elements for making annotations and advanced features for scoring.';
+
+  element 'p', 'Redael operates in basically two modes:';
+
+  startTag 'ol';
+
+  startTag 'li';
+  element 'p', 'A researcher can develop an exemplar film annotation.';
+  endTag 'li';
+
+  startTag 'li';
+  element 'p', 'A student can be tested against an exemplar film annotation.';
+  endTag 'li';
+
+  endTag 'ol';
 
   element 'h2', 'Workflow Summary';
 
