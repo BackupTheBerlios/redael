@@ -17,7 +17,7 @@ page 'm.html', sub {
   for my $pic (qw(mappl-h.jpg mappl-j.jpg
 		  nirmal_nagari.jpg
 		  mother_arrives.jpg christmas_puja.jpg 
-		  kawali1.jpg kawali2.jpg 
+		  kawali1.jpg making_friends.jpg kawali2.jpg 
 		  huldi1.jpg huldi2.jpg
 		  huldi_joshua.jpg 
 		  marriage_puja.jpg marriage_havan.jpg 
@@ -149,6 +149,10 @@ our qualifications.';
   },
   sub { hskip 4 },
   sub {
+    thumb 'art/making_friends.jpg', 'Making Friends';
+  },
+  sub { hskip 4 },
+  sub {
     element 'p', "Heera:";
 
     startTag 'ul';
@@ -239,7 +243,16 @@ compose couplets for Shri Mataji.';
   };
 
   columns sub {
-    element 'p', "One of Heera's uncles knows how to handle government
+    startTag 'p';
+    text "During January, we visited Nagpur where most of Heera's
+family is living.  A ";
+    element 'a', 'wedding reception', href => 'kamdi.html';
+    text ' was thrown on Jan 13.';
+    endTag 'p';
+
+    element 'p', "Marriage registration in India is not always
+simple and easy, especially with a foreigner involved.  Fortunately,
+one of Heera's uncles knew how to handle government
 bureaucracy.  We got official documentation after only a few days.";
 
   },
@@ -252,21 +265,21 @@ bureaucracy.  We got official documentation after only a few days.";
   element 'b', 'Both of us invite and welcome you to Sahaja Yoga.';
   endTag 'p';
   
-#  element 'p', 'Kamdi Family Reception';
-
   element 'p', 'Last modified @DATE@.';
 };
 
-__END__
-  startTag 'p';
-  emptyTag 'hr';
-  endTag 'p';
+page 'kamdi.html', sub {
+  element 'title', 'Kamdi Family Reception';
+  endTag 'head';
 
- element 'h2', 'Kamdi Family Reception';
+  body 20;
+
+  element 'h2', 'Kamdi Family Reception';
 
   columns sub {
-    element 'p', 'On Jan 13, the Kamdi family gave us a marriage
- reception in Nagpur.';
+    element 'p', 'The reception was not as much fun compared to
+Ganapatipule.  Even so, we tried to enjoy.  The Nagpur Sahajis
+sang two bhajans during the program.';
   },
   sub { hskip 4 },
   sub {
@@ -277,6 +290,7 @@ __END__
     thumb 'art/kamdi2.jpg', 'Reception';
   };
 
+  br;
   columns sub {
     thumb 'art/kamdi3.jpg', 'Chatting';
   },
@@ -288,4 +302,7 @@ __END__
   sub {
     element 'p', "Here is one of Heera's old photos.";
   };
+
+  element 'p', 'Last modified @DATE@.';
+}
 
