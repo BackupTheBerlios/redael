@@ -229,7 +229,12 @@ page 'index.html', sub {
 our $topmenu = MenuTree
   ->new([
 	 ['News'              => 'news.html'],
-	 ['Download'          => 'download.html'],
+	 ['Download'          => 'download.html',
+	  [
+	   [Unix               => 'dl-unix.html'],
+	   [Windows            => 'dl-windows.html'],
+	  ]
+	 ],
 	 ['Documentation'     => 'doc.html',
 	  [
 	   ['Film'            => 'doc-film.html'],
@@ -537,45 +542,8 @@ Here are some anecdotal data points:';
 
   endTag 'ul';
 
-  element 'h2', 'Compiling';
-
-  element 'p', 'Presently, redael is only distributed as source code.
-Binaries will be available as soon as it is a practical possibility.
-If you are prepared to compile the source release then you may attempt
-the following steps:';
-
-  startTag 'p';
-  columns sub {
-    startTag 'a', 'href', 'http://gtk.org/download/';
-    img 'art/gnomelogo.png', 'Gnome', 'border', 0;
-    endTag 'a';
-  },
-  sub { hskip 6 },
-  sub {
-    text 'Install 1.3.11 or later versions of glib, atk, pango, and gtk+.';
-  };
-  endTag 'p';
-
-  startTag 'p';
-  columns sub {
-    startTag 'a', 'href', 'http://www.gstreamer.net/';
-    img 'art/gstlogo.png', 'Gstreamer', 'border', 0;
-    endTag 'a';
-  },
-  sub { hskip 6 },
-  sub {
-    text 'Install 0.3.0 or later version of gstreamer.  You will also
-need some libraries: libmpeg2, liba52, and libHermes.  Make sure gstreamer
-is built with --enable-glib2.';
-  };
-  endTag 'p';
-
-  startTag 'p';
-  startTag 'a', href=>'http://developer.berlios.de/project/filelist.php?group_id=167';
-  text 'Download the latest snapshot of redael.';
-  endTag 'a';
-  text ' Compile and run.';
-  endTag 'p';
+  element 'p', 'To install the software, please choose specific
+instructions for your operating system.';
 
   element 'h2', 'Films';
 
@@ -695,6 +663,103 @@ Any Given Sunday (1999), Devil's Advocate (1997), Ghost (1990),
 American Werewolf in Paris (1997), or serious Hindi
 drama.  Do not submit your favorite film titles until the first
 annotations are completed.";
+};
+
+menupage $topmenu, 'Unix', sub {
+  element 'h1', 'Compiling';
+
+  element 'p', 'Presently, redael is only distributed as source code.
+Binaries will be available as soon as it is a practical possibility.
+If you are prepared to compile the source release then you may attempt
+the following steps:';
+
+  startTag 'p';
+  columns sub {
+    startTag 'a', 'href', 'http://gtk.org/download/';
+    img 'art/gnomelogo.png', 'Gnome', 'border', 0;
+    endTag 'a';
+  },
+  sub { hskip 6 },
+  sub {
+    text 'Install 1.3.11 or later versions of glib, atk, pango, and gtk+.';
+  };
+  endTag 'p';
+
+  startTag 'p';
+  columns sub {
+    startTag 'a', 'href', 'http://www.gstreamer.net/';
+    img 'art/gstlogo.png', 'Gstreamer', 'border', 0;
+    endTag 'a';
+  },
+  sub { hskip 6 },
+  sub {
+    text 'Install 0.3.0 or later version of gstreamer.  You will also
+need some libraries: libmpeg2, liba52, and libHermes.  Make sure gstreamer
+is built with --enable-glib2.';
+  };
+  endTag 'p';
+
+  startTag 'p';
+  startTag 'a', href=>'http://developer.berlios.de/project/filelist.php?group_id=167';
+  text 'Download the latest snapshot of redael.';
+  endTag 'a';
+  text ' Compile and run.';
+  endTag 'p';
+};
+
+menupage $topmenu, 'Windows', sub {
+  element 'h1', 'Please do not port software to Windows';
+
+  element 'p', 'At least, do not port my software to Windows.';
+
+  element 'p', 'While the GNU General Public License expressly
+  prohibits me from denying you the freedom to port software protected
+  by it to Windows, I feel that you do great damage to the world if
+  you do. Let me explain.';
+
+  element 'p', "Windows is a proprietary environment. They don't give
+  you the source code, and they do anything in their power to limit
+  your freedom. They even try to limit what you can do with the
+  software you rightfully bought from them. So, supporting them in any
+  way is bad for the world, because it encourages others to try to
+  limit others' freedoms (it worked great for Microsoft, so it must be
+  a good idea, right?).";
+
+  element 'p', "I don't want any of my work to give anyone a reason to
+  support companies like Microsoft who try to limit people's freedoms.";
+
+  startTag 'p';
+  text "That's why I develop my software on a completely free
+  platform. So I know it works on a completely free platform. Many
+  people using Windows don't care about their freedom. They do care
+  about quality software and for that reason try to replace all the
+  user space software from Microsoft with better free
+  alternatives. This is the sole reason for the existance of ";
+  element 'a', 'cygwin', href => 'http://sources.redhat.com/cygwin/';
+  text '.';
+  endTag 'p';
+
+  element 'p', "However, giving people a way to work around bugs in
+  Windows makes them stay longer with Windows. That's why I consider
+  porting software to Windows sabotage. It does not help people under
+  Windows, in the contrary. It makes them stay longer with
+  Windows. And while they stay, they will put pressure on others to
+  also use Windows. It only helps Microsoft.";
+
+  element 'p', "While this text singles out Microsoft, other companies
+  are equally evil. For example, porting redael to Solaris
+  would help Sun, noone else. Don't do it.";
+
+  element 'p', 'In the same line of argumentation, I will not modify
+  any of my software so it works better with proprietary development
+  platforms like Visual C++, even if I sacrifice great amounts of
+  performance by not exploiting their features. And I ask you to do
+  the same.';
+
+  startTag 'p';
+  element 'a', '(This discussion was copied from www.fefe.de.)',
+    href => 'http://www.fefe.de';
+  endTag 'p';
 };
 
 menupage $topmenu, 'Documentation', sub {
