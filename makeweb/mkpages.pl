@@ -373,21 +373,6 @@ and a *good* model confers real insight into reality and joy.";
   element 'p', 'The rest of this page offers a philosophical
 justification of the model used by redael.';
 
-  element 'h2', 'Subject / Object';
-
-  startTag 'p';
-  columns sub {
-    text 'These words are not meant in a strict grammatical sense.
-"Subject" and "object" describe end-points of an attention vector.
-The subject is the origin of attention.  Attention is focused on an object,
-the object is enveloped with awareness, and the subject is informed
-about the object.';
-  }, sub {
-    emptyTag 'img', src => 'art/informs.png', alt => 'Informs',
-      width => 206, height => 64;
-  };
-  endTag 'p';
-
   element 'h2', 'Compassion';
 
   startTag 'p';
@@ -440,6 +425,27 @@ four perspectives come into focus:';
   };
   endTag 'center';
 
+  element 'p', 'That compassion is "the answer" is nothing new.  What
+is new, is that balanced compassion is defined as awareness of
+the four perspectives.  So instead of talking about compassion in
+vague terms, we can do something scientific: study the relationships
+between perspectives.';
+
+  element 'h2', 'Subject / Object';
+
+  startTag 'p';
+  columns sub {
+    text "`Subject' and `object' describe end-points of an attention vector.
+(These words are not meant in a strict grammatical sense.)
+The subject is the origin of attention.  Attention is focused on an object,
+the object is enveloped with awareness, and the subject is informed
+about the object.";
+  }, sub {
+    emptyTag 'img', src => 'art/informs.png', alt => 'Informs',
+      width => 206, height => 64;
+  };
+  endTag 'p';
+
   element 'h2', 'Attention Configurations';
 
   element 'p', 'Within the realm of compassionate individuality,
@@ -447,7 +453,7 @@ there are various ways attention can be configured.  What
 are all the permutations?  Fortunately, it is easy to generate
 a question to invoke a given configuration.  Once posed
 as a question, we can consider whether
-the configuration make sense and draw any further conclusions.';
+the configuration makes sense and draw any further conclusions.';
 
   startTag 'p';
   columns sub { attention 0,1 },
@@ -547,7 +553,7 @@ Attention vectors are only possible between the ';
     text ' perspectives.';
   },
   sub { hspace 2 },
-  sub { attention 3,2 };
+  sub { text 'impossible'; attention 3,2 };
   endTag 'p';
 
   element 'p', 'The following table and diagram summarize all sensical
