@@ -457,9 +457,10 @@ are generally sufficient.';
   startTag 'li';
   startTag 'p';
   text 'The pattern matching also makes it easier to verify that
-each abstract situation corresponds to its associated concrete situation
-in the film.  If the abstract emotion seems wrong then
-the situation was probably evaluated with unjustifiable bias.';
+each abstract situation corresponds to its associated actual situation
+in the film.  If the abstract emotions seem correct except for one
+case then the structure of the exceptional situation probably
+needs re-evaluation.';
   endTag 'p';
   endTag 'li';
 
