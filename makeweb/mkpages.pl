@@ -56,6 +56,11 @@ sub body {
 
 sub br { emptyTag 'br' }
 
+sub img {
+  my ($src, $alt, @rest) = @_;
+  emptyTag 'img', src=>$src, alt=>$alt, @rest;
+}
+
 sub columns {
   startTag 'table', border => 0, cellspacing => 0, cellpadding => 0;
   startTag 'tr';
@@ -106,11 +111,13 @@ sub attention {
   startTag 'table', border=>1, cellpadding=>3, cellspacing=>0;
   startTag 'tr';
   startTag 'th';
-  text 'subject: ';
+  text 'subject:';
+  hspace;
   nth $s;
   endTag 'th';
   startTag 'th';
-  text 'object: ';
+  text 'object:';
+  hspace;
   nth $o;
   endTag 'th';
   endTag 'tr';
@@ -169,22 +176,21 @@ page 'index.html', sub {
   startTag 'tr';
   
   startTag 'td', 'align', 'center';
-  emptyTag 'img', 'src', 'art/shri.jpg', 'alt', 'Shri Chaktra', 'border', 0;
+  img 'art/shri.jpg', 'Shri Chakra', border=>0;
   br;
   text 'SQ: ';
   element 'a', 'Spiritual Intelligence', 'href', 'http://sahajayoga.org';
   endTag 'td';
   
   startTag 'td', 'align', 'center';
-  emptyTag 'img', 'src', 'art/trident.png',
-    'alt', 'Attention Trident', 'border', 0;
+  img 'art/trident.png', 'Attention Trident', border => 0;
   br;
   text 'EQ: ';
   element 'a', 'Emotional Intelligence', 'href', 'news.html';
   endTag 'td';
   
   startTag 'td', 'align', 'center';
-  emptyTag 'img', 'src', 'art/mensa.png', 'alt', 'Mensa Logo', 'border', 0;
+  img 'art/mensa.png', 'Mensa Logo', border => 0;
   br;
   text 'IQ: ';
   element 'a', 'Mental Intelligence', 'href', 'http://www.mensa.org';
@@ -292,29 +298,29 @@ going to need help.';
 
   startTag 'p';
   columns sub {
-    startTag 'a', 'href', 'http://gtk.org/download/';
-    emptyTag 'img', 'src', 'art/gnomelogo.png', 'alt', 'Gnome', 'border', 0;
-    endTag 'a';
-  },
-  sub { hspace 2 },
-  sub {
     text 'Get the current CVS for glib, atk, pango, and gtk+.  Apply
 this patch for 64-bit parameters.  Follow the directions in HACKING
 to build from CVS sources.';   # XXX
+  },
+  sub { hspace 2 },
+  sub {
+    startTag 'a', 'href', 'http://gtk.org/download/';
+    img 'art/gnomelogo.png', 'Gnome', 'border', 0;
+    endTag 'a';
   };
   endTag 'p';
 
   startTag 'p';
   columns sub {
-    startTag 'a', 'href', 'http://www.gstreamer.net/';
-    emptyTag 'img', 'src', 'art/gstlogo.png', 'alt', 'Gstreamer', 'border', 0;
-    endTag 'a';
-  },
-  sub { hspace 2 },
-  sub {
     text 'Get the current CVS for gstreamer.  Apply this patch for
 large file support.  You need to install the libraries: mpeg2dec, a52dec,
 and Hermes.  Build gstreamer with --enable-glib2.';
+  },
+  sub { hspace 2 },
+  sub {
+    startTag 'a', 'href', 'http://www.gstreamer.net/';
+    img 'art/gstlogo.png', 'Gstreamer', 'border', 0;
+    endTag 'a';
   };
   endTag 'p';
 
@@ -324,7 +330,32 @@ and Hermes.  Build gstreamer with --enable-glib2.';
 menupage $topmenu, 'Documentation', sub {
   element 'h1', 'Documentation';
 
-  text 'Add lots of screen captures with explanation.';
+  element 'p', 'The interface combines the elements from a word
+processor and movie player.  There are also some user interface
+elements for making annotations and advanced features for scoring.';
+
+  startTag 'p';
+  img 'art/transcript.png', 'Transcript View', border=>1;
+  endTag 'p';
+  
+  element 'p', 'The left side contains the film transcript.  Each highlighted
+segment indicates the span of a single situation.  The right side
+contain a list of situations.  When you move the cursor, the left
+and right side stay in-sync.  You can double-click in the situation
+list to open a detail screen (below).';
+
+  startTag 'p';
+  img 'art/ip.png', 'IP Editor', border=>1;
+  endTag 'p';
+
+  element 'p', 'This screen shows the structural parameters of
+the situation.  A situation always consists of two participants.
+The best way to learn what these descriptions mean is to examine
+one of the exemplar film annotations.';
+
+  vspace;
+
+  element 'p', '[Add lots of screen captures with explanation.]';
 };
 
 menupage $topmenu, 'Mailing Lists', sub {
@@ -474,8 +505,8 @@ what happens while watching a film.  A film is nothing but ';
 	nth 3;
 	text ' person perspective: images and sound.  However,
 people can easily empathize with the characters and *feel* a
-precise replica of the emotions depicted onscreen.  Emotion
-is the subject and the film is the object.';
+precise replica of the emotions depicted onscreen.  The film
+is the object and emotion is the subject, hence "empathy."';
       };
   endTag 'p';
 
@@ -536,7 +567,7 @@ much more so than any physical or mental amusement.';
 flexibility) is necessarily partial because the four perspectives
 are known only by compassion.  For example, ";
     text '"How is your personality affected by observing the situation?"
--- this question could only be answered by an omniscient consciousness.
+-- this question could only be answered by an omniscient individual.
 We are merely compassionate individuals.
 Attention vectors are only possible between the ';
     nth(0);
@@ -600,10 +631,3 @@ configurations:';
 };
 
 __END__
-    startTag 'p';
-    text 'Far back in ancient history, an animal saw another animal
-with compassion.  He or she realized that there
-were a multiplicity of individuals, for the *first* time.
-Before compassion, each animal was ruthless, perfectly self-centered,
-and alone.';
-    endTag 'p';

@@ -60,6 +60,9 @@ sync_dir('art', map { s,^.+/,,; $_ }
 	 glob('art/*.png'),
 	 glob('art/*.jpg'));
 
+sync_dir('bulky', map { s,^.+/,,; $_ }
+	 glob('bulky/*'));
+
 open my $fh, ">checksum" or die "open: $!";
 for (sort keys %Sum) {
   print $fh "$Sum{$_} $_\n";
