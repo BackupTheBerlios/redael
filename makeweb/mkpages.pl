@@ -316,120 +316,13 @@ our $topmenu = MenuTree
 	  ]],
 	 ['Download'           => 'download.html'],
 	 ['Mailing Lists'     => 'lists.html'],
-	 ['High Scores'       => 'scores.html'],
+#	 ['High Scores'       => 'scores.html'],
 	 ['Research & Professional' => 'jobs.html',
 	  [
 	   ['IMRT'            => 'imrt.html'],
 	  ]
 	 ],
 	]);
-
-page 'fairuse.html', sub {
-  element 'title', 'Fair Use Statement';
-  endTag 'head';
-
-  body(20);
-
-  element 'h2', 'Fair Use Statement';
-
-  element 'p', 'Despite the fact that Aleader is an international project,
-this discussion will
-entertain American copyright law because America is presently taking a
-leadership role in legislating and enforcing restictions on fair use.';
-
-  emptyTag 'hr';
-
-  startTag 'p';
-  text 'The references which i used to research this discussion include ';
-  element 'a', 'http://fairuse.stanford.edu',
-    href=>'http://fairuse.stanford.edu';
-  text ' and ';
-  element 'a', 'http://www.benedict.com',
-    href=>'http://www.benedict.com';
-  text '.';
-  endTag 'p';
-
-  emptyTag 'hr';
-
-  startTag 'font', color=>'red';
-  element 'p', 'Fair Use Provision of the U.S. Copyright Act: Ch 1 Sec 107';
-  element 'p', '[...]  In determining whether the use made of a work in any particular
-case is a fair use the factors to be considered shall include -';
-  element 'p', '(1) the purpose and character of the use, including whether such use
-is of a commercial nature or is for nonprofit educational purposes;';
-  endTag 'font';
-  
-  element 'p', 'Aleader uses films for non-profit educational purposes, specifically
-for the purposes of teaching, scholarship, and research.  The films
-are used verbatim (not transformed) and retain proper attribution.';
-
-  
-  startTag 'font', color=>'red';
-  element 'p', '(2) the nature of the copyrighted work;';
-  endTag 'font';
-
-  element 'p', 'Our fair use statement does not contest the worthiness of film for
-protection under copyright law.';
-
-  startTag 'font', color=>'red';
-  element 'p', '(3) the amount and substantiality of the portion used in relation to
-the copyrighted work as a whole; and';
-  endTag 'font';
-
-  element 'p', 'The decision to make a portion of a copyrighted film available under
-the fair use provision was not undertaken lightly.  We decided to
-distribute the minimum workable sub-sample: only the first 10% of the
-film at sub-standard quality.';
-
-  startTag 'ul';
-  startTag 'li';
-  element 'p',
-'Quality justification: Video and audio must be of sufficient quality to
-activate the empathy mechanism, to generate emotions.  The customary quality
-used in for-profit film presentation is not required for our purposes.';
-  endTag 'li';
-
-  startTag 'li';
-  element 'p',
-'First 10% justification: To properly annotation duration, a whole film is
-required.  Our compromise is to use only the first 10%.  Within 10%, joints &
-duration can be demonstrated in a limited way which we hope and expect
-will be sufficient.';
-  endTag 'li';
-
-  endTag 'ul';
-  
-  startTag 'font', color=>'red';
-  element 'p',
-'(4) the effect of the use upon the potential market for or value of
-the copyrighted work. The fact that a work is unpublished shall not
-itself bar a finding of fair use if such finding is made upon
-consideration of all the above factors.';
-  endTag 'font';
-  
-  startTag 'ul';
-  startTag 'li';
-  element 'p',
- 'Part of the motivation for this fair use statement is to encourage
-people to take copyright seriously.  Please buy an
-authorized duplicate if you wish to view a film for any purpose not
-protected under the fair use provision.';
-  endTag 'li';
-
-  startTag 'li';
-  element 'p',
-'Offering 10% of a quality degraded film is similar to the practice
-routinely used in film promotion (previews).
-Hopefully it is plausible to studios that making available our proposed
-film sub-set will not diminish the asset value of a given film.
-Of course the actual effect on asset value is hard to measure objectively
-with any precision.';
-  endTag 'li';
-
-  endTag 'ul';
-
-  vskip 2;
-};
 
 my %Chapter;
 
@@ -567,7 +460,6 @@ menupage $topmenu, 'News', sub {
   startTag 'i';
   element 'p', 'How well do you understand the meaning of your emotions?';
   element 'p', 'How accurately can you assess difficult situations?';
-  element 'p', 'How gracefully do you manage people?';
   endTag 'i';
   endTag 'big';
   emptyTag 'hr';
@@ -590,100 +482,9 @@ Aleader is the software used to administer the test.
 It combines a video player, annotation tools,
 and a scoring system into an easy to use GUI.';
 
-  element 'p', "So what is assessment quotient (AQ)?  Let us
-consider AQ's relationship with spiritual traditions, personality
-development, and general harmony with society:";
-
-  startTag 'table', cellspacing => 10, cellpadding => 0, border => 0;
-
-  startTag 'tr';
-
-  my $bgcolor = 'LightYellow1';
-  startTag 'td', valign => 'top', bgcolor => $bgcolor;
-  text 'There is a concept called "witness state" noted in many ';
-  element 'b', 'spiritual traditions';
-  text '.  Here we are interested in the definition of witness
-state which is practical in daily life.
-For example, if a boy verbally insults me then what do i do?
-Do i start a fight on the spot?  If i am trying for a witness
-state then i will not react immediately to a verbal insult.  i
-will take an appropriate amount of time to consider the whole
-situation.  Once i have a cool head, then i can decide on
-a action (if any).';
-  endTag 'td';
-  endTag 'tr';
-
-  startTag 'tr';
-  startTag 'td', valign => 'top';
-  text 'To what extent am i in the witness state?  How
-much do i know about the witness state?  In the past, these
-questions were mostly a matter of personal introspection.  Now you can
-objectively measure your witnessing power as assessment quotient.';
-  endTag 'td';
-  endTag 'tr';
-
-  startTag 'tr';
-  element 'td', '*', align => 'center';
-  endTag 'tr';
-
-  startTag 'tr';
-  startTag 'td', valign => 'top', bgcolor => $bgcolor;
-  text 'The witness state is closely related to personality development. ';
-  element 'b', 'Personality development';
-  text " generally focuses on the student's reaction to a given situation.
-Certainly choosing the correct reaction *is* important.
-However, deciding on a reaction depends on assessing
-the situation accurately.
-If your perfect reaction is based on a misreading of the situation
-then how can you expect to act effectively?";
-  endTag 'td';
-  endTag 'tr';
-
-  startTag 'tr';
-  startTag 'td', valign => 'top';
-  text "If my AQ is below average then attending a personality
-development course will do more harm that good.  Many of my new
-reactions will be wrong or seem artificial.  Fortunately, now we
-can measure AQ numerically.  If my assessment quotient is below
-average then i can invest time in raising my AQ, clearing the
-way for constructive personality development.";
-  endTag 'td';
-  endTag 'tr';
-
-  startTag 'tr';
-  element 'td', '*', align => 'center';
-  endTag 'tr';
-
-  startTag 'tr';
-  startTag 'td', valign => 'top', bgcolor => $bgcolor;
-  text 'One who has experienced the wider variety of situations
-is better attuned to understand the thoughts and reactions of others.
-Such a person can live in greater ';
-  element 'b', 'harmony with society';
-  text ' and derive
-greater meaning and pleasure out of life.  However, gaining awareness
-of such a vast variety of situations typically requires an
-entire lifetime.';
-  endTag 'td';
-  endTag 'tr';
-
-  startTag 'tr';
-  startTag 'td', valign => 'top';
-  text 'What if there were a way to understand all possible
-situations in a short amount of time?  What if students could attain
-the clarity of a wise old man';
-  note 'AQ helps reach the clarity of a wise old man,
-but not the personality of a wise old man.';
-  text ' in less than a year?
-This is a promise and benefit of increasing the assessment quotient.';
-  endTag 'td';
-
-  endTag 'tr';
-  endTag 'table';
-
   startTag 'p';
   text 'Aleader uses a non-mystical, statistical approach to measure
-situation assessment ability (or witnessing power).
+situation assessment ability.
 This project is strictly non-profit.
 The software is licensed under the ';
   element 'a', 'GPL', 'href', 'http://www.gnu.org/philosophy/philosophy.html';
@@ -695,6 +496,23 @@ The software is licensed under the ';
   show_notes();
 
   element 'h1', "News";
+
+  startTag 'p';
+  text '[28 Feb 2003] Aleader 0.9.1 is out.
+The main change in this release is exam mode, which is greatly
+simplified.  Also, a few SEGV are fixed, a bunch of memory leaks are
+plugged, and there are an assortment of minor cosmetic improvements.
+Work continues on building a correct analysis (exemplar) for each
+of our first films.';
+  endTag 'p';
+
+  startTag 'p';
+  text '[10 Feb 2003] After a long wait, Aleader 0.9.0 is released.
+This is the first release that builds without any pre-released code
+from CVS.  On i386, all library dependencies can be resolved by
+binary packages from debian unstable.  Beta testing is needed.
+Please try it out.';
+  endTag 'p';
 
   startTag 'p';
   text '[26 Apr 2002] Courtesy of the Institute of Management,
@@ -730,19 +548,6 @@ snapshot of our progress.';
   element 'p', '[23 Jan 2002] A pre-compiled binary is available
 for Debian i386.';
 
-  startTag 'p';
-  text '[5 Dec 2001] Assuming the cooperation of upstream
-libraries, a binary release of Redael will be made
-within a few months (1Q02).  As part of the release,
-i would very much like to make available
-some exemplar annotations. However, this will depend upon
-the vagaries of international copywrite law.  Can anyone comment
-on a preliminary ';
-  element 'a', 'fair use statement',
-    href => 'fairuse.html';
-  text '?';
-  endTag 'p';
-
   element 'p', '[3 Oct 2001] The basic features of the software have
 been working since two days ago.  A few patches are pending with
 upstream libraries, but everything should be resolved for
@@ -764,6 +569,36 @@ where it would lead.';
   endTag 'p';
 };
 
+my %Film;
+
+sub film_name {
+  my ($f) = @_;
+  die "$f not found" if !exists $Film{$f};
+  $f.'_r'.$Film{$f}.'.leadr';
+}
+
+sub grab_films {
+  my $edir = "/home/joshua/aleader/exemplar";
+  opendir my $dh, $edir or die "opendir $edir: $!";
+  for my $f (readdir $dh) {
+    if ($f =~ s/_r(\d+)\.leadr$//) {
+      my $ver = $1;
+      if (!exists $Film{$f} or $Film{$f} < $ver) {
+	$Film{$f} = $ver;
+      }
+    }
+  }
+  for my $f (keys %Film) {
+    my $fn = film_name($f);
+    run "cp $edir/$fn root/";
+  }
+}
+
+sub film_link {
+  my ($f) = @_;
+  element 'a', "v$Film{$f}", href => film_name($f);
+}
+
 menupage $topmenu, 'Download', sub {
   columns sub {
     element 'h1', 'Get the Software';
@@ -774,8 +609,6 @@ menupage $topmenu, 'Download', sub {
     img 'floating.jpg', 'GNU Software', border=>0, hspace=>4;
     endTag 'a';
   };
-
-  element 'h2', 'Requirements';
 
   startTag 'p';
   text 'If your computer is fast enough to playback VCD format films
@@ -788,52 +621,87 @@ portable as ';
 and operating system then, chances are, Aleader will also work.';
   endTag 'p';
 
-  startTag 'font', color => 'red';
+  element 'h2', 'Debian (i386)';
+
+  run 'mkdir -p root/releases/debian';
+  run 'cp ~/aleader/release/* root/releases/debian';
+  run 'cd root/releases/debian; dpkg-scansources . | gzip > Sources.gz; dpkg-scanpackages . /dev/null | gzip > Packages.gz';
+
+  element 'p', 'Add the following line to /etc/apt/sources.list:';
+
   startTag 'p';
-  text 'Old versions of the software are available but they
-are difficult to compile and do not work very well.
-We are currently preparing a new release.  The latest
-snapshot is ';
-  element 'a', 'here', href => 'ftp://ftp.berlios.de/pub/redael/aleader-0.9.0.tar.bz2';
-  text '.';
+  startTag 'blockquote';
+  startTag 'pre';
+  text 'deb http://redael.berlios.de/releases/debian ./';
+  endTag 'pre';
+  endTag 'blockquote';
   endTag 'p';
-  endTag 'font';
+
+  element 'p', 'Then:';
+
+  startTag 'p';
+  startTag 'blockquote';
+  startTag 'pre';
+  text 'apt-get update
+apt-get install aleader aleader-doc
+';
+  endTag 'pre';
+  endTag 'blockquote';
+  endTag 'p';
+
+  element 'h2', 'Generic Unix';
+
+  startTag 'p';
+  text 'Build and install ';
+  element 'a', 'Gtk+', href => 'http://gtk.org/download/';
+  text ' 2.2 (or better) and ';
+  element 'a', 'Gstreamer', href => 'http://www.gstreamer.net/download';
+  text ' 0.6.0 (or better). ';
+  startTag 'a', href=>'http://developer.berlios.de/project/filelist.php?group_id=167';
+  text 'Download the latest release of Aleader source code.';
+  endTag 'a';
+  text ' Compile and install.';
+  endTag 'p';
 
   if (!-e 'root/manual') {
     mkdir 'root/manual' or die "mkdir root/manual: $!";
   }
 
-  if (modtime("root/manual/aleader.pdf.bz2") <
+  if (modtime("root/manual/aleader.pdf") <
       modtime("/home/joshua/aleader/doc/aleader.pdf")) {
     run "cp /home/joshua/aleader/doc/aleader.pdf root/manual";
-    run "bzip2 -f root/manual/aleader.pdf";
   }
 
-  run "cp /home/joshua/aleader/doc/aleader.html root/manual";
+  run "cp /home/joshua/aleader/doc/index.html root/manual";
   run "cp /home/joshua/aleader/doc/*.png root/manual";
   run "cp /home/joshua/aleader/doc/*.jpg root/manual";
 
-  startTag 'p';
-  text 'Documentation is here: ';
-  element 'a', 'HTML', href => 'manual/aleader.html';
-  text ' | ';
-  element 'a', 'PDF', href => 'manual/aleader.pdf.bz2';
-  endTag 'p';
+  element 'h2', 'Documentation';
 
-  element 'p', 'In addition to the Aleader software, you will need
-some films with an exemplar to get started.';
+  startTag 'p';
+  element 'a', 'HTML', href => 'manual/index.html';
+  text ' | ';
+  element 'a', 'PDF', href => 'manual/aleader.pdf';
+  br;
+  element 'small', '(PDF looks a _lot_ better than HTML)';
+  endTag 'p';
 
   element 'h2', 'Films';
 
-  element 'p', 'i selected some of my favorite films for initial
-analysis.  As more films are analyzed, the exemplars will appear here.';
+  element 'p', 'In addition to the Aleader software, you will need
+some films to get started.  i selected some of my favorite films for
+analysis.  It is important to work with films which you enjoy
+watching because you will have to watch them so many times to
+analyze them properly.';
 
+  grab_films();
+
+  startTag 'center';
   startTag 'table', border=>1;
   startTag 'tr';
   element 'th', 'Title';
   element 'th', 'Rating';
-  element 'th', 'Status';
-  element 'th', 'Annotation';
+  element 'th', 'Exemplar';
   endTag 'tr';
 
   startTag 'tr';
@@ -842,10 +710,19 @@ analysis.  As more films are analyzed, the exemplars will appear here.';
     href => 'http://www.nausicaa.net/miyazaki/nausicaa/';
   endTag 'td';
   element 'td', 'All Ages';
-  element 'td', '5%';
   startTag 'td';
-  #element 'a', '22k', href => 'annotation/naushika35';
-  text 'soon';
+  film_link('Nausicaa');
+  endTag 'td';
+  endTag 'tr';
+
+  startTag 'tr';
+  startTag 'td';
+  element 'a', 'Star Wars: A New Hope (1977)',
+    href => 'http://www.starwars.com/episode-iv/';
+  endTag 'td';
+  element 'td', 'All Ages';
+  startTag 'td';
+  film_link('StarWars');
   endTag 'td';
   endTag 'tr';
 
@@ -855,23 +732,30 @@ analysis.  As more films are analyzed, the exemplars will appear here.';
     href => 'http://www.un-official.com/GWH/GWMain.html';
   endTag 'td';
   element 'td', '17+ (language, adult themes)';
-  element 'td', '0%';
-  element 'td', 'soon';
-  endTag 'tr';
-
-  startTag 'tr';
   startTag 'td';
-  element 'a', 'Star Wars: A New Hope (1977)',
-    href => 'http://www.starwars.com/episode-iv/';
+  film_link('GoodWillHunting');
   endTag 'td';
-  element 'td', 'All Ages';
-  element 'td', '0%';
-  element 'td', 'soon';
   endTag 'tr';
 
   # add Pixar films here
 
   endTag 'table';
+  endTag 'center';
+
+  startTag 'p';
+  text 'To accompany the exemplar, you need the actual
+film in VCD format.  If you already have the film then it is not
+difficult to ';
+  run "cp /home/joshua/aleader/doc/conversion.txt root/";
+  element 'a', 'convert to VCD format', href => 'conversion.txt';
+text ".  If you don't have the film then you can make a ";
+  run "cp /home/joshua/aleader/doc/fair-use.txt root/";
+  element 'a', 'fair-use claim', href => 'fair-use.txt';
+  text ' against the copywrite and send email to ';
+  element 'a', 'joshua@why-compete.org',
+    href => 'mailto:joshua@why-compete.org';
+  text '.';
+  endTag 'p';
 
   element 'p', 'Films which will not be analyzed here: most comedy, horror,
 and action movies (unless especially insightful).  Why not?  Because these
@@ -927,91 +811,38 @@ to serve as a basis for Aleader analysis.';
   element 'a', 'The Matrix (1999)', href => 'thematrix.html';
   text ', however, this film is not really a good film to analyze
 with Aleader.  The beauty of this film is less due to its
-abstract emotional content.';
+abstract emotional content and more due to its artistic use of
+fantasy to illuminate the structure of reality.';
   endTag 'p';
+
+  element 'h3', 'Combined Exemplar Statistics';
+
+  element 'p', 'Here are the coverage statistics for
+the film exemplars finished so far.';
+
+  startTag 'center';
+  startTag 'table', border => 1;
+  startTag 'tr';
+  element 'th', 'Date';
+  element 'th', 'Situations';
+  element 'th', 'Patterns';
+  element 'th', 'Unknown';
+  element 'th', 'Coverage';
+  element 'th', 'Complexity';
+  endTag 'tr';
+  startTag 'tr';
+  element 'td', '26 Feb 2002';
+  element 'td', '437';
+  element 'td', '98';
+  element 'td', '39';
+  element 'td', '58.2%';
+  element 'td', '4.266';
+  endTag 'tr';
+  endTag 'table';
+  endTag 'center';
+
+  element 'p', '58.2% coverage and 39 unknown is not very good.  i know.  We are working on it.';
 };
-
-if (0) {
-menupage $topmenu, 'Debian', sub {
-  element 'h1', 'Debian Installation';
-
-  element 'p', 'GStreamer debs beyond 0.3.1 are not supported
-yet.  You can install debs for glib/gtk+ but then
-follow the Unix installation, instead of the instructions below:';
-
-  startTag 'font', color=>'gray';
-
-  element 'p', 'Add the following lines to /etc/apt/sources.list:';
-
-  startTag 'p';
-  startTag 'blockquote';
-  startTag 'pre';
-  text 'deb http://gstreamer.net/releases/debian ./
-deb http://redael.berlios.de/releases/debian ./
-';
-  endTag 'pre';
-  endTag 'blockquote';
-  endTag 'p';
-
-  element 'p', 'Then simply use apt-get:';
-
-  startTag 'p';
-  startTag 'blockquote';
-  startTag 'pre';
-  text '# apt-get update
-# apt-get install aleader
-';
-  endTag 'pre';
-  endTag 'blockquote';
-  endTag 'p';
-
-  endTag 'font';
-};
-
-menupage $topmenu, 'Unix', sub {
-  element 'h1', 'Generic Unix Installation';
-
-  element 'p', 'If your operating system is not listed then you
-can compile Aleader from source code.';
-
-  startTag 'p';
-  columns sub {
-    startTag 'a', 'href', 'http://gtk.org/download/';
-    img 'gnomelogo.png', 'Gnome', 'border', 0;
-    endTag 'a';
-  },
-  sub { hskip 6 },
-  sub {
-    text 'Install 1.3.13 or later versions of glib, atk, pango, and gtk+.';
-  };
-  endTag 'p';
-
-  startTag 'p';
-  columns sub {
-    startTag 'a', 'href', 'http://www.gstreamer.net/';
-    img 'gstlogo.png', 'Gstreamer', 'border', 0;
-    endTag 'a';
-  },
-  sub { hskip 6 },
-  sub {
-    element 'p', 'Install gstreamer 0.3.1.  To build the plugins,
-you will also need some libraries:
-libbz2, libmpeg2 0.2.0, liba52 0.7.2, hermes, and mad.';
-
-    startTag 'font', color =>'red';
-    element 'p', 'ALERT: Aleader has not been ported to gstreamer 
-version 0.3.2 or later yet.  You must use exactly version 0.3.1.';
-    endTag 'font';
-  };
-  endTag 'p';
-
-  startTag 'p';
-  startTag 'a', href=>'http://developer.berlios.de/project/filelist.php?group_id=167';
-  text 'Download the latest snapshot of Aleader source code.';
-  endTag 'a';
-  endTag 'p';
-};
-}
 
 menupage $topmenu, 'Mailing Lists', sub {
   element 'h1', 'Mailing Lists';
@@ -1048,7 +879,8 @@ menupage $topmenu, 'Mailing Lists', sub {
 'At most one message per day.');
 
   $list->('redael-devel',
-	  'Technical discussions about software development and philosophy.',
+	  'Everything else.  Bug reports, user support, and developer
+discussion.',
 'Can be high volume on occation.');
 
   endTag 'ul';
@@ -1119,16 +951,22 @@ and there is plenty of work to do.
 The methodology used in Aleader has only been tested on
 a hand-full of people.  Larger scale scientific studies are needed
 to better reveal its effectiveness. ';
-  text 'There are basically two things which need to be
-established statistically:';
+  text 'Here are few questions which could be the target of
+a research study:';
 
   endTag 'p';
 
   startTag 'ul';
   startLi;
+  text 'Which emotions are common across most spoken languages?  Which
+emotions are unique to just a few languages?';
+  endLi;
+  
+  startLi;
   text 'How many hours of practice does it take to produce
 an accurate AQ score?';
   endLi;
+
   startLi;
   text 'Does well does our AQ score correlate with career
 performance?';
@@ -1149,7 +987,7 @@ not necessary.  For example, consider NIH grant ";
   endTag 'a';
   text '.  On the other hand, a grant is not even necessary
 for a small study.  You just need one computer, a small
-group of students, and time commitment.';
+group of students, and a lot of time.';
   text '  For example, see the study we did at '; element 'a', 'IMRT', href=>'imrt.html'; text '.';
   endTag 'p';
 
