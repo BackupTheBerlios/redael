@@ -380,7 +380,7 @@ about the object.';
   startTag 'p';
   columns sub {
     startTag 'p';
-    text 'Far back in history, an animal looked at another
+    text 'Far back in ancient history, an animal saw another animal
 with compassion.  He or she realized that there
 were a multiplicity of individuals, for the *first* time.
 Before compassion, each animal was ruthless, perfectly self-centered,
@@ -388,7 +388,8 @@ and alone.';
     endTag 'p';
 
     element 'p', 'Actually compassion awakens gradually for each individual.
-If it does not develop in a balanced way then
+A good mother ususally sooths the development into a balanced path.
+If for some reason compassion goes out of balance then
 horrible atrocities can result.  The business of slavery
 and the Nazi movement (in Germany) can be attributed to a
 terrible dearth of compassion.';
@@ -451,13 +452,87 @@ The anger is an object of my attention."';
     sub { hspace 2 },
       sub {
 	text 'Perhaps the most obvious example of empathy is
-what happens when watching a film.  A film is nothing but ';
+what happens while watching a film.  A film is nothing but ';
 	nth 3;
-	text ' person perspective, images and sound.  However,
-people can easily empathize with the characters and feel a
-precise replica of the emotions depicted onscreen.  The emotion
+	text ' person perspective: images and sound.  However,
+people can easily empathize with the characters and *feel* a
+precise replica of the emotions depicted onscreen.  Emotion
 is the subject and the film is the object.';
       };
+  endTag 'p';
+
+  startTag 'p';
+  columns sub { attention 3,1 },
+    sub { hspace 2 },
+      sub {
+	text '"Based on how you feel, what is the structural situation?"
+This style of question is repeatedly posed in redael annotations.';
+      };
+  endTag 'p';
+
+  startTag 'p';
+  columns sub { attention 1,2 },
+  sub { hspace 1 },
+  sub { attention 2,1 },
+  sub { hspace 2 },
+  sub {
+    text 'These configurations involving personality are difficult
+to understand and not particularly important.  They will be
+explored elsewhere.'
+  };
+  endTag 'p';
+
+  startTag 'p';
+  columns sub { attention 0,0 },
+    sub { hspace 2 },
+      sub {
+	text "If you haven't experienced self-realization then
+please visit a local ";
+	element 'a', 'Sahaja Yoga', href=>'http://sahajayoga.org';
+	text " center and feel the divine cool breeze.  You can't
+understand philosophy unless and until you take your second birth.";
+      };
+  endTag 'p';
+
+  startTag 'p';
+  columns sub { attention 1,0 },
+    sub { hspace 2 },
+      sub {
+	text 'While practicing true meditation you focus your attention on
+the Whole (a.k.a. "I am").  After meditation, part of your attention remains
+connected to the Whole thereby enlightening the experience of individuality.
+This divine expression makes individuality most beautiful and enjoyable,
+much more so than any physical or mental amusement.';
+      };
+  endTag 'p';
+
+  startTag 'p';
+  columns sub {
+    text 'The permutations between ';
+    nth(2);
+    text ' and ';
+    nth(3);
+    text " perspectives don't make sense.  Our information (or
+flexibility) is necessarily partial because the four perspectives
+are known only by compassion.  For example, ";
+    text '"How is your personality affected by observing the situation?"
+-- this question could only be answered by an omniscient consciousness.
+We are merely compassionate individuals.
+Attention vectors are only possible between the ';
+    nth(0);
+    text ' and ';
+    nth(1);
+    text '; ';
+    nth(1);
+    text ' and ';
+    nth(2);
+    text '; and ';
+    nth(1);
+    text ' and ';
+    nth(3);
+    text ' perspectives.';
+  },
+  sub { attention 3,2 };
   endTag 'p';
 
   element 'p', 'The following table summarizes all the sensical
