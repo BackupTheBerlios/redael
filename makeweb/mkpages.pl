@@ -26,6 +26,7 @@ sub page {
 
   endTag 'body';
   endTag 'html';
+  print "\n";
   close $fh;
   
   run "tidy -config tidy.conf -utf8 -xml tmp$$";
