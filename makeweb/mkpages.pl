@@ -978,12 +978,14 @@ both ';
   text ' and ';
   element 'i', 'choosing a reaction';
   text ', assessment is the more
-important part.  Furthermore, i find reactions to be a natural
-outcome once the situation is established.
-Therefore, the redael test concentrates on situation asseessment
-and leaves the question of choosing a
+urgent part.  Therefore, the redael test concentrates on
+situation asseessment and leaves the question of choosing a
 reaction up to your spontaneous creativity.';
   endTag 'p';
+
+  element 'p', 'If, even after mastering situation assessment, you
+still want to study the variety of possible reactions then you
+can always come back to training systems similar to the above example.';
 };
 
 menupage $topmenu, 'Getting Started', sub {
