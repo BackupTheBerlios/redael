@@ -209,8 +209,8 @@ our $topmenu = MenuTree
 	 'Download'          => 'download.html',
 	 'Documentation'     => 'doc.html',
 	 'Mailing Lists'     => 'lists.html',
-	 'Job Opportunities' => 'jobs.html',
 	 'Philosophy'        => 'philo.html',
+	 'Job Opportunities' => 'jobs.html',
 	]);
 
 sub menupage {
@@ -296,22 +296,19 @@ with a more pragmatic approach.';
 
 menupage $topmenu, 'Download', sub {
   columns sub {
-    startTag 'a', href => 'http://www.gnu.org/philosophy/philosophy.html';
-    img 'art/richard.jpg', 'Richard Stallman', border=>0, hspace=>4;
-    endTag 'a';
+    element 'h1', 'Downloading';
   },
   sub { hskip 2 },
   sub {
-    element 'h1', 'Downloading';
+    startTag 'a', href => 'http://www.gnu.org/philosophy/philosophy.html';
+    img 'art/floating.jpg', 'GNU Software', border=>0, hspace=>4;
+    endTag 'a';
   };
 
   element 'p', 'Presently, redael is only distributed as source code,
 and worse, it is difficult to compile.  Binaries will be available
 as soon as it is a practical possibility.  If you are still undaunted
 then you may attempt the following steps:';
-
-  element 'p', 'Subscribe to the redael-devel mailing list.  You are
-going to need help.';
 
   startTag 'p';
   columns sub {
@@ -327,9 +324,9 @@ going to need help.';
 
   startTag 'p';
   columns sub {
-    text 'Get the current CVS for gstreamer.  Apply this patch for
-large file support.  You need to install the libraries: mpeg2dec, a52dec,
-and Hermes.  Build gstreamer with --enable-glib2.';
+    text 'Get the current CVS for gstreamer.  You need to install
+some libraries: libmpeg2, liba52, and libHermes.  Build gstreamer
+with --enable-glib2.';
   },
   sub { hskip 2 },
   sub {
