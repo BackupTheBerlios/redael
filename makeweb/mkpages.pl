@@ -745,9 +745,8 @@ to serve as a basis for redael annotations.';
 
   element 'p', "Films under consideration for future analysis:
 Any Given Sunday (1999), Devil's Advocate (1997), Ghost (1990),
-American Werewolf in Paris (1997), or serious Hindi
-drama.  Do not submit your favorite film titles until the first
-annotations are completed.";
+or serious Hindi drama.  Do not submit your favorite film
+titles until the first annotations are completed.";
 
   element 'p', 'Does anyone know where Hindi film scripts are
 available?'
@@ -757,11 +756,8 @@ menupage $topmenu, 'Debian', sub {
   element 'h1', 'Debian Installation';
 
   element 'p', 'GStreamer debs beyond 0.3.1 are not supported
-yet.  Since the release of Glib/Gtk+ 2.0 and corresponding debs,
-it is not practical downgrade and use the i386 deb here.';
-
-  element 'p', 'You can install debs for glib/gtk+ but then
-follow the Unix installation instead of the instructions below:';
+yet.  You can install debs for glib/gtk+ but then
+follow the Unix installation, instead of the instructions below:';
 
   startTag 'font', color=>'gray';
 
@@ -1747,8 +1743,9 @@ chance to settle into emotional detachment (a) and spontaneously
 resolve into self-identity (f).  
 Besides actual emotional detechment (a), there are two other
 attention configurations which consider emotion as an
-object: (c) and (e).  While ideal role-model (e) is outside of our
-scope, emotional intelligence (c) is one of the special configurations.';
+object: (c) and (e).  Studying an ideal role-model (e)
+is one of the special configurations, however, here we are concerned
+exclusively with emotional intelligence (c).';
 
   },
   sub { hskip 4 },
@@ -1920,8 +1917,24 @@ menupage $topmenu, 'Research & Professional', sub {
 and there is plenty of work to do.
 The methodology used in redael has only been tested on
 a hand-full of people.  Larger scale scientific studies are needed
-to better estimate its effectiveness.';
+to better reveal its effectiveness. ';
+  text 'There are basically two things which need to be
+established statistically:';
+
   endTag 'p';
+
+  startTag 'ul';
+  startLi;
+  text 'How many hours of practice does it take to produce
+an accurate EQ score?  (i speculate that accuracy will emerge
+after the 2nd or 3rd attempt.)';
+  endLi;
+  startLi;
+  text 'Does well does our EQ score correlate with actual career
+performance?  (Once scores are measured then i expect *excellent*
+correlation between the EQ score actual career performance.)';
+  endLi;
+  endTag 'ul';
 
   startTag 'p';
   text "If you have run a psychology experiment in college then
@@ -1932,7 +1945,7 @@ not necessary.  For example, consider NIH grant ";
   endTag 'a';
   text '.  On the other hand, a grant is not even necessary
 for a small study.  You just need one computer, a small
-group of students, and lots of time.';
+group of students, and time commitment.';
   endTag 'p';
 
   element 'h2', 'Certified EQ Testing';

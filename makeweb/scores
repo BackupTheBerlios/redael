@@ -1,11 +1,15 @@
 # -*- perl -*-
 
+use strict;
+our $Scores;
+
 my $naushika = 'Naushika-1984';
 
 my @yogita = ('Yogita Patil', 'F', 1, 'Nashik');
 my @shweta = ('Shweta Patil', 'F', 1, 'Nashik');
 my @heera = ('Heera Pritikin', 'F', 1, 'Nashik');
 my @sumit = ('Sumit Pradhan', 'M', 1, 'Nashik');
+my @mjkulkarni = ('M. J. Kulkarni', 'M', 1, 'Nashik');
 
 $Scores =
 [
@@ -15,4 +19,5 @@ $Scores =
  [20020119, @heera, $naushika, 2.76, 6.1, 'N'],
  [20020126, @shweta, $naushika, 9.07, 6.2, 'N'],
  [20020213, @heera, $naushika, 2.71, 1.7, 'P'],
+ [20020407, @mjkulkarni, $naushika, 6.05, 5.6, 'N'],
 ];
