@@ -1,6 +1,5 @@
 #!/usr/bin/perl -w
 
-use 5.6.1;
 use strict;
 use Fatal qw(open);
 
@@ -22,9 +21,35 @@ sub modtime {
   $s[9] || 0;
 }
 
+our $NoteNumber;
+our @Notes;
+sub note {
+  my ($text) = @_;
+  element 'a', "[$NoteNumber]", href => "#$NoteNumber";
+  push @Notes, [$NoteNumber, $text];
+  ++ $NoteNumber;
+}
+
+sub show_notes {
+  startTag 'small';
+  for my $ni (@Notes) {
+    my ($n, $text) = @$ni;
+    startTag 'p';
+    element 'a', "[$n]", name => "$n";
+    text ' ';
+    text $text;
+    endTag 'p';
+  }
+  @Notes = ();
+  endTag 'small';
+}
+
 sub page {
   my ($file, $x) = @_;
   
+  $NoteNumber = 1;
+  @Notes = ();
+
   open my $fh, ">tmp$$";
   select $fh;
 
@@ -157,26 +182,33 @@ sub nth_ex {
 }
 
 sub attention {
-  my ($s, $o) = @_;
-  
+  my ($s, $o, $hl) = @_;
+
+  my @s_opt;
+  my @o_opt;
+  if ($hl) {
+    @s_opt = (bgcolor => "yellow") if $hl eq 's';
+    @o_opt = (bgcolor => "yellow") if $hl eq 'o';
+  }
+
   startTag 'table', border=>1, cellpadding=>3, cellspacing=>0;
   startTag 'tr';
-  startTag 'th';
+  startTag 'th', @s_opt;
   text 'subject:';
   hskip;
   nth $s;
   endTag 'th';
-  startTag 'th';
+  startTag 'th', @o_opt;
   text 'object:';
   hskip;
   nth $o;
   endTag 'th';
   endTag 'tr';
   startTag 'tr';
-  startTag 'td';
+  startTag 'td', @s_opt;
   nth_ex $s;
   endTag 'td';
-  startTag 'td';
+  startTag 'td', @o_opt;
   nth_ex $o;
   endTag 'td';
   endTag 'tr';
@@ -251,24 +283,7 @@ our $topmenu = MenuTree
 	  [
 	   ['History'          => 'history.html'],
 	  ]],
-	 ['Download'           => 'download.html',
-	  [
-	   [Debian             => 'dl-debian.html'],
-	   [Unix               => 'dl-unix.html'],
-	   [Windows            => 'dl-windows.html'],
-	  ]
-	 ],
-	 ['Documentation'     => 'doc.html',
-	  [
-	   ['Acknowledgment'  => 'doc-intro.html'],
-	   ['Getting Started' => 'doc-starting.html'],
-	   ['Film'            => 'doc-film.html'],
-	   ['Situation'       => 'doc-situation.html'],
-	   ['Joints'          => 'doc-joints.html'],
-	   ['X-Reference'     => 'doc-xref.html'],
-	   ['Exam'            => 'doc-exam.html'],
-	   ['Disagreement Resolution' => 'doc-disagree.html'],
-	  ]],
+	 ['Download'           => 'download.html'],
 	 ['Mailing Lists'     => 'lists.html'],
 	 ['High Scores'       => 'scores.html'],
 	 ['Research & Professional' => 'jobs.html',
@@ -276,10 +291,7 @@ our $topmenu = MenuTree
 	   ['IMRT'            => 'imrt.html'],
 	  ]
 	 ],
-	 ['Philosophy'        => 'philo.html',
-	 [
-	  ['Aleader'           => 'philo-redael.html'],
-	 ]],
+	 ['Philosophy'        => 'philo.html'],
 	]);
 
 require 'marriage.pl';
@@ -538,24 +550,116 @@ menupage $topmenu, 'News', sub {
 
   element 'h1', 'Introduction';
 
-  element 'p', "Personality development generally focuses on the student's
-reaction to a given situation.
-Certainly choosing the correct reaction *is* important.
-However, deciding on a reaction depends on assessing
-the situation accurately.
-If your perfect reaction is based on a misreading of the situation
-then how can you expect to act effectively?";
+  element 'p', 'i am not against competition,
+but i believe that this software project is unique.
+As far as i know, there is nothing else like it.
+For this reason, a little extra effort
+may be needed to understand what this software does and why
+it is important.';
 
   element 'p', 'Our concern is with measuring and increasing
-AQ (assessment quotient).
+assessment quotient (AQ).
 Our test presents film segments and tests how consistantly you
 can be a witness.
 Aleader is the software used to administer the test.
 It combines a video player, annotation tools,
 and a scoring system into an easy to use GUI.';
 
+  element 'p', "So what is assessment quotient (AQ)?  Let us
+consider AQ's relationship with spiritual traditions, personality
+development, and general harmony with society:";
+
+  startTag 'table', cellspacing => 10, cellpadding => 0, border => 0;
+
+  startTag 'tr';
+
+  my $bgcolor = 'LightYellow1';
+  startTag 'td', valign => 'top', bgcolor => $bgcolor;
+  text 'There is a concept called "witness state" noted in many ';
+  element 'b', 'spiritual traditions';
+  text '.  Here we are interested in the definition of witness
+state which is practical in daily life.
+For example, if a boy verbally insults me then what do i do?
+Do i start a fight on the spot?  If i am trying for a witness
+state then i will not react immediately to a verbal insult.  i
+will take an appropriate amount of time to consider the whole
+situation.  Once i have a cool head, then i can decide on
+a action (if any).';
+  endTag 'td';
+  endTag 'tr';
+
+  startTag 'tr';
+  startTag 'td', valign => 'top';
+  text 'To what extent am i in the witness state?  How
+much do i know about the witness state?  In the past, these
+questions were mostly a matter of personal introspection.  Now you can
+objectively measure your witnessing power as assessment quotient.';
+  endTag 'td';
+  endTag 'tr';
+
+  startTag 'tr';
+  element 'td', '*', align => 'center';
+  endTag 'tr';
+
+  startTag 'tr';
+  startTag 'td', valign => 'top', bgcolor => $bgcolor;
+  text 'The witness state is closely related to personality development. ';
+  element 'b', 'Personality development';
+  text " generally focuses on the student's reaction to a given situation.
+Certainly choosing the correct reaction *is* important.
+However, deciding on a reaction depends on assessing
+the situation accurately.
+If your perfect reaction is based on a misreading of the situation
+then how can you expect to act effectively?";
+  endTag 'td';
+  endTag 'tr';
+
+  startTag 'tr';
+  startTag 'td', valign => 'top';
+  text "If my AQ is below average then attending a personality
+development course will do more harm that good.  Many of my new
+reactions will be wrong or seem artificial.  Fortunately, now we
+can measure AQ numerically.  If my assessment quotient is below
+average then i can invest time in raising my AQ, clearing the
+way for constructive personality development.";
+  endTag 'td';
+  endTag 'tr';
+
+  startTag 'tr';
+  element 'td', '*', align => 'center';
+  endTag 'tr';
+
+  startTag 'tr';
+  startTag 'td', valign => 'top', bgcolor => $bgcolor;
+  text 'One who has experienced the wider variety of situations
+is better attuned to understand the thoughts and reactions of others.
+Such a person can live in greater ';
+  element 'b', 'harmony with society';
+  text ' and derive
+greater meaning and pleasure out of life.  However, gaining awareness
+of such a vast variety of situations typically requires an
+entire lifetime.';
+  endTag 'td';
+  endTag 'tr';
+
+  startTag 'tr';
+  startTag 'td', valign => 'top';
+  text 'What if there were a way to understand all possible
+situations in a short amount of time?  What if students could attain
+the clarity of a wise old man';
+  note 'AQ helps reach the clarity of a wise old man,
+but not the personality of a wise old man.';
+  text ' in less than a year?
+This is a promise and benefit of increasing the assessment quotient.';
+  endTag 'td';
+
+  endTag 'tr';
+  endTag 'table';
+
   startTag 'p';
-  text 'This project is strictly non-profit.
+  text 'Aleader uses a non-mystical, statistical approach to measure
+situation assessment ability (or witnessing power).
+This project is strictly non-profit.
 The software is licensed under the ';
   element 'a', 'GPL', 'href', 'http://www.gnu.org/philosophy/philosophy.html';
   text ' and is freely available from the ';
@@ -563,6 +667,8 @@ The software is licensed under the ';
   text '.';
   endTag 'p';
   
+  show_notes();
+
   element 'h1', "News";
 
   startTag 'p';
@@ -666,8 +772,8 @@ menupage $topmenu, 'Download', sub {
   endTag 'li';
 
   startTag 'li';
-  element 'p', 'Playing movies requires at least mid-range hardware.
-Here are some anecdotal data points:';
+  element 'p', 'You need a fairly recent computer to play movies.
+Any Intel P4 is more than adaquate.  Here are some anecdotal data points:';
   
   startTag 'table', border=>1, cellpadding=>3;
   startTag 'tr';
@@ -706,8 +812,16 @@ Here are some anecdotal data points:';
 
   endTag 'ul';
 
-  element 'p', 'To install the software, please choose specific
-instructions for your operating system.';
+  startTag 'font', color => 'red';
+  startTag 'p';
+  text 'Old versions of the software are available but they
+are difficult to compile and do not work very well.
+We are currently preparing a new release.  The latest
+snapshot is ';
+  element 'a', 'here', href => 'ftp://ftp.berlios.de/pub/redael/aleader-0.9.0.tar.bz2';
+  text '.';
+  endTag 'p';
+  endTag 'font';
 
   element 'h2', 'Films';
 
@@ -759,28 +873,7 @@ instructions for your operating system.';
   element 'td', 'soon';
   endTag 'tr';
 
-  if (0) {
-  startTag 'tr';
-  startTag 'td';
-  text 'Hum Dil De Chuke Sanam (1999)';
-  endTag 'td';
-  element 'td', 'Hindi Drama';
-  element 'td', '13+ (adult themes)';
-  element 'td', '0%';
-  element 'td', 'VCD';
-  element 'td', 'soon';
-  endTag 'tr';
-  }
-
   endTag 'table';
-
-  startTag 'blockquote';
-  startTag 'font', color => 'red';
-  element 'i', 'You must use the same format as is given in the
-table above because synchronization is accomplished with byte-offsets
-instead of time-offsets.  This will be fixed as soon as possible.';
-  endTag 'font';
-  endTag 'blockquote';
 
   element 'p', 'Films which will not be analyzed here: most comedy, horror,
 and action movies (unless especially insightful).  Why not?  Because these
@@ -838,6 +931,7 @@ available?';
 film would be difficult to analyze.';
 };
 
+if (0) {
 menupage $topmenu, 'Debian', sub {
   element 'h1', 'Debian Installation';
 
@@ -917,575 +1011,7 @@ version 0.3.2 or later yet.  You must use exactly version 0.3.1.';
   endTag 'a';
   endTag 'p';
 };
-
-menupage $topmenu, 'Windows', sub {
-  element 'h1', 'Microsoft Windows';
-
-  element 'p', "i don't know much about programming on Windows
-and i don't have time to learn.
-If you have the expertise, 
-you are welcome to port Aleader to Windows and submit patches.";
-};
-
-menupage $topmenu, 'Documentation', sub {
-  element 'h1', 'Documentation';
-
-  element 'p', 'The user interface combines the elements from a word
-processor and movie player.  There are also some interface
-elements for making annotations and advanced features for scoring.';
-
-  element 'p', 'Aleader operates in basically two modes:';
-
-  startTag 'ol';
-
-  startTag 'li';
-  element 'p', 'A student can be tested against an exemplar film annotation.
-Once the user interface is mastered, as little as one hour is required
-for a rough AQ estimate.';
-  endTag 'li';
-
-  startTag 'li';
-  element 'p', 'A researcher can develop an exemplar film annotation.
-This demands a considerable amount of time.  Annotations should be
-consistent across three or more films.  Expect a whole film to consume
-at least a man-month of effort.';
-  endTag 'li';
-
-  endTag 'ol';
-};
-
-menupage $topmenu, 'Acknowledgment', sub {
-  element 'h1', 'Acknowledgment';
-
-  startTag 'p';
-  text 'In scientific literature, it customary to provide
-a bibliography of related research.  However, i am forced to break
-with this convention because i can hardly make a short
-list of people whose contribution i should acknowledge.
-i have drawn inspiration from too many sources.  The best i can
-do is refer you to the ';
-  element 'a', 'philosophy page', href => 'philo.html';
-  text '.';
-  endTag 'p';
-
-  element 'p', 'i have given my life for this research,
-put everything into it, every moment,
-person, and experience.  Perhaps i am the author, but only as
-a transcriber for the Author of All.';
-};
-
-menupage $topmenu, 'Getting Started', sub {
-  element 'h1', 'Getting Started';
-
-  element 'p', 'The most important feature of Aleader is that you
-do not have to understand *why* it works to benefit.  All you have to do is
-gain practical experience using it.  Moreover, you are welcome to
-use standard test-taking techniques to improve your score.';
-
-  element 'p', "The test medium is multiple-choice except for spans,
-duration and joints.  Don't try to figure out spans or joints on your
-first attempt.  Follow a gradual introduction:";
-
-  startTag 'ol';
-  startTag 'li';
-  element 'p', 'Take an exam with original spans and also ignore any joints.
-Always set duration to Closed.  Use the diff tool to
-examine your mistakes. (Depth 1)';
-  endTag 'li';
-  
-  startTag 'li';
-  element 'p', 'Take an exam with the original spans
-and always set the duration to Open.
-Add closing joints until all the situations are closed.
-You can use the duration query screen to check whether anything remains open.
-Use the diff tool to examine your mistakes. (Depth 2)';
-  endTag 'li';
-  
-  startTag 'li';
-  element 'p', 'Take an exam without any original annotation.
-Now it is your responsibility to deterime the span of each situation.
-Set the duration and add joints as you see fit.
-Use the diff tool to examine your mistakes. (Depth 3)';
-  endTag 'li';
-  
-  endTag 'ol';
-
-  element 'p', 'The diff tool can measure the difference between
-your answers and the exemplar.  Generally, any differences will
-be your mistake.  However, this is not always true.  You may find
-errors in the exemplar.  Please report possible errors to the mailing
-list.';
-};
-
-menupage $topmenu, 'Film', sub {
-  element 'h1', 'Film Transcript';
-
-  startTag 'center';
-  startTag 'p';
-  img 'art/transcript.png', 'Transcript View';
-  endTag 'p';
-  endTag 'center';
-  
-  element 'p', 'The left side contains the film transcript.  Each highlighted
-segment indicates the span of a single situation.  The right side
-contain a list of situations.  When you move the cursor, the left
-and right sides stay in-sync.  By selecting text or by pressing the
-"Play" button, you can effortless play back any piece of the film.';
-
-  startTag 'p';
-  emptyTag 'hr';
-  endTag 'p';
-
-  element 'h2', 'Film View';
-
-  startTag 'center';
-  startTag 'p';
-  img 'art/filmview.jpg', 'Film View', border=>0;
-  endTag 'p';
-  endTag 'center';
-
-  element 'p', 'Actually it takes a lot of effort to make this effortless.
-Fortunately, only folks who are preparing a new film annotation need
-to understand these steps in detail.';
-
-  startTag 'ol';
-  startTag 'li';
-  startTag 'p';
-  text 'Copy a film onto your hard drive.  MPEG1 (vcd) or MPEG2 (dvd)
-is OK.  Actually, this step is optional.  You do not *need* to copy the
-film, but the following steps will involve lots of seeking which might
-stress your CD/DVD.';
-  endTag 'p';
-  endTag 'li';
-
-  startLi;
-  text 'Find or create a transcript of your film.  Creating a transcript
-from scratch is *really* tedious.  Be sure to search ';
-  element 'a', "Drew's Script-O-Rama", href=>'http://www.script-o-rama.com';
-  text " or any other similar sites for your title.  If you can't find
-a script then consider whether you should go back to step (1) and
-pick a different film.";
-  endLi;
-
-  startTag 'li';
-  startTag 'p';
-  text 'Load your transcript and film together in Aleader.';
-  endTag 'p';
-  endTag 'li';
-
-  startTag 'li';
-  startTag 'p';
-  text 'Actors or actresses generally take turns talking.  Place your
-cursor at the beginning of a segment of talking.  Sync the film up to
-the same place so the film matches your cursor position in the
-transcript.  Select Insert::Sync from the menu.';
-  endTag 'p';
-  endTag 'li';
-
-  startTag 'li';
-  startTag 'p';
-  text 'Re-position your cursor at the end of the dialog.  Select Insert::Sync.  Repeat until you have done the whole film. Aleader will do
-linear interpolation between the explicit time sync marks so
-you only have to add a time sync at the important places.';
-  endTag 'p';
-  endTag 'li';
-
-  startTag 'li';
-  startTag 'p';
-  text 'Make backups.  This is something you should never be forced to
-do more than once!';
-  endTag 'p';
-  endTag 'li';
-  endTag 'ol';
-};
-
-menupage $topmenu, 'Situation', sub {
-  element 'h1', 'Abstract Situation';
-
-  element 'p',
-'This screen shows the structural parameters of the situation.  Here
-questions are presented, mostly in a multiple-choice format.';
-
-  startTag 'center';
-  startTag 'p';
-  img 'art/ip.png', 'Abstract Situation', border=>1;
-  endTag 'p';
-  endTag 'center';
-
-  startTag 'ol';
-
-  startLi;
-  text 'Select the two most important people in the scene.
-A situation always consists of two participants (real or anthropomorphic).';
-  endLi;
-  
-  startLi;
-  text "Choose the initiator.  Generally, whoever is talking is
-the initiator.  Always consider the situation from the initiator's
-point of view.";
-  endLi;
-
-  startLi;
-  text "Choose the situation.";
-  endLi;
-
-  startLi;
-  text 'Choose the phase, tension, and intensity.';
-  endLi;
-
-  startLi;
-  text 'The span of a situation is the longest period of time
-during which the parameters of the situation remain constant.';
-  endLi;
-
-  startLi;
-  text 'Choose the duration.  Although duration is not considered
-for scoring, duration indicates whether the situation will be the
-target of a joint (see the Joint section).  An ambiguous
-duration is only useful for exemplars to indicate an *optional*
-situation.';
-  endLi;
-
-  endTag 'ol';
-
-  element 'p', 'At first glance, the questions may seem simple,
-but they attempt to summarize all possible experiences between individuals.
-The idea is to construct a
-sentence by the options given which best describes what is
-happening in the film.  Three detailed screens provide
-guidance for describing situations uniquely and consistently.
-These screens are available from the Help menu.';
-
-  startTag 'center';
-  startTag 'p';
-  columns sub {
-    thumb 'art/situation_help1.jpg', 'Situation';
-  },
-  sub { hskip 4 },
-  sub {
-    thumb 'art/situation_help2.jpg', 'Phase & Initiative';
-  },
-  sub { hskip 4 },
-  sub {
-    thumb 'art/situation_help3.jpg', 'Intensity & Tension';
-  };
-  endTag 'p';
-  endTag 'center';
-
-};
-
-
-menupage $topmenu, 'Joints', sub {
-  element 'h1', 'Add Joint';
-
-  element 'p', 'These two screens are used to create connections
-between two situations.  Connections (a.k.a. joints) describe
-a temporal relationship between two situations.';
-
-  element 'p', 'Canidate situations are generally indicated by
-having an open duration.  The Duration Query screen (not shown)
-offers a convenient summary of duration status.';
-
-  startTag 'p';
-  columns sub {
-    img 'art/addjoint1.png', 'Add Joint (1)', border=>0;
-  },
-  sub { hskip 2 },
-  sub {
-    img 'art/addjoint2.png', 'Add Joint (2)', border=>0;
-  };
-  endTag 'p';
-
-  element 'p', "Each joint has particular characteristics.  (This is
-really hard to understand until you actually use Aleader so don't worry
-if it doesn't make much sense.)";
-
-  startTag 'p';
-  startTag 'table', border=>1, cellpadding=>4;
-
-  startTag 'tr';
-  element 'td', '';
-  element 'td', 'react';
-  element 'td', 'amend';
-  element 'td', 'revoke';
-  element 'td', 'echo';
-  element 'td', 'witness';
-  endTag 'tr';
-
-  startTag 'tr';
-  element 'td', 'in-force';
-  element 'td', '--';
-  element 'td', 'yes';
-  element 'td', 'no';
-  element 'td', 'yes';
-  element 'td', '--';
-  endTag 'tr';
-
-  startTag 'tr';
-  element 'td', 'change';
-  element 'td', '--';
-  element 'td', 'yes';
-  element 'td', 'yes';
-  element 'td', 'no';
-  element 'td', '--';
-  endTag 'tr';
-
-  startTag 'tr';
-  element 'td', 'linkage';
-  startTag 'td'; nth 2; endTag 'td';
-  startTag 'td'; nth 1; endTag 'td';
-  startTag 'td'; nth 1; endTag 'td';
-  startTag 'td'; nth 1; endTag 'td';
-  startTag 'td'; nth 3; endTag 'td';
-  endTag 'tr';
-
-  endTag 'table';
-  endTag 'p';
-
-  startTag 'ul';
-  startTag 'li';
-  element 'b', 'in-force';
-  text ': Whether the past situation will continue
-to be in-force.  Here is an example where the past situation
-is revoked: "Send five pizzas.  No, cancel, send six pizzas."';
-  endTag 'li';
-
-  startTag 'li';
-  element 'b', 'change';
-  text ': Whether there is a desire to change the past situation.';
-  endTag 'li';
-
-  startTag 'li';
-  element 'b', 'linkage';
-  text ': This gives a hint about the identity of the initiator
-and contraparty.  If '; nth(1);
-  text ' person then the initiator or contraparty will remain the
-same.  If '; nth(2);
-  text ' person then the participants will take turns being the initiator.
-If '; nth(3);
-  text ' then the participants in the past and present situations
-might be entirely different.';
-  endTag 'li';
-
-  endTag 'ul';
-
-  element 'p', "Joint characteristics are enforced by a set of rules
-written in a simple if-then language.  These rules are loaded at
-Aleader startup.  If you don't like the default rules then you can
-customize them.";
-
-  element 'p', 'In any case, the scoring algorithm only distinguishes
-witness or non-witness type joints as the joint type can usually be
-inferred from surrounding context.';
-};
-
-menupage $topmenu, 'X-Reference', sub {
-  element 'h1', 'Cross Reference';
-
-  element 'p', 'Once you have annotated the film in the 3rd person then you can
-create empathy patterns to translate back into the 1st person
-perspective.  This completes the empathy <---> situation assessment cycle.';
-
-  startTag 'p';
-  img 'art/crossref.png', 'Cross Reference', border=>0;
-  endTag 'p';
-
-  element 'p', "About 110 patterns have been gathered based on
-a comparison of annotations from three films, however, this work was
-done before i wrote Aleader.  With Aleader's help, we should be able
-to develop a larger and more consistent collection of patterns.
-(Your help is needed. :-)";
-
-  startTag 'p';
-  text 'You might enjoy browsing the hyper-linked ';
-  element 'a', 'empathy map', href => 'empathy/index.html';
-  text '.';
-  endTag 'p';
-
-};
-
-menupage $topmenu, 'Exam', sub {
-  element 'h1', 'Exam Setup';
-
-  element 'p', 'Once an exemplar film annotation is prepared
-and verified then students can be tested against it.';
-
-  startTag 'center';
-  startTag 'p';
-  img 'art/exam_setup.png', 'Exam Setup', border=>0;
-  endTag 'p';
-  endTag 'center';
-
-  element 'p', 'Exam Status: The heart of Aleader is the score
-calculation.  The definition of AQ is:
-"# of correctly categorized situations per hour."
-Here is an example of an exam in progress.';
-
-  columns sub {
-    element 'p', '"Changed" is the number of situations
-which the student has *potentially*
-categorized correctly.  "Ideal AQ" is the AQ which the student
-could have gotten if he had actually categorized the situations perfectly.
-"AQ" is the actual AQ.  "Speed" is a recommendation based on
-whether the student is making a good trade-off between speed and accuracy.
-If the accuracy is too low (lots of errors) then Aleader will suggest
-"Go Slower".  If the accuracy is too high (no errors) then Aleader will
-suggest "Go Faster".';
-  },
-  sub { hskip 4 },
-  sub {
-    img 'art/exam_status.png', 'Exam Status', border=>0;
-  };
-
-  columns sub {
-    element 'p', 'In this case, the student needs to spend
-more time working on accuracy since the actual AQ is about 10%
-of the Ideal AQ (84.9 * 10% = 8.4 > 8.26).';
-  }, 
-  sub { hskip 4 },
-  sub {
-    img 'art/exam_status2.png', 'Exam Status';
-  };
-
-  startTag 'p';
-  columns sub {
-    element 'p', 'Ideal AQ is a function of "Elapse Time" and "Changed".
-The table (right side) offers some examples of this function.
-Notice that both 5 situations in 5 minutes and
-25 situations in 25 minutes give an Ideal AQ of 60.  This
-makes sense because one situation per minute is 60 situations per hour.';
-    element 'p', 'It is hard to score above 60 without practicing the test in advance.';
-  },
-  sub {
-  startTag 'table';
-  startTag 'tr';
-  element 'th', '';
-  for (my $ch = 5; $ch <= 55; $ch += 10) {
-    element 'th', $ch;
-  }
-  element 'th', 'Changed';
-  endTag 'tr';
-  for (my $tm = 5; $tm <= 45; $tm += 5) {
-    startTag 'tr';
-    element 'th', "$tm:00";
-    for (my $ch = 5; $ch <= 55; $ch += 10) {
-      my $ieq = $ch * 60 / $tm;
-      if ($ieq > 60) {
-        startTag 'td';
-        element 'font', sprintf("%d", $ieq), color => 'gray';
-        endTag 'td';
-      } else {
-        element 'td', sprintf("%d", $ieq);
-      }
-    }
-    endTag 'tr';
-  }
-  startTag 'tr';
-  element 'th', 'Elapsed';
-  endTag 'tr';
-  endTag 'table';
-  };
-  endTag 'p';
-
-  columns sub {
-    element 'p', 'Here is another example.  The AQ is almost the
-same as the Ideal AQ, so Aleader recommends "Go Faster".  By
-going faster, the student will do two things: raise the Ideal AQ
-and make slightly more mistakes.  Overall, the AQ score should
-improve by balancing speed and accuracy.';
-  },
-  sub { hskip 4 },
-  sub {
-    img 'art/exam_status3.png', 'Exam Status';
-  };
-
-  element 'p', 'Spending more time taking a test increases
-the accuracy.  On the other hand, spending longer than one hour
-becomes exhausting and the score is likely to decay somewhat.
-Empirically, we found that 15, 30, and 45 minutes are probably
-the most enjoyable test durations.';
-
-};
-
-menupage $topmenu, 'Disagreement Resolution', sub {
-  element 'h1', 'Disagreement Resolution';
-
-  element 'p', '*Expect* disagreements to happen.  The questions
-posed by Aleader may seem easy but sometimes it is hard to figure
-out the best way to answer.  The first thing to check is:
-what is happening in the film?';
-
-  startTag 'blockquote';
-  element 'p', "Just discuss the situation in more detail and see
-if you can reach an agreement on the general meaning of the
-film.  Repeatedly view the scene 5, 10 or 100 times.
-If you can't agree on the meaning then the film is just too ambiguous.";
-
-  element 'p', 'Add some notes to the transcript to hint at an agreed
-upon meaning.  Until the film is clear, it is not possible to
-classify a given situation.';
-  endTag 'blockquote';
-
-  element 'p', 'Here are a few more guidelines to disambiguate
-complex scenes.  Understand that abstract situations are a
-*simplification* of the actual film.  It is sufficient to
-model only the most important aspects of a situation.';
-
-  startTag 'ul';
-  startLi;
-  text 'The film may include an actor who is doing narration
-from a 3rd person perspective.  This narration is less important
-that any immediate action.';
-  endLi;
-
-  startLi;
-  text 'If there seem to be multiple active situations (for
-example both [+] admires [0] and [0] accepts [+]) then the
-situation with a shorter span is more important.';
-  endLi;
-
-  startLi;
-  text "You are welcome to study the whole film, however,
-you must respect the status of hidden information before it
-is subsequently revealed.  For example, if someone's
-identity is not yet revealed then treat that person as
-Someone until the film progresses to the point where
-the person's identity is actually revealed in the film.
-A 5-10 second look-ahead is admissible in some cases.
-Use your good judgment.";
-  endLi;
-  endTag 'ul';
-
-  element 'h2', 'Hard Disagreements';
-
-  element 'p', 'If there is still a disagreement then it is
-necessary to resort to a democratic protocol.  The general
-principle for resolving disputes is "the majority wins".  However, your
-vote will not be counted until you demonstrate thoroughly level-headed
-consistency.';
-
-  element 'blockquote', 'The utility of a model of 3rd person situations
-is whether it provides a one-to-one mapping between abstract situations
-and abstract emotions.
-
-A one-to-one mapping provides an inverse-of-empathy mapping
-(situation assessment) which can then be seen, understood,
-and tested against.';
-
-  element 'p',  'Use the Cross Reference screen to check
-the consistency of the annotations.  For a given annotation,
-all the matching situations should evoke a similar emotion.
-Check this theory by re-playing matching situations from the film.
-Each group of matching situations should evoke a distinct
-cluster of similar emotions.  Try it.
-This is how to gain confidence in the categorization system.';
-
-  element 'p','If you are advocating a different categorization
-system then you need to show that your system offers at least
-as much consistancy.  May the most consistent system prevail.
-Good luck!';
-
-};
+}
 
 menupage $topmenu, 'Mailing Lists', sub {
   element 'h1', 'Mailing Lists';
@@ -1620,12 +1146,22 @@ here are as follows:';
   startTag 'ul';
   startTag 'li';
   text "`Emotion' is a feeling which arises in the context of two separate people.";
+  note "We can give a definition for `thought',
+however, distinguishing between thought and emotion is not necessary
+for this discussion. Here `emotion' is meant inclusive of thought --
+some non-physical sensation arising in the context of two separate people.";
   endTag 'li';
   startTag 'li';
   text "`Spirit' is a feeling which does not admit the idea of separation.";
   endTag 'li';
   startTag 'li';
   text "`Compassion' is a special feeling which bridges spirit to emotion.";
+  note "Emotion doesn't require two living breathing people.
+Only the *context* of two people is important.
+For example,
+if you have compassion for a stone then emotion can
+arise between you and the stone (maybe you are a sculptor).
+Anthropomorphic emotions are still emotions.";
   endTag 'li';
   startTag 'li';
   text "`Feeling' is the most general word, including emotion,
@@ -1633,26 +1169,7 @@ spirit, and compassion.";
   endTag 'li';
   endTag 'ul';
 
-  element 'p', 'Here are some additional notes:';
-
-  startTag 'ul';
-
-  startLi;
-  text "We can give a definition for `thought',
-however, distinguishing between thought and emotion is not necessary
-for this discussion. Here `emotion' is meant inclusive of thought.";
-  endLi;
-
-  startLi;
-  text "Emotion doesn't require two living breathing people.
-Only the *context* of two people is important.
-For example,
-if you have compassion for a stone then emotion can
-arise between you and the stone (maybe you are a sculptor).
-Anthropomorphic emotions are still emotions.";
-  endLi;
-
-  endTag 'ul';
+  show_notes();
 
   element 'h2', 'Compassion';
 
@@ -1667,7 +1184,8 @@ and the Nazi killings in Germany can be attributed to a
 terrible imbalance in compassion.';
   endTag 'p';
   startTag 'p';
-  text 'Before compassion, the main focus is on the ';
+  text 'Before compassion awakens, an individual can be described
+as follows:  His main focus is on the ';
   nth(1);
   text ' person perspective.  There is no partition between personality
 and emotion.  There are no situations, only *my* situation (singular).
@@ -1742,7 +1260,8 @@ and draw any further conclusions.';
   columns sub { attention 0,1 },
     sub { hskip 2 },
       sub {
-	text 'For example: "i am angry, but i am detached from
+	element 'tt', 'detachment'; br;
+        text 'For example: "i am angry, but i am detached from
 my anger.  The anger is an object of my attention.  i forgive,
 i forgive.  Now i do not feel angry."';
       };
@@ -1752,6 +1271,7 @@ i forgive.  Now i do not feel angry."';
   columns sub { attention 1,3 },
     sub { hskip 2 },
       sub {
+        element 'tt', 'empathy';  br;
 	text 'Perhaps the most obvious example of empathy is
 what happens while watching a film.  A film is nothing but ';
 	nth 3;
@@ -1759,6 +1279,8 @@ what happens while watching a film.  A film is nothing but ';
 people can easily empathize with the actors and *feel* a
 precise replica of the emotions depicted onscreen.  The film
 is the object and emotion is the subject, hence "empathy."';
+        note 'A few people fail to developed a sense of empathy
+as children.  Such people are called "autistic".';
       };
   endTag 'p';
 
@@ -1767,6 +1289,7 @@ is the object and emotion is the subject, hence "empathy."';
     sub { hskip 2 },
       sub {
 	startTag 'font', color=> EICOLOR;
+        element 'tt', 'situation assessment'; br;
 	text '"Based on how i feel, what is the structural situation?"
 This style of question is repeatedly posed in Aleader annotations.';
 	endTag 'font';
@@ -1778,6 +1301,7 @@ This style of question is repeatedly posed in Aleader annotations.';
   columns sub { attention 1,2 },
   sub { hskip 2 },
   sub {
+    element 'tt', 'follow everyone else'; br;
     text '"What are other people doing?"  Extra-ordinary personal
 preference and fashions are expressions of this configuration of
 attention.  For example, "Everyone is going to the pub therefore
@@ -1789,6 +1313,7 @@ i will also go to the pub."';
   columns sub { attention 2,1 },
   sub { hskip 2 },
   sub {
+     element 'tt', 'ideal role-model'; br;
      text 'How would an ideal personality behave?
 For example, "How would my mother behave in my place?"  Parents
 or great teachers of morality can serve as a role-model.';
@@ -1804,6 +1329,7 @@ A person with sound character behaves in accord with ideal principles.";
   columns sub { attention 0,0 },
     sub { hskip 2 },
       sub {
+        element 'tt', 'self-realization'; br;
 	text "If you have *not* experienced self-realization then
 please visit a local ";
 	element 'a', 'Sahaja Yoga', href=>'http://sahajayoga.org';
@@ -1817,8 +1343,8 @@ into your living reality.";
   columns sub { attention 1,0 },
     sub { hskip 2 },
       sub {
-	text 'While practicing true meditation, i focus my attention on
-the pure spirit.  After meditation, part of my attention remains
+        element 'tt', 'divine expression'; br;
+	text 'After meditation, part of my attention remains
 connected with the spirit, thereby enlightening the experience
 of individuality.
 Divine expression makes individuality most beautiful and enjoyable,
@@ -1827,11 +1353,7 @@ much more so than any physical or mental amusement.';
   endTag 'p';
 
   startTag 'p';
-  text 'Jumping directly between the ';
-    nth(2);
-    text ' and ';
-    nth(3);
-    text " perspectives doesn't make sense.  Attention flows between the ";
+    text "Attention flows between the ";
     nth(0);
     text ' and ';
     nth(1);
@@ -1844,6 +1366,12 @@ much more so than any physical or mental amusement.';
     text ' and ';
     nth(3);
     text ' perspectives. ';
+
+    text 'Jumping directly between the ';
+    nth(2);
+    text ' and ';
+    nth(3);
+    text " perspectives doesn't make sense.  ";
 
   text 'The following table and diagram summarize all sensical
 configurations:';
@@ -1890,6 +1418,8 @@ configurations:';
   };
   endTag 'center';
 
+  show_notes();
+
   element 'h2', 'Toward Self-Identity';
 
   columns sub {
@@ -1900,28 +1430,34 @@ Self-realization (f) is the only configuration to accomplish this
 Even so, the attention quickly flows outward into other configurations
 and the divine quality (g) of attention is soon dilute.';
 
-    element 'p', '
-To restart the divine flow, we need a way to consistently
+    startTag 'p';
+    text 'To restart the divine flow, we need a way to consistently
 place our attention in the configuration of self-realization (f).
-The problem with seeking self-realization (f) is that the attention
-is lost in seemingly infinite variations of experience.
+However, neither self-realization (f) or divine expression (g) are
+easily accessible because their object is pure spirit.
+How to focus the attention on pure spirit?
+The attention is lost in seemingly infinite variations of experience.
 Detachment (a) is essential to elminate the confusion.
-This configuration (a) is unique because the pure spirit is present
-as the subject.  None of the other accessible configurations
-directly involve the pure spirit.';
+This configuration (a) is unique: the pure spirit is present
+(as the subject) and the object tangible.
+None of the other accessible configurations';
+    note 'Configurations (a), (b), (c), (d), and (e) are easily accessible
+because their object is something tangible.';
+    text ' even involve the pure spirit.';
+    endTag 'p';
 
-    element 'p', '
-By aligning the attention as soothing detachment (a) with respect to
-the complete octave of emotions, no significant object remains.
-The attention ceases to be a vector and resolves to
-the point of self-realization (f).
+    element 'p', 'Detachment (a) is a most subtle topic.
+H. H. Shri Mataji describes it well:
 "The spirit is like the steady axis of a wheel. If
 our attention reaches the immovable firm axis at the very centre of the
 wheel of our existence (which is constantly moving), we become
 enlightened by the spirit, the source of inner peace, and reach a state
-of complete calm and self-knowledge." (H. H. Shri Mataji)';
+of complete calm and self-knowledge."
+In geometric terms, the attention ceases to be a vector (looking
+from here to there) and resolves to the point of complete calm.';
 
-    element 'p', '
+    columns sub {
+      element 'p', '
 If detachment (a) supports self-realization (f) then
 what kind of experiences support detachment (a)?
 The pressures of daily life keep attention bouncing
@@ -1930,7 +1466,7 @@ At least the emotions can be kept as the object of
 attention.  If emotion is the object then the attention is
 already halfway configured as detachment (a).';
 
-    startTag 'p';
+      startTag 'p';
     text 'While having some importance,
 empathy (b) and following everyone else (d) need not
 be full-time pursuits.  The two remaining attention configurations
@@ -1940,9 +1476,19 @@ is one of the special configurations, however, here we are
 concerned exclusively with ';
     element 'font', 'situation assessment (c)', color=>EICOLOR;
     text '.';
-    endTag 'p';
+      endTag 'p';
+    },
+    sub { hskip 2 },
+    sub {
+      text '(a) detachment';
+      attention 0,1,'o'; br;
+      element 'font', '(c) situation assessment', color=>EICOLOR;
+      attention 3,1,'o'; br;
+      text '(e) ideal role-model';
+      attention 2,1,'o';
+    };
+    show_notes();
   },
-  sub { hskip 4 },
   sub {
     startTag 'center';
     element 'h3', 'Summary';
@@ -1959,8 +1505,8 @@ divine expression is soon diluted by subsequent experiences.';
     endLi;
 
     startLi;
-    text 'Detachment (a) demands a precise understanding
-of emotions.';
+    text 'Detachment (a) demands a subtle understanding
+of thought and emotion.';
     endLi;
 
     startLi;
@@ -1985,210 +1531,6 @@ the object of attention.';
   };
 };
 
-menupage $topmenu, 'Aleader', sub {
-  element 'h1', 'Aleader';
-
-  element 'h2', 'Workflow';
-
-  element 'p', 'See below for an explanation of each numbered point.';
-
-  startTag 'center';
-  startTag 'p';
-  img 'art/workflow.png', 'Workflow', border=>0;
-  endTag 'p';
-  endTag 'center';
-
-  startTag 'ol';
-
-  startTag 'li';
-  startTag 'p';
-  text 'People can easily empathize with the actors and actresses,
-and *feel* a precise replica of the emotions depicted onscreen.
-(A few people fail to developed a sense of empathy as children.  Such
-people are called "autistic".)';
-  endTag 'p';
-  endTag 'li';
-
-  startTag 'li';
-  startTag 'p';
-  text 'AQ (assessment quoient) is the factor which allows one to
-envision the 3rd person situation by sensitivity to emotion.
-The Situation screen
-records the structural parameters of the situation.  The
-Joint screens record any relationships between situations.';
-  endTag 'p';
-  endTag 'li';
-
-  startTag 'li';
-  startTag 'p';
-  text 'The Cross Reference screen automates pattern
-matching from abstract situations to abstract emotions.  This
-mechanical process aims to mimic the empathy sense.';
-  endTag 'p';
-  endTag 'li';
-
-  startTag 'li';
-  startTag 'p';
-  text 'The principal
-reason to want abstract emotions is for verifying correctness.  For
-example, it is much easier to imagine the abstract emotion "try
-to cover up mistake" (or "shame") than to imagine the corresponding abstract
-situation "before ';
-  element 'b', '[0]';
-  text ' accepts [+] followed by :react: during stifled
-[+] exposes ';
-element 'b', '[-]';
-  text '".  Since emotions are often repeated, pattern classifications
-can be established with certainty.';
-  endTag 'p';
-  endTag 'li';
-
-  startTag 'li';
-  startTag 'p';
-  text 'The pattern matching also makes it easier to verify that
-each abstract situation corresponds to its associated actual situation
-in the film.  If the abstract emotions seem correct except for one
-case then the structure of the exceptional situation probably
-needs re-evaluation.';
-  endTag 'p';
-  endTag 'li';
-
-  endTag 'ol';
-
-  startTag 'p';
-  text 'Steps (4) and (5) work against each other in opposite directions.
-After checking and re-checking, we can gain confidence that the
-abstract representation is a fairly accurate distillation of the film.';
-  endTag 'p';
-
-  startTag 'p';
-  text "During an examination session, the automated facilities relating to
-abstract emotions are disabled (step 3).  
-A student's AQ (assessment quotient) is tested intensively.";
-  endTag 'p';
-
-if (0){
-  element 'h2', 'The Model';
-
-  element 'p', 'By showing a film, it is easy to present actual situations
-which are complex enough to activate the empathy mechanism.
-However, it is not at all obvious how to record the structural
-parameters of an abstract situation.';
-
-  element 'p', 'The utility of a given model of 3rd person situations
-is whether it provides a one-to-one mapping between abstract situations
-and abstract emotions.  If the mapping is one-to-one then the model
-can be taken as equal to the actual empathy sense.  Moreover, a
-one-to-one mapping exposes the inverse-of-empathy mechanism
-(situation assessment) which can then be seen, understood, and
-tested against.';
-
-  element 'p', 'So what is the *best* model to use for recording
-the structural parameters of a situation?  There are probably an infinite
-number of ways to organize all the situations involving individuals.
-Even so, by thinking about this question like a mathematical
-equation, a solution is revealed.';
-
-  startTag 'center';
-  img 'art/model.png', 'Model Mathematics';
-  endTag 'center';
-
-  startTag 'ol';
-  startLi;
-  text 'Write our question like a mathematical equation.';
-  endLi;
-  startLi;  
-  text 'Be specific about our terms.  Situation can be the object
-of attention (as with empathy) or the subject of attention (as with
-situation assessment).';
-  endLi;
-  startLi;
-  text 'For the case of the situation as a subject, we can
-substitute the word "competition".';
-  endLi;
-  startLi;
-  text 'Divide both sides of the equation by "competition".';
-  endLi;
-  startLi;
-  text 'Our sentence is re-written as: "The best model of competition
-is the actual objective situation."';
-  endLi;
-  endTag 'ol';
-
-  element 'p', 'This explanation may seem far-fetched,
-but it is easy to check the practical utility of the resulting model
-using the metric proposed above (whether the model is one-to-one with
-respect to emotions).';
-  };
-
-  element 'h2', 'Ghost Wheel?';
-
-  element 'p', '"Ghost" refers to the all-pervading power of divine
-love, the divine cool breeze.  "Wheel" hints at the idea of a machine.
-So "ghost-wheel" refers to the timeless machine which is animated
-by the power of divine love.  This machine is *timeless* because only
-one prerequisite is needed to trigger its operation:
- compassionate individuals.';
-
-  startTag 'table', border => 0, cellspacing => 0, cellpadding => 0;
-  startTag 'tr';
-  startTag 'td', width=>'50%', valign => 'top';
-    element 'p', 'The other name i used for this project is "why-compete".
-This name is based on the inspiration i received when i was trying to
-figure out how to design the situation model.';
-
-    element 'p', 'Redael is the word "leader" with the letters reversed.
-Pronounce it as you wish.';
-
-    element 'p', 'Aleader has at least two meanings:';
-    startTag 'ul';
-    startLi;
-    text 'It is a short form of "assessment leader".';
-    endLi;
-    startLi;
-    text 'It suggests a contrast between "a leader" and "the leader".
-Only one of us is the leader, but we can all be a leader.
-In other words, i believe that leadership qualities are not dependent on
-the number of followers.';
-    endLi;
-    endTag 'ul';
-  endTag 'td';
-  startTag 'td';
-  hskip 4;
-  endTag 'td';
-  startTag 'td', width => '50%', valign => 'top';
-    startTag 'p';
-    text 'The river carves out the valley by flowing beneath it.';
-    br;
-    text 'Thereby the river is the master of the valley.';
-    br;br;
-    text 'In order to master people';
-    br;
-    text 'One must speak as their servant;';
-    br; 
-    text 'In order to lead people';
-    br;
-    text 'One must follow them.';
-    br;br;
-    text 'So when the gentle rise above the people,';
-    br;
-    text 'They do not feel oppressed;';
-    br;
-    text 'And when the gentle stand before the people,';
-    br;
-    text 'They do not feel hindered.';
-    br;br;
-    text 'So support for the gentle does not fail,';
-    br;
-    text 'They do not contend, and none contend against them.';
-    endTag 'p';
-    element 'a', 'Tao Te Ching #66',
-      href => 'http://home.san.rr.com/merel/gnl.html';
-  endTag 'td';
-  endTag 'tr';
-  endTag 'table';
-};
-
 menupage $topmenu, 'Research & Professional', sub {
   element 'h1', 'The Next Step';
 
@@ -2209,9 +1551,6 @@ established statistically:';
   startLi;
   text 'How many hours of practice does it take to produce
 an accurate AQ score?';
-  br;
-  text '(i speculate that accuracy will emerge
-after the 2nd or 3rd attempt.)';
   endLi;
   startLi;
   text 'Does well does our AQ score correlate with career
@@ -2473,3 +1812,4 @@ This test is only concerned with situation assessment.  It leaves the
 question of choosing the perfect reaction up to your spontaneous
 creativity.
 
+Algorithmic definition of Happiness

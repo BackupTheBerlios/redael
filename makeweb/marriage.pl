@@ -165,7 +165,7 @@ our qualifications.';
     startTag 'ul';
     element 'li', 'Software Engineer';
     startTag 'li';
-    element 'a', 'Research in Emotional Intelligence',
+    element 'a', 'Research in Situation Assessment',
       href => 'http://ghost-wheel.net';
     endTag 'li';
     endTag 'ul';

@@ -1,15 +1,22 @@
 #!/usr/bin/perl -w
 
+#
+# upload with:
+#
+# tar zcf empathy.tgz empathy
+# scp empathy.tgz vishnu@shell.berlios.de:/home/groups/redael/htdocs/
+#
+
 use 5.6.1;
 use strict;
 use Carp;
 
 our @Em;
-our @Attr = (qw(situation initiator victim phase tension intensity jtype));
+our @Attr = (qw(intent initiator victim phase tension intensity jtype));
 our %Attr =
   (
-   situation => [qw(ready accepts observes admires impasse
-		    exposes uneasy steals kills)],
+   intent => [qw(ready accepts observes admires impasse
+		 exposes uneasy steals kills)],
    initiator => [qw(left right)],
    victim => [qw(absent)],
    phase => [qw(before during after)],
@@ -44,6 +51,8 @@ sub last_constraint {
 
     if ($l =~ /(\w+) \s* \= \s* (\w+)/x) {
       my ($attr, $val) = ($1,$2);
+      $attr = 'intent'
+	if $attr eq 'situation';
       $last->{ $attr } = $val;
     } elsif ($l =~ /then \s* \" (.*) \"/x) {
       if (keys %$last == 0) {  die 'no keys'; }
@@ -103,8 +112,8 @@ sub is_subpattern {
 	 $nc->{initiator} ne $hc->{initiator}) or
 	(exists $nc->{victim} and
 	 $nc->{victim} ne $hc->{victim}) or
-	(exists $nc->{situation} and
-	 $nc->{situation} ne $hc->{situation}) or
+	(exists $nc->{intent} and
+	 $nc->{intent} ne $hc->{intent}) or
 	(exists $nc->{phase} and
 	 $nc->{phase} ne $hc->{phase}) or
 	(exists $nc->{tension} and
@@ -135,7 +144,7 @@ sub pattern_rank {
     $rank += 10;
     ++$rank if exists $c1->{initiator};
     ++$rank if exists $c1->{victim};
-    ++$rank if exists $c1->{situation};
+    ++$rank if exists $c1->{intent};
     ++$rank if exists $c1->{phase};
     ++$rank if exists $c1->{tension};
     ++$rank if exists $c1->{intensity};
@@ -158,7 +167,7 @@ sub traverse {
 
   for my $attr (@Attr) {
     next if exists $oldlast->{$attr};
-    next if ($attr eq 'jtype' and !exists $oldlast->{situation});
+    next if ($attr eq 'jtype' and !exists $oldlast->{intent});
 
     for my $choice (@{ $Attr{$attr} }) {
       # refine pattern
@@ -307,6 +316,8 @@ sub pat2html {
 warn "Generating HTML...\n";
 
 sub header_map {
+  my ($full) = @_;
+  
   startTag 'table', border => 0, width => '100%';
   startTag 'tr';
   
@@ -325,6 +336,36 @@ sub header_map {
   endTag 'tr';
   endTag 'table';
   
+  emptyTag 'hr';
+
+  return if !$full;
+
+  startTag 'p';
+  text 'The empathy map matches abstract situations
+to abstract emotions.  An abstract situation consists of
+one or more spans connected by joints (jtype).
+There are six parameters which describe a span:';
+  for (0..5)  { text " $Attr[$_]" }
+  text '.';
+  endTag 'p';
+
+  for my $attr (@Attr) {
+    startTag 'p';
+    text "$attr :";
+    for my $val (@{ $Attr{ $attr} }) {
+      text " $val";
+    }
+    endTag 'p';
+  }
+
+  element 'p', 'It is possible that more than one abstract emotion
+matches a given abstract situation.  All matches can be considered,
+but usually the most specific match is of greater interest.';
+
+  my @tm = localtime;
+  element 'p', 'Last modified ' .
+    sprintf "%02d/%02d/%04d", $tm[3], $tm[4]+1, $tm[5]+1900;
+
   emptyTag 'hr';
 }
 
@@ -345,7 +386,7 @@ for (my $px=0; $px < @Page; $px++) {
 
     body 4;
 
-    header_map();
+    header_map($px == 0);
 
     startTag 'table', border => 0;
 
@@ -422,7 +463,7 @@ page 'index.html', sub {
 
   body 4;
 
-  header_map();
+  header_map(1);
 
   startTag 'table';
   my $col=0;
