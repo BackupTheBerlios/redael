@@ -332,7 +332,12 @@ and Hermes.  Build gstreamer with --enable-glib2.';
   };
   endTag 'p';
 
-  element 'p', 'Download the latest snapshot of redael.  Add salt to taste.';
+  startTag 'p';
+  startTag 'a', href=>'http://developer.berlios.de/project/filelist.php?group_id=167';
+  text 'Download the latest snapshot of redael.';
+  endTag 'a';
+  text ' Add salt to taste.';
+  endTag 'p';
 };
 
 menupage $topmenu, 'Documentation', sub {
@@ -469,7 +474,7 @@ four perspectives come into focus:';
 However, we can do better than talking about it in the typical
 vague terms. Since balanced compassion is defined as awareness
 of the four perspectives, we can study the relationships
-between perspectives. These relationship may reveal a scientific
+between perspectives. These relationships may reveal a scientific
 way to foster compassion.';
 
   element 'h2', 'Subject / Object';
