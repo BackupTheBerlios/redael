@@ -469,7 +469,7 @@ is the subject and the film is the object.';
   columns sub { attention 3,1 },
     sub { hspace 2 },
       sub {
-	startTag 'font', color=>'#990000';
+	startTag 'font', color=>'#006600';
 	text '"Based on how i feel, what is the structural situation?"
 This style of question is repeatedly posed in redael annotations.';
 	endTag 'font';
@@ -560,7 +560,11 @@ configurations:';
     columns sub { text '(b) ' },
     sub { text 'empathy'; attention 1,3 },
     sub { hspace 3 },
-    sub { text 'emotional intelligence'; attention 3,1 };
+    sub {
+      startTag 'font', color=>'#006600';
+      text 'emotional intelligence';
+      endTag 'font';
+      attention 3,1 };
     endTag 'p';
 
     startTag 'p';
