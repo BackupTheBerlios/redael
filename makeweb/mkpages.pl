@@ -498,11 +498,13 @@ sub menupage {
 menupage $topmenu, 'News', sub {
   startTag 'center';
   emptyTag 'hr';
+  startTag 'big';
   startTag 'i';
   element 'p', 'How well do you understand the meaning of your emotions?';
   element 'p', 'How accurately can you assess difficult situations?';
   element 'p', 'How gracefully do you manage people?';
   endTag 'i';
+  endTag 'big';
   emptyTag 'hr';
   endTag 'center';
 
@@ -631,6 +633,12 @@ Here are some anecdotal data points:';
   endTag 'tr';
 
   startTag 'tr';
+  element 'td', 'Intel P-3 @ 764Mhz via XVideo';
+  element 'td', '15%';
+  element 'td', '?';
+  endTag 'tr';
+
+  startTag 'tr';
   element 'td', 'Dual Intel P-3 @ 500Mhz via XVideo';
   element 'td', '20%';
   element 'td', '60%';
@@ -673,17 +681,6 @@ instructions for your operating system.';
 
   startTag 'tr';
   startTag 'td';
-  text 'Hum Dil De Chuke Sanam (1999)';
-  endTag 'td';
-  element 'td', 'Hindi Drama';
-  element 'td', '13+ (adult themes)';
-  element 'td', '0%';
-  element 'td', 'VCD';
-  element 'td', 'soon';
-  endTag 'tr';
-
-  startTag 'tr';
-  startTag 'td';
   element 'a', 'Good Will Hunting (1997)',
     href => 'http://www.un-official.com/GWH/GWMain.html';
   endTag 'td';
@@ -701,6 +698,17 @@ instructions for your operating system.';
   endTag 'td';
   element 'td', 'Space Opera';
   element 'td', 'All Ages';
+  element 'td', '0%';
+  element 'td', 'VCD';
+  element 'td', 'soon';
+  endTag 'tr';
+
+  startTag 'tr';
+  startTag 'td';
+  text 'Hum Dil De Chuke Sanam (1999)';
+  endTag 'td';
+  element 'td', 'Hindi Drama';
+  element 'td', '13+ (adult themes)';
   element 'td', '0%';
   element 'td', 'VCD';
   element 'td', 'soon';
@@ -834,7 +842,7 @@ can compile redael from source code.';
   sub {
     element 'p', 'Install gstreamer 0.3.1.  To build the plugins,
 you will also need some libraries:
-libmpeg2 0.2.0, liba52 0.7.2, and libHermes.';
+libbz2, libmpeg2 0.2.0, liba52 0.7.2, hermes, and mad.';
 
     element 'p', 'ALERT: Redael has not been ported to gstreamer 
 version 0.3.2 or later yet.  You must use version 0.3.1.';
@@ -941,7 +949,7 @@ reaction to a *given* situation.
 Certainly choosing the correct reaction *is*
 important.  However, deciding on a reaction depends on assessing
 the situation accurately.
-If your perfect reaction is in reaction to the wrong situation
+If your perfect reaction is based on a misreading of the situation
 then how can you expect to communicate effectively?";
 
   startTag 'p';
@@ -952,15 +960,15 @@ both ';
   element 'i', 'choosing a reaction';
   text ', assessment is the more
 urgent part.  Therefore, the redael test concentrates only on
-situation asseessment and leaves the question of choosing
+situation assessment and leaves the question of choosing
 the perfect reaction up to your spontaneous creativity.';
   endTag 'p';
 
   element 'h2', 'Acknowledgment';
 
   element 'p', 'In scientific literature, it customary to provide
-a bibliography of related research.  While i hestitate to break
-with scientific norms in the slightest, i can hardly make a short
+a bibliography of related research.  However, i am forced to break
+with this convention because i can hardly make a short
 list of people whose contribution i should acknowledge.
 i have drawn inspiration from too many sources.';
 
@@ -999,7 +1007,7 @@ Use the diff tool to examine your mistakes.';
   
   startTag 'li';
   element 'p', 'Take an exam without any original annotation.
-Now it is your responsibility to deterine the span of each situation.
+Now it is your responsibility to deterime the span of each situation.
 Set the duration and add joints as you see fit.
 Use the diff tool to examine your mistakes.';
   endTag 'li';
@@ -1167,6 +1175,36 @@ These screens are available from the Help menu.';
   endTag 'p';
 
   endTag 'center';
+
+  element 'p', 'Here are a few more guidelines to disambiguate
+complex scenes.  Understand that abstract situations are a
+*simplification* of the actual film.  It is sufficient to
+model only the most important aspects of a situation.';
+
+  startTag 'ol';
+  startLi;
+  text 'The film may include an actor who is doing narration
+from a 3rd person perspective.  This narration is less important
+that any immediate action.';
+  endLi;
+
+  startLi;
+  text 'If there seem to be multiple active situations (for
+example both [+] admires [0] and [0] accepts [+]) then the
+situation with a shorter span is more important.';
+  endLi;
+
+  startLi;
+  text "You are welcome to study the whole film, however,
+you must respect the status of hidden information before it
+is subsequently revealed.  For example, if someone's
+identity is not yet revealed then treat that person as
+Someone until the film progresses to the point where
+the person's identity is actually revealed in the film.
+A 5-10 second look-ahead is admissible in some cases.
+Use your good judgment.";
+  endLi;
+  endTag 'ol';
 };
 
 
@@ -1586,7 +1624,7 @@ The anger is an object of my attention."';
 what happens while watching a film.  A film is nothing but ';
 	nth 3;
 	text ' person perspective: images and sound.  However,
-people can easily empathize with the characters and *feel* a
+people can easily empathize with the actors and *feel* a
 precise replica of the emotions depicted onscreen.  The film
 is the object and emotion is the subject, hence "empathy."';
       };
@@ -1800,9 +1838,9 @@ people are called "autistic".)';
   startTag 'p';
   text 'Emotional Intelligence is the factor which allows one to
 envision a
-situation from a 3rd person perspective.  The Situation screen
+situation from the 3rd person perspective.  The Situation screen
 records the structural parameters of the situation.  The
-Joint screens records any relationships between situations.';
+Joint screens record any relationships between situations.';
   endTag 'p';
   endTag 'li';
 
@@ -1810,7 +1848,7 @@ Joint screens records any relationships between situations.';
   startTag 'p';
   text 'The Cross Reference screen automates pattern
 matching from abstract situations to abstract emotions.  This
-mechanical process tries to mimic the empathy sense.';
+mechanical process aims to mimic the empathy sense.';
   endTag 'p';
   endTag 'li';
 
@@ -1944,12 +1982,16 @@ established statistically:';
   startTag 'ul';
   startLi;
   text 'How many hours of practice does it take to produce
-an accurate EQ score?  (i speculate that accuracy will emerge
+an accurate EQ score?';
+  br;
+  text '(i speculate that accuracy will emerge
 after the 2nd or 3rd attempt.)';
   endLi;
   startLi;
   text 'Does well does our EQ score correlate with actual career
-performance?  (Once scores are measured then i expect *excellent*
+performance?';
+  br;
+  text '(Once scores are measured then i expect *excellent*
 correlation between the EQ score actual career performance.)';
   endLi;
   endTag 'ul';
