@@ -380,20 +380,24 @@ about the object.';
 
   startTag 'p';
   columns sub {
-    startTag 'p';
-    text 'Far back in ancient history, an animal saw another animal
-with compassion.  He or she realized that there
-were a multiplicity of individuals, for the *first* time.
-Before compassion, each animal was ruthless, perfectly self-centered,
-and alone.';
-    endTag 'p';
 
-    element 'p', 'Actually compassion awakens gradually for each individual.
+  startTag 'p';
+  text 'Compassion awakens gradually in each individual.
 A good mother ususally sooths the development into a balanced path.
 If for some reason compassion goes out of balance then
 horrible atrocities can result.  The business of slavery
 and the Nazi killings in Germany can be attributed to a
 terrible imbalance in compassion.';
+  endTag 'p';
+  startTag 'p';
+  text 'Before compassion, the main focus is on the ';
+  nth(1);
+  text ' person perspective.  There is no personality or
+emotion, only a vibratory feeling.  There are no situations,
+only *my* situation (singular).  As compassion dawns, the
+four perspectives come into focus:';
+  endTag 'p';
+
   }, sub {
     emptyTag 'img', src=>'art/nocompassion.jpg', alt => 'No Compassion';
   };
@@ -423,14 +427,6 @@ terrible imbalance in compassion.';
     endTag 'table';
   };
   endTag 'center';
-
-  startTag 'p';
-  text 'Before compassion, the main focus is on the ';
-  nth(1);
-  text ' person perspective.  There is no personality or
-emotion, only a vibratory feeling.  There are no situations,
-only *my* situation (singular).';
-  endTag 'p';
 
   element 'h2', 'Attention Configurations';
 
@@ -576,3 +572,10 @@ configurations:';
 };
 
 __END__
+    startTag 'p';
+    text 'Far back in ancient history, an animal saw another animal
+with compassion.  He or she realized that there
+were a multiplicity of individuals, for the *first* time.
+Before compassion, each animal was ruthless, perfectly self-centered,
+and alone.';
+    endTag 'p';
