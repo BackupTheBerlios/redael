@@ -536,7 +536,7 @@ Attention vectors are only possible between the ';
   sub { attention 3,2 };
   endTag 'p';
 
-  element 'p', 'The following table summarizes all the sensical
+  element 'p', 'The following table and diagram summarize all sensical
 configurations:';
 
   startTag 'center';
