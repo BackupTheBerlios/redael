@@ -315,9 +315,7 @@ going to need help.';
 
   startTag 'p';
   columns sub {
-    text 'Get the current CVS for glib, atk, pango, and gtk+.  Apply
-this patch for 64-bit parameters.  Follow the directions in HACKING
-to build from CVS sources.';   # XXX
+    text 'Install 1.3.10 or later versions of glib, atk, pango, and gtk+.';
   },
   sub { hskip 2 },
   sub {
@@ -370,9 +368,11 @@ list to open a detail screen (below).';
   img 'art/ip.png', 'IP Editor', border=>1;
   endTag 'p';
 
-  element 'p', 'This screen shows the structural parameters of
-the situation.  A situation always consists of two participants.
-The best way to learn what these descriptions mean is to examine
+  element 'p', 'Situation Editor: This screen shows the structural
+parameters of
+the situation.  A situation always consists of two participants (real
+or anthropomorphic).
+Perhaps the best way to learn what these descriptions mean is to examine
 one of the exemplar film annotations.';
 
   startTag 'p';
@@ -392,7 +392,7 @@ point in a film. (Films not included. :-)';
   };
   endTag 'p';
 
-  element 'p', 'These two screens are used to create connections
+  element 'p', 'Add Joint: These two screens are used to create connections
 between two situations.  Connections (a.k.a. joints) are a
 bookkeeping aide to help keep everything in proper perspective.';
 
@@ -400,10 +400,82 @@ bookkeeping aide to help keep everything in proper perspective.';
   img 'art/crossref.png', 'Cross Reference', border=>0;
   endTag 'p';
 
-  element 'p', 'The cross reference screen is like a reconciliation.
-Once you have annotated the film in the 3rd person, then you can
+  element 'p', 'Cross Reference:
+Once you have annotated the film in the 3rd person then you can
 create empathy patterns to translate back into the 1st person
 perspective.  This completes the empathy - emotional intelligence cycle.';
+
+  element 'h2', 'Workflow Summary';
+
+  startTag 'p';
+  img 'art/workflow.png', 'Workflow', border=>0;
+  endTag 'p';
+
+  startTag 'ol';
+
+  startTag 'li';
+  startTag 'p';
+  text 'People can easily empathize with the actors and actresses, and *feel* a
+precise replica of the emotions depicted onscreen.';
+  endTag 'p';
+  endTag 'li';
+
+  startTag 'li';
+  startTag 'p';
+  text 'Emotion Intelligence is the factor which allow one to
+envision a
+situation from a 3rd person perspective.  The Situation Editor
+assists in recording the structural parameters of the situation.  The
+Add Joint screens assist in recording any relationships between situations.';
+  endTag 'p';
+  endTag 'li';
+
+  startTag 'li';
+  startTag 'p';
+  text 'The Cross Reference screen automates pattern
+matching from abstract situations to abstract emotions.';
+  endTag 'p';
+  endTag 'li';
+
+  startTag 'li';
+  startTag 'p';
+  text 'The principal
+reason to want abstract emotions is for verifying correctness.  For
+example, it is much easier to imagine the abstract emotion "try
+to cover up mistake" than to imagine the corresponding abstract
+situation "before ';
+  element 'b', '[0]';
+  text ' accepts [+] followed by :react: during stifled
+[+] exposes ';
+element 'b', '[-]';
+  text '".  Since emotions are occationally repeated, the pattern classifications
+can be established with some certainty.  As few as two or three repetitions
+are generally sufficient.';
+  endTag 'p';
+  endTag 'li';
+
+  startTag 'li';
+  startTag 'p';
+  text 'The pattern matching also makes it easier to verify that
+each abstract situation corresponds to its associated concrete situation
+in the film.  If the abstract emotion is seems wrong then
+the situation was probably evaluated with unjustifiable bias.';
+  endTag 'p';
+  endTag 'li';
+
+  endTag 'ol';
+
+  startTag 'p';
+  text 'After checking and re-checking, we can gain confidence that
+abstract representation is a fairly accurate distillation of the film.';
+  endTag 'p';
+
+  startTag 'p';
+  text "For an examination session, the automated facilities relating to
+abstract emotions are disable.  This changes the reconciliation steps
+(4) and (5) into a manual process.  Student's capacity for (2) emotional
+intelligence is tested intensively.";
+  endTag 'p';
 
   vskip;
 
