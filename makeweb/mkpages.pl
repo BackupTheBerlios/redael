@@ -367,6 +367,14 @@ the situation.  A situation always consists of two participants.
 The best way to learn what these descriptions mean is to examine
 one of the exemplar film annotations.';
 
+  startTag 'p';
+  img 'art/filmview.jpg', 'Film View', border=>0;
+  endTag 'p';
+
+  element 'p', 'The filmview screen offers effortless seeking to any
+point in a film.  Preset scaling is offered from 25% to 200%.  (Films
+not included. :-)';
+
   vskip;
 
   element 'p', '[Add lots of screen captures with explanation.]';
