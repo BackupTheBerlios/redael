@@ -436,7 +436,10 @@ four perspectives come into focus:';
 
   element 'p', 'Within the realm of compassionate individuality,
 there are various ways attention can be configured.  What
-are all the permutations?';
+are all the permutations?  Fortunately, it is easy to generate
+a question to invoke a given configuration.  Once posed
+as a question, we can consider whether
+the configuration make sense and draw any further conclusions.';
 
   startTag 'p';
   columns sub { attention 0,1 },
@@ -466,8 +469,10 @@ is the subject and the film is the object.';
   columns sub { attention 3,1 },
     sub { hspace 2 },
       sub {
+	startTag 'font', color=>'#990000';
 	text '"Based on how i feel, what is the structural situation?"
 This style of question is repeatedly posed in redael annotations.';
+	endTag 'font';
       };
   endTag 'p';
 
@@ -477,8 +482,8 @@ This style of question is repeatedly posed in redael annotations.';
   sub { attention 2,1 },
   sub { hspace 2 },
   sub {
-    text 'These configurations, which involve personality, are difficult
-to understand and not particularly important.  They will be
+    element 'i', 'These configurations, which involve personality,
+are difficult to understand and not particularly important.  They will be
 explored elsewhere.'
   };
   endTag 'p';
@@ -499,8 +504,8 @@ understand philosophy unless and until you take your second birth.";
   columns sub { attention 1,0 },
     sub { hspace 2 },
       sub {
-	text 'While practicing true meditation, you focus your attention on
-the Whole (a.k.a. "I am").  After meditation, part of your attention remains
+	text 'While practicing true meditation, i focus my attention on
+the Whole (a.k.a. "I am").  After meditation, part of my attention remains
 connected with the Whole, thereby enlightening the experience of individuality.
 This divine expression makes individuality most beautiful and enjoyable,
 much more so than any physical or mental amusement.';
@@ -533,6 +538,7 @@ Attention vectors are only possible between the ';
     nth(3);
     text ' perspectives.';
   },
+  sub { hspace 2 },
   sub { attention 3,2 };
   endTag 'p';
 
