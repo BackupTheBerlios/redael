@@ -436,7 +436,8 @@ needs re-evaluation.';
   endTag 'ol';
 
   startTag 'p';
-  text 'After checking and re-checking, we can gain confidence that
+  text 'Steps (4) and (5) work against each other in opposite directions.
+After checking and re-checking, we can gain confidence that
 abstract representation is a fairly accurate distillation of the film.';
   endTag 'p';
 
@@ -452,13 +453,13 @@ intelligence is tested intensively.";
   endTag 'p';
 
   startTag 'p';
-  img 'art/transcript.png', 'Transcript View', border=>1;
+  img 'art/transcript.png', 'Transcript View';
   endTag 'p';
   
   element 'p', 'The left side contains the film transcript.  Each highlighted
 segment indicates the span of a single situation.  The right side
 contain a list of situations.  When you move the cursor, the left
-and right side stay in-sync.  You can double-click in the situation
+and right sides stay in-sync.  You can double-click in the situation
 list to open a detail screen (below).';
 
   startTag 'p';
@@ -470,8 +471,8 @@ list to open a detail screen (below).';
 situation.  A situation always consists of two participants (real or
 anthropomorphic).
 Perhaps the best way to learn what these descriptions mean is to examine
-one of the exemplar film annotations.  Most of the terms are not
-defined beyond the customary dictionary.';
+one of the exemplar film annotations.  (Most of the terms are not
+defined beyond the customary dictionary definitions.)';
 
   startTag 'p';
   img 'art/filmview.jpg', 'Film View', border=>0;
@@ -479,6 +480,61 @@ defined beyond the customary dictionary.';
 
   element 'p', 'The filmview screen offers effortless seeking to any
 point in a film. (Films not included. :-)';
+
+  element 'p', 'Actually it takes a lot of effort to make this effortless:';
+
+  startTag 'ol';
+  startTag 'li';
+  startTag 'p';
+  text 'Copy a film onto your hard drive.  MPEG1 (vcd) or MPEG2 (dvd)
+is OK.  Actually, this step is optional.  You do not *need* to copy the
+film, but the following steps will involve lots of seeking which might
+stress your CD/DVD.';
+  endTag 'p';
+  endTag 'li';
+
+  startTag 'li';
+  startTag 'p';
+  text 'Find or create a transcript of your film.  Creating a transcript
+from scratch is *really* tedious.  Be sure to search ';
+  element 'a', "Drew's Script-O-Rama", href=>'http://www.script-o-rama.com';
+  text " or any other similar sites for your title.  If you can't find
+a script then consider whether you should go back to step (1) and
+pick a different film.";
+  endTag 'p';
+  endTag 'li';
+
+  startTag 'li';
+  startTag 'p';
+  text 'Load your transcript and film together in redael.';
+  endTag 'p';
+  endTag 'li';
+
+  startTag 'li';
+  startTag 'p';
+  text 'Actors or actresses generally take turns talking.  Place your
+cursor at the beginning of a segment of talking.  Sync the film up to
+the same place so the film matches your cursor position in the
+transcript.  Select Insert::Time Sync from the menu.';
+  endTag 'p';
+  endTag 'li';
+
+  startTag 'li';
+  startTag 'p';
+  text 'Re-position your cursor at the end of the dialog.  Select Insert::Time
+Sync.  Repeat until you have done the whole film. Redael will do
+linear interpolation between the explicit time sync marks so
+you only have to add a time sync at the important places.';
+  endTag 'p';
+  endTag 'li';
+
+  startTag 'li';
+  startTag 'p';
+  text 'Make backups.  This is something you should never be forced to
+do more than once!';
+  endTag 'p';
+  endTag 'li';
+  endTag 'ol';
 
   startTag 'p';
   columns sub {
@@ -494,6 +550,84 @@ point in a film. (Films not included. :-)';
 between two situations.  Connections (a.k.a. joints) are a
 bookkeeping aide to help keep everything in proper perspective.';
 
+  element 'p', "Each joint has particular characteristics.  (This is
+really hard to understand until you actually use redael so don't worry
+if it doesn't make much sense.)";
+
+  startTag 'p';
+  startTag 'table', border=>1, cellpadding=>4;
+
+  startTag 'tr';
+  element 'td', '';
+  element 'td', 'react';
+  element 'td', 'amend';
+  element 'td', 'revoke';
+  element 'td', 'echo';
+  element 'td', 'witness';
+  endTag 'tr';
+
+  startTag 'tr';
+  element 'td', 'in-force';
+  element 'td', '--';
+  element 'td', 'yes';
+  element 'td', 'no';
+  element 'td', 'yes';
+  element 'td', '--';
+  endTag 'tr';
+
+  startTag 'tr';
+  element 'td', 'change';
+  element 'td', '--';
+  element 'td', 'yes';
+  element 'td', 'yes';
+  element 'td', 'no';
+  element 'td', '--';
+  endTag 'tr';
+
+  startTag 'tr';
+  element 'td', 'linkage';
+  startTag 'td'; nth 2; endTag 'td';
+  startTag 'td'; nth 1; endTag 'td';
+  startTag 'td'; nth 1; endTag 'td';
+  startTag 'td'; nth 1; endTag 'td';
+  startTag 'td'; nth 3; endTag 'td';
+  endTag 'tr';
+
+  endTag 'table';
+  endTag 'p';
+
+  startTag 'ul';
+  startTag 'li';
+  element 'b', 'in-force';
+  text ': Whether the past situation will continue
+to be in-force.  Here is an example where the past situation
+is revoked: "Send five pizzas.  No, cancel, send six pizzas."';
+  endTag 'li';
+
+  startTag 'li';
+  element 'b', 'change';
+  text ': Whether there is a desire to change the past situation.';
+  endTag 'li';
+
+  startTag 'li';
+  element 'b', 'linkage';
+  text ': This gives a hint about the identity of the initiator
+and contraparty.  If '; nth(1);
+  text ' person then the initiator or contraparty will remain the
+same.  If '; nth(2);
+  text ' person then the participants will take turns being the initiator.
+If '; nth(3);
+  text ' then the participants in the past and present situations
+might be entirely different.';
+  endTag 'li';
+
+  endTag 'ul';
+
+  element 'p', "Joint characteristics are enforced by a set of rules
+written in a simple if-then language.  These rules are loaded at
+redael startup.  If you don't like the default rules then you can
+customize them.";
+
   startTag 'p';
   img 'art/crossref.png', 'Cross Reference', border=>0;
   endTag 'p';
@@ -502,6 +636,12 @@ bookkeeping aide to help keep everything in proper perspective.';
 Once you have annotated the film in the 3rd person then you can
 create empathy patterns to translate back into the 1st person
 perspective.  This completes the empathy - emotional intelligence cycle.';
+
+  element 'p', "About 110 patterns have been gathered based on
+a comparison of annotations from three films, however, this work was
+done before i wrote redael.  With redael's help, we should be able
+to develop a larger and more consistent collection of patterns.
+(Your help is needed. :-)";
 
   startTag 'p';
   img 'art/exam_setup.png', 'Exam Setup', border=>0;
@@ -836,7 +976,7 @@ as those affiliated with ';
   text 'EI Consortium';
   endTag 'a';
   text '.  Anyone is welcome to do this -- the code
-is ';
+is licensed under the ';
   element 'a', 'GPL', href=> 'http://www.gnu.org/copyleft/gpl.html';
 
   text ' -- so you can start your own testing franchise, royalty free.';
