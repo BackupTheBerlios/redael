@@ -36,7 +36,7 @@ arranged marriage.";
     element 'p', "The traditional Indian marriage procedure takes too
 much time (more than six months) and is too expensive.  Also the bride
 must endure too much abuse.";
-    element 'p', "Hira's sister had married into a Sahaja Yoga family
+    element 'p', "Heera's sister had married into a Sahaja Yoga family
 two years back.
 The marriage has been successful and her parents felt that Sahaja Yoga
 attracted high quality people.  They gladly approved the application.";
@@ -45,9 +45,9 @@ attracted high quality people.  They gladly approved the application.";
   sub { hskip 4 },
   sub {
     startTag 'center';
-    img 'art/mappl-h1.jpg', 'Hira';
+    img 'art/mappl-h1.jpg', 'Heera';
     br;
-    text 'Hira ';
+    text 'Heera ';
     element 'a', '(enlarge)', href => 'art/mappl-h2.jpg';
     endTag 'center';
   };
@@ -103,6 +103,8 @@ Here are some photos from the marrage ceremony:';
   columns sub {
     element 'p', 'After the ceremony, each bride and bride-groom were
 asked to spontaneously compose couplets for Shri Mataji.';
+
+    element 'p', "(`Heera' means `diamond' in Marathi.)";
   },
   sub { hskip 4 },
   sub {
@@ -110,12 +112,12 @@ asked to spontaneously compose couplets for Shri Mataji.';
     img 'art/couplet-j.png', "Joshua's Couplet";
     endTag 'p';
     startTag 'p';
-    img 'art/couplet-h.png', "Hira's Couplet";
+    img 'art/couplet-h.png', "Heera's Couplet";
     endTag 'p';
   };
 
   startTag 'p';
   element 'i', 'Please let me know any further questions i can answer here.
-i will add more photos as the film is developed.';
+i will add more photos as they become available.';
   endTag 'p';
 };

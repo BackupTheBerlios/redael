@@ -70,6 +70,16 @@ sub img {
   emptyTag 'img', src=>$src, alt=>$alt, @rest;
 }
 
+sub startLi {
+  startTag 'li';
+  startTag 'p';
+}
+
+sub endLi {
+  endTag 'p';
+  endTag 'li';
+}
+
 sub columns {
   startTag 'table', border => 0, cellspacing => 0, cellpadding => 0;
   startTag 'tr';
@@ -149,21 +159,19 @@ sub new { bless $_[1], $_[0]; }
 sub file {
   my ($o, $item) = @_;
 
-  for (my $x=0; $x < @$o; $x += 2) {
-    next if $o->[$x] ne $item;
-    return $o->[$x + 1];
-  }
-  die "can't find $item";
-}
+  for (my $x=0; $x < @$o; ++$x) {
+    my $cur = $o->[$x];
 
-sub titles {
-  my ($o) = @_;
-  my @ret;
+    if (@$cur == 3) {
+      my $ans = file($cur->[2], $item);
+      return $ans
+	if $ans;
+    }
 
-  for (my $x=0; $x < @$o; $x += 2) {
-    push @ret, $o->[$x];
+    next if $cur->[0] ne $item;
+    return $cur->[1];
   }
-  @ret;
+  undef
 }
 
 package main;
@@ -214,13 +222,23 @@ page 'index.html', sub {
 
 our $topmenu = MenuTree
   ->new([
-	 'News'              => 'news.html',
-	 'Download'          => 'download.html',
-	 'Documentation'     => 'doc.html',
-	 'Mailing Lists'     => 'lists.html',
-	 'High Scores'       => 'scores.html',
-	 'Business Opportunities' => 'jobs.html',
-	 'Philosophy'        => 'philo.html',
+	 ['News'              => 'news.html'],
+	 ['Download'          => 'download.html'],
+	 ['Documentation'     => 'doc.html',
+	  [
+	   ['Film'            => 'doc-film.html'],
+	   ['Situation'       => 'doc-situation.html'],
+	   ['Joints'          => 'doc-joints.html'],
+	   ['X-Reference'     => 'doc-xref.html'],
+	   ['Exam'            => 'doc-exam.html'],
+	  ]],
+	 ['Mailing Lists'     => 'lists.html'],
+	 ['High Scores'       => 'scores.html'],
+	 ['Business Opportunities' => 'jobs.html'],
+	 ['Philosophy'        => 'philo.html',
+	 [
+	  ['Redael'           => 'philo-redael.html'],
+	 ]],
 	]);
 
 require 'marriage.pl';
@@ -347,12 +365,30 @@ sub menupage {
 
     br;
 
-    for my $item ($menu->titles) {
+    # this is a gross hack
+    for my $item (@$menu) {
       startTag 'p';
-      if ($item eq $curitem) {
-	text $item;
+
+      my $sub = $item->[2];
+      my $in_sub = MenuTree::file($sub, $curitem)
+	if $sub;
+
+      if ($item->[0] eq $curitem) {
+	text $item->[0];
       } else {
-	element 'a', $item, 'href', $menu->file($item);
+	element 'a', $item->[0], 'href', $item->[1];
+      }
+
+      if (@$item == 3 and ($item->[0] eq $curitem or $in_sub)) {
+	for my $s (@{$item->[2]}) {
+	  br;
+	  hskip 2;
+	  if ($s->[0] eq $curitem) {
+	    text $s->[0];
+	  } else {
+	    element 'a', $s->[0], 'href', $s->[1];
+	  }
+	}
       }
       endTag 'p';
     }
@@ -386,7 +422,7 @@ sub menupage {
     columns sub { hskip 2 },
     sub {
       emptyTag 'hr';
-      element 'p', 'Copyright (C) 2001 Joshua Nathaniel Pritikin.  Verbatim copying and distribution of this entire article is permitted in any medium, provided this notice is preserved.';
+      element 'p', 'Copyright (C) 2001, 2002 Joshua Nathaniel Pritikin.  Verbatim copying and distribution of this entire article is permitted in any medium, provided this notice is preserved.';
       emptyTag 'hr';
     },
     sub { hskip 2 };
@@ -691,7 +727,7 @@ at least a man-month of effort.';
   element 'p', 'The most important feature of redael is that you
 do not have to understand *why* it works to benefit.  All you have to do is
 gain practical experience using it.  Moreover, you are welcome to
-use standard test-taking techniques to improve your score .';
+use standard test-taking techniques to improve your score.';
 
   element 'p', "The test medium is multiple-choice except for spans,
 duration and joints.  Don't try to figure out spans or joints on your
@@ -743,24 +779,61 @@ contain a list of situations.  When you move the cursor, the left
 and right sides stay in-sync.  You can double-click in the situation
 list to open a detail screen (below).';
 
+  vskip;
+};
+
+menupage $topmenu, 'Situation', sub {
+  element 'h1', 'Abstract Situation';
+
+  element 'p',
+'This screen shows the structural parameters of the situation.  Here
+questions are presented, mostly in a multiple-choice format.';
+
   startTag 'p';
   img 'art/ip.png', 'Abstract Situation', border=>1;
   endTag 'p';
 
-  element 'p',
-'Situation Editor: This screen shows the structural parameters of the
-situation.  A situation always consists of two participants (real or
-anthropomorphic).
-Perhaps the best way to learn what these descriptions mean is to examine
-one of the exemplar film annotations.  (Most of the terms are not
-defined beyond the customary dictionary definitions.)';
+  element 'p', 'The questions are simple:';
+
+  startTag 'ol';
+
+  startLi;
+  text 'Select the two most important people in the scene.
+A situation always consists of two participants (real or anthropomorphic).';
+  endLi;
+  
+  startLi;
+  text 'Choose the initiator.  Generally, whoever is talking is
+the initiator.';
+  endLi;
+
+  startLi;
+  text 'Choose the situation.  To pick the correct situation, the
+intention of the two participants must be taken into account.';
+  endLi;
+
+  startLi;
+  text 'Some situations occur in phases.  If necessary then
+choose the phase.';
+  endLi;
+
+  startLi;
+  text '[Add more steps here ...]';
+  endLi;
+
+  endTag 'ol';
+};
+
+
+menupage $topmenu, 'Film', sub {
+  element 'h1', 'Film';
+
+  element 'p', 'The filmview offers effortless seeking to any
+point in a film. (Films not included. :-)';
 
   startTag 'p';
   img 'art/filmview.jpg', 'Film View', border=>0;
   endTag 'p';
-
-  element 'p', 'The filmview screen offers effortless seeking to any
-point in a film. (Films not included. :-)';
 
   element 'p', 'Actually it takes a lot of effort to make this effortless:';
 
@@ -774,16 +847,14 @@ stress your CD/DVD.';
   endTag 'p';
   endTag 'li';
 
-  startTag 'li';
-  startTag 'p';
+  startLi;
   text 'Find or create a transcript of your film.  Creating a transcript
 from scratch is *really* tedious.  Be sure to search ';
   element 'a', "Drew's Script-O-Rama", href=>'http://www.script-o-rama.com';
   text " or any other similar sites for your title.  If you can't find
 a script then consider whether you should go back to step (1) and
 pick a different film.";
-  endTag 'p';
-  endTag 'li';
+  endLi;
 
   startTag 'li';
   startTag 'p';
@@ -815,6 +886,14 @@ do more than once!';
   endTag 'p';
   endTag 'li';
   endTag 'ol';
+};
+
+menupage $topmenu, 'Joints', sub {
+  element 'h1', 'Add Joint';
+
+  element 'p', 'These two screens are used to create connections
+between two situations.  Connections (a.k.a. joints) describe
+a temporal relationship between two situations.';
 
   startTag 'p';
   columns sub {
@@ -825,10 +904,6 @@ do more than once!';
     img 'art/addjoint2.png', 'Add Joint (2)', border=>0;
   };
   endTag 'p';
-
-  element 'p', 'Add Joint: These two screens are used to create connections
-between two situations.  Connections (a.k.a. joints) are a
-bookkeeping aide to help keep everything in proper perspective.';
 
   element 'p', "Each joint has particular characteristics.  (This is
 really hard to understand until you actually use redael so don't worry
@@ -907,15 +982,18 @@ might be entirely different.';
 written in a simple if-then language.  These rules are loaded at
 redael startup.  If you don't like the default rules then you can
 customize them.";
+};
+
+menupage $topmenu, 'X-Reference', sub {
+  element 'h1', 'Cross Reference';
+
+  element 'p', 'Once you have annotated the film in the 3rd person then you can
+create empathy patterns to translate back into the 1st person
+perspective.  This completes the empathy <---> emotional intelligence cycle.';
 
   startTag 'p';
   img 'art/crossref.png', 'Cross Reference', border=>0;
   endTag 'p';
-
-  element 'p', 'Cross Reference:
-Once you have annotated the film in the 3rd person then you can
-create empathy patterns to translate back into the 1st person
-perspective.  This completes the empathy <---> emotional intelligence cycle.';
 
   element 'p', "About 110 patterns have been gathered based on
 a comparison of annotations from three films, however, this work was
@@ -923,23 +1001,46 @@ done before i wrote redael.  With redael's help, we should be able
 to develop a larger and more consistent collection of patterns.
 (Your help is needed. :-)";
 
+  element 'p', 'Here are some example patterns:';
+
+  startTag 'pre';
+  text q(if
+ initiator = right
+ situation = steals
+ phase = during
+ tension = stifled
+then "angry with himself / herself"
+
+if
+ initiator = left
+ situation = admires
+ phase = during
+ tension = focused
+then "awe / offer service"
+);
+  endTag 'pre';
+};
+
+menupage $topmenu, 'Exam', sub {
+  element 'h1', 'Exam Setup';
+
+  element 'p', 'Once an exemplar film annotation is prepared
+and verified then students can be tested against it.';
+
   startTag 'p';
   img 'art/exam_setup.png', 'Exam Setup', border=>0;
   endTag 'p';
 
-  element 'p', 'Exam Setup: Once an exemplar film annotation is prepared
-and verified then students can be tested against it.';
-
-  startTag 'p';
-  img 'art/exam_status.png', 'Exam Status', border=>0;
-  endTag 'p';
-
+  columns sub {
   element 'p', 'Exam Status: The progress of an exam is shown.  The
 EQ score can be calculated in real-time.  This particular screen
 shows an elapse time of 49 seconds.  The accuracy of the EQ score will
 increase as the exam progresses.';
-
-  vskip;
+  },
+  sub { hskip 4 },
+  sub {
+  img 'art/exam_status.png', 'Exam Status', border=>0;
+  };
 };
 
 menupage $topmenu, 'Mailing Lists', sub {
@@ -1192,93 +1293,13 @@ This style of question is repeatedly posed in redael annotations.';
       };
   endTag 'p';
 
-  startTag 'blockquote';
-  emptyTag 'hr';
-
-  element 'h3', 'Redael Workflow';
-
-  startTag 'p';
-  img 'art/workflow.png', 'Workflow', border=>0;
-  endTag 'p';
-
-  startTag 'ol';
-
-  startTag 'li';
-  startTag 'p';
-  text 'People can easily empathize with the actors and actresses, and *feel* a
-precise replica of the emotions depicted onscreen.';
-  endTag 'p';
-  endTag 'li';
-
-  startTag 'li';
-  startTag 'p';
-  text 'Emotional Intelligence is the factor which allows one to
-envision a
-situation from a 3rd person perspective.  The Situation Editor
-assists in recording the structural parameters of the situation.  The
-Add Joint screens assist in recording any relationships between situations.';
-  endTag 'p';
-  endTag 'li';
-
-  startTag 'li';
-  startTag 'p';
-  text 'The Cross Reference screen automates pattern
-matching from abstract situations to abstract emotions.';
-  endTag 'p';
-  endTag 'li';
-
-  startTag 'li';
-  startTag 'p';
-  text 'The principal
-reason to want abstract emotions is for verifying correctness.  For
-example, it is much easier to imagine the abstract emotion "try
-to cover up mistake" (or "shame") than to imagine the corresponding abstract
-situation "before ';
-  element 'b', '[0]';
-  text ' accepts [+] followed by :react: during stifled
-[+] exposes ';
-element 'b', '[-]';
-  text '".  Since emotions are occasionally repeated, the pattern classifications
-can be established with some certainty.  As few as two or three repetitions
-are generally sufficient.';
-  endTag 'p';
-  endTag 'li';
-
-  startTag 'li';
-  startTag 'p';
-  text 'The pattern matching also makes it easier to verify that
-each abstract situation corresponds to its associated actual situation
-in the film.  If the abstract emotions seem correct except for one
-case then the structure of the exceptional situation probably
-needs re-evaluation.';
-  endTag 'p';
-  endTag 'li';
-
-  endTag 'ol';
-
-  startTag 'p';
-  text 'Steps (4) and (5) work against each other in opposite directions.
-After checking and re-checking, we can gain confidence that
-abstract representation is a fairly accurate distillation of the film.';
-  endTag 'p';
-
-  startTag 'p';
-  text "For an examination session, the automated facilities relating to
-abstract emotions are disabled.  Part of the reconciliation, step (4),
-is changed into a manual process.  A student's capacity for (2) emotional
-intelligence is tested intensively.";
-  endTag 'p';
-
-  emptyTag 'hr';
-  endTag 'blockquote';
-
 
   startTag 'p';
   columns sub { attention 1,2 },
   sub { hskip 2 },
   sub {
-    text '"How do i feel about [something]?" ; where [something] is some
-imaginary situation.  Extra-ordinary personal preference and fashions
+    text '"How do i feel about [something]?" ([something] is some
+imaginary situation.)  Extra-ordinary personal preference and fashions
 are expressions of this configuration of attention.';
   };
   endTag 'p';
@@ -1287,9 +1308,10 @@ are expressions of this configuration of attention.';
   columns sub { attention 2,1 },
   sub { hskip 2 },
   sub {
-     text '"i do not care how i feel about [something]."
- ; where [something] is some imaginary situation. This
-is to take a professional attitude.';
+     text '"How would [XXX] feel about [something]?"
+Replace [XXX] with any of: Krishna, Rama, Jesus the Christ, Buddha,
+Mahavira, Lao Zi, etc.  In other words, how would an ideal
+role-model react in a given situation?';
   };
   endTag 'p';
 
@@ -1378,7 +1400,7 @@ configurations:';
     sub { text 'how do i feel about ..?'; attention 1,2 },
     sub { hskip 6 },
     sub { text '(e) ' },
-    sub { text 'command'; attention 2,1 };
+    sub { text 'ideal role-model'; attention 2,1 };
     endTag 'p';
 
     startTag 'p';
@@ -1393,9 +1415,12 @@ configurations:';
 
   element 'h2', 'Toward Self-Identity';
 
-  startTag 'p';
+  element 'p', 'How is emotional intelligence (c) related to
+self-realization (f)?';
+
   columns sub {
-    element 'p', 'The problem with seeking self-realization (f)
+    element 'p', '
+The problem with seeking self-realization (f)
 is that the actual
 self (the original subject or "I am") cannot appear as an object,
 by definition.  "I am" is the *subject*.  So to realize the self, we have
@@ -1404,7 +1429,7 @@ to use divine intelligence.';
     element 'p', 'The most direct approach is to concentrate all the
 attention as emotional detachment (a) while soothing the emotions
 down.  As the strength of emotions fade, the actual self is experienced
-when the attention vector resolves to a point.
+when the attention vector resolves to a point (f).
 However, this approach is not generally practical.
 The pressures of daily life keep the attention bouncing
 around the various other configurations.';
@@ -1416,17 +1441,100 @@ around the various other configurations.';
 
   element 'p', 'At least the emotions can be kept as the object of
 attention.  If emotion is the object then the attention has a
-chance to settle into emotional detachment (a) and eventually
+chance to settle into emotional detachment (a) and spontaneously
 resolve into self-identity (f).  Consideration of emotion as
 a object is important for this reason, as a means of
-gaining self-realization and preserving self-identity.';
-
-  element 'p', 'Besides emotional detechment (a), there are two other
+taking self-realization and preserving self-identity.
+Besides emotional detechment (a), there are two other
 attention configurations which consider emotion as an object.
-Our interest here is with one of those configurations, emotional
+Our interest here is with one of those configurations: emotional
 intelligence (c).';
+};
 
+menupage $topmenu, 'Redael', sub {
+  element 'h1', 'Redael';
+
+  element 'h2', 'Workflow';
+
+  startTag 'p';
+  img 'art/workflow.png', 'Workflow', border=>0;
   endTag 'p';
+
+  startTag 'ol';
+
+  startTag 'li';
+  startTag 'p';
+  text 'People can easily empathize with the actors and actresses, and *feel* a
+precise replica of the emotions depicted onscreen.';
+  endTag 'p';
+  endTag 'li';
+
+  startTag 'li';
+  startTag 'p';
+  text 'Emotional Intelligence is the factor which allows one to
+envision a
+situation from a 3rd person perspective.  The Situation Editor
+assists in recording the structural parameters of the situation.  The
+Add Joint screens assist in recording any relationships between situations.';
+  endTag 'p';
+  endTag 'li';
+
+  startTag 'li';
+  startTag 'p';
+  text 'The Cross Reference screen automates pattern
+matching from abstract situations to abstract emotions.';
+  endTag 'p';
+  endTag 'li';
+
+  startTag 'li';
+  startTag 'p';
+  text 'The principal
+reason to want abstract emotions is for verifying correctness.  For
+example, it is much easier to imagine the abstract emotion "try
+to cover up mistake" (or "shame") than to imagine the corresponding abstract
+situation "before ';
+  element 'b', '[0]';
+  text ' accepts [+] followed by :react: during stifled
+[+] exposes ';
+element 'b', '[-]';
+  text '".  Since emotions are occasionally repeated, the pattern classifications
+can be established with some certainty.  As few as two or three repetitions
+are generally sufficient.';
+  endTag 'p';
+  endTag 'li';
+
+  startTag 'li';
+  startTag 'p';
+  text 'The pattern matching also makes it easier to verify that
+each abstract situation corresponds to its associated actual situation
+in the film.  If the abstract emotions seem correct except for one
+case then the structure of the exceptional situation probably
+needs re-evaluation.';
+  endTag 'p';
+  endTag 'li';
+
+  endTag 'ol';
+
+  startTag 'p';
+  text 'Steps (4) and (5) work against each other in opposite directions.
+After checking and re-checking, we can gain confidence that
+abstract representation is a fairly accurate distillation of the film.';
+  endTag 'p';
+
+  startTag 'p';
+  text "For an examination session, the automated facilities relating to
+abstract emotions are disabled.  Part of the reconciliation, step (4),
+is changed into a manual process.  A student's capacity for (2) emotional
+intelligence is tested intensively.";
+  endTag 'p';
+
+  element 'h2', 'The Model';
+
+  startTag 'p';
+  text 'Which model is most appropriate to encode abstract situations?';
+  endTag 'p';
+
+  element 'p', '[write something here]';
 };
 
 menupage $topmenu, 'Business Opportunities', sub {
