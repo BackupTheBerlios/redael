@@ -168,28 +168,27 @@ page 'index.html', sub {
   body();
 
   startTag 'center';
-  vskip 2;
+  vskip 1;
   element 'h1', 'Complete, Integrated Personality Development';
-  vskip 2;
-  
+
   startTag 'table', 'border', 0, 'cellpadding', 25;
   startTag 'tr';
   
-  startTag 'td', 'align', 'center';
-  img 'art/shri.jpg', 'Shri Chakra', border=>0;
+  startTag 'td', 'align', 'center', valign=>'bottom';
+  img 'art/about_sy_chart.png', 'Chakra System', border=>0;
   br;
   text 'SQ: ';
   element 'a', 'Spiritual Intelligence', 'href', 'http://sahajayoga.org';
   endTag 'td';
   
-  startTag 'td', 'align', 'center';
+  startTag 'td', 'align', 'center', valign=>'bottom';
   img 'art/trident.png', 'Attention Trident', border => 0;
   br;
   text 'EQ: ';
   element 'a', 'Emotional Intelligence', 'href', 'news.html';
   endTag 'td';
   
-  startTag 'td', 'align', 'center';
+  startTag 'td', 'align', 'center', valign=>'bottom';
   img 'art/mensa.png', 'Mensa Logo', border => 0;
   br;
   text 'IQ: ';
