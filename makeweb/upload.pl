@@ -6,8 +6,8 @@ use Digest::MD5;
 
 sub run {
   my $cmd = join ' ', @_;
-  #system(@_) == 0 or die "system $cmd failed: $?";
   print "$cmd\n";
+  system(@_) == 0 or die "system $cmd failed: $?";
 }
 
 our %OldSum;
@@ -47,13 +47,17 @@ sub sync_dir {
   }
 
   if (@todo) {
-    run('scp', @todo, $user.'@shell.berlios.de:'.
+    run('scp', (map { "$dir/$_" } @todo), $user.'@shell.berlios.de:'.
 	'/home/groups/redael/htdocs/'.$dir.'/');
   }
 }
 
-sync_dir('.', qw(index.html));
-sync_dir('art', map { s,^.+/,,; $_ } glob('art/*.png'));
+sync_dir('.',
+	 qw(index.html));
+
+sync_dir('art', map { s,^.+/,,; $_ }
+	 glob('art/*.png'),
+	 glob('art/*.jpg'));
 
 open my $fh, ">checksum" or die "open: $!";
 while (my ($k,$v) = each %Sum) {

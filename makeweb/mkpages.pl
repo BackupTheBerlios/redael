@@ -48,7 +48,7 @@ startTag 'table', 'border', 0, 'cellpadding', 14;
 startTag 'tr';
 
 startTag 'td', 'align', 'center';
-emptyTag 'img', 'src', 'art/shri.png', 'alt', 'Shri Chaktra', 'border', 0;
+emptyTag 'img', 'src', 'art/shri.jpg', 'alt', 'Shri Chaktra', 'border', 0;
 emptyTag 'br';
 text 'SQ:';
 element 'a', 'Spiritual Intelligence', 'href', 'http://sahajayoga.org';
