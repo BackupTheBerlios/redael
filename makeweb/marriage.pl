@@ -269,6 +269,13 @@ compose couplets for Shri Mataji.';
     startTag 'p';
     img 'art/couplet-h.png', "Heera's Couplet";
     endTag 'p';
+    
+    startTag 'p';
+    text 'We would like to humbly offer ';
+    element 'a', 'a recipe for giving self-realization',
+      href => 'realize.html';
+    text ' at the divine lotus feet of Shri Mataji.';
+    endTag 'p';
   };
 
   columns sub {
@@ -354,5 +361,4 @@ sang two bhajans during the program.';
   };
 
   element 'p', 'Last modified @DATE@.';
-}
-
+};

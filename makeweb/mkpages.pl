@@ -254,6 +254,7 @@ our $topmenu = MenuTree
 	]);
 
 require 'marriage.pl';
+require 'realization.pl';
 
 page 'fairuse.html', sub {
   element 'title', 'Fair Use Statement';
@@ -458,6 +459,19 @@ easy to use GUI.  This software is licensed under the ';
   endTag 'p';
   
   element 'h1', "News";
+
+  startTag 'p';
+  columns sub {
+    text '[12 Feb 2002] We plan to start giving regular tests at a local
+college here in Maharashtra.  Since the main language is Marathi,
+we are slowly translating the most important screens.  Here is an
+snapshot of our progress.';
+  },
+  sub { hskip 4 },
+  sub {
+    img 'art/marathi_demo1.png', 'Situations in Marathi';
+  };
+  endTag 'p';
 
   element 'p', '[23 Jan 2002] A pre-compiled binary is available
 for Debian i386.';
@@ -839,7 +853,7 @@ first attempt.  Follow a gradual introduction:";
   startTag 'ol';
   startTag 'li';
   element 'p', 'Take an exam with original spans and also ignore any joints.
-Always set duration to Closed.  After you finish, use the diff tool to
+Always set duration to Closed.  Use the diff tool to
 examine your mistakes.';
   endTag 'li';
   
@@ -848,14 +862,14 @@ examine your mistakes.';
 and always set the duration to Open.
 Add closing joints until all the situations are closed.
 You can use the duration query screen to check whether anything remains open.
-After you finish, use the diff tool to examine your mistakes.';
+Use the diff tool to examine your mistakes.';
   endTag 'li';
   
   startTag 'li';
   element 'p', 'Take an exam without any original annotation.
 Now it is your responsibility to deterine the span of each situation.
 Set the duration and add joints as you see fit.
-After you finish, use the diff tool to examine your mistakes.';
+Use the diff tool to examine your mistakes.';
   endTag 'li';
   
   endTag 'ol';
@@ -907,8 +921,9 @@ A situation always consists of two participants (real or anthropomorphic).';
   endLi;
   
   startLi;
-  text 'Choose the initiator.  Generally, whoever is talking is
-the initiator.';
+  text "Choose the initiator.  Generally, whoever is talking is
+the initiator.  Always consider the situation from the initiator's
+point of view.";
   endLi;
 
   startLi;
@@ -931,7 +946,7 @@ during which the parameters of the situation remain constant.';
   endTag 'ol';
 
   element 'p', 'At first glance, the questions may seem simple,
-but they attempt to summarize all possible experiences.
+but they attempt to summarize all possible experiences between individuals.
 The idea is to construct a
 sentence by the options given which best describes what is
 happening in the film.  Three detailed screens provide
@@ -1626,8 +1641,8 @@ menupage $topmenu, 'Redael', sub {
   startTag 'p';
   text 'People can easily empathize with the actors and actresses,
 and *feel* a precise replica of the emotions depicted onscreen.
-A few people have an under-developed sense of empathy.  Such
-people are called "autistic".';
+(A few people fail to developed a sense of empathy as children.  Such
+people are called "autistic".)';
   endTag 'p';
   endTag 'li';
 
@@ -1705,8 +1720,22 @@ tested against.';
 "What is the best model to model the process of competition?"  While the
 inspiration behind this question is hard to explain, it is easy
 to check the utility of the model using our proposed measure.';
-
   endTag 'p';
+
+  element 'h2', 'Ghost Wheel?';
+
+  element 'p', '"Ghost" refers to the all-pervading power of divine
+love, the divine cool breeze.  "Wheel" hints at the idea of a machine.
+So "ghost-wheel" refers to the timeless machine which is animated
+by the power of divine love.  This machine is *timeless* because only
+one prerequisite is needed for its operation: compassionate individuals.';
+
+  element 'p', 'The other name i used for this project is "why-compete".
+This name is based on the inspiration i received when i was trying to
+figure out how to design the situation model.';
+
+  element 'p', 'Redael is the word "leader" with the letters reversed.
+Pronounce it as you wish.';
 };
 
 menupage $topmenu, 'Business Opportunities', sub {
@@ -1752,6 +1781,19 @@ is licensed under the ';
 
   text ' -- so you can start your own EQ testing franchise, royalty free.';
   endTag 'p';
+
+  # element 'h2', 'How can Redael be a serious competitor to established
+  # EQ testing techniques when it is at an embryonic stage of development?';
+
+  # see http://www.bytext.org/FAQ.htm (5)
 };
 
 __END__
+5. How can Bytext be a serious competitor to Unicode when it is at an embryonic stage of development?
+
+Because most of the benefits of Bytext can be proven theoretically. Compare this question to the question: At what point did object oriented programming become a serious competitor to procedural programming? To those concerned with the theoretical aspects of computer programming and those forward thinking enough to predict the needs of computer languages, it was a serious competitor the moment it was conceived, before there was even an implementation ready to exploit it. To less forward thinking individuals, it was only a serious competitor once there were enough people that could be quoted as saying that it is a serious competitor. Reactionaries always need to have things forced down their throat before they become palatable.
+
+Likewise, to those concerned with the theoretical aspects of processing text, Bytext as a technical idea and a format should most definitely be regarded as a serious competitor to the technical ideas that Unicode is based on and the formats that Unicode provides.
+
+Also note the answer to question 1, Bytext provides a different way of thinking about characters and makes use of what would be private characters in a UCS context, but does not fundamentally compete with the groups tasked with building a consensus of what characters are appropriate for plain text.
+
