@@ -231,6 +231,7 @@ our $topmenu = MenuTree
 	 ['News'              => 'news.html'],
 	 ['Download'          => 'download.html',
 	  [
+	   [Debian             => 'dl-debian.html'],
 	   [Unix               => 'dl-unix.html'],
 	   [Windows            => 'dl-windows.html'],
 	  ]
@@ -458,6 +459,9 @@ easy to use GUI.  This software is licensed under the ';
   
   element 'h1', "News";
 
+  element 'p', '[23 Jan 2002] A pre-compiled binary is available
+for Debian i386.';
+
   startTag 'p';
   text '[20 Jan 2002] i got ';
   element 'a', 'married', href => 'm.html';
@@ -665,13 +669,44 @@ drama.  Do not submit your favorite film titles until the first
 annotations are completed.";
 };
 
-menupage $topmenu, 'Unix', sub {
-  element 'h1', 'Compiling';
+menupage $topmenu, 'Debian', sub {
+  element 'h1', 'Debian Installation';
 
-  element 'p', 'Presently, redael is only distributed as source code.
-Binaries will be available as soon as it is a practical possibility.
-If you are prepared to compile the source release then you may attempt
-the following steps:';
+  element 'p', 'A i386 binary package is available (but not yet
+as part of the main debian distribution).';
+
+  element 'p', 'Add the following lines to /etc/apt/sources.list:';
+
+  startTag 'p';
+  startTag 'blockquote';
+  startTag 'pre';
+  text 'deb http://gstreamer.net/releases/debian ./
+deb-src http://gstreamer.net/releases/debian ./
+
+deb http://redael.berlios.de/releases/debian ./
+';
+  endTag 'pre';
+  endTag 'blockquote';
+  endTag 'p';
+
+  element 'p', 'And then simply use apt-get:';
+
+  startTag 'p';
+  startTag 'blockquote';
+  startTag 'pre';
+  text '# apt-get update
+# apt-get install redael
+';
+  endTag 'pre';
+  endTag 'blockquote';
+  endTag 'p';
+};
+
+menupage $topmenu, 'Unix', sub {
+  element 'h1', 'Generic Unix Installation';
+
+  element 'p', 'If your operating system is not listed then you will
+need to compile redael from source code.';
 
   startTag 'p';
   columns sub {
@@ -703,8 +738,9 @@ is built with --enable-glib2.';
   startTag 'a', href=>'http://developer.berlios.de/project/filelist.php?group_id=167';
   text 'Download the latest snapshot of redael.';
   endTag 'a';
-  text ' Compile and run.';
   endTag 'p';
+
+  element 'p', 'Compile and run.';
 };
 
 menupage $topmenu, 'Windows', sub {
@@ -877,18 +913,22 @@ A situation always consists of two participants (real or anthropomorphic).';
 the initiator.';
   endLi;
 
+  startTag 'p';
+  img 'art/wheel.png', 'The Ghost Wheel';
+  endTag 'p';
+
   startLi;
-  text 'Choose the situation.  To pick the correct situation, the
-intention of the two participants must be taken into account.';
+  text "Choose the situation.  To pick the correct situation, the
+intention of the two participants must be taken into account.
+If there is an initiator then estimate intentions relative to
+the initiator's point of view.
+For each person, estimate his or her attention.  By this pair
+of intentions you can pick the appropriate situation.";
   endLi;
 
   startLi;
-  text 'Some situations occur in phases.  If necessary then
-choose the phase.';
-  endLi;
-
-  startLi;
-  text '[Add more steps here ...]';
+  text 'For phase, tension, and intensity, see the example
+dialogues in the Help menu.';
   endLi;
 
   endTag 'ol';
@@ -1614,11 +1654,7 @@ represent an abstract situation.';
   text 'The trick is to analyze the question.  "What is the ';
   element 'b', 'best';
   text ' model to encode abstract situations?"  This word "best"
-implies some sort of competition between canidate models.
-Actually if we think of these canidate models anthopomoriphically
-and take them two at a time then the competition factor becomes
-an inductive solution:  The best model of competition is the
-best model.  [write more ..]';
+implies some sort of competition between canidate models.  [write more...]';
 
   endTag 'p';
 };

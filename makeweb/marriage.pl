@@ -84,10 +84,14 @@ attracted high quality people.  They gladly approved the application.";
   endTag 'p';
   
   columns sub {
-    element 'p', 'Of course the main reason that we applied for
-marriage in Sahaja Yoga is because we both wanted a partner with the
-subtle understanding of vibrations which can easily be felt
+    startTag 'p';
+    text 'Of course the main reason that we applied for
+marriage in is because we both wanted a partner with the
+subtle understanding of ';
+    element 'a', 'vibrations', href => 'http://sahajayoga.org/ExperienceItNOW/';
+    text ' which can easily be felt
 after self-realization.';
+    endTag 'p';
 
     element 'p', 'The submission deadline was Dec 7.';
     element 'p', 'The forms were collected in Delhi, the capitol of India.';
@@ -124,7 +128,7 @@ international Sahaja Yoga seminar at Ganapatipule, Maharashtra.';
   sub {
     element 'p', 'Ganapatipule seminar started with the performance
 of Christmas Puja -- we worshipped the mother in the form of
-Jesus the Christ.';
+Jesus the Christ and Mother Mary.';
   },
   sub { hskip 4 },
   sub {
@@ -262,9 +266,20 @@ bureaucracy.  We got official documentation after only a few days.";
   };
 
   startTag 'p';
-  element 'b', 'Both of us invite and welcome you to Sahaja Yoga.';
+  startTag 'b';
+  text 'Both of us invite and welcome you to ';
+  element 'a', 'Sahaja Yoga', href => 'http://sahajayoga.org';
+  text '.';
+  endTag 'b';
   endTag 'p';
-  
+
+  startTag 'p';
+  text 'We would be very happy to receive your comments at ';
+  element 'a', 'joshua@why-compete.org',
+    href => 'mailto:joshua@why-compete.org';
+  text '.  Thank you very much.';
+  endTag 'p';
+
   element 'p', 'Last modified @DATE@.';
 };
 
