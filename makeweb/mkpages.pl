@@ -228,7 +228,10 @@ page 'index.html', sub {
 
 our $topmenu = MenuTree
   ->new([
-	 ['News'              => 'news.html'],
+	 ['News'              => 'news.html',
+	  [
+	   ['History'          => 'history.html'],
+	  ]],
 	 ['Download'          => 'download.html',
 	  [
 	   [Debian             => 'dl-debian.html'],
@@ -504,6 +507,11 @@ on a preliminary ';
   text '?';
   endTag 'p';
 
+};
+
+menupage $topmenu, 'History', sub {
+  element 'h1', "Old News";
+  
   element 'p', '[3 Oct 2001] The basic features of the software have
 been working since two days ago.  A few patches are pending with
 upstream libraries, but everything should be resolved for
@@ -513,6 +521,16 @@ almost over. :-)';
 
   element 'p', '[18 Sep 2001] A re-designed web site goes online
 with a more pragmatic approach.';
+
+  startTag 'p';
+  text '[22 Feb 1999] After attending my first puja of ';
+  element 'a', 'Mataji Shri Nirmala Devi',
+    href => 'http://theworldsavior.org';
+  text ' in New Jersey (USA), the importance of the
+word "competition" was revealed to me. i started writing down
+everything i could discover about competition without any idea
+where it would lead.';
+  endTag 'p';
 };
 
 menupage $topmenu, 'Download', sub {
@@ -943,14 +961,15 @@ reaction to a *given* situation.);
 
   element 'p', 'Certainly choosing the correct reaction *is*
 important.  However, deciding on a reaction depends on assessing
-the situation accurately.  How many times has your reaction been
-out-of-place because you misunderstood the situation?
+the situation accurately.  
 To continue the example above, did your
 colleague really take credit for your 100% of your work?  Or
 did she take a small part of your idea and add her own unique spin to it?
 Or is she presenting her own idea except that she is using your
-particular style and terminology?  Attention to subtle details
-make all the difference.';
+particular style and terminology?
+How many times has your reaction been
+out-of-place because you misunderstood a situation?
+Attention to subtle details make all the difference.';
 
   startTag 'p';
   text 'Even if the term "emotional intelligence" encompasses
@@ -1443,9 +1462,16 @@ justification of the model used by redael.';
 
   element 'h2', 'Categories of Feeling';
 
+  columns sub {
   element 'p', 'The words emotion, spirit, and feeling are used to mean a
 variety of different things in different contexts.  The defintions used
 here are as follows:';
+
+  },
+  sub { hskip 4 },
+  sub {
+    img 'art/feelings.png', 'Feelings';
+  };
 
   startTag 'ul';
   startTag 'li';
@@ -1455,10 +1481,11 @@ here are as follows:';
   text "`Spirit' is a feeling which does not admit the idea of separation.";
   endTag 'li';
   startTag 'li';
-  text "`Feeling' includes both emotion and spirit.";
+  text "`Compassion' is a special feeling which bridges spirit to emotion.";
   endTag 'li';
   startTag 'li';
-  text "`Compassion' is a special feeling which bridges spirit to emotion.";
+  text "`Feeling' is the most general word, including emotion,
+spirit, and compassion.";
   endTag 'li';
   endTag 'ul';
 
@@ -1583,9 +1610,10 @@ This style of question is repeatedly posed in redael annotations.';
   columns sub { attention 1,2 },
   sub { hskip 2 },
   sub {
-    text '"How do i feel about [something]?" ([something] is some
-imaginary situation.)  Extra-ordinary personal preference and fashions
-are expressions of this configuration of attention.';
+    text '"What are other people doing?"  Extra-ordinary personal
+preference and fashions are expressions of this configuration of
+attention.  "Everyone is going to the pub therefore i will also
+go to the pub."';
   };
   endTag 'p';
 
@@ -1593,10 +1621,10 @@ are expressions of this configuration of attention.';
   columns sub { attention 2,1 },
   sub { hskip 2 },
   sub {
-     text '"How would [XXX] feel about [something]?"
-Replace [XXX] with any of: Krishna, Rama, Jesus the Christ, Buddha,
+     text '"How would [XXX] feel to solve a given problem?"
+Replace [XXX] with any of: Ganesha, Krishna, Rama, Jesus the Christ, Buddha,
 Mahavira, Lao Zi, etc.  In other words, how would an ideal
-role-model react in a given situation?';
+role-model feel in a given situation?';
   };
   endTag 'p';
 
