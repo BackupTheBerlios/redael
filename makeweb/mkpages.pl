@@ -374,6 +374,10 @@ elements for making annotations and advanced features for scoring.';
 
   endTag 'ol';
 
+  startTag 'p';
+  emptyTag 'hr';
+  endTag 'p';
+
   element 'h2', 'Workflow Summary';
 
   startTag 'p';
@@ -451,6 +455,8 @@ intelligence is tested intensively.";
   startTag 'p';
   emptyTag 'hr';
   endTag 'p';
+
+  element 'h2', 'Screenshots';
 
   startTag 'p';
   img 'art/transcript.png', 'Transcript View';
@@ -661,7 +667,7 @@ increase as the exam progresses.';
 
   vskip;
 
-  element 'p', '[Add lots of screen captures with explanation.]';
+  element 'p', '[Note to self: Add lots of screen captures with explanation.]';
 };
 
 menupage $topmenu, 'Mailing Lists', sub {
