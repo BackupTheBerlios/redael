@@ -542,7 +542,7 @@ is built with --enable-glib2.';
   element 'td', '5%';
   element 'td', 'VCD';
   startTag 'td';
-  element 'a', '22k', href => 'annotation/naushika';
+  element 'a', '22k', href => 'annotation/naushika12';
   endTag 'td';
   endTag 'tr';
 
@@ -564,7 +564,7 @@ is built with --enable-glib2.';
   endTag 'td';
   element 'td', 'Drama';
   element 'td', '17+ (language, adult themes)';
-  element 'td', '10%';
+  element 'td', '0%';
   element 'td', 'DVD';
   element 'td', 'soon';
   endTag 'tr';
