@@ -524,12 +524,6 @@ menupage $topmenu, 'Philosophy', sub {
 concepts expressing fundamental beliefs.';
   endTag 'blockquote';
 
-  startTag 'p';
-  element 'i', "`Philosophy' is the first word we should define for the
-very reason that an analysis of the meaning of words is so essential to
-philosophy.";
-  endTag 'p';
-
   element 'h1', 'The Need For a Model';
 
   element 'p', "We can't see ourselves apart from ourselves.
