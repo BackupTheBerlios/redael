@@ -219,8 +219,8 @@ our $topmenu = MenuTree
 	 'Documentation'     => 'doc.html',
 	 'Mailing Lists'     => 'lists.html',
 	 'High Scores'       => 'scores.html',
+	 'Business Opportunities' => 'jobs.html',
 	 'Philosophy'        => 'philo.html',
-	 'Job Opportunities' => 'jobs.html',
 	]);
 
 page 'fairuse.html', sub {
@@ -1372,8 +1372,10 @@ configurations:';
   endTag 'center';
 };
 
-menupage $topmenu, 'Job Opportunities', sub {
+menupage $topmenu, 'Business Opportunities', sub {
   element 'h1', 'The Next Step';
+
+  element 'h2', 'Research';
 
   startTag 'p';
   text 'This project should be of interest to lots of research grants,
@@ -1396,6 +1398,8 @@ not necessary.  For example, consider NIH grant ";
   endTag 'a';
   text ", but that's a long-shot.";
   endTag 'p';
+
+  element 'h2', 'Certified EQ Testing';
 
   startTag 'p';
   text 'Once some studies are completed then we can approach
