@@ -317,12 +317,16 @@ menupage $topmenu, 'Download', sub {
 
   startTag 'ul';
 
-  element 'li', 'XFree86 4.1.0';
-
-  element 'li', 'A video card supporting the XVideo extension is highly recommended.';
+  startTag 'li';
+  element 'p', 'XFree86 4.1.0';
+  endTag 'li';
 
   startTag 'li';
-  text 'Playing movies requires at least mid-range hardware.
+  element 'p', 'A video card supporting the XVideo extension is highly recommended.';
+  endTag 'li';
+
+  startTag 'li';
+  element 'p', 'Playing movies requires at least mid-range hardware.
 Here are some anecdotal data points:';
   
   startTag 'table', border=>1;
@@ -403,7 +407,7 @@ with --enable-glib2.';
 
   startTag 'tr';
   element 'td', 'Kaze no Tani no Naushika';
-  element 'td', 'Animated Adventure Epic';
+  element 'td', 'Epic Animated Adventure';
   element 'td', 'All Ages';
   element 'td', '0%';
   element 'td', 'VCD';
@@ -437,10 +441,12 @@ instead of time-offsets.  This will be fixed as soon as possible.';
   endTag 'p';
 
   element 'p', 'Films which will not be analyzed: most comedy, action,
-and horror genres unless especially insightful.';
+and horror genres (unless especially insightful).';
 
-  element 'p', "Films under consideration for future analysis: Any Given Sunday, Devil's Advocate, or serious Hindi drama.  Do not submit your favorite
-film titles yet.";
+  element 'p', "Films under consideration for future analysis: Any Given
+Sunday, Devil's Advocate, American Werewolf in Paris, or serious Hindi
+drama.  Do not submit your favorite film titles until the first
+annotations are completed.";
 };
 
 menupage $topmenu, 'Documentation', sub {
